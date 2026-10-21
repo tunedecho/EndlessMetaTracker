@@ -1,0 +1,39 @@
+{
+  "slug": "tracker-song-format",
+  "title": "Tracker Song Format",
+  "one_liner": "A shared, documented JSON format that fully describes a piece or a generative style by separating composition (notes, patterns, structure, rules) from sound (synth voices and their parameters).",
+  "status": "seed",
+  "tags": [
+    "music",
+    "tracker",
+    "generative"
+  ],
+  "description": "## What\n\nThe common language for the other projects: one structured format that can describe Endless Spa pieces, Endless Techno, and M8 songs, and is small and precise enough for a 4k-style compact version.\n\n## Why\n\nEndless Spa already exports full JSON. Turning that into a documented format that other systems share is what lets a style move between systems, and makes the meta-pattern concrete.\n\n## How\n\nEarly thoughts, to refine in a workshop:\n\n- **Two halves.** A composition half (tempo, sections, patterns, note and parameter events, and for generative pieces the rules that produce them) and a sound half (each voice's engine type and every parameter value).\n- **Fixed songs and generative styles.** The same format should hold a finished song, where every event is written out, and a style, where rules generate events. A generated song could be saved as a fixed song.\n- **Tracker vocabulary.** Borrow the familiar tracker structure, a song made of chains of phrases, plus instruments and tables, so it maps naturally onto the M8 and similar trackers.\n- **A schema with validation.** Publish a JSON Schema and a validator, so files from any of the systems can be checked.\n- **Start from what exists.** Begin with Endless Spa's current JSON and generalize it, rather than designing from scratch.",
+  "open_questions": [
+    "How different is Endless Spa's current JSON from what the M8 needs?",
+    "Should the generative rules be data, such as probabilities and grammars, or small scripts?",
+    "Should it also cover video effects, as Sam's 4k tracker does?"
+  ],
+  "notes": "- 2026-10-21: Captured as a sub-idea of Music Styles as Tracker Systems: the shared format that lets the other projects exchange compositions and voices.",
+  "links": [
+    {
+      "label": "Part of: Music Styles as Tracker Systems",
+      "url": "#/idea/music-styles-as-trackers"
+    },
+    {
+      "label": "Used by: Endless Techno",
+      "url": "#/idea/endless-techno"
+    },
+    {
+      "label": "Used by: M8 Song Writer",
+      "url": "#/idea/m8-song-writer"
+    },
+    {
+      "label": "Used by: New Tracker Engine",
+      "url": "#/idea/new-tracker-engine"
+    }
+  ],
+  "plan": null,
+  "created": "2026-10-21T01:09:55.521Z",
+  "updated": "2026-10-21T01:09:55.521Z"
+}

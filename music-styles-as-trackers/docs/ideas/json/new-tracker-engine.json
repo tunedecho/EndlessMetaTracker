@@ -1,0 +1,35 @@
+{
+  "slug": "new-tracker-engine",
+  "title": "New Tracker Engine",
+  "one_liner": "A greatly expanded tracker in the spirit of the M8, with rewritten synth engines, built to run whole style definitions natively.",
+  "status": "seed",
+  "tags": [
+    "music",
+    "tracker",
+    "generative"
+  ],
+  "description": "## What\n\nThe most ambitious sub-idea: greatly expand on the M8 tracker idea and rewrite the synth engines.\n\n## Why\n\nAn engine designed around the Tracker Song Format could run generative styles directly, rather than only fixed songs, and could use synth engines chosen for the styles being built, such as spa textures or techno percussion and acid lines.\n\n## How\n\nEarly thoughts, to refine in a workshop:\n\n- **A new tracker, not a modified M8.** As far as is known, the M8's firmware is not open source, so rewriting its engines in place is not realistic. The practical path is a new tracker that keeps the M8's workflow and adds what is missing.\n- **What to expand.** Generative patterns and rules alongside written notes, more voices, new synth engines, and native loading of the shared format.\n- **Where it runs.** Candidates are a desktop or browser app first, then possibly a plugin for Ableton, or small hardware later.\n- **Reuse Endless Spa's voices.** Its synth voices are a natural first engine set.\n- **Sound quality and timing first.** A tracker lives or dies on tight timing and good sound, so build a small, solid core before adding features.",
+  "open_questions": [
+    "Desktop app, browser, plugin, or hardware?",
+    "Which synth engines matter most to write first?",
+    "Is this a tool for the user alone, or something to share with other tracker musicians?"
+  ],
+  "notes": "- 2026-10-21: Captured as a sub-idea of Music Styles as Tracker Systems. The user mentioned greatly expanding on the M8 tracker and rewriting the synth engines.",
+  "links": [
+    {
+      "label": "Part of: Music Styles as Tracker Systems",
+      "url": "#/idea/music-styles-as-trackers"
+    },
+    {
+      "label": "Uses: Tracker Song Format",
+      "url": "#/idea/tracker-song-format"
+    },
+    {
+      "label": "Runs styles like: Endless Techno",
+      "url": "#/idea/endless-techno"
+    }
+  ],
+  "plan": null,
+  "created": "2026-10-21T01:09:55.521Z",
+  "updated": "2026-10-21T01:09:55.521Z"
+}

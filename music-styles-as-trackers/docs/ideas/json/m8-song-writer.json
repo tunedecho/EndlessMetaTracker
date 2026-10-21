@@ -1,0 +1,35 @@
+{
+  "slug": "m8-song-writer",
+  "title": "M8 Song Writer",
+  "one_liner": "Write whole songs, including all their instruments, for the Dirtywave M8 tracker, from a style definition or a conversation with Claude.",
+  "status": "seed",
+  "tags": [
+    "music",
+    "tracker",
+    "generative"
+  ],
+  "description": "## What\n\nA tool that produces complete songs for the M8: the notes and patterns, plus the instruments that make the sounds, ready to load and play.\n\n## Why\n\nThe M8 already fully defines a song and its sounds inside one system. Generating M8 songs from a style definition, for example from Endless Techno, turns styles into music on a real instrument the user can then play, perform, and edit by hand.\n\n## How\n\nEarly thoughts, to refine in a workshop:\n\n- **Two ways in.** Write M8 song and instrument files directly, or drive the M8 live over MIDI. Writing files gives complete songs with their instruments. MIDI is simpler but leaves sound design on the device.\n- **The file format.** M8 song files are a binary format. Community projects have documented and parsed it; check how complete and current that work is before relying on it, and test every generated file on the device.\n- **Map from the shared format.** Translate the Tracker Song Format into M8 terms: song, chains, phrases, instruments, and tables, and the M8's own synth engines and their parameters.\n- **Claude as co-writer.** Describe a song in words, and Claude writes it in the shared format, which is then converted for the M8.\n- **Round trip.** Reading M8 files back into the shared format would let hand-made M8 songs become examples for a style.",
+  "open_questions": [
+    "Write song files directly, or drive the M8 over MIDI first?",
+    "Which M8 hardware and firmware version should it target?",
+    "Which style should the first generated M8 song be?"
+  ],
+  "notes": "- 2026-10-21: Captured as a sub-idea of Music Styles as Tracker Systems. The user wants to be able to write whole songs for the M8 tracker.",
+  "links": [
+    {
+      "label": "Part of: Music Styles as Tracker Systems",
+      "url": "#/idea/music-styles-as-trackers"
+    },
+    {
+      "label": "Uses: Tracker Song Format",
+      "url": "#/idea/tracker-song-format"
+    },
+    {
+      "label": "Source style: Endless Techno",
+      "url": "#/idea/endless-techno"
+    }
+  ],
+  "plan": null,
+  "created": "2026-10-21T01:09:55.521Z",
+  "updated": "2026-10-21T01:09:55.521Z"
+}
