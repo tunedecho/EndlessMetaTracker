@@ -22,12 +22,12 @@
       "hat": {
         "engine": "hihat",
         "params": { "tone": 0.75, "metallic": 0.5, "decay": 0.05 },
-        "mix": { "volume": 0.45, "pan": 0.15 }
+        "mix": { "volume": 0.6, "pan": 0.15 }
       },
       "ohat": {
         "engine": "hihat",
         "params": { "tone": 0.6, "metallic": 0.6, "decay": 0.3, "open": true },
-        "mix": { "volume": 0.35, "pan": -0.1, "delaySend": 0.1 }
+        "mix": { "volume": 0.5, "pan": -0.1, "delaySend": 0.1 }
       },
       "bass": {
         "engine": "analog",

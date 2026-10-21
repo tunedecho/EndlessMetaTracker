@@ -1,0 +1,19 @@
+{
+  "name": "@tracker/engine",
+  "version": "0.1.0",
+  "description": "A tracker engine that plays Tracker Song Format documents: six synth engines, tables, effects, and a sample-accurate sequencer. Renders offline to WAV in Node and plays in the browser from the same code.",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js"
+  },
+  "bin": {
+    "tracker-render": "bin/render.js"
+  },
+  "scripts": {
+    "test": "node --test \"test/**/*.test.js\""
+  },
+  "dependencies": {
+    "@tracker/format": "0.1.0"
+  }
+}
