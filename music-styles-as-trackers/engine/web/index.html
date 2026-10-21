@@ -160,7 +160,7 @@
       <div id="knobs"></div>
     </div>
     <canvas id="wave" width="1200" height="90"></canvas>
-    <details id="about"><summary>how this works</summary><p>Same engine as the offline renderer, played live. The grid is the whole song row, every step of it; each band starts a phrase and names the phrase each track plays there (with its chain transpose). <b>Play</b> streams the song from the cursor's row and <b>Loop row</b> repeats one row; edits are heard the next time their row comes round. A step belongs to a phrase, so an edit changes that phrase everywhere it plays; <b>Make unique here</b> copies it first. <b>Generate</b> writes a fixed song from the chosen style and seed. <b>Endless</b> starts a run that never ends; <b>−</b> and <b>+</b> nudge the energy of the next section.</p></details>
+    <details id="about"><summary>how this works</summary><p>Same engine as the offline renderer, played live. The grid is the whole song row, every step of it; each band starts a phrase and names the phrase each track plays there (with its chain transpose). <b>Play</b> streams the song from the cursor's row and <b>Loop row</b> repeats one row; edits are heard from the next bar. A step belongs to a phrase, so an edit changes that phrase everywhere it plays; <b>Make unique here</b> copies it first. <b>Generate</b> writes a fixed song from the chosen style and seed. <b>Endless</b> starts a run that never ends; <b>−</b> and <b>+</b> nudge the energy of the next section.</p></details>
     <div class="gridbar">
       <h2 id="gridTitle">Row</h2>
       <label class="check" title="While playing, show the playing row and scroll to the playhead (F)"><input type="checkbox" id="follow" checked> follow playhead</label>

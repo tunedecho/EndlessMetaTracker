@@ -1,7 +1,7 @@
 /**
  * Browser player and step editor for Tracker Song Format files, on the same
  * engine as the CLI. Songs play live in an AudioWorklet (synth-worklet.js),
- * so edits are heard the next time their row comes round; the worker renders
+ * so edits are heard from the next bar; the worker renders
  * WAVs and runs the generator, including endless mode's sections.
  */
 import { resolve, toName, toMidi, stepSource, phrasePlays, getStep, setStep, makeUnique } from '../../format/lib/core.js';

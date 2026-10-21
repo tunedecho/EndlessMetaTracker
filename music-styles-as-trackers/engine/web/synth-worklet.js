@@ -4,8 +4,9 @@
  *
  * - a keyboard player with no rows, played note by note (the synth
  *   playground, and step audition in the tracker player);
- * - a song player that streams song rows as they come due, so edits to the
- *   composition are heard the next time a row is appended.
+ * - a song player that streams songs a bar at a time, half a second before
+ *   each bar is due, so edits to the composition (and macros) are heard
+ *   within about a bar.
  *
  * Messages in:
  *   {type:'load', sound, bpm, stepsPerBeat, voices?}   rebuild the keyboard player (new sound or master)
@@ -21,6 +22,7 @@
  *   {type:'ended'}                            the song played to its end
  */
 import { Player } from '../lib/player.js';
+import { rowSteps } from '../../format/lib/core.js';
 
 const VOICES = 9; // default: eight for the keyboard, the last for repeat
 const LOOKAHEAD = 0.5; // seconds of song appended ahead of playback
@@ -50,7 +52,7 @@ class SynthProcessor extends AudioWorkletProcessor {
     if (m.type === 'play') {
       const { song } = m;
       const header = { meta: song.meta, transport: song.transport, sound: song.sound, composition: { tracks: song.composition.tracks } };
-      this.song = { player: new Player(header, { sampleRate }), comp: song.composition, next: m.row, loop: !!m.loop, endless: !!m.endless, loopTarget: song.transport.loop, segs: [], ended: false, stopAt: -1 };
+      this.song = { player: new Player(header, { sampleRate }), comp: song.composition, next: m.row, bar: 0, loop: !!m.loop, endless: !!m.endless, loopTarget: song.transport.loop, segs: [], ended: false, stopAt: -1 };
       return;
     }
     if (m.type === 'composition') { if (this.song) this.song.comp = m.composition; return; }
@@ -70,20 +72,40 @@ class SynthProcessor extends AudioWorkletProcessor {
     }
   }
 
-  /** Append the next song row; at the end, jump to the loop row, wait for more (endless), or finish. Returns false when it appended nothing. */
+  /**
+   * Append the next bar of the song: at the end of a row, the next row (or the
+   * same one when looping); at the end of the song, the loop row, a wait for
+   * more rows (endless), or the end. Returns false when it appended nothing.
+   */
   appendNext(s) {
     const rows = s.comp.song.rows;
     if (s.next >= rows.length) {
       if (s.endless) return false; // the page adds rows as it writes them
-      if (s.loopTarget !== undefined && s.loopTarget < rows.length) s.next = s.loopTarget;
+      if (s.loopTarget !== undefined && s.loopTarget < rows.length) { s.next = s.loopTarget; s.bar = 0; }
       else { s.player.end(); s.ended = true; return false; }
     }
     const r = s.next;
-    const sec = (s.comp.song.sections || []).find((x) => x.row === r);
-    const info = s.player.appendRow(rows[r], s.comp, { name: sec?.name, energy: sec?.energy });
-    if (info.steps) s.segs.push({ row: r, step: info.step, steps: info.steps });
-    else if (s.loop) { s.player.end(); s.ended = true; } // an empty row has nothing to loop
-    if (!s.loop) s.next++;
+    const row = rows[r];
+    const pl = s.player.transport.phraseLength;
+    const bars = rowSteps({ transport: s.player.transport, composition: s.comp }, row) / pl;
+    if (!bars) { // an empty row has nothing to play
+      if (s.loop) { s.player.end(); s.ended = true; return false; }
+      s.next++; s.bar = 0;
+      return true;
+    }
+    // One bar of the row: each track plays the phrase its chain has at this bar (shorter chains repeat).
+    const b = s.bar;
+    const barRow = {}, chains = {};
+    for (const [trackId, chainId] of Object.entries(row)) {
+      if (!chainId) continue;
+      const chain = s.comp.chains[chainId];
+      chains[`bar.${trackId}`] = { rows: [chain.rows[b % chain.rows.length]] };
+      barRow[trackId] = `bar.${trackId}`;
+    }
+    const sec = b === 0 ? (s.comp.song.sections || []).find((x) => x.row === r) : null;
+    const info = s.player.appendRow(barRow, { tracks: s.comp.tracks, phrases: s.comp.phrases, chains }, { name: sec?.name, energy: sec?.energy });
+    s.segs.push({ row: r, step: info.step, steps: info.steps, offset: b * pl, rowSteps: bars * pl });
+    if (++s.bar >= bars) { s.bar = 0; if (!s.loop) s.next++; }
     return true;
   }
 
@@ -100,7 +122,7 @@ class SynthProcessor extends AudioWorkletProcessor {
         this.lastPost = currentTime;
         while (s.segs.length > 1 && s.segs[1].step <= p.stepCursor) s.segs.shift();
         const seg = s.segs[0];
-        if (seg) this.port.postMessage({ type: 'pos', row: seg.row, step: Math.min(p.stepCursor - seg.step, seg.steps - 1) });
+        if (seg) this.port.postMessage({ type: 'pos', row: seg.row, step: Math.min(seg.offset + p.stepCursor - seg.step, seg.rowSteps - 1) });
       }
       if (s.ended && s.stopAt < 0 && p.pos >= p.rowStart) { s.stopAt = p.pos; this.port.postMessage({ type: 'ended' }); }
       if (s.stopAt >= 0 && p.pos > s.stopAt + TAIL * sampleRate) this.song = null;
