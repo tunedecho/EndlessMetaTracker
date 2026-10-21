@@ -2,7 +2,7 @@
  * Browser player and step editor for Tracker Song Format files, on the same
  * engine as the CLI. Songs play live in an AudioWorklet (synth-worklet.js),
  * so edits are heard the next time their row comes round; the worker renders
- * WAVs and runs the generator and endless mode.
+ * WAVs and runs the generator, including endless mode's sections.
  */
 import { resolve, toName, toMidi, stepSource, phrasePlays, getStep, setStep, makeUnique } from '../../format/lib/core.js';
 import { encodeWav } from '../lib/wav.js';
@@ -473,11 +473,13 @@ async function auditionCell() {
 
 /* ------------------------------------------------------------- playback */
 
+function stopEndlessIfOn() { if (endless.on) stopEndless(); }
+
 async function play(loop = false) {
   if (!song) return;
-  stopEndlessIfOn();
+  if (loop) stopEndlessIfOn(); // looping one row ends the run; playing from a row keeps it going
   await startAudio();
-  post({ type: 'play', song, row: view, loop });
+  post({ type: 'play', song, row: view, loop, endless: endless.on });
   playing = loop ? 'row' : 'song';
   $('stop').disabled = false;
   status(loop ? `looping row ${view}` : `playing from row ${view}`);
@@ -495,6 +497,13 @@ function stop() {
 function onLive(m) {
   if (m.type === 'pos' && playing) {
     playPos = m;
+    if (endless.on) {
+      // Write the next section a bar before the last one ends, so energy nudges and knobs reach it.
+      const last = resolved.rows.length - 1;
+      if (m.row === last && resolved.rows[last].steps - m.step <= pl()) requestSection();
+      const sec = song.composition.song.sections?.[m.row];
+      status(`endless · row ${m.row}${sec ? ` ${sec.name} · energy ${sec.energy}` : ''}${endless.bias ? ` · next ${endless.bias > 0 ? '+' : ''}${endless.bias.toFixed(1)}` : ''}`);
+    }
     // Following, the grid shows the playing row and keeps the playhead in view; otherwise it stays where you are.
     if (following() && m.row !== view) { view = m.row; cur.step = Math.min(cur.step, resolved.rows[view].steps - 1); renderGrid(); }
     showPlaying();
@@ -599,6 +608,8 @@ function weirdOpts() {
   const opts = { seed: weirdness.seed, amounts: weirdness.amounts, depth: weirdness.depth, vary: $('wVary').checked };
   if (scope === 'row' || scope === 'rowtrack') opts.rows = [view, view + 1];
   if (scope === 'track' || scope === 'rowtrack') opts.tracks = [tracks()[cur.track].id];
+  // An endless song keeps growing: leave the rows already played alone, so each rebuild stays small.
+  if (endless.on && playPos) opts.rows = [Math.max(opts.rows?.[0] ?? 0, playPos.row), opts.rows?.[1] ?? (original ?? song).composition.song.rows.length];
   return opts;
 }
 
@@ -616,6 +627,7 @@ function applyWeird() {
   song = w;
   resolved = resolve(song);
   setView(Math.min(view, resolved.rows.length - 1));
+  renderRows();
   renderGrid();
   post({ type: 'composition', composition: song.composition });
   info();
@@ -628,7 +640,7 @@ function weirdOff(redraw = true) {
   weirdness.on = false;
   document.body.classList.remove('weird');
   $('weirdToggle').textContent = 'original';
-  if (redraw && song) { resolved = resolve(song); renderGrid(); post({ type: 'composition', composition: song.composition }); }
+  if (redraw && song) { resolved = resolve(song); renderRows(); renderGrid(); post({ type: 'composition', composition: song.composition }); }
   info();
 }
 
@@ -684,123 +696,83 @@ $('wVary').onchange = () => { if (weirdness.on) applyWeird(); };
 info();
 
 /* ---------------------------------------------------------------- endless */
-const endless = { on: false, nextTime: 0, queued: 0, bias: 0, sections: [], current: null, sampleRate: 44100, sources: [] };
-const LOOKAHEAD = 2; // sections rendered ahead of playback
-let raf = 0;
 
-function stopEndlessIfOn() { if (endless.on) stopEndless(); }
+// Endless is a song that grows: the worker writes one section at a time and
+// each becomes a new song row, streamed live like any song. So the grid,
+// editing, follow, and the weirdness macros all work on it; a change lands on
+// rows not yet playing. The next section is written a bar before the last one ends.
+const endless = { on: false, style: null, bias: 0, pending: false, base: null };
 
 function startEndless() {
   stop();
-  endless.on = true; endless.queued = 0; endless.bias = 0; endless.sections = []; endless.current = null; endless.sources = [];
-  output();
-  startAudio();
   weirdOff(false);
-  song = null; resolved = null; stepRows = [];
-  $('rows').innerHTML = ''; $('grid').innerHTML = ''; $('gridTitle').textContent = 'Row'; $('cell').textContent = '–';
-  $('less').disabled = false; $('more').disabled = false; $('stop').disabled = false;
-  for (const id of ['play', 'loop', 'download', 'save']) $(id).disabled = true;
+  endless.on = true; endless.bias = 0; endless.pending = false; endless.base = null;
+  $('less').disabled = false; $('more').disabled = false;
   status('endless: starting…');
   worker.postMessage({ type: 'endless-start', style: endless.style, seed: parseInt($('seed').value, 10) || 0 });
 }
 
 function requestSection() {
-  if (!endless.on) return;
-  endless.queued++;
+  if (!endless.on || endless.pending) return;
+  endless.pending = true;
   worker.postMessage({ type: 'endless-next', energy: endless.bias });
   endless.bias = 0;
 }
 
-function onSection(m) {
-  endless.queued--;
-  const buf = audio.createBuffer(2, m.left.length, m.sampleRate);
-  buf.copyToChannel(m.left, 0); buf.copyToChannel(m.right, 1);
-  const src = audio.createBufferSource();
-  src.buffer = buf; src.connect(output());
-  if (endless.sections.length === 0) endless.nextTime = audio.currentTime + 0.15;
-  const at = endless.nextTime;
-  src.start(at);
-  endless.nextTime += m.left.length / m.sampleRate;
-  endless.sources.push(src);
-  src.onended = () => { endless.sources = endless.sources.filter((x) => x !== src); };
-  endless.sections.push({ ...m, at, left: null, right: null });
-  const tr = document.createElement('tr');
-  tr.innerHTML = `<td>${m.index}</td><td>${m.section.kind}</td><td><i class="energy" style="width:${Math.round(m.section.energy * 40)}px"></i></td><td>${m.steps / 16}b</td><td>${Object.keys(m.row).join(' ').slice(0, 24)}</td>`;
-  $('rows').appendChild(tr);
-  if (endless.queued + (endless.sections.length - sectionIndexAt(audio.currentTime)) < LOOKAHEAD + 1) requestSection();
-  if (!raf) tickEndless();
-}
-
-function sectionIndexAt(t) {
-  let i = 0;
-  for (let k = 0; k < endless.sections.length; k++) if (endless.sections[k].at <= t) i = k;
-  return i;
-}
-
-function showEndlessRow(sec) {
-  if (endless.current === sec) return;
-  endless.current = sec;
-  for (const tr of $('rows').rows) tr.classList.toggle('current', tr.firstChild.textContent === String(sec.index));
-  $('gridTitle').textContent = `Row ${sec.index} · ${sec.section.kind} · energy ${sec.section.energy} · ${sec.steps / 16} bars (first phrase shown)`;
-  const g = $('grid');
-  g.innerHTML = '';
-  const head = document.createElement('tr');
-  head.innerHTML = '<th></th>' + sec.tracks.map((t) => `<th>${t.id}</th>`).join('');
-  g.appendChild(head);
-  for (let s = 0; s < 16; s++) {
-    const tr = document.createElement('tr');
-    tr.dataset.step = s;
-    if (s % 4 === 0) tr.className = 'beat';
-    let html = `<td class="stepno">${hex(s)}</td>`;
-    for (let ti = 0; ti < sec.tracks.length; ti++) {
-      const ev = sec.events.find((e) => e.track === ti && e.step === s);
-      html += `<td class="${cellClass(ev)}">${cellHtml(ev)}</td>`;
-    }
-    tr.innerHTML = html;
-    g.appendChild(tr);
+/** A new section from the worker: add it to the song as a row. */
+async function onSection(m) {
+  endless.pending = false;
+  if (!endless.on) return;
+  const base = endless.base;
+  const c = base.composition;
+  const grewTracks = m.tracks.length !== c.tracks.length;
+  c.tracks = m.tracks;
+  Object.assign(c.phrases, m.phrases);
+  Object.assign(c.chains, m.chains);
+  c.song.rows.push(m.row);
+  c.song.sections.push({ row: m.index, name: m.section.kind, energy: m.section.energy });
+  cached.base = null; // the song grew under the last weird copy
+  if (m.index === 0) {
+    const knobsUp = Object.values(weirdness.amounts).some((v) => v > 0);
+    setSong(base, base.meta.title);
+    endless.on = true;
+    $('less').disabled = false; $('more').disabled = false;
+    if (knobsUp) applyWeird();
+    await play(false);
+    return;
   }
-}
-
-function tickEndless() {
-  if (!endless.on) { raf = 0; return; }
-  const t = audio.currentTime;
-  const i = sectionIndexAt(t);
-  const sec = endless.sections[i];
-  if (sec && sec.at <= t) {
-    showEndlessRow(sec);
-    const sample = (t - sec.at) * sec.sampleRate;
-    let lo = 0, hi = sec.stepStarts.length - 1;
-    while (lo < hi) { const mid = (lo + hi + 1) >> 1; if (sec.stepStarts[mid] <= sample) lo = mid; else hi = mid - 1; }
-    // Only the first phrase is shown, so light the playhead only while it is in it.
-    for (const tr of $('grid').rows) tr.classList.toggle('playing', lo < 16 && parseInt(tr.dataset.step, 10) === lo);
-    status(`endless · ${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')} · row ${sec.index} ${sec.section.kind}${endless.bias ? ` · next ${endless.bias > 0 ? '+' : ''}${endless.bias.toFixed(1)}` : ''}`);
-    // Keep the lookahead full as playback advances.
-    if (endless.queued + (endless.sections.length - 1 - i) < LOOKAHEAD) requestSection();
-  }
-  raf = requestAnimationFrame(tickEndless);
+  if (grewTracks && node) loadKeys();
+  if (weirdness.on) applyWeird();
+  else { resolved = resolve(song); renderRows(); post({ type: 'composition', composition: song.composition }); }
+  if (view === resolved.rows.length - 1) renderGrid();
 }
 
 function stopEndless() {
   endless.on = false;
-  for (const s of endless.sources) { try { s.stop(); } catch {} }
-  endless.sources = [];
+  endless.pending = false;
   $('less').disabled = true; $('more').disabled = true;
-  status('stopped');
 }
 
 $('endless').onclick = async () => {
   endless.style = await (await fetch($('styles').value)).json();
   startEndless();
 };
-$('more').onclick = () => { endless.bias = Math.min(0.6, endless.bias + 0.2); status(`next section: ${endless.bias >= 0 ? '+' : ''}${endless.bias.toFixed(1)} energy`); };
-$('less').onclick = () => { endless.bias = Math.max(-0.6, endless.bias - 0.2); status(`next section: ${endless.bias >= 0 ? '+' : ''}${endless.bias.toFixed(1)} energy`); };
+const nudge = (d) => { endless.bias = Math.max(-0.6, Math.min(0.6, endless.bias + d)); status(`next section: ${endless.bias >= 0 ? '+' : ''}${endless.bias.toFixed(1)} energy`); };
+$('more').onclick = () => nudge(0.2);
+$('less').onclick = () => nudge(-0.2);
 
 /* ------------------------------------------------------------- worker, files */
 
 worker.onmessage = (e) => {
   const m = e.data;
-  if (m.type === 'endless-ready') { status(`endless: ${m.title} at ${m.bpm} bpm`); $('meta').textContent = `${m.title}\nendless run, ${m.bpm} bpm\nseed ${$('seed').value}`; requestSection(); return; }
-  if (m.type === 'section') { onSection(m); return; }
+  if (m.type === 'endless-ready') {
+    endless.base = { ...m.header, meta: { ...m.header.meta, title: `${m.header.meta.title} (endless)` } };
+    endless.base.composition.song.sections = [];
+    status(`endless: ${m.header.meta.title} at ${m.header.transport.bpm} bpm`);
+    requestSection();
+    return;
+  }
+  if (m.type === 'endless-section') { onSection(m); return; }
   if (m.type === 'progress') progress(m.value);
   else if (m.type === 'rendered') {
     progress(1);

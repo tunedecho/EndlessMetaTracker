@@ -5,18 +5,17 @@
  *   {type:'render', song}                          whole-song render
  *   {type:'generate', style, seed, minutes}        fixed song from a style
  *   {type:'endless-start', style, seed}            begin an endless session
- *   {type:'endless-next', energy}                  write and render the next section
+ *   {type:'endless-next', energy}                  write the next section
  * Messages out:
  *   {type:'progress', value} | {type:'rendered', ...} | {type:'generated', song}
- *   {type:'section', index, section, startSample, samples, sampleRate, left, right, tracks, events, steps, stepStarts}
+ *   {type:'endless-ready', header}                 the song header: transport, sound, no rows yet
+ *   {type:'endless-section', row, section, index, tracks, phrases, chains}   one new row, with the phrases and chains it introduced
  *   {type:'error', message}
  */
 import { renderSong } from '../lib/sequencer.js';
-import { Player } from '../lib/player.js';
 import { generateSong, Session } from '../../endless-techno/lib/generate.js';
-import { resolve } from '../../format/lib/core.js';
 
-let session = null, player = null;
+let session = null;
 
 self.onmessage = (e) => {
   const m = e.data;
@@ -29,20 +28,11 @@ self.onmessage = (e) => {
       self.postMessage({ type: 'rendered', left: r.left, right: r.right, sampleRate: r.sampleRate, starts: r.grid.starts, rows: r.resolved.rows }, [r.left.buffer, r.right.buffer, r.grid.starts.buffer]);
     } else if (m.type === 'endless-start') {
       session = new Session(m.style, { seed: m.seed });
-      player = new Player(session.header(), { sampleRate: 44100, seed: m.seed });
-      self.postMessage({ type: 'endless-ready', bpm: session.bpm, title: session.header().meta.title });
+      self.postMessage({ type: 'endless-ready', header: session.header() });
     } else if (m.type === 'endless-next') {
       if (!session) throw new Error('no endless session');
-      const r = session.next({ energy: m.energy || 0 });
-      const comp = { phrases: session.phrases, chains: session.chains, tracks: r.tracks };
-      const info = player.appendRow(r.row, comp, r.section);
-      const n = Math.round(info.samples);
-      const { left, right } = player.render(n);
-      // Events of this row, relative to its first step, for the grid display.
-      const mini = { format: 'tracker-song/0.1', transport: { ...player.transport, bpm: session.bpm }, sound: session.sound, composition: { tracks: r.tracks, phrases: session.phrases, chains: session.chains, song: { rows: [r.row] } } };
-      const events = resolve(mini).events.filter((ev) => ev.step < player.transport.phraseLength).map((ev) => ({ step: ev.step, track: ev.track, note: ev.note, vel: ev.vel, fx: ev.fx }));
-      const stepStarts = Float64Array.from(player.stepStarts.slice(info.step, info.step + info.steps).map((s) => s - info.startSample));
-      self.postMessage({ type: 'section', index: r.index, section: r.section, row: r.row, startSample: info.startSample, samples: n, sampleRate: player.sampleRate, left, right, tracks: r.tracks, events, steps: info.steps, stepStarts }, [left.buffer, right.buffer, stepStarts.buffer]);
+      // Only the writing happens here; the page adds the section to its song and plays it live.
+      self.postMessage({ type: 'endless-section', ...session.next({ energy: m.energy || 0 }) });
     }
   } catch (err) {
     self.postMessage({ type: 'error', message: err.message });
