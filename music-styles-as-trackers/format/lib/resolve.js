@@ -51,6 +51,7 @@ export function stepSeconds(bpm, stepsPerBeat) {
  * @property {string|null} inst instrument id (null when no note)
  * @property {number} vel 0..1
  * @property {object} fx command map, possibly empty
+ * @property {object|null} lock parameter locks for this note, or null
  * @property {number} row song row index
  * @property {string} chain chain id
  * @property {string} phrase phrase id
@@ -93,7 +94,7 @@ export function resolve(song, opts = {}) {
         if (!chainId || row[trackId]) continue;
         const ti = trackIndex.get(trackId);
         if (ti === undefined || tracks[ti].mute) continue;
-        events.push({ step, track: ti, trackId, note: 'OFF', inst: tracks[ti].instrument ?? null, vel: 1, fx: {}, row: r, chain: chainId, phrase: null, phraseStep: 0 });
+        events.push({ step, track: ti, trackId, note: 'OFF', inst: tracks[ti].instrument ?? null, vel: 1, fx: {}, lock: null, row: r, chain: chainId, phrase: null, phraseStep: 0 });
       }
     }
 
@@ -133,6 +134,7 @@ export function resolve(song, opts = {}) {
               inst: note !== null && note !== 'OFF' ? (cell.inst ?? defaultInst) : (cell.inst ?? defaultInst),
               vel: cell.vel ?? 1,
               fx: cell.fx ?? {},
+              lock: cell.lock ?? null,
               row: r,
               chain: chainId,
               phrase: phraseId,

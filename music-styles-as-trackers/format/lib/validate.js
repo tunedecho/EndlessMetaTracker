@@ -6,6 +6,7 @@ import { createRequire } from 'node:module';
 import Ajv2020 from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
 import { checkSongReferences, checkStyleReferences } from './refs.js';
+import { applyLock, phraseInstruments } from './locks.js';
 
 export { checkSongReferences, checkStyleReferences };
 
@@ -25,7 +26,7 @@ function getAjv() {
 }
 
 function formatErrors(errors) {
-  return (errors || []).map((e) => `${e.instancePath || '/'} ${e.message}${e.params?.allowedValues ? ' (' + e.params.allowedValues.join(', ') + ')' : ''}`);
+  return (errors || []).map((e) => `${e.instancePath || '/'} ${e.message}${e.params?.allowedValues ? ' (' + e.params.allowedValues.join(', ') + ')' : ''}${e.params?.additionalProperty ? `: ${e.params.additionalProperty}` : ''}`);
 }
 
 /**
@@ -39,6 +40,7 @@ export function validate(doc) {
   const errors = [];
   if (!v(doc)) errors.push(...formatErrors(v.errors));
   else errors.push(...(kind === 'song' ? checkSongReferences(doc) : checkStyleReferences(doc)));
+  if (kind === 'song' && !errors.length) errors.push(...checkLocks(doc));
   return { ok: errors.length === 0, kind, errors };
 }
 
@@ -47,4 +49,21 @@ export function assertValid(doc, label = 'document') {
   const r = validate(doc);
   if (!r.ok) throw new Error(`${label} is not a valid ${r.kind}:\n  ${r.errors.join('\n  ')}`);
   return doc;
+}
+
+/** Every locked note must still be a valid instrument: a known parameter for its engine, in range. */
+function checkLocks(song) {
+  const v = getAjv().getSchema(`${songSchema.$id}#/$defs/instrument`);
+  const { instruments } = song.sound;
+  const players = phraseInstruments(song);
+  const problems = [];
+  for (const [id, phrase] of Object.entries(song.composition.phrases)) {
+    phrase.steps.forEach((s, i) => {
+      if (!s?.lock) return;
+      for (const instId of s.inst ? [s.inst] : players.get(id) || []) {
+        if (!v(applyLock(instruments[instId], s.lock))) problems.push(...formatErrors(v.errors).map((e) => `phrases.${id}[${i}].lock on ${instId}: ${e}`));
+      }
+    });
+  }
+  return problems;
 }

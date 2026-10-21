@@ -69,6 +69,7 @@ function color(lane, cell, i) {
   if (lane.key === 'pitch') c.setHSL(((cell.raw[i] % 12) / 12), 0.75, 0.5 + 0.15 * v); // pitch class as hue
   else if (cell.source[i] === SOURCE.unset) c.setHSL(HUE[lane.group] / 360, 0.08, 0.22 + 0.2 * v);
   else c.setHSL(HUE[lane.group] / 360, cell.source[i] === SOURCE.command ? 0.35 : 0.7, 0.28 + 0.35 * v + (cell.source[i] === SOURCE.command ? 0.15 : 0));
+  if (cell.source[i] === SOURCE.lock) c.lerp(new THREE.Color(0xf59e0b), 0.6); // locked for this note
   if (cell.changed[i]) c.lerp(new THREE.Color(0xffffff), 0.35);
   return c;
 }
@@ -229,7 +230,7 @@ renderer.domElement.addEventListener('pointermove', (e) => {
     const l = model.lanes[lane];
     const raw = cell.raw[lane];
     const shown = l.key === 'pitch' ? `${toName(raw)} (${raw})` : raw === null || raw === undefined ? '–' : String(raw);
-    const src = { [SOURCE.set]: 'set', [SOURCE.unset]: 'unset: schema default', [SOURCE.command]: 'set by a track command' }[cell.source[lane]] || '';
+    const src = { [SOURCE.set]: 'set', [SOURCE.unset]: 'unset: schema default', [SOURCE.command]: 'set by a track command', [SOURCE.lock]: 'locked on this step' }[cell.source[lane]] || '';
     tip.innerHTML = `${head}\n<b>${l.label}</b> = ${shown}  <span style="color:var(--dim)">${src}${cell.changed[lane] ? ', changed' : ''}</span>${l.description ? `\n<span style="color:var(--dim)">${l.description}</span>` : ''}`;
   }
   tip.style.display = 'block';

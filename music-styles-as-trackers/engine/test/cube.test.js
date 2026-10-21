@@ -42,3 +42,16 @@ test('cube: a row range keeps state from earlier rows and counts steps from the 
   const mine = part.cells.find((c) => c.track === same.track && c.rowStep === same.rowStep);
   assert.deepEqual([...mine.raw.keys()].map((i) => mine.raw[i]), [...same.raw.keys()].map((i) => same.raw[i]));
 });
+
+test('cube: a parameter lock shows on its note only, over a track command', () => {
+  const s = JSON.parse(JSON.stringify(song));
+  const m0 = cubeModel(s, defs);
+  const cutoff = m0.lanes.findIndex((l) => l.key === 'filter.cutoff');
+  const c = m0.cells.find((x) => x.kind === 'note' && x.source[cutoff] === SOURCE.command);
+  s.composition.phrases[c.phrase].steps[c.phraseStep].lock = { 'filter.cutoff': 0.11 };
+  const m = cubeModel(s, defs);
+  const same = m.cells.filter((x) => x.phrase === c.phrase && x.phraseStep === c.phraseStep && x.kind === 'note');
+  for (const x of same) { assert.equal(x.source[cutoff], SOURCE.lock); assert.equal(x.raw[cutoff], 0.11); }
+  const next = m.cells.find((x) => x.track === c.track && x.step > c.step && x.kind === 'note' && !(x.phrase === c.phrase && x.phraseStep === c.phraseStep));
+  assert.notEqual(next.source[cutoff], SOURCE.lock);
+});

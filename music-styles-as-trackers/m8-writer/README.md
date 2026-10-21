@@ -58,6 +58,7 @@ Targets **file version 6.6.2** (firmware 6.6.x, the current release as of Octobe
 | `nudge`, `cut`, `slide`, `tempo`, `retrig`, `chance` | DEL, OFF, PSL, TPO, RET, CHA | Values in ticks (6 per step). RET and CHA value semantics are unverified. |
 | `accent` | Folded into velocity | |
 | `pitch`, swing, loop point | Dropped with a warning | |
+| Parameter locks (`lock`) | Dropped with a warning | The M8 has no per-step locks; a few could become step commands, but those persist on the track and locks do not |
 
 More than three commands on a step keeps the first three.
 

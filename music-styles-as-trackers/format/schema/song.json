@@ -314,6 +314,13 @@
         "cut": { "$ref": "#/$defs/unit", "description": "Note: release the note after this fraction of a step." }
       }
     },
+    "lock": {
+      "type": "object",
+      "minProperties": 1,
+      "description": "Parameter locks: instrument parameters set for this step's note only, by dotted path into the instrument (\"filter.cutoff\", \"amp.decay\", \"params.unison\"). The note plays as if its instrument had these values; a lock wins over a track command for its note. The validator checks the locked instrument against the instrument schema.",
+      "propertyNames": { "pattern": "^(transpose|(params|filter|amp|lfo|mix)(\\.[A-Za-z][A-Za-z0-9]*)+)$" },
+      "additionalProperties": { "type": ["number", "string", "boolean"] }
+    },
     "step": {
       "oneOf": [
         { "type": "null" },
@@ -324,7 +331,8 @@
             "note": { "$ref": "#/$defs/note" },
             "inst": { "$ref": "#/$defs/id", "description": "Instrument for this note. Defaults to the track's instrument." },
             "vel": { "$ref": "#/$defs/unit", "default": 1 },
-            "fx": { "$ref": "#/$defs/fx" }
+            "fx": { "$ref": "#/$defs/fx" },
+            "lock": { "$ref": "#/$defs/lock" }
           }
         }
       ]

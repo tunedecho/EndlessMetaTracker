@@ -26,7 +26,7 @@ Plain JavaScript, Node 22, no build step, no dependencies beyond the validator's
 
 ```sh
 npm install
-npm test                      # 66 tests across the four packages
+npm test                      # 69 tests across the four packages
 npm run validate              # check every example and style
 npm run demo                  # generate, render, and export everything into demo-out/
 npm run web                   # player and step editor at http://localhost:8080/engine/web/; synth.html and cube.html beside it

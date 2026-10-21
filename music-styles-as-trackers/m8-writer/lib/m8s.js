@@ -464,6 +464,7 @@ function writePhrase(buf, idx, phrase, defaultInst, ctx) {
     if (!cell) continue;
     const o = base + s * STEP_SIZE;
     const instId = cell.inst ?? defaultInst;
+    if (cell.lock) ctx.warnings.push(`${ctx.where}[${s}]: parameter locks (${Object.keys(cell.lock).join(', ')}) dropped; the M8 has no per-step locks`);
     if (cell.note !== undefined) {
       if (cell.note === 'OFF') buf[o] = NOTE_OFF;
       else {

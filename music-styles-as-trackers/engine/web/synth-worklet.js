@@ -10,7 +10,7 @@
  * Messages in:
  *   {type:'load', sound, bpm, stepsPerBeat, voices?}   rebuild the keyboard player (new sound or master)
  *   {type:'update', id, inst}                 change an instrument in place
- *   {type:'on', voice, id, note, vel}         start a note on a voice (track)
+ *   {type:'on', voice, id, note, vel, lock?}  start a note on a voice (track), with optional parameter locks
  *   {type:'off', voice}                       release a voice
  *   {type:'repeat', id, note, every, gate}    retrigger a note every `every` steps (every 0 stops)
  *   {type:'play', song, row, loop}            stream a song from a row; loop repeats that row
@@ -62,7 +62,7 @@ class SynthProcessor extends AudioWorkletProcessor {
     const p = this.player;
     if (!p) return;
     if (m.type === 'update') p.updateInstrument(m.id, m.inst);
-    else if (m.type === 'on') p.noteOn(m.voice, m.id, m.note, m.vel ?? 1);
+    else if (m.type === 'on') p.noteOn(m.voice, m.id, m.note, m.vel ?? 1, m.lock || null);
     else if (m.type === 'off') p.noteOff(m.voice);
     else if (m.type === 'repeat') {
       if (!m.every) { if (this.repeat) p.noteOff(this.voices - 1); this.repeat = null; }

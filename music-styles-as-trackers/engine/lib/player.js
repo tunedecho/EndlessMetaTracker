@@ -8,7 +8,7 @@
  * to phrases and chains by id, so they are passed with each row (or once, if
  * they do not change). Tracks may be added later; they are append-only.
  */
-import { resolve, Random } from '../../format/lib/core.js';
+import { resolve, Random, applyLock, commandForPath } from '../../format/lib/core.js';
 import { createVoice } from './voices.js';
 import { Master } from './effects.js';
 import { drive as driveShape, panGains, clamp } from './dsp.js';
@@ -138,9 +138,9 @@ export class Player {
     return info;
   }
 
-  /** Live play, for a keyboard: start a note on a track now (at the next rendered sample). */
-  noteOn(track, inst, note, vel = 1) {
-    this.applyEvent({ kind: 'on', track, inst, note, vel, accent: 0, slide: null, table: null, stepSamples: this.currentStepLen });
+  /** Live play, for a keyboard: start a note on a track now (at the next rendered sample), with optional parameter locks. */
+  noteOn(track, inst, note, vel = 1, lock = null) {
+    this.applyEvent({ kind: 'on', track, inst, note, vel, accent: 0, slide: null, table: null, lock, stepSamples: this.currentStepLen });
   }
 
   /** Live play: release whatever the track is playing. */
@@ -169,11 +169,12 @@ export class Player {
     if (!tr) return;
     if (ev.kind === 'ctl') { Object.assign(tr.ctl, ev.ctl); return; }
     if (ev.kind === 'off') { if (tr.current) tr.current.noteOff(); return; }
-    const inst = this.sound.instruments[ev.inst];
-    if (!inst) return;
+    const base = this.sound.instruments[ev.inst];
+    if (!base) return;
+    const inst = ev.lock ? applyLock(base, ev.lock) : base;
     const tables = this.sound.tables || {};
     const tableDef = ev.table ? tables[ev.table] : inst.table ? tables[inst.table] : null;
-    const sounding = tr.current && !tr.current.done && tr.current.inst === inst;
+    const sounding = tr.current && !tr.current.done && tr.current.instId === ev.inst;
     // Legato: a slide command, or a glide instrument whose previous note was not released (no OFF between).
     const glide = inst.params?.glide > 0 && sounding && tr.current.amp.stage !== 'release' && tr.current.amp.stage !== 'idle';
     if (sounding && (ev.slide || glide)) {
@@ -188,8 +189,16 @@ export class Player {
       // Too many tails: choke the oldest, but keep rendering them until they are done (no hard cuts).
       for (let i = 0; i < tr.releasing.length - MAX_RELEASING; i++) tr.releasing[i].choke();
     }
-    const v = createVoice(inst, this.sampleRate, tr.ctl);
+    // A lock on a parameter a track command also sets wins for this note: the voice sees the
+    // track's controls through a layer holding the locked values.
+    let ctl = tr.ctl;
+    if (ev.lock) {
+      ctl = Object.create(tr.ctl);
+      for (const [path, value] of Object.entries(ev.lock)) { const cmd = commandForPath(path); if (cmd) ctl[cmd] = value; }
+    }
+    const v = createVoice(inst, this.sampleRate, ctl);
     v.inst = inst;
+    v.instId = ev.inst;
     v.mix = inst.mix || {};
     v.noteOn(ev.note, ev.vel, {
       accent: ev.accent,
@@ -206,7 +215,7 @@ export class Player {
     tr.bufL.fill(0, 0, count); tr.bufR.fill(0, 0, count);
     v.render(tr.bufL, tr.bufR, 0, count, this.currentStepLen);
     const m = v.mix;
-    const c = tr.ctl;
+    const c = v.ctl;
     const vol = (c.volume ?? m.volume ?? 0.8) * (tr.def.volume ?? 1);
     const pan = clamp((c.pan ?? m.pan ?? 0) + (tr.def.pan ?? 0), -1, 1);
     const drv = c.drive ?? m.drive ?? 0;

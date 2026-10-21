@@ -175,3 +175,18 @@ test('live play: a held note sounds until noteOff, and instrument edits reach it
   p.render(SR / 10);
   assert.ok(rms(p.render(SR / 10).left) < 1e-4, 'silent after release');
 });
+
+test('a parameter lock shapes its own note only, and wins over a track command', () => {
+  const SAW = { engine: 'analog', params: { wave: 'saw' }, filter: { cutoff: 0.9 }, amp: { attack: 0.001, sustain: 1, release: 0.005 }, mix: { volume: 1 } };
+  const steps = rest(16);
+  steps[0] = { note: 'C3', fx: { cutoff: 0.9 } };
+  steps[4] = { note: 'C3', lock: { 'filter.cutoff': 0.05 } }; // dark, despite the track command
+  steps[8] = { note: 'C3' };                                   // back to the command's value
+  const r = renderSong(mini({ bpm: 120, inst: SAW, steps }), { tailSeconds: 0 });
+  const step = r.grid.starts[1] - r.grid.starts[0];
+  const rms = (s) => { const a = Math.round(r.grid.starts[s] + step * 0.3), b = Math.round(r.grid.starts[s] + step * 0.9); let e = 0; for (let i = a; i < b; i++) e += r.left[i] ** 2; return Math.sqrt(e / (b - a)); };
+  const open = rms(0), locked = rms(4), after = rms(8);
+  assert.ok(locked < open / 4, `locked note is dark: ${locked} vs ${open}`);
+  assert.ok(Math.abs(after - open) / open < 0.2, `the next note is back: ${after} vs ${open}`);
+  assert.equal(SAW.filter.cutoff, 0.9, 'the instrument itself is untouched');
+});

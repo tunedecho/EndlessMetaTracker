@@ -47,7 +47,7 @@ export function leafParams(defs, schemaNode, path = []) {
     else if (node.type === 'boolean') out.push({ path: p, description: node.description, kind: 'bool', norm: (v) => (v ? 1 : 0) });
     else if (node.type === 'number' || node.type === 'integer') {
       const sc = scaleFor(node, ref, key);
-      out.push({ path: p, description: node.description, kind: 'number', default: node.default, norm: (v) => Math.min(1, Math.max(0, sc.to(Math.min(sc.max, v)))) });
+      out.push({ path: p, description: node.description, kind: 'number', default: node.default, scale: sc, exclusiveMinimum: node.exclusiveMinimum, norm: (v) => Math.min(1, Math.max(0, sc.to(Math.min(sc.max, v)))) });
     }
   }
   return out;

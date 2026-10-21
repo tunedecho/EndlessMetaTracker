@@ -37,7 +37,8 @@ Built early, against the plan's own advice, because every other phase needed som
 - [ ] Port Endless Spa's voices as the first engine set (needs Endless Spa's parameters)
 - [x] Load the shared format natively, including generative styles (the browser player generates and plays styles in the page)
 - [x] Real-time streaming playback and live generation section by section (`engine/lib/player.js`, the browser's Endless mode, `endless-techno/bin/endless.js`)
-- [ ] A tracker editing UI: phrase editing is in (the player's step editor: step through rows, edit notes and commands, live playback, undo); editing the song grid and chains is not
+- [ ] A tracker editing UI: phrase editing is in (the player's step editor: step through rows, edit notes, commands, and parameter locks on any instrument parameter, live playback, undo); editing the song grid and chains is not
+- [ ] More ways to edit locks: ramps and draws across a range of steps, per-track parameter columns in the grid, recording slider moves while a row loops, copy and paste, editing in the cube
 - [x] A sound editor: the synth playground (`engine/web/synth.html`)
 
 ## Ongoing: the meta-pattern

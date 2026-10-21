@@ -139,3 +139,19 @@ test('editing a shared phrase changes every place it plays; makeUnique keeps the
   assert.equal(before - local, phrasePlays(song, ids.phrase), 'only the copy lost its note');
   assert.deepEqual(validate(song).errors, []);
 });
+
+test('parameter locks: valid ones pass, and each lock is checked against the instrument that plays it', () => {
+  const song = load('minimal-techno-loop.json');
+  const bass = Object.keys(song.composition.phrases).find((k) => k.startsWith('bass'));
+  const steps = song.composition.phrases[bass].steps;
+  const i = steps.findIndex((s) => s && s.note);
+  steps[i].lock = { 'filter.cutoff': 0.6, 'amp.decay': 0.4, 'params.unison': 3 };
+  assert.deepEqual(validate(song).errors, []);
+  assert.equal(resolve(song).events.find((e) => e.phrase === bass && e.phraseStep === i).lock['amp.decay'], 0.4);
+  steps[i].lock = { 'filter.cutoff': 3 };
+  assert.match(validate(song).errors.join('\n'), /lock on \w+: \/filter\/cutoff must be <= 1/);
+  steps[i].lock = { 'params.pitchStart': 100 };
+  assert.match(validate(song).errors.join('\n'), /additional properties: pitchStart/, 'a kick parameter on an analog instrument');
+  steps[i].lock = { engine: 'fm' };
+  assert.ok(validate(song).errors.length, 'the engine cannot be locked');
+});

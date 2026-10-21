@@ -7,6 +7,7 @@
 import { resolve, toName, toMidi, stepSource, phrasePlays, getStep, setStep, makeUnique } from '../../format/lib/core.js';
 import { encodeWav } from '../lib/wav.js';
 import { EXAMPLES, STYLES } from './catalog.js';
+import { deref, leafParams } from './params.js';
 
 const $ = (id) => document.getElementById(id);
 // Tracker keyboard layout: two rows, an octave and a bit each.
@@ -140,7 +141,7 @@ function cellHtml(ev) {
   if (!ev) return '·';
   if (ev.note === 'OFF') return 'OFF';
   if (ev.note === null) return Object.keys(ev.fx).join(',').slice(0, 7);
-  return `${toName(ev.note)}${ev.vel < 1 ? ' ' + Math.round(ev.vel * 99).toString().padStart(2, '0') : ''}${Object.keys(ev.fx).length ? '*' : ''}`;
+  return `${toName(ev.note)}${ev.vel < 1 ? ' ' + Math.round(ev.vel * 99).toString().padStart(2, '0') : ''}${Object.keys(ev.fx).length ? '*' : ''}${ev.lock ? '◆' : ''}`;
 }
 
 function cellClass(ev) {
@@ -249,6 +250,7 @@ function showCell() {
     $('cell').innerHTML = `<b>${t.id}</b> is silent in row ${view}: no chain to write into.`;
     form.style.opacity = 0.4;
     for (const el of form.querySelectorAll('input, select, button')) el.disabled = true;
+    showLocks(null);
     return;
   }
   form.style.opacity = 1;
@@ -264,6 +266,126 @@ function showCell() {
   if (active !== $('cVel')) $('cVel').value = cell.vel ?? '';
   $('cInst').value = cell.inst ?? '';
   if (active !== $('cFx')) { $('cFx').value = cell.fx ? JSON.stringify(cell.fx) : ''; $('cFx').classList.remove('bad'); }
+  showLocks(src, cell);
+}
+
+/* ------------------------------------------------------------- parameter locks */
+
+let defs = null;
+fetch('../../format/schema/song.json').then((r) => r.json()).then((j) => { defs = j.$defs; if (song) showCell(); });
+let dragging = false;
+// A drag that ends without a change event (or off the slider) must not leave the panel frozen.
+addEventListener('pointerup', () => setTimeout(() => { if (dragging) { dragging = false; edited(); } }, 0));
+const openGroups = new Set(['params']);
+const getPath = (o, path) => path.reduce((v, k) => (v == null ? undefined : v[k]), o);
+const short = (v) => (typeof v === 'number' ? Number(v.toPrecision(3)) : v);
+
+/** Every instrument parameter, grouped, for the instrument that plays this step. */
+function lockGroups(engine) {
+  const props = defs.instrument.properties;
+  return [
+    ['params', `${engine} params`, leafParams(defs, defs[`params.${engine}`], ['params'])],
+    ['filter', 'filter', leafParams(defs, props.filter, ['filter'])],
+    ['amp', 'amp envelope', leafParams(defs, deref(defs, props.amp).node, ['amp'])],
+    ['lfo', 'lfo', leafParams(defs, props.lfo, ['lfo'])],
+    ['mix', 'mix', leafParams(defs, props.mix, ['mix'])],
+    ['other', 'transpose', leafParams(defs, { properties: { transpose: props.transpose } })],
+  ];
+}
+
+/**
+ * The All parameters panel: one control per instrument parameter. An unlocked
+ * control is dim and shows the instrument's value; moving it locks the value on
+ * this step, and × unlocks it.
+ */
+function showLocks(src, cell = {}) {
+  const box = $('locks');
+  if (dragging) return;
+  box.innerHTML = '';
+  $('lockCount').textContent = '';
+  if (!defs || !src) return;
+  const instId = cell.inst ?? tracks()[cur.track].instrument;
+  const inst = song.sound.instruments[instId];
+  if (cell.note === undefined || cell.note === 'OFF' || !inst) {
+    box.innerHTML = '<p class="dim">Locks shape a note: write a note on this step to lock its parameters.</p>';
+    return;
+  }
+  const lock = cell.lock || {};
+  const n = Object.keys(lock).length;
+  $('lockCount').textContent = n ? `· ${n} locked` : '';
+  const head = document.createElement('p');
+  head.className = 'dim';
+  head.textContent = `${instId} (${inst.engine}). Move a control to lock it on this note; × unlocks.`;
+  box.appendChild(head);
+  for (const [key, title, params] of lockGroups(inst.engine)) {
+    const det = document.createElement('details');
+    const locked = params.filter((p) => lock[p.path.join('.')] !== undefined).length;
+    det.open = openGroups.has(key) || locked > 0;
+    det.ontoggle = () => { if (det.open) openGroups.add(key); else openGroups.delete(key); };
+    det.innerHTML = `<summary>${title}${locked ? ` <span class="lk">${locked}</span>` : ''}</summary>`;
+    for (const p of params) det.appendChild(lockRow(p, inst, lock));
+    box.appendChild(det);
+  }
+}
+
+function lockRow(p, inst, lock) {
+  const path = p.path.join('.');
+  const own = getPath(inst, p.path);
+  const value = lock[path];
+  const r = document.createElement('div');
+  r.className = `lockrow${value === undefined ? '' : ' locked'}`;
+  r.title = `${path}${p.description ? `: ${p.description}` : ''}\ninstrument: ${own === undefined ? 'unset' : own}`;
+  const label = document.createElement('label');
+  label.textContent = p.path.slice(1).join('.') || path;
+  r.appendChild(label);
+  if (p.kind === 'number') {
+    const sc = p.scale;
+    const shown = value ?? own ?? sc.rest;
+    const slider = Object.assign(document.createElement('input'), { type: 'range', min: 0, max: 1000, step: 1, value: Math.round(p.norm(shown) * 1000) });
+    const num = Object.assign(document.createElement('input'), { type: 'number', step: 'any', value: value ?? '', placeholder: own === undefined ? '–' : String(short(own)) });
+    const clean = (v) => {
+      v = Math.min(sc.hardMax, Math.max(sc.hardMin, sc.round(v)));
+      return p.exclusiveMinimum !== undefined && v <= p.exclusiveMinimum ? undefined : v;
+    };
+    slider.oninput = () => {
+      if (!dragging) { snapshot(); dragging = true; } // one undo step per drag
+      const v = clean(sc.from(slider.value / 1000)); if (v === undefined) return; num.value = v; r.classList.add('locked'); setLock(path, v, false); };
+    slider.onchange = () => { dragging = false; setLock(path, clean(sc.from(slider.value / 1000)), true); };
+    num.onchange = () => { if (num.value === '') setLock(path, undefined, true, true); else { const v = clean(Number(num.value)); if (v !== undefined) setLock(path, v, true, true); } };
+    r.append(slider, num);
+  } else {
+    const s = document.createElement('select');
+    s.add(new Option(`(${own === undefined ? 'default' : own})`, ''));
+    for (const o of p.kind === 'bool' ? [true, false] : p.options) s.add(new Option(String(o), JSON.stringify(o)));
+    s.value = value === undefined ? '' : JSON.stringify(value);
+    s.onchange = () => setLock(path, s.value === '' ? undefined : JSON.parse(s.value), true, true);
+    r.appendChild(s);
+  }
+  const x = document.createElement('button');
+  x.className = 'clear';
+  x.textContent = '×';
+  x.title = 'unlock: back to the instrument';
+  x.onclick = () => setLock(path, undefined, true, true);
+  r.appendChild(x);
+  return r;
+}
+
+/**
+ * Set or clear one lock on the cursor's step. While a slider moves, the change
+ * goes straight to the live player without redrawing; on release it is a full edit.
+ */
+function setLock(path, value, final, undoable = false) {
+  const src = stepSource(song, view, tracks()[cur.track].id, cur.step);
+  if (!src) return;
+  if (undoable) snapshot();
+  const cell = { ...(getStep(song, src.phrase, src.phraseStep) || {}) };
+  const lock = { ...cell.lock };
+  if (value === undefined) delete lock[path]; else lock[path] = value;
+  if (Object.keys(lock).length) cell.lock = lock; else delete cell.lock;
+  setStep(song, src.phrase, src.phraseStep, cell);
+  if (!final) { resolved = resolve(song); post({ type: 'composition', composition: song.composition }); return; }
+  edited();
+  auditionCell();
 }
 
 /** Write the cursor's step. `change` maps the stored cell (or {}) to the new one; null clears it. */
@@ -315,9 +437,9 @@ $('unique').onclick = () => {
 
 function instFor(ti, ev) { return ev?.inst ?? tracks()[ti].instrument; }
 
-function sound(ti, id, note, vel = 1) {
+function sound(ti, id, note, vel = 1, lock = null) {
   if (!id) return;
-  post({ type: 'on', voice: ti, id, note, vel });
+  post({ type: 'on', voice: ti, id, note, vel, lock });
   clearTimeout(releaseTimers.get(ti));
   releaseTimers.set(ti, setTimeout(() => post({ type: 'off', voice: ti }), HOLD * 1000));
 }
@@ -329,14 +451,14 @@ async function auditionStep() {
   const events = rowEvents();
   for (let ti = 0; ti < tracks().length; ti++) {
     const ev = events.get(`${ti}:${cur.step}`);
-    if (ev && typeof ev.note === 'number') sound(ti, instFor(ti, ev), ev.note, ev.vel);
+    if (ev && typeof ev.note === 'number') sound(ti, instFor(ti, ev), ev.note, ev.vel, ev.lock);
   }
 }
 
 async function auditionCell() {
   await startAudio();
   const ev = rowEvents().get(`${cur.track}:${cur.step}`);
-  if (ev && typeof ev.note === 'number') sound(cur.track, instFor(cur.track, ev), ev.note, ev.vel);
+  if (ev && typeof ev.note === 'number') sound(cur.track, instFor(cur.track, ev), ev.note, ev.vel, ev.lock);
 }
 
 /* ------------------------------------------------------------- playback */

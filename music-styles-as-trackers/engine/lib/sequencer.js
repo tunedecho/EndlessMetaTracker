@@ -64,6 +64,7 @@ export function schedule(song, resolved, sampleRate, seed = 1, lastNote = new Ma
         accent: fx.accent || 0,
         slide: fx.slide !== undefined && slideFrom !== undefined ? { from: slideFrom, seconds: fx.slide * L / sampleRate } : null,
         table: fx.table || null,
+        lock: e.lock || null,
         stepSamples: L,
         step: e.step,
       });

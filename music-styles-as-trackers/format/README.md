@@ -10,6 +10,6 @@ node bin/validate.js --stats examples/*.json ../styles/*.json   # validate, prin
 import { validate, resolve, toMidi, Random, songStats } from '@tracker/format';
 ```
 
-- `lib/core.js` is browser-safe (notes, seeded random, song flattening, reference checks, and the editing helpers in `lib/edit.js`).
+- `lib/core.js` is browser-safe (notes, seeded random, song flattening, reference checks, the editing helpers in `lib/edit.js`, and parameter locks in `lib/locks.js`).
 - `lib/validate.js` adds JSON Schema validation with Ajv; `lib/stats.js` adds counts and gzipped sizes.
 - `examples/` holds three hand-written songs that double as engine test material.

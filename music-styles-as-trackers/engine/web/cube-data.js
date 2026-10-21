@@ -5,18 +5,17 @@
  *
  * Values follow the engine's rules: track commands (cutoff, volume, ...)
  * persist on the track and override the instrument's own setting until
- * changed, note commands (accent, retrig, ...) act on one step, and an
- * instrument parameter that is not set falls back to the engine default.
+ * changed, a parameter lock sets any instrument parameter for its own note
+ * and wins over both, note commands (accent, retrig, ...) act on one step,
+ * and an instrument parameter that is not set falls back to the engine default.
  */
-import { resolve } from '../../format/lib/core.js';
+import { resolve, TRACK_COMMAND_PATHS } from '../../format/lib/core.js';
 import { leafParams } from './params.js';
 
-/** Track commands that set an instrument parameter, as the player applies them. */
-const TRACK_SETS = { cutoff: ['filter', 'cutoff'], resonance: ['filter', 'resonance'], volume: ['mix', 'volume'], pan: ['mix', 'pan'], drive: ['mix', 'drive'], delaySend: ['mix', 'delaySend'], reverbSend: ['mix', 'reverbSend'] };
 const STEP_COMMANDS = ['accent', 'retrig', 'nudge', 'slide', 'cut', 'chance'];
 
 /** Where a lane's value came from. */
-export const SOURCE = { none: 0, set: 1, unset: 2, command: 3 };
+export const SOURCE = { none: 0, set: 1, unset: 2, command: 3, lock: 4 };
 
 export const GROUPS = {
   note: 'the note: pitch and velocity',
@@ -69,7 +68,7 @@ export function cubeModel(song, defs, { from = 0, to = song.composition.song.row
   }
   instLanes.sort((a, b) => order.indexOf(a.group) - order.indexOf(b.group));
   lanes.push(...instLanes);
-  for (const [cmd, path] of Object.entries(TRACK_SETS)) lanes.find((l) => l.key === path.join('.')).command = cmd;
+  for (const [cmd, path] of Object.entries(TRACK_COMMAND_PATHS)) lanes.find((l) => l.key === path).command = cmd;
   const L = lanes.length;
   const laneIndex = new Map(lanes.map((l, i) => [l.key, i]));
   const tableLane = laneIndex.get('fx.table'), offsetLane = laneIndex.get('track.pitch');
@@ -81,7 +80,7 @@ export function cubeModel(song, defs, { from = 0, to = song.composition.song.row
   for (const e of resolved.events) {
     const st = state[e.track];
     const fx = e.fx || {};
-    for (const k of Object.keys(TRACK_SETS).concat('pitch')) if (fx[k] !== undefined) st.ctl[k] = fx[k];
+    for (const k of Object.keys(TRACK_COMMAND_PATHS).concat('pitch')) if (fx[k] !== undefined) st.ctl[k] = fx[k];
     if (typeof e.note === 'number' && e.inst) st.inst = e.inst;
     if (e.row < from || e.row >= to) continue;
     const kind = e.note === 'OFF' ? 'off' : typeof e.note === 'number' ? 'note' : 'cmd';
@@ -111,6 +110,8 @@ export function cubeModel(song, defs, { from = 0, to = song.composition.song.row
         if (lane.engine && lane.engine !== inst.engine) continue;
         let v = getPath(inst, lane.path), src = SOURCE.set;
         if (lane.command && st.ctl[lane.command] !== undefined) { v = st.ctl[lane.command]; src = SOURCE.command; }
+        const locked = kind === 'note' && e.lock ? e.lock[lane.path.join('.')] : undefined;
+        if (locked !== undefined) { v = locked; src = SOURCE.lock; } // a lock wins for its note
         if (v === undefined) { v = lane.default; src = SOURCE.unset; }
         cell.raw[i] = v ?? null;
         cell.source[i] = src;

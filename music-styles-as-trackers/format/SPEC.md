@@ -33,6 +33,8 @@ The structure is the one M8 and LSDJ users already know.
 
 **Commands.** `fx` is a map from command name to value. Track commands (`cutoff`, `resonance`, `volume`, `pan`, `drive`, `delaySend`, `reverbSend`, `pitch`) persist on the track until changed. Note commands (`retrig`, `nudge`, `slide`, `accent`, `cut`, `chance`, `table`) affect only that step. `tempo` is global. Values are 0..1 unless the schema says otherwise; `cutoff` is exponential from 20 Hz to 20 kHz.
 
+**Parameter locks.** `lock` sets any instrument parameter for one step's note, by dotted path into the instrument: `{ "note": "A1", "lock": { "filter.cutoff": 0.3, "amp.decay": 0.12, "params.unison": 3 } }`. The note plays as if its instrument had those values; the next note is back to the instrument. A lock is more specific than a track command, so for its note it wins over one (a locked `filter.cutoff` beats a `cutoff` command still in force). The engine cannot be locked, and a lock must suit the instrument that plays the step: the validator applies each lock to that instrument (the step's `inst`, or the default instrument of every track that plays the phrase) and checks the result against the instrument schema. A legato note (slide, or glide with no gap) keeps the sounding voice and its settings. The idea is Elektron's parameter locks; the M8 has no equivalent, so its writer drops them with a warning.
+
 **Tables.** A short list of rows, each with a transpose, volume, and commands, that runs each time a note on the instrument starts, at `rate` rows per step. Tables make arpeggios, pitch drops, and filter movement without writing them into every phrase.
 
 ## The sound half: engines as parameter sets
