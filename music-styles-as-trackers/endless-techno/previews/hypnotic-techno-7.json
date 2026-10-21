@@ -5,7 +5,7 @@
   "style": "hypnotic-techno",
   "seed": 7,
   "generator": "endless-techno/0.1",
-  "created": "2026-10-21T02:44:14.306Z",
+  "created": "2026-10-21T03:26:00.322Z",
   "notes": "6 min, 126.1 bpm, E dorian, 15 sections"
  },
  "transport": {
@@ -333,10 +333,6 @@
     "instrument": "ohat"
    },
    {
-    "id": "perc",
-    "instrument": "perc"
-   },
-   {
     "id": "stab",
     "instrument": "stab"
    },
@@ -351,6 +347,10 @@
    {
     "id": "ride",
     "instrument": "ride"
+   },
+   {
+    "id": "perc",
+    "instrument": "perc"
    },
    {
     "id": "acid",
@@ -390,7 +390,7 @@
     "steps": [
      {
       "note": "E3",
-      "vel": 0.65
+      "vel": 0.74
      },
      null,
      null,
@@ -412,8 +412,8 @@
    "pad_2": {
     "steps": [
      {
-      "note": "G3",
-      "vel": 0.67
+      "note": "E3",
+      "vel": 0.76
      },
      null,
      null,
@@ -435,8 +435,8 @@
    "pad_3": {
     "steps": [
      {
-      "note": "B3",
-      "vel": 0.61
+      "note": "E3",
+      "vel": 0.78
      },
      null,
      null,
@@ -459,7 +459,7 @@
     "steps": [
      {
       "note": "E3",
-      "vel": 0.68
+      "vel": 0.64
      },
      null,
      null,
@@ -481,8 +481,8 @@
    "pad_5": {
     "steps": [
      {
-      "note": "G3",
-      "vel": 0.74
+      "note": "E3",
+      "vel": 0.62
      },
      null,
      null,
@@ -504,8 +504,8 @@
    "pad_6": {
     "steps": [
      {
-      "note": "B3",
-      "vel": 0.78
+      "note": "E3",
+      "vel": 0.63
      },
      null,
      null,
@@ -527,8 +527,8 @@
    "pad_7": {
     "steps": [
      {
-      "note": "G3",
-      "vel": 0.75
+      "note": "C#4",
+      "vel": 0.67
      },
      null,
      null,
@@ -550,8 +550,8 @@
    "pad_8": {
     "steps": [
      {
-      "note": "B3",
-      "vel": 0.68
+      "note": "G3",
+      "vel": 0.7
      },
      null,
      null,
@@ -573,8 +573,8 @@
    "pad_9": {
     "steps": [
      {
-      "note": "E3",
-      "vel": 0.69
+      "note": "G3",
+      "vel": 0.65
      },
      null,
      null,
@@ -597,7 +597,7 @@
     "steps": [
      {
       "note": "G3",
-      "vel": 0.69
+      "vel": 0.61
      },
      null,
      null,
@@ -620,7 +620,7 @@
     "steps": [
      {
       "note": "G3",
-      "vel": 0.62
+      "vel": 0.69
      },
      null,
      null,
@@ -642,8 +642,8 @@
    "pad_12": {
     "steps": [
      {
-      "note": "B3",
-      "vel": 0.72
+      "note": "G3",
+      "vel": 0.66
      },
      null,
      null,
@@ -666,7 +666,7 @@
     "steps": [
      {
       "note": "G3",
-      "vel": 0.61
+      "vel": 0.74
      },
      null,
      null,
@@ -688,8 +688,8 @@
    "pad_14": {
     "steps": [
      {
-      "note": "B3",
-      "vel": 0.71
+      "note": "E4",
+      "vel": 0.62
      },
      null,
      null,
@@ -711,8 +711,8 @@
    "pad_15": {
     "steps": [
      {
-      "note": "E3",
-      "vel": 0.73
+      "note": "B3",
+      "vel": 0.76
      },
      null,
      null,
@@ -734,8 +734,8 @@
    "pad_16": {
     "steps": [
      {
-      "note": "G3",
-      "vel": 0.76
+      "note": "B3",
+      "vel": 0.7
      },
      null,
      null,
@@ -758,7 +758,7 @@
     "steps": [
      {
       "note": "B3",
-      "vel": 0.67
+      "vel": 0.79
      },
      null,
      null,
@@ -780,8 +780,8 @@
    "pad_18": {
     "steps": [
      {
-      "note": "G3",
-      "vel": 0.77
+      "note": "B3",
+      "vel": 0.75
      },
      null,
      null,
@@ -804,7 +804,7 @@
     "steps": [
      {
       "note": "B3",
-      "vel": 0.77
+      "vel": 0.71
      },
      null,
      null,
@@ -826,8 +826,8 @@
    "pad_20": {
     "steps": [
      {
-      "note": "C#4",
-      "vel": 0.75
+      "note": "B3",
+      "vel": 0.77
      },
      null,
      null,
@@ -849,8 +849,8 @@
    "pad_21": {
     "steps": [
      {
-      "note": "E4",
-      "vel": 0.78
+      "note": "B3",
+      "vel": 0.74
      },
      null,
      null,
@@ -873,7 +873,7 @@
     "steps": [
      {
       "note": "G4",
-      "vel": 0.6
+      "vel": 0.79
      },
      null,
      null,
@@ -897,42 +897,39 @@
      null,
      {
       "note": "C3",
-      "vel": 0.6
-     },
-     {
-      "note": "C3",
-      "vel": 0.56
-     },
-     {
-      "note": "C3",
-      "vel": 0.73
+      "vel": 0.46
      },
      null,
      {
       "note": "C3",
-      "vel": 0.64
+      "vel": 0.53
+     },
+     null,
+     null,
+     null,
+     {
+      "note": "C3",
+      "vel": 0.59
      },
      null,
      {
       "note": "C3",
-      "vel": 0.73
+      "vel": 0.68
      },
-     null,
-     null,
      null,
      {
       "note": "C3",
       "vel": 0.66
      },
      null,
+     {
+      "note": "C3",
+      "vel": 0.55
+     },
      null,
      {
       "note": "C3",
-      "vel": 0.58
-     },
-     {
-      "note": "C3",
-      "vel": 0.61
+      "vel": 0.75
      }
     ]
    },
@@ -941,67 +938,54 @@
      null,
      {
       "note": "C3",
-      "vel": 0.6
+      "vel": 0.45
      },
      null,
      {
       "note": "C3",
-      "vel": 0.52
+      "vel": 0.67
+     },
+     null,
+     {
+      "note": "C3",
+      "vel": 0.58
+     },
+     {
+      "note": "C3",
+      "vel": 0.46
+     },
+     {
+      "note": "C3",
+      "vel": 0.51
+     },
+     null,
+     null,
+     {
+      "note": "C3",
+      "vel": 0.54
+     },
+     {
+      "note": "C3",
+      "vel": 0.54
      },
      null,
      null,
      null,
      {
       "note": "C3",
-      "vel": 0.56
-     },
-     null,
-     null,
-     {
-      "note": "C3",
-      "vel": 0.56
-     },
-     {
-      "note": "C3",
-      "vel": 0.52
-     },
-     null,
-     null,
-     null,
-     {
-      "note": "C3",
-      "vel": 0.75
+      "vel": 0.63
      }
     ]
    },
    "hats_3": {
     "steps": [
      null,
-     {
-      "note": "C3",
-      "vel": 0.6
-     },
-     {
-      "note": "C3",
-      "vel": 0.5
-     },
-     {
-      "note": "C3",
-      "vel": 0.53
-     },
+     null,
      null,
      {
       "note": "C3",
-      "vel": 0.42
+      "vel": 0.73
      },
-     null,
-     {
-      "note": "C3",
-      "vel": 0.74
-     },
-     null,
-     null,
-     null,
      {
       "note": "C3",
       "vel": 0.46
@@ -1009,50 +993,75 @@
      null,
      {
       "note": "C3",
-      "vel": 0.4
+      "vel": 0.47
      },
+     {
+      "note": "C3",
+      "vel": 0.52
+     },
+     null,
      null,
      {
       "note": "C3",
-      "vel": 0.64
+      "vel": 0.6
+     },
+     {
+      "note": "C3",
+      "vel": 0.4
+     },
+     null,
+     null,
+     null,
+     {
+      "note": "C3",
+      "vel": 0.48
      }
     ]
    },
    "hats_4": {
     "steps": [
-     null,
-     null,
-     null,
      {
       "note": "C3",
-      "vel": 0.76
-     },
-     null,
-     null,
-     null,
-     {
-      "note": "C3",
-      "vel": 0.44
-     },
-     null,
-     {
-      "note": "C3",
-      "vel": 0.51
-     },
-     null,
-     {
-      "note": "C3",
-      "vel": 0.44
-     },
-     null,
-     null,
-     {
-      "note": "C3",
-      "vel": 0.68
+      "vel": 0.64
      },
      {
       "note": "C3",
       "vel": 0.41
+     },
+     null,
+     {
+      "note": "C3",
+      "vel": 0.67
+     },
+     {
+      "note": "C3",
+      "vel": 0.36
+     },
+     {
+      "note": "C3",
+      "vel": 0.48
+     },
+     null,
+     {
+      "note": "C3",
+      "vel": 0.57
+     },
+     null,
+     null,
+     {
+      "note": "C3",
+      "vel": 0.72
+     },
+     {
+      "note": "C3",
+      "vel": 0.41
+     },
+     null,
+     null,
+     null,
+     {
+      "note": "C3",
+      "vel": 0.46
      }
     ]
    },
@@ -1063,13 +1072,35 @@
      null,
      {
       "note": "C3",
-      "vel": 0.58
+      "vel": 0.47
      },
+     null,
+     null,
      null,
      {
       "note": "C3",
-      "vel": 0.72
+      "vel": 0.57
      },
+     null,
+     null,
+     {
+      "note": "C3",
+      "vel": 0.58
+     },
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "C3",
+      "vel": 0.41
+     }
+    ]
+   },
+   "hats_6": {
+    "steps": [
+     null,
+     null,
      null,
      null,
      null,
@@ -1078,33 +1109,84 @@
       "note": "C3",
       "vel": 0.63
      },
+     {
+      "note": "C3",
+      "vel": 0.46
+     },
+     null,
      null,
      {
       "note": "C3",
-      "vel": 0.7,
-      "fx": {
-       "retrig": 2
-      }
+      "vel": 0.42
+     },
+     {
+      "note": "C3",
+      "vel": 0.76
+     },
+     null,
+     {
+      "note": "C3",
+      "vel": 0.73
+     },
+     null,
+     {
+      "note": "C3",
+      "vel": 0.45
+     }
+    ]
+   },
+   "hats_7": {
+    "steps": [
+     {
+      "note": "C3",
+      "vel": 0.64
+     },
+     {
+      "note": "C3",
+      "vel": 0.41
+     },
+     null,
+     {
+      "note": "C3",
+      "vel": 0.67
+     },
+     {
+      "note": "C3",
+      "vel": 0.36
+     },
+     {
+      "note": "C3",
+      "vel": 0.48
+     },
+     null,
+     {
+      "note": "C3",
+      "vel": 0.57
+     },
+     null,
+     null,
+     {
+      "note": "C3",
+      "vel": 0.72
+     },
+     {
+      "note": "C3",
+      "vel": 0.41
      },
      {
       "note": "C3",
       "vel": 0.7,
       "fx": {
-       "retrig": 2
+       "retrig": 3
       }
      },
+     null,
+     null,
      {
       "note": "C3",
-      "vel": 0.48,
+      "vel": 0.46,
       "fx": {
-       "retrig": 2
-      }
-     },
-     {
-      "note": "C3",
-      "vel": 0.73,
-      "fx": {
-       "retrig": 2
+       "retrig": 3
       }
      }
     ]
@@ -1115,104 +1197,22 @@
      null,
      {
       "note": "E1",
+      "vel": 0.88
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     {
+      "note": "E1",
       "vel": 0.93
      },
      {
       "note": "OFF"
      },
-     {
-      "note": "C#1",
-      "vel": 0.84
-     },
-     {
-      "note": "OFF"
-     },
      null,
      null,
-     {
-      "note": "C#1",
-      "vel": 0.92
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     null,
-     {
-      "note": "C#2",
-      "vel": 0.82
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "E2",
-      "vel": 1
-     },
-     {
-      "note": "OFF"
-     }
-    ]
-   },
-   "bass_2": {
-    "steps": [
-     null,
-     null,
-     {
-      "note": "E2",
-      "vel": 0.86
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "A2",
-      "vel": 0.83
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     null,
-     {
-      "note": "C#1",
-      "vel": 0.99
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     null,
-     {
-      "note": "E2",
-      "vel": 0.95,
-      "fx": {
-       "slide": 0.6
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "E1",
-      "vel": 0.97
-     },
-     {
-      "note": "OFF"
-     }
-    ]
-   },
-   "bass_3": {
-    "steps": [
-     null,
-     null,
-     {
-      "note": "E1",
-      "vel": 0.82
-     },
-     {
-      "note": "OFF"
-     },
      {
       "note": "E1",
       "vel": 0.9
@@ -1220,110 +1220,9 @@
      {
       "note": "OFF"
      },
-     null,
-     null,
      {
       "note": "E1",
-      "vel": 0.81
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     null,
-     {
-      "note": "E1",
-      "vel": 0.84
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "E1",
-      "vel": 0.93
-     },
-     {
-      "note": "OFF"
-     }
-    ]
-   },
-   "bass_4": {
-    "steps": [
-     null,
-     null,
-     {
-      "note": "E1",
-      "vel": 0.81
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "A2",
-      "vel": 0.94
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     null,
-     {
-      "note": "E2",
-      "vel": 0.96
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     null,
-     {
-      "note": "E2",
-      "vel": 0.95
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "A2",
-      "vel": 0.94
-     },
-     {
-      "note": "OFF"
-     }
-    ]
-   },
-   "bass_5": {
-    "steps": [
-     null,
-     null,
-     {
-      "note": "A2",
-      "vel": 0.8
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     null,
-     {
-      "note": "A2",
-      "vel": 0.89
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     null,
-     {
-      "note": "E1",
-      "vel": 0.95
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "E1",
-      "vel": 0.92
+      "vel": 0.82
      },
      {
       "note": "OFF"
@@ -1332,11 +1231,179 @@
      null
     ]
    },
+   "bass_2": {
+    "steps": [
+     null,
+     null,
+     {
+      "note": "E2",
+      "vel": 0.8
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     {
+      "note": "E1",
+      "vel": 0.84
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     {
+      "note": "E1",
+      "vel": 0.96
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "E1",
+      "vel": 0.99
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     null
+    ]
+   },
+   "bass_3": {
+    "steps": [
+     null,
+     null,
+     {
+      "note": "E1",
+      "vel": 1
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     {
+      "note": "E1",
+      "vel": 0.89
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     {
+      "note": "E2",
+      "vel": 0.94,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A2",
+      "vel": 1
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     null
+    ]
+   },
+   "bass_4": {
+    "steps": [
+     null,
+     null,
+     {
+      "note": "C#2",
+      "vel": 0.94
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     {
+      "note": "C#2",
+      "vel": 0.89
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     {
+      "note": "E2",
+      "vel": 0.95
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "E2",
+      "vel": 0.89
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     null
+    ]
+   },
+   "bass_5": {
+    "steps": [
+     null,
+     null,
+     {
+      "note": "A2",
+      "vel": 0.87
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "E2",
+      "vel": 0.86
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     {
+      "note": "E2",
+      "vel": 0.84
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     {
+      "note": "E2",
+      "vel": 0.93
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A2",
+      "vel": 0.86
+     },
+     {
+      "note": "OFF"
+     }
+    ]
+   },
    "pad_23": {
     "steps": [
      {
       "note": "C#4",
-      "vel": 0.61
+      "vel": 0.7
      },
      null,
      null,
@@ -1358,8 +1425,8 @@
    "pad_24": {
     "steps": [
      {
-      "note": "E4",
-      "vel": 0.64
+      "note": "C#4",
+      "vel": 0.69
      },
      null,
      null,
@@ -1381,8 +1448,8 @@
    "pad_25": {
     "steps": [
      {
-      "note": "G4",
-      "vel": 0.77
+      "note": "C#4",
+      "vel": 0.61
      },
      null,
      null,
@@ -1405,7 +1472,7 @@
     "steps": [
      {
       "note": "C#4",
-      "vel": 0.72
+      "vel": 0.79
      },
      null,
      null,
@@ -1425,6 +1492,52 @@
     ]
    },
    "pad_27": {
+    "steps": [
+     {
+      "note": "C#4",
+      "vel": 0.62
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "pad_28": {
+    "steps": [
+     {
+      "note": "E4",
+      "vel": 0.74
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "pad_29": {
     "steps": [
      {
       "note": "E4",
@@ -1447,57 +1560,11 @@
      null
     ]
    },
-   "pad_28": {
-    "steps": [
-     {
-      "note": "G4",
-      "vel": 0.65
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_29": {
-    "steps": [
-     {
-      "note": "C#4",
-      "vel": 0.6
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
    "pad_30": {
     "steps": [
      {
-      "note": "G4",
-      "vel": 0.64
+      "note": "E4",
+      "vel": 0.8
      },
      null,
      null,
@@ -1519,8 +1586,8 @@
    "pad_31": {
     "steps": [
      {
-      "note": "C#4",
-      "vel": 0.8
+      "note": "E4",
+      "vel": 0.78
      },
      null,
      null,
@@ -1566,7 +1633,7 @@
     "steps": [
      {
       "note": "G4",
-      "vel": 0.66
+      "vel": 0.68
      },
      null,
      null,
@@ -1588,8 +1655,8 @@
    "pad_34": {
     "steps": [
      {
-      "note": "C#4",
-      "vel": 0.73
+      "note": "G4",
+      "vel": 0.8
      },
      null,
      null,
@@ -1611,8 +1678,8 @@
    "pad_35": {
     "steps": [
      {
-      "note": "E4",
-      "vel": 0.63
+      "note": "G4",
+      "vel": 0.62
      },
      null,
      null,
@@ -1635,7 +1702,7 @@
     "steps": [
      {
       "note": "G4",
-      "vel": 0.61
+      "vel": 0.64
      },
      null,
      null,
@@ -1657,8 +1724,8 @@
    "pad_37": {
     "steps": [
      {
-      "note": "E4",
-      "vel": 0.67
+      "note": "G4",
+      "vel": 0.61
      },
      null,
      null,
@@ -1680,54 +1747,8 @@
    "pad_38": {
     "steps": [
      {
-      "note": "C#4",
-      "vel": 0.65
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_39": {
-    "steps": [
-     {
-      "note": "E4",
-      "vel": 0.68
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_40": {
-    "steps": [
-     {
       "note": "G4",
-      "vel": 0.75
+      "vel": 0.69
      },
      null,
      null,
@@ -1746,50 +1767,79 @@
      null
     ]
    },
-   "hats_6": {
+   "kick_2": {
     "steps": [
      null,
      null,
      null,
-     {
-      "note": "C3",
-      "vel": 0.54
-     },
      null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "hats_8": {
+    "steps": [
      {
       "note": "C3",
       "vel": 0.64
      },
-     null,
      {
       "note": "C3",
-      "vel": 0.56
+      "vel": 0.41
      },
      null,
      {
       "note": "C3",
-      "vel": 0.42
+      "vel": 0.67
      },
      {
       "note": "C3",
-      "vel": 0.37
+      "vel": 0.36
      },
      {
       "note": "C3",
-      "vel": 0.6
-     },
-     {
-      "note": "C3",
-      "vel": 0.53
-     },
-     {
-      "note": "C3",
-      "vel": 0.58
+      "vel": 0.48
      },
      null,
      {
       "note": "C3",
       "vel": 0.57
+     },
+     null,
+     null,
+     {
+      "note": "C3",
+      "vel": 0.72
+     },
+     {
+      "note": "C3",
+      "vel": 0.41
+     },
+     null,
+     {
+      "note": "C3",
+      "vel": 0.7,
+      "fx": {
+       "retrig": 3
+      }
+     },
+     null,
+     {
+      "note": "C3",
+      "vel": 0.46,
+      "fx": {
+       "retrig": 3
+      }
      }
     ]
    },
@@ -1799,338 +1849,24 @@
      null,
      {
       "note": "C3",
-      "vel": 0.65
+      "vel": 0.67
      },
+     null,
+     null,
+     null,
+     null,
      null,
      null,
      null,
      {
       "note": "C3",
-      "vel": 0.61
-     },
-     null,
-     null,
-     null,
-     {
-      "note": "C3",
-      "vel": 0.75
-     },
-     null,
-     null,
-     null,
-     {
-      "note": "C3",
-      "vel": 0.88
-     },
-     null
-    ]
-   },
-   "perc_1": {
-    "steps": [
-     null,
-     null,
-     {
-      "note": "E4",
-      "fx": {
-       "accent": 1
-      }
-     },
-     null,
-     null,
-     null,
-     {
-      "note": "E4",
       "vel": 0.9
      },
      null,
      null,
      null,
      null,
-     {
-      "note": "E4",
-      "vel": 0.84
-     },
-     null,
-     null,
-     null,
-     {
-      "note": "E4",
-      "fx": {
-       "accent": 1
-      }
-     }
-    ]
-   },
-   "perc_2": {
-    "steps": [
-     {
-      "note": "C#5",
-      "fx": {
-       "accent": 1
-      }
-     },
-     null,
-     null,
-     null,
-     null,
-     {
-      "note": "C#5",
-      "vel": 0.52
-     },
-     null,
-     null,
-     null,
-     {
-      "note": "C#5",
-      "vel": 0.82
-     },
-     null,
-     null,
-     null,
-     {
-      "note": "C#5",
-      "vel": 0.5
-     },
-     null,
      null
-    ]
-   },
-   "bass_6": {
-    "steps": [
-     null,
-     null,
-     {
-      "note": "E1",
-      "vel": 0.93
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#1",
-      "vel": 0.84
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     {
-      "note": "C#1",
-      "vel": 0.74
-     },
-     {
-      "note": "C#1",
-      "vel": 0.92
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     null,
-     {
-      "note": "C#2",
-      "vel": 0.82
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "E2",
-      "vel": 1
-     },
-     {
-      "note": "OFF"
-     }
-    ]
-   },
-   "bass_7": {
-    "steps": [
-     null,
-     null,
-     {
-      "note": "E2",
-      "vel": 0.86
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "A2",
-      "vel": 0.83
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     {
-      "note": "C#1",
-      "vel": 0.79
-     },
-     {
-      "note": "C#1",
-      "vel": 0.99
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     null,
-     {
-      "note": "E2",
-      "vel": 0.95,
-      "fx": {
-       "slide": 0.6
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "E1",
-      "vel": 0.97
-     },
-     {
-      "note": "OFF"
-     }
-    ]
-   },
-   "bass_8": {
-    "steps": [
-     null,
-     null,
-     {
-      "note": "E1",
-      "vel": 0.82
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "E1",
-      "vel": 0.9
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     {
-      "note": "E1",
-      "vel": 0.65
-     },
-     {
-      "note": "E1",
-      "vel": 0.81
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     null,
-     {
-      "note": "E1",
-      "vel": 0.84
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "E1",
-      "vel": 0.93
-     },
-     {
-      "note": "OFF"
-     }
-    ]
-   },
-   "bass_9": {
-    "steps": [
-     null,
-     null,
-     {
-      "note": "A2",
-      "vel": 0.8
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     null,
-     {
-      "note": "A2",
-      "vel": 0.89
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "E1",
-      "vel": 0.76
-     },
-     null,
-     {
-      "note": "E1",
-      "vel": 0.95
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "E1",
-      "vel": 0.92
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     null
-    ]
-   },
-   "bass_10": {
-    "steps": [
-     null,
-     null,
-     {
-      "note": "E1",
-      "vel": 0.81
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "A2",
-      "vel": 0.94
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     {
-      "note": "E2",
-      "vel": 0.77
-     },
-     {
-      "note": "E2",
-      "vel": 0.96
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     null,
-     {
-      "note": "E2",
-      "vel": 0.95
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "A2",
-      "vel": 0.94
-     },
-     {
-      "note": "OFF"
-     }
     ]
    },
    "stab_1": {
@@ -2138,8 +1874,8 @@
      null,
      null,
      {
-      "note": "E3",
-      "vel": 0.79
+      "note": "E4",
+      "vel": 0.92
      },
      null,
      null,
@@ -2147,17 +1883,43 @@
      null,
      null,
      {
-      "note": "E3",
-      "vel": 0.95
+      "note": "E4",
+      "vel": 0.92
      },
      null,
      null,
      {
-      "note": "E3",
-      "vel": 0.96
+      "note": "E4",
+      "vel": 0.83
      },
      null,
      null,
+     null,
+     null
+    ]
+   },
+   "stab_2": {
+    "steps": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "E3",
+      "vel": 0.81
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "E3",
+      "vel": 0.82
+     },
      null,
      null
     ]
@@ -2190,26 +1952,6 @@
    },
    "riser_2": {
     "steps": [
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "riser_3": {
-    "steps": [
      {
       "fx": {
        "cutoff": 0.293,
@@ -2233,7 +1975,7 @@
      null
     ]
    },
-   "riser_4": {
+   "riser_3": {
     "steps": [
      {
       "note": "C4",
@@ -2259,7 +2001,7 @@
      null
     ]
    },
-   "riser_5": {
+   "riser_4": {
     "steps": [
      {
       "fx": {
@@ -2284,39 +2026,29 @@
      null
     ]
    },
-   "hats_7": {
+   "riser_5": {
     "steps": [
-     null,
-     null,
-     null,
      {
-      "note": "C3",
-      "vel": 0.58
-     },
-     null,
-     {
-      "note": "C3",
-      "vel": 0.72
+      "fx": {
+       "cutoff": 0.85,
+       "volume": 0.5
+      }
      },
      null,
      null,
      null,
      null,
-     {
-      "note": "C3",
-      "vel": 0.63
-     },
      null,
      null,
      null,
-     {
-      "note": "C3",
-      "vel": 0.48
-     },
-     {
-      "note": "C3",
-      "vel": 0.73
-     }
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
     ]
    },
    "clap_1": {
@@ -2346,201 +2078,58 @@
      }
     ]
    },
-   "stab_2": {
-    "steps": [
-     null,
-     {
-      "note": "E3",
-      "vel": 0.69
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     {
-      "note": "E3",
-      "vel": 1
-     },
-     null,
-     null,
-     {
-      "note": "E3",
-      "vel": 1
-     },
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "stab_3": {
-    "steps": [
-     null,
-     null,
-     null,
-     null,
-     null,
-     {
-      "note": "E3",
-      "vel": 0.76
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     {
-      "note": "E3",
-      "vel": 1
-     },
-     null,
-     null
-    ]
-   },
-   "hats_8": {
-    "steps": [
-     null,
-     null,
-     null,
-     {
-      "note": "C3",
-      "vel": 0.76
-     },
-     null,
-     null,
-     null,
-     {
-      "note": "C3",
-      "vel": 0.44
-     },
-     null,
-     {
-      "note": "C3",
-      "vel": 0.51
-     },
-     null,
-     {
-      "note": "C3",
-      "vel": 0.44
-     },
-     {
-      "note": "C3",
-      "vel": 0.7,
-      "fx": {
-       "retrig": 3
-      }
-     },
-     null,
-     {
-      "note": "C3",
-      "vel": 0.68,
-      "fx": {
-       "retrig": 3
-      }
-     },
-     {
-      "note": "C3",
-      "vel": 0.41,
-      "fx": {
-       "retrig": 3
-      }
-     }
-    ]
-   },
    "hats_9": {
     "steps": [
-     null,
-     null,
-     null,
      {
       "note": "C3",
-      "vel": 0.76
+      "vel": 0.64
      },
-     null,
-     null,
-     null,
      {
       "note": "C3",
-      "vel": 0.44
+      "vel": 0.41
      },
      null,
      {
       "note": "C3",
-      "vel": 0.51
+      "vel": 0.67
+     },
+     {
+      "note": "C3",
+      "vel": 0.36
+     },
+     {
+      "note": "C3",
+      "vel": 0.48
      },
      null,
      {
       "note": "C3",
-      "vel": 0.44
+      "vel": 0.57
      },
      null,
      null,
      {
       "note": "C3",
-      "vel": 0.68,
-      "fx": {
-       "retrig": 3
-      }
+      "vel": 0.72
      },
      {
       "note": "C3",
-      "vel": 0.41,
-      "fx": {
-       "retrig": 3
-      }
-     }
-    ]
-   },
-   "hats_10": {
-    "steps": [
-     null,
-     null,
-     null,
-     {
-      "note": "C3",
-      "vel": 0.76
-     },
-     null,
-     null,
-     null,
-     {
-      "note": "C3",
-      "vel": 0.44
-     },
-     null,
-     {
-      "note": "C3",
-      "vel": 0.51
-     },
-     null,
-     {
-      "note": "C3",
-      "vel": 0.44
+      "vel": 0.41
      },
      null,
      {
       "note": "C3",
       "vel": 0.7,
       "fx": {
-       "retrig": 3
+       "retrig": 2
       }
      },
+     null,
      {
       "note": "C3",
-      "vel": 0.68,
+      "vel": 0.46,
       "fx": {
-       "retrig": 3
-      }
-     },
-     {
-      "note": "C3",
-      "vel": 0.41,
-      "fx": {
-       "retrig": 3
+       "retrig": 2
       }
      }
     ]
@@ -2549,8 +2138,14 @@
     "steps": [
      null,
      null,
-     null,
-     null,
+     {
+      "note": "C3",
+      "vel": 0.75
+     },
+     {
+      "note": "C3",
+      "vel": 0.75
+     },
      {
       "note": "C3"
      },
@@ -2558,18 +2153,24 @@
       "note": "C3",
       "vel": 0.75
      },
-     null,
+     {
+      "note": "C3",
+      "vel": 0.75
+     },
      {
       "note": "C3",
       "vel": 0.75
      },
      null,
+     null,
      {
       "note": "C3",
       "vel": 0.75
      },
-     null,
-     null,
+     {
+      "note": "C3",
+      "vel": 0.75
+     },
      {
       "note": "C3"
      },
@@ -2590,39 +2191,1359 @@
      null,
      {
       "note": "C3",
+      "vel": 0.67
+     },
+     null,
+     {
+      "note": "C3",
+      "vel": 0.44
+     },
+     null,
+     {
+      "note": "C3",
+      "vel": 0.67
+     },
+     null,
+     {
+      "note": "C3",
+      "vel": 0.47
+     },
+     null,
+     {
+      "note": "C3",
       "vel": 0.75
      },
      null,
      {
       "note": "C3",
-      "vel": 0.41
+      "vel": 0.46
      },
      null,
      {
       "note": "C3",
-      "vel": 0.63
+      "vel": 0.53
+     },
+     null
+    ]
+   },
+   "perc_1": {
+    "steps": [
+     null,
+     null,
+     {
+      "note": "C#5",
+      "fx": {
+       "accent": 1
+      }
+     },
+     null,
+     null,
+     {
+      "note": "C#5",
+      "vel": 0.57
+     },
+     null,
+     null,
+     {
+      "note": "C#5",
+      "vel": 0.75
+     },
+     null,
+     null,
+     {
+      "note": "C#5",
+      "vel": 0.52
+     },
+     null,
+     null,
+     null,
+     {
+      "note": "C#5",
+      "fx": {
+       "accent": 1
+      }
+     }
+    ]
+   },
+   "perc_2": {
+    "steps": [
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "C#5",
+      "fx": {
+       "accent": 1
+      }
+     },
+     null,
+     null,
+     null,
+     {
+      "note": "C#5",
+      "vel": 0.78
+     },
+     null,
+     null,
+     null,
+     {
+      "note": "C#5",
+      "vel": 0.73
+     },
+     null,
+     null,
+     null
+    ]
+   },
+   "acid_1": {
+    "steps": [
+     {
+      "note": "E2",
+      "vel": 0.93,
+      "fx": {
+       "cutoff": 0.561
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A2",
+      "vel": 0.74
+     },
+     {
+      "note": "C#4",
+      "vel": 0.89,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "A3",
+      "vel": 0.77
+     },
+     {
+      "note": "A2",
+      "vel": 0.96,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     {
+      "note": "E2",
+      "vel": 0.85
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "E3",
+      "vel": 0.9,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.76
+     },
+     {
+      "note": "E2",
+      "vel": 0.92,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.8,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.83,
+      "fx": {
+       "slide": 0.6
+      }
+     }
+    ]
+   },
+   "acid_2": {
+    "steps": [
+     null,
+     {
+      "note": "E3",
+      "vel": 0.87
+     },
+     {
+      "note": "E2",
+      "vel": 0.71
+     },
+     {
+      "note": "A3",
+      "vel": 0.74
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     {
+      "note": "C#5",
+      "vel": 0.78,
+      "fx": {
+       "slide": 0.6,
+       "accent": 1
+      }
+     },
+     {
+      "note": "A4",
+      "vel": 0.75
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     {
+      "note": "C#5",
+      "vel": 0.78,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.85
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     null
+    ]
+   },
+   "acid_3": {
+    "steps": [
+     {
+      "fx": {
+       "cutoff": 0.497
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.98
+     },
+     {
+      "note": "E2",
+      "vel": 0.91
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     {
+      "note": "E3",
+      "vel": 0.84
+     },
+     {
+      "note": "E3",
+      "vel": 0.97
+     },
+     {
+      "note": "E3",
+      "vel": 0.82
+     },
+     {
+      "note": "E3",
+      "vel": 0.74,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.8,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.72
+     },
+     {
+      "note": "E3",
+      "vel": 0.98
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A3",
+      "vel": 0.91,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     null
+    ]
+   },
+   "acid_4": {
+    "steps": [
+     null,
+     null,
+     {
+      "note": "A2",
+      "vel": 0.86,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "A2",
+      "vel": 0.77,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A2",
+      "vel": 0.93,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.72
+     },
+     {
+      "note": "E3",
+      "vel": 0.79
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     {
+      "note": "E2",
+      "vel": 0.97,
+      "fx": {
+       "slide": 0.6,
+       "accent": 1
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A2",
+      "vel": 0.82
+     },
+     {
+      "note": "A3",
+      "vel": 0.94,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.79
+     },
+     {
+      "note": "OFF"
+     }
+    ]
+   },
+   "acid_5": {
+    "steps": [
+     {
+      "note": "E2",
+      "vel": 0.93,
+      "fx": {
+       "cutoff": 0.432
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A2",
+      "vel": 0.74
+     },
+     {
+      "note": "C#4",
+      "vel": 0.89,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "A3",
+      "vel": 0.77
+     },
+     {
+      "note": "A2",
+      "vel": 0.96,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     {
+      "note": "E2",
+      "vel": 0.85
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "E3",
+      "vel": 0.9,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.76
+     },
+     {
+      "note": "E2",
+      "vel": 0.92,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.8,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.83,
+      "fx": {
+       "slide": 0.6
+      }
+     }
+    ]
+   },
+   "acid_6": {
+    "steps": [
+     {
+      "fx": {
+       "cutoff": 0.368
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.98
+     },
+     {
+      "note": "E2",
+      "vel": 0.91
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     {
+      "note": "E3",
+      "vel": 0.84
+     },
+     {
+      "note": "E3",
+      "vel": 0.97
+     },
+     {
+      "note": "E3",
+      "vel": 0.82
+     },
+     {
+      "note": "E3",
+      "vel": 0.74,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.8,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.72
+     },
+     {
+      "note": "E3",
+      "vel": 0.98
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A3",
+      "vel": 0.91,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     null
+    ]
+   },
+   "acid_7": {
+    "steps": [
+     {
+      "fx": {
+       "cutoff": 0.336
+      }
+     },
+     null,
+     {
+      "note": "A2",
+      "vel": 0.86,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "A2",
+      "vel": 0.77,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A2",
+      "vel": 0.93,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.72
+     },
+     {
+      "note": "E3",
+      "vel": 0.79
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     {
+      "note": "E2",
+      "vel": 0.97,
+      "fx": {
+       "slide": 0.6,
+       "accent": 1
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A2",
+      "vel": 0.82
+     },
+     {
+      "note": "A3",
+      "vel": 0.94,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.79
+     },
+     {
+      "note": "OFF"
+     }
+    ]
+   },
+   "stab_3": {
+    "steps": [
+     null,
+     null,
+     {
+      "note": "E4",
+      "vel": 0.92
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "E4",
+      "vel": 0.92
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "hats_10": {
+    "steps": [
+     null,
+     {
+      "note": "C3",
+      "vel": 0.43
      },
      null,
      {
       "note": "C3",
-      "vel": 0.38
+      "vel": 0.43
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "C3",
+      "vel": 0.58
      },
      null,
      {
       "note": "C3",
-      "vel": 0.7
+      "vel": 0.69
      },
      null,
      {
       "note": "C3",
-      "vel": 0.37
+      "vel": 0.5
+     },
+     null,
+     {
+      "note": "C3",
+      "vel": 0.6
+     }
+    ]
+   },
+   "hats_11": {
+    "steps": [
+     null,
+     {
+      "note": "C3",
+      "vel": 0.42
      },
      null,
      {
       "note": "C3",
       "vel": 0.54
      },
+     null,
+     null,
+     {
+      "note": "C3",
+      "vel": 0.39
+     },
+     {
+      "note": "C3",
+      "vel": 0.53
+     },
+     null,
+     null,
+     {
+      "note": "C3",
+      "vel": 0.49
+     },
+     {
+      "note": "C3",
+      "vel": 0.43
+     },
+     null,
+     null,
+     null,
+     {
+      "note": "C3",
+      "vel": 0.66
+     }
+    ]
+   },
+   "hats_12": {
+    "steps": [
+     null,
+     null,
+     null,
+     {
+      "note": "C3",
+      "vel": 0.68
+     },
+     {
+      "note": "C3",
+      "vel": 0.37
+     },
+     null,
+     null,
+     {
+      "note": "C3",
+      "vel": 0.44
+     },
+     null,
+     null,
+     {
+      "note": "C3",
+      "vel": 0.63
+     },
+     {
+      "note": "C3",
+      "vel": 0.36
+     },
+     null,
+     null,
+     null,
+     {
+      "note": "C3",
+      "vel": 0.39
+     }
+    ]
+   },
+   "hats_13": {
+    "steps": [
+     {
+      "note": "C3",
+      "vel": 0.6
+     },
+     {
+      "note": "C3",
+      "vel": 0.33
+     },
+     null,
+     null,
+     {
+      "note": "C3",
+      "vel": 0.31
+     },
+     {
+      "note": "C3",
+      "vel": 0.5
+     },
+     null,
+     {
+      "note": "C3",
+      "vel": 0.51
+     },
+     null,
+     null,
+     {
+      "note": "C3",
+      "vel": 0.58
+     },
+     {
+      "note": "C3",
+      "vel": 0.43
+     },
+     null,
+     null,
+     null,
+     {
+      "note": "C3",
+      "vel": 0.42
+     }
+    ]
+   },
+   "perc_3": {
+    "steps": [
+     {
+      "note": "C#5",
+      "fx": {
+       "accent": 1
+      }
+     },
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "C#5",
+      "vel": 0.78
+     },
+     null,
+     null,
+     null,
+     {
+      "note": "C#5",
+      "vel": 0.82
+     },
+     null,
+     null,
+     null,
+     {
+      "note": "C#5",
+      "vel": 0.63
+     },
+     null,
      null
+    ]
+   },
+   "acid_8": {
+    "steps": [
+     {
+      "note": "E2",
+      "vel": 0.93,
+      "fx": {
+       "cutoff": 0.262
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A2",
+      "vel": 0.74
+     },
+     {
+      "note": "C#4",
+      "vel": 0.89,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "A3",
+      "vel": 0.77
+     },
+     {
+      "note": "A2",
+      "vel": 0.96,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     {
+      "note": "E2",
+      "vel": 0.85
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "E3",
+      "vel": 0.9,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.76
+     },
+     {
+      "note": "E2",
+      "vel": 0.92,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.8,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.83,
+      "fx": {
+       "slide": 0.6
+      }
+     }
+    ]
+   },
+   "acid_9": {
+    "steps": [
+     {
+      "fx": {
+       "cutoff": 0.376
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.98
+     },
+     {
+      "note": "E2",
+      "vel": 0.91
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     {
+      "note": "E3",
+      "vel": 0.84
+     },
+     {
+      "note": "E3",
+      "vel": 0.97
+     },
+     {
+      "note": "E3",
+      "vel": 0.82
+     },
+     {
+      "note": "E3",
+      "vel": 0.74,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.8,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.72
+     },
+     {
+      "note": "E3",
+      "vel": 0.98
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A3",
+      "vel": 0.91,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     null
+    ]
+   },
+   "acid_10": {
+    "steps": [
+     {
+      "note": "E2",
+      "vel": 0.95
+     },
+     {
+      "note": "E2",
+      "vel": 0.9,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "C#5",
+      "vel": 0.82
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     {
+      "note": "C#4",
+      "vel": 0.88,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "C#3",
+      "vel": 0.82
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     {
+      "note": "C#3",
+      "vel": 0.94,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "A3",
+      "vel": 0.92,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "A4",
+      "vel": 0.96,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "C#4",
+      "vel": 0.96
+     },
+     {
+      "note": "C#4",
+      "vel": 0.81
+     }
+    ]
+   },
+   "acid_11": {
+    "steps": [
+     {
+      "note": "E2",
+      "vel": 0.93,
+      "fx": {
+       "cutoff": 0.489
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A2",
+      "vel": 0.74
+     },
+     {
+      "note": "C#4",
+      "vel": 0.89,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "A3",
+      "vel": 0.77
+     },
+     {
+      "note": "A2",
+      "vel": 0.96,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     {
+      "note": "E2",
+      "vel": 0.85
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "E3",
+      "vel": 0.9,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.76
+     },
+     {
+      "note": "E2",
+      "vel": 0.92,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.8,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.83,
+      "fx": {
+       "slide": 0.6
+      }
+     }
+    ]
+   },
+   "acid_12": {
+    "steps": [
+     {
+      "fx": {
+       "cutoff": 0.602
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.98
+     },
+     {
+      "note": "E2",
+      "vel": 0.91
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     {
+      "note": "E3",
+      "vel": 0.84
+     },
+     {
+      "note": "E3",
+      "vel": 0.97
+     },
+     {
+      "note": "E3",
+      "vel": 0.82
+     },
+     {
+      "note": "E3",
+      "vel": 0.74,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.8,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.72
+     },
+     {
+      "note": "E3",
+      "vel": 0.98
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A3",
+      "vel": 0.91,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     null
+    ]
+   },
+   "acid_13": {
+    "steps": [
+     {
+      "note": "E2",
+      "vel": 0.95,
+      "fx": {
+       "cutoff": 0.659
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.9,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "C#5",
+      "vel": 0.82
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     {
+      "note": "C#4",
+      "vel": 0.88,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "C#3",
+      "vel": 0.82
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     {
+      "note": "C#3",
+      "vel": 0.94,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "A3",
+      "vel": 0.92,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "A4",
+      "vel": 0.96,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "C#4",
+      "vel": 0.96
+     },
+     {
+      "note": "C#4",
+      "vel": 0.81
+     }
+    ]
+   },
+   "hats_14": {
+    "steps": [
+     null,
+     null,
+     null,
+     {
+      "note": "C3",
+      "vel": 0.44
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "C3",
+      "vel": 0.47
+     },
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "C3",
+      "vel": 0.35
+     }
+    ]
+   },
+   "hats_15": {
+    "steps": [
+     {
+      "note": "C3",
+      "vel": 0.6
+     },
+     {
+      "note": "C3",
+      "vel": 0.33
+     },
+     null,
+     null,
+     {
+      "note": "C3",
+      "vel": 0.31
+     },
+     {
+      "note": "C3",
+      "vel": 0.5
+     },
+     null,
+     {
+      "note": "C3",
+      "vel": 0.51
+     },
+     null,
+     null,
+     {
+      "note": "C3",
+      "vel": 0.58
+     },
+     {
+      "note": "C3",
+      "vel": 0.43
+     },
+     null,
+     {
+      "note": "C3",
+      "vel": 0.7,
+      "fx": {
+       "retrig": 4
+      }
+     },
+     {
+      "note": "C3",
+      "vel": 0.7,
+      "fx": {
+       "retrig": 4
+      }
+     },
+     {
+      "note": "C3",
+      "vel": 0.42,
+      "fx": {
+       "retrig": 4
+      }
+     }
     ]
    },
    "clap_3": {
@@ -2658,8 +3579,49 @@
      }
     ]
    },
-   "bass_11": {
+   "perc_4": {
     "steps": [
+     null,
+     null,
+     {
+      "note": "C#5",
+      "fx": {
+       "accent": 1
+      }
+     },
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "C#5",
+      "vel": 0.79
+     },
+     null,
+     null,
+     null,
+     {
+      "note": "C#5",
+      "vel": 0.63
+     },
+     null,
+     null,
+     null,
+     {
+      "note": "C#5",
+      "vel": 0.75
+     }
+    ]
+   },
+   "bass_6": {
+    "steps": [
+     null,
+     null,
+     null,
+     {
+      "note": "E1",
+      "vel": 0.88
+     },
      {
       "note": "OFF"
      },
@@ -2672,78 +3634,91 @@
      {
       "note": "OFF"
      },
+     null,
+     null,
      {
-      "note": "C#1",
+      "note": "E1",
+      "vel": 0.9
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "E1",
+      "vel": 0.82
+     },
+     {
+      "note": "OFF"
+     },
+     null
+    ]
+   },
+   "bass_7": {
+    "steps": [
+     null,
+     null,
+     null,
+     {
+      "note": "E2",
+      "vel": 0.8
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     {
+      "note": "E1",
       "vel": 0.84
      },
      {
       "note": "OFF"
      },
      null,
-     {
-      "note": "C#1",
-      "vel": 0.74
-     },
-     {
-      "note": "C#1",
-      "vel": 0.92
-     },
-     {
-      "note": "OFF"
-     },
-     null,
      null,
      {
-      "note": "C#2",
-      "vel": 0.82
+      "note": "E1",
+      "vel": 0.96
      },
      {
       "note": "OFF"
      },
      {
-      "note": "E2",
-      "vel": 1
-     }
-    ]
-   },
-   "bass_12": {
-    "steps": [
-     {
-      "note": "OFF"
-     },
-     null,
-     null,
-     {
-      "note": "E2",
-      "vel": 0.86
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "A2",
-      "vel": 0.83
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     {
-      "note": "C#1",
-      "vel": 0.79
-     },
-     {
-      "note": "C#1",
+      "note": "E1",
       "vel": 0.99
      },
      {
       "note": "OFF"
      },
+     null
+    ]
+   },
+   "bass_8": {
+    "steps": [
+     null,
+     null,
+     null,
+     {
+      "note": "E1",
+      "vel": 1
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     {
+      "note": "E1",
+      "vel": 0.89
+     },
+     {
+      "note": "OFF"
+     },
      null,
      null,
      {
       "note": "E2",
-      "vel": 0.95,
+      "vel": 0.94,
       "fx": {
        "slide": 0.6
       }
@@ -2752,13 +3727,1090 @@
       "note": "OFF"
      },
      {
-      "note": "E1",
-      "vel": 0.97
+      "note": "A2",
+      "vel": 1
+     },
+     {
+      "note": "OFF"
+     },
+     null
+    ]
+   },
+   "bass_9": {
+    "steps": [
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     {
+      "note": "A2",
+      "vel": 0.87
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "E2",
+      "vel": 0.86
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     {
+      "note": "E2",
+      "vel": 0.84
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     {
+      "note": "E2",
+      "vel": 0.93
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A2",
+      "vel": 0.86
      }
     ]
    },
-   "bass_13": {
+   "bass_10": {
     "steps": [
+     null,
+     null,
+     null,
+     {
+      "note": "C#2",
+      "vel": 0.94
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     {
+      "note": "C#2",
+      "vel": 0.89
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     {
+      "note": "E2",
+      "vel": 0.95
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "E2",
+      "vel": 0.89
+     },
+     {
+      "note": "OFF"
+     },
+     null
+    ]
+   },
+   "acid_14": {
+    "steps": [
+     {
+      "note": "E2",
+      "vel": 0.93,
+      "fx": {
+       "cutoff": 0.506
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A2",
+      "vel": 0.74
+     },
+     {
+      "note": "C#4",
+      "vel": 0.89,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "A3",
+      "vel": 0.77
+     },
+     {
+      "note": "A2",
+      "vel": 0.96,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     {
+      "note": "E2",
+      "vel": 0.85
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "E3",
+      "vel": 0.9,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.76
+     },
+     {
+      "note": "E2",
+      "vel": 0.92,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.8,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.83,
+      "fx": {
+       "slide": 0.6
+      }
+     }
+    ]
+   },
+   "acid_15": {
+    "steps": [
+     null,
+     {
+      "note": "E2",
+      "vel": 0.98
+     },
+     {
+      "note": "E2",
+      "vel": 0.91
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     {
+      "note": "E3",
+      "vel": 0.84
+     },
+     {
+      "note": "E3",
+      "vel": 0.97
+     },
+     {
+      "note": "E3",
+      "vel": 0.82
+     },
+     {
+      "note": "E3",
+      "vel": 0.74,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.8,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.72
+     },
+     {
+      "note": "E3",
+      "vel": 0.98
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A3",
+      "vel": 0.91,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     null
+    ]
+   },
+   "acid_16": {
+    "steps": [
+     {
+      "note": "E2",
+      "vel": 0.93,
+      "fx": {
+       "cutoff": 0.449
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A2",
+      "vel": 0.74
+     },
+     {
+      "note": "C#4",
+      "vel": 0.89,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "A3",
+      "vel": 0.77
+     },
+     {
+      "note": "A2",
+      "vel": 0.96,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     {
+      "note": "E2",
+      "vel": 0.85
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "E3",
+      "vel": 0.9,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.76
+     },
+     {
+      "note": "E2",
+      "vel": 0.92,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.8,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.83,
+      "fx": {
+       "slide": 0.6
+      }
+     }
+    ]
+   },
+   "acid_17": {
+    "steps": [
+     {
+      "note": "E2",
+      "vel": 0.93,
+      "fx": {
+       "cutoff": 0.393
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A2",
+      "vel": 0.74
+     },
+     {
+      "note": "C#4",
+      "vel": 0.89,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "A3",
+      "vel": 0.77
+     },
+     {
+      "note": "A2",
+      "vel": 0.96,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     {
+      "note": "E2",
+      "vel": 0.85
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "E3",
+      "vel": 0.9,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.76
+     },
+     {
+      "note": "E2",
+      "vel": 0.92,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.8,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.83,
+      "fx": {
+       "slide": 0.6
+      }
+     }
+    ]
+   },
+   "acid_18": {
+    "steps": [
+     {
+      "note": "E2",
+      "vel": 0.93,
+      "fx": {
+       "cutoff": 0.337
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A2",
+      "vel": 0.74
+     },
+     {
+      "note": "C#4",
+      "vel": 0.89,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "A3",
+      "vel": 0.77
+     },
+     {
+      "note": "A2",
+      "vel": 0.96,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     {
+      "note": "E2",
+      "vel": 0.85
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "E3",
+      "vel": 0.9,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.76
+     },
+     {
+      "note": "E2",
+      "vel": 0.92,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.8,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.83,
+      "fx": {
+       "slide": 0.6
+      }
+     }
+    ]
+   },
+   "acid_19": {
+    "steps": [
+     {
+      "fx": {
+       "cutoff": 0.295
+      }
+     },
+     null,
+     {
+      "note": "A2",
+      "vel": 0.86,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "A2",
+      "vel": 0.77,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A2",
+      "vel": 0.93,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.72
+     },
+     {
+      "note": "E3",
+      "vel": 0.79
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     {
+      "note": "E2",
+      "vel": 0.97,
+      "fx": {
+       "slide": 0.6,
+       "accent": 1
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A2",
+      "vel": 0.82
+     },
+     {
+      "note": "A3",
+      "vel": 0.94,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.79
+     },
+     {
+      "note": "OFF"
+     }
+    ]
+   },
+   "stab_4": {
+    "steps": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "E3",
+      "vel": 0.81
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "hats_16": {
+    "steps": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "C3",
+      "vel": 0.59
+     },
+     null,
+     null,
+     null,
+     {
+      "note": "C3",
+      "vel": 0.34
+     },
+     {
+      "note": "C3",
+      "vel": 0.65
+     },
+     null,
+     {
+      "note": "C3",
+      "vel": 0.76
+     },
+     null,
+     {
+      "note": "C3",
+      "vel": 0.41
+     }
+    ]
+   },
+   "clap_4": {
+    "steps": [
+     null,
+     {
+      "note": "C3",
+      "vel": 0.75
+     },
+     {
+      "note": "C3",
+      "vel": 0.75
+     },
+     null,
+     {
+      "note": "C3"
+     },
+     null,
+     {
+      "note": "C3",
+      "vel": 0.75
+     },
+     null,
+     null,
+     {
+      "note": "C3",
+      "vel": 0.75
+     },
+     {
+      "note": "C3",
+      "vel": 0.75
+     },
+     {
+      "note": "C3",
+      "vel": 0.75
+     },
+     {
+      "note": "C3"
+     },
+     null,
+     null,
+     {
+      "note": "C3",
+      "vel": 0.4
+     }
+    ]
+   },
+   "acid_20": {
+    "steps": [
+     {
+      "note": "E2",
+      "vel": 0.93,
+      "fx": {
+       "cutoff": 0.304
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A2",
+      "vel": 0.74
+     },
+     {
+      "note": "C#4",
+      "vel": 0.89,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "A3",
+      "vel": 0.77
+     },
+     {
+      "note": "A2",
+      "vel": 0.96,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "E3",
+      "vel": 0.61
+     },
+     null,
+     {
+      "note": "E2",
+      "vel": 0.85
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "E3",
+      "vel": 0.9,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.76
+     },
+     {
+      "note": "E2",
+      "vel": 0.92,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.8,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.83,
+      "fx": {
+       "slide": 0.6
+      }
+     }
+    ]
+   },
+   "acid_21": {
+    "steps": [
+     null,
+     {
+      "note": "E3",
+      "vel": 0.87
+     },
+     {
+      "note": "E2",
+      "vel": 0.71
+     },
+     {
+      "note": "A3",
+      "vel": 0.74
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     {
+      "note": "C#5",
+      "vel": 0.78,
+      "fx": {
+       "slide": 0.6,
+       "accent": 1
+      }
+     },
+     {
+      "note": "A4",
+      "vel": 0.75
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A4",
+      "vel": 0.6
+     },
+     {
+      "note": "C#5",
+      "vel": 0.78,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.85
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     null
+    ]
+   },
+   "acid_22": {
+    "steps": [
+     {
+      "fx": {
+       "cutoff": 0.304
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.98
+     },
+     {
+      "note": "E2",
+      "vel": 0.91
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "E3",
+      "vel": 0.64,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.84
+     },
+     {
+      "note": "E3",
+      "vel": 0.97
+     },
+     {
+      "note": "E3",
+      "vel": 0.82
+     },
+     {
+      "note": "E3",
+      "vel": 0.74,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.8,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.72
+     },
+     {
+      "note": "E3",
+      "vel": 0.98
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A3",
+      "vel": 0.91,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     null
+    ]
+   },
+   "acid_23": {
+    "steps": [
+     null,
+     {
+      "note": "E2",
+      "vel": 0.78,
+      "fx": {
+       "slide": 0.6,
+       "accent": 1
+      }
+     },
+     {
+      "note": "A2",
+      "vel": 0.86,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "A2",
+      "vel": 0.77,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A2",
+      "vel": 0.93,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.72
+     },
+     {
+      "note": "E3",
+      "vel": 0.79
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     {
+      "note": "E2",
+      "vel": 0.97,
+      "fx": {
+       "slide": 0.6,
+       "accent": 1
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A2",
+      "vel": 0.82
+     },
+     {
+      "note": "A3",
+      "vel": 0.94,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.79
+     },
+     {
+      "note": "OFF"
+     }
+    ]
+   },
+   "acid_24": {
+    "steps": [
+     {
+      "fx": {
+       "cutoff": 0.304
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.78,
+      "fx": {
+       "slide": 0.6,
+       "accent": 1
+      }
+     },
+     {
+      "note": "A2",
+      "vel": 0.86,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "A2",
+      "vel": 0.77,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A2",
+      "vel": 0.93,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.72
+     },
+     {
+      "note": "E3",
+      "vel": 0.79
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     {
+      "note": "E2",
+      "vel": 0.97,
+      "fx": {
+       "slide": 0.6,
+       "accent": 1
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A2",
+      "vel": 0.82
+     },
+     {
+      "note": "A3",
+      "vel": 0.94,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.79
+     },
+     {
+      "note": "OFF"
+     }
+    ]
+   },
+   "perc_5": {
+    "steps": [
+     null,
+     {
+      "note": "C#5",
+      "fx": {
+       "accent": 1
+      }
+     },
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "C#5",
+      "vel": 0.83
+     },
+     null,
+     null,
+     null,
+     {
+      "note": "C#5",
+      "vel": 0.76
+     },
+     null,
+     null,
+     null,
+     {
+      "note": "C#5",
+      "vel": 0.88
+     },
+     null
+    ]
+   },
+   "bass_11": {
+    "steps": [
+     null,
+     null,
+     null,
+     {
+      "note": "E1",
+      "vel": 0.88
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     {
+      "note": "E1",
+      "vel": 0.93
+     },
      {
       "note": "OFF"
      },
@@ -2778,14 +4830,17 @@
      {
       "note": "OFF"
      },
+     null
+    ]
+   },
+   "bass_12": {
+    "steps": [
+     null,
+     null,
      null,
      {
-      "note": "E1",
-      "vel": 0.65
-     },
-     {
-      "note": "E1",
-      "vel": 0.81
+      "note": "E2",
+      "vel": 0.8
      },
      {
       "note": "OFF"
@@ -2799,10 +4854,66 @@
      {
       "note": "OFF"
      },
+     null,
+     null,
      {
       "note": "E1",
-      "vel": 0.93
-     }
+      "vel": 0.99
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "E1",
+      "vel": 0.96
+     },
+     {
+      "note": "OFF"
+     },
+     null
+    ]
+   },
+   "bass_13": {
+    "steps": [
+     null,
+     null,
+     null,
+     {
+      "note": "E1",
+      "vel": 1
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     {
+      "note": "E1",
+      "vel": 0.89
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     {
+      "note": "A2",
+      "vel": 1
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "E2",
+      "vel": 0.94,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     null
     ]
    },
    "bass_14": {
@@ -2811,8 +4922,8 @@
      null,
      null,
      {
-      "note": "A2",
-      "vel": 0.8
+      "note": "C#2",
+      "vel": 0.94
      },
      {
       "note": "OFF"
@@ -2820,27 +4931,24 @@
      null,
      null,
      {
-      "note": "A2",
+      "note": "C#2",
+      "vel": 0.89
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     {
+      "note": "E2",
       "vel": 0.89
      },
      {
       "note": "OFF"
      },
      {
-      "note": "E1",
-      "vel": 0.76
-     },
-     null,
-     {
-      "note": "E1",
+      "note": "E2",
       "vel": 0.95
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "E1",
-      "vel": 0.92
      },
      {
       "note": "OFF"
@@ -2856,3024 +4964,530 @@
      null,
      null,
      {
-      "note": "E1",
-      "vel": 0.81
+      "note": "A2",
+      "vel": 0.87
      },
      {
       "note": "OFF"
      },
+     {
+      "note": "E2",
+      "vel": 0.86
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     {
+      "note": "E2",
+      "vel": 0.84
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
      {
       "note": "A2",
-      "vel": 0.94
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     {
-      "note": "E2",
-      "vel": 0.77
-     },
-     {
-      "note": "E2",
-      "vel": 0.96
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     null,
-     {
-      "note": "E2",
-      "vel": 0.95
+      "vel": 0.86
      },
      {
       "note": "OFF"
      },
      {
-      "note": "A2",
-      "vel": 0.94
+      "note": "E2",
+      "vel": 0.93
      }
     ]
    },
-   "acid_1": {
+   "acid_25": {
     "steps": [
      {
+      "note": "E2",
+      "vel": 0.93,
       "fx": {
        "cutoff": 0.506
       }
      },
      {
-      "note": "C#4",
-      "vel": 0.76
-     },
-     {
       "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.73
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     {
-      "note": "C#4",
-      "vel": 0.88
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.87,
-      "fx": {
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.78,
-      "fx": {
-       "slide": 0.6,
-       "accent": 1
-      }
-     },
-     {
-      "note": "E2",
-      "vel": 0.82
-     },
-     {
-      "note": "E2",
-      "vel": 0.94
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "E2",
-      "vel": 0.92,
-      "fx": {
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     }
-    ]
-   },
-   "acid_2": {
-    "steps": [
-     null,
-     null,
-     {
-      "note": "A3",
-      "vel": 0.88
      },
      {
       "note": "A2",
-      "vel": 0.8,
-      "fx": {
-       "accent": 1
-      }
-     },
-     {
-      "note": "C#3",
-      "vel": 0.82,
-      "fx": {
-       "slide": 0.6
-      }
-     },
-     {
-      "note": "C#4",
-      "vel": 0.75,
-      "fx": {
-       "slide": 0.6
-      }
-     },
-     {
-      "note": "C#4",
-      "vel": 0.71,
-      "fx": {
-       "slide": 0.6,
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "E2",
-      "vel": 0.72,
-      "fx": {
-       "slide": 0.6
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "E3",
       "vel": 0.74
      },
      {
-      "note": "OFF"
-     },
-     null,
-     {
-      "note": "E2",
-      "vel": 0.77,
-      "fx": {
-       "slide": 0.6
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#3",
-      "vel": 0.73,
-      "fx": {
-       "slide": 0.6
-      }
-     }
-    ]
-   },
-   "acid_3": {
-    "steps": [
-     {
       "note": "C#4",
-      "vel": 0.91
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.87,
+      "vel": 0.89,
       "fx": {
-       "slide": 0.6
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     {
-      "note": "C#4",
-      "vel": 0.73,
-      "fx": {
-       "slide": 0.6
+       "accent": 1
       }
      },
      {
       "note": "A3",
-      "vel": 0.84
-     },
-     {
-      "note": "E2",
-      "vel": 0.79
-     },
-     {
-      "note": "A3",
-      "vel": 0.79,
-      "fx": {
-       "slide": 0.6,
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     null,
-     {
-      "note": "A4",
-      "vel": 0.74
-     },
-     {
-      "note": "C#3",
-      "vel": 0.7,
-      "fx": {
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#5",
-      "vel": 0.72
-     }
-    ]
-   },
-   "acid_4": {
-    "steps": [
-     {
-      "note": "E2",
-      "vel": 0.9
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     {
-      "note": "E2",
-      "vel": 0.79
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#5",
-      "vel": 0.87
-     },
-     {
-      "note": "E3",
-      "vel": 0.79,
-      "fx": {
-       "accent": 1
-      }
+      "vel": 0.77
      },
      {
       "note": "A2",
-      "vel": 0.77,
-      "fx": {
-       "slide": 0.6
-      }
-     },
-     {
-      "note": "C#3",
-      "vel": 0.75
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "A2",
-      "vel": 0.9
-     },
-     {
-      "note": "E2",
-      "vel": 0.91
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "E3",
       "vel": 0.96,
       "fx": {
        "slide": 0.6
       }
      },
      {
-      "note": "A2",
-      "vel": 0.92,
-      "fx": {
-       "slide": 0.6
-      }
-     },
-     {
-      "note": "A2",
-      "vel": 0.92
-     }
-    ]
-   },
-   "acid_5": {
-    "steps": [
-     {
-      "fx": {
-       "cutoff": 0.449
-      }
-     },
-     {
-      "note": "C#4",
-      "vel": 0.76
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.73
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     {
-      "note": "C#4",
-      "vel": 0.88
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.87,
-      "fx": {
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.78,
-      "fx": {
-       "slide": 0.6,
-       "accent": 1
-      }
-     },
-     {
-      "note": "E2",
-      "vel": 0.82
-     },
-     {
-      "note": "E2",
-      "vel": 0.94
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "E2",
-      "vel": 0.92,
-      "fx": {
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     }
-    ]
-   },
-   "acid_6": {
-    "steps": [
-     {
-      "note": "A2",
-      "vel": 0.78,
-      "fx": {
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     {
-      "note": "E2",
-      "vel": 1
-     },
-     {
-      "note": "A2",
-      "vel": 0.77,
-      "fx": {
-       "slide": 0.6
-      }
-     },
-     {
-      "note": "E3",
-      "vel": 0.92
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "A2",
-      "vel": 0.81
-     },
-     {
-      "note": "C#3",
-      "vel": 0.86
-     },
-     {
-      "note": "E3",
-      "vel": 0.87,
-      "fx": {
-       "slide": 0.6
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     null
-    ]
-   },
-   "acid_7": {
-    "steps": [
-     {
-      "fx": {
-       "cutoff": 0.393
-      }
-     },
-     {
-      "note": "C#4",
-      "vel": 0.76
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.73
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     {
-      "note": "C#4",
-      "vel": 0.88
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.87,
-      "fx": {
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.78,
-      "fx": {
-       "slide": 0.6,
-       "accent": 1
-      }
-     },
-     {
-      "note": "E2",
-      "vel": 0.82
-     },
-     {
-      "note": "E2",
-      "vel": 0.94
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "E2",
-      "vel": 0.92,
-      "fx": {
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     }
-    ]
-   },
-   "acid_8": {
-    "steps": [
-     {
-      "fx": {
-       "cutoff": 0.337
-      }
-     },
-     {
-      "note": "C#4",
-      "vel": 0.76
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.73
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     {
-      "note": "C#4",
-      "vel": 0.88
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.87,
-      "fx": {
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.78,
-      "fx": {
-       "slide": 0.6,
-       "accent": 1
-      }
-     },
-     {
-      "note": "E2",
-      "vel": 0.82
-     },
-     {
-      "note": "E2",
-      "vel": 0.94
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "E2",
-      "vel": 0.92,
-      "fx": {
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     }
-    ]
-   },
-   "hats_11": {
-    "steps": [
-     null,
-     null,
-     null,
-     {
-      "note": "C3",
-      "vel": 0.58
-     },
-     null,
-     {
-      "note": "C3",
-      "vel": 0.72
-     },
-     null,
-     null,
-     null,
-     null,
-     {
-      "note": "C3",
-      "vel": 0.63
-     },
-     null,
-     {
-      "note": "C3",
-      "vel": 0.7,
-      "fx": {
-       "retrig": 3
-      }
-     },
-     null,
-     {
-      "note": "C3",
-      "vel": 0.48,
-      "fx": {
-       "retrig": 3
-      }
-     },
-     {
-      "note": "C3",
-      "vel": 0.73,
-      "fx": {
-       "retrig": 3
-      }
-     }
-    ]
-   },
-   "clap_4": {
-    "steps": [
-     {
-      "note": "C3",
-      "vel": 0.75
-     },
-     null,
-     null,
-     {
-      "note": "C3",
-      "vel": 0.75
-     },
-     {
-      "note": "C3"
-     },
-     {
-      "note": "C3",
-      "vel": 0.75
-     },
-     null,
-     null,
-     {
-      "note": "C3",
-      "vel": 0.75
-     },
-     null,
-     null,
-     {
-      "note": "C3",
-      "vel": 0.75
-     },
-     {
-      "note": "C3"
-     },
-     {
-      "note": "C3",
-      "vel": 0.75
-     },
-     {
-      "note": "C3",
-      "vel": 0.75
-     },
-     {
-      "note": "C3",
-      "vel": 0.4
-     }
-    ]
-   },
-   "acid_9": {
-    "steps": [
-     {
-      "fx": {
-       "cutoff": 0.304
-      }
-     },
-     {
-      "note": "C#4",
-      "vel": 0.76
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.73
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     {
-      "note": "C#4",
-      "vel": 0.88
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.87,
-      "fx": {
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.78,
-      "fx": {
-       "slide": 0.6,
-       "accent": 1
-      }
-     },
-     {
-      "note": "E2",
-      "vel": 0.82
-     },
-     {
-      "note": "E2",
-      "vel": 0.94
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "E2",
-      "vel": 0.92,
-      "fx": {
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     }
-    ]
-   },
-   "acid_10": {
-    "steps": [
-     {
-      "note": "C#4",
-      "vel": 0.91,
-      "fx": {
-       "cutoff": 0.304
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.87,
-      "fx": {
-       "slide": 0.6
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     {
-      "note": "C#4",
-      "vel": 0.73,
-      "fx": {
-       "slide": 0.6
-      }
-     },
-     {
-      "note": "A3",
-      "vel": 0.84
-     },
-     {
-      "note": "E2",
-      "vel": 0.79
-     },
-     {
-      "note": "A3",
-      "vel": 0.79,
-      "fx": {
-       "slide": 0.6,
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     null,
-     {
-      "note": "A4",
-      "vel": 0.74
-     },
-     {
-      "note": "C#3",
-      "vel": 0.7,
-      "fx": {
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#5",
-      "vel": 0.72
-     }
-    ]
-   },
-   "hats_12": {
-    "steps": [
-     null,
-     null,
-     null,
-     {
-      "note": "C3",
-      "vel": 0.58
-     },
-     null,
-     {
-      "note": "C3",
-      "vel": 0.72
-     },
-     null,
-     null,
-     null,
-     null,
-     {
-      "note": "C3",
-      "vel": 0.63
-     },
-     null,
-     null,
-     {
-      "note": "C3",
-      "vel": 0.7,
-      "fx": {
-       "retrig": 3
-      }
-     },
-     {
-      "note": "C3",
-      "vel": 0.48,
-      "fx": {
-       "retrig": 3
-      }
-     },
-     {
-      "note": "C3",
-      "vel": 0.73,
-      "fx": {
-       "retrig": 3
-      }
-     }
-    ]
-   },
-   "bass_16": {
-    "steps": [
-     {
-      "note": "OFF"
-     },
-     null,
-     null,
-     {
-      "note": "E1",
-      "vel": 0.93
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#1",
-      "vel": 0.84
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#2",
-      "vel": 0.66
-     },
-     {
-      "note": "C#1",
-      "vel": 0.74
-     },
-     {
-      "note": "C#1",
-      "vel": 0.92
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     null,
-     {
-      "note": "C#2",
-      "vel": 0.82
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "E2",
-      "vel": 1
-     }
-    ]
-   },
-   "bass_17": {
-    "steps": [
-     {
-      "note": "OFF"
-     },
-     null,
-     null,
-     {
-      "note": "E2",
-      "vel": 0.86
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "A2",
-      "vel": 0.83
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "E2",
-      "vel": 0.76,
-      "fx": {
-       "slide": 0.6
-      }
-     },
-     {
-      "note": "C#1",
-      "vel": 0.79
-     },
-     {
-      "note": "C#1",
-      "vel": 0.99
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     null,
-     {
-      "note": "E2",
-      "vel": 0.95,
-      "fx": {
-       "slide": 0.6
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "E1",
-      "vel": 0.97
-     }
-    ]
-   },
-   "bass_18": {
-    "steps": [
-     {
-      "note": "OFF"
-     },
-     null,
-     null,
-     {
-      "note": "E1",
-      "vel": 0.82
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "E1",
-      "vel": 0.9
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "E1",
-      "vel": 0.67
-     },
-     {
-      "note": "E1",
-      "vel": 0.65
-     },
-     {
-      "note": "E1",
-      "vel": 0.81
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     null,
-     {
-      "note": "E1",
-      "vel": 0.84
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "E1",
-      "vel": 0.93
-     }
-    ]
-   },
-   "bass_19": {
-    "steps": [
-     null,
-     null,
-     null,
-     {
-      "note": "A2",
-      "vel": 0.8
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "E1",
-      "vel": 0.74
-     },
-     null,
-     {
-      "note": "A2",
-      "vel": 0.89
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "E1",
-      "vel": 0.76
-     },
-     null,
-     {
-      "note": "E1",
-      "vel": 0.95
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "E1",
-      "vel": 0.92
-     },
-     {
-      "note": "OFF"
-     },
-     null
-    ]
-   },
-   "bass_20": {
-    "steps": [
-     {
-      "note": "OFF"
-     },
-     null,
-     null,
-     {
-      "note": "E1",
-      "vel": 0.81
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "A2",
-      "vel": 0.94
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "E2",
-      "vel": 0.76
-     },
-     {
-      "note": "E2",
-      "vel": 0.77
-     },
-     {
-      "note": "E2",
-      "vel": 0.96
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     null,
-     {
-      "note": "E2",
-      "vel": 0.95
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "A2",
-      "vel": 0.94
-     }
-    ]
-   },
-   "acid_11": {
-    "steps": [
-     {
-      "fx": {
-       "cutoff": 0.535
-      }
-     },
-     {
-      "note": "C#4",
-      "vel": 0.76
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.73
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     {
-      "note": "E2",
-      "vel": 0.92,
-      "fx": {
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.87,
-      "fx": {
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.78,
-      "fx": {
-       "slide": 0.6,
-       "accent": 1
-      }
-     },
-     {
-      "note": "E2",
-      "vel": 0.82
-     },
-     {
-      "note": "E2",
-      "vel": 0.94
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.88
-     },
-     {
-      "note": "OFF"
-     }
-    ]
-   },
-   "acid_12": {
-    "steps": [
-     null,
-     null,
-     {
-      "note": "A3",
-      "vel": 0.88
-     },
-     {
-      "note": "A2",
-      "vel": 0.8,
-      "fx": {
-       "accent": 1
-      }
-     },
-     {
-      "note": "C#3",
-      "vel": 0.82,
-      "fx": {
-       "slide": 0.6
-      }
-     },
-     {
-      "note": "C#3",
-      "vel": 0.73,
-      "fx": {
-       "slide": 0.6
-      }
-     },
-     {
-      "note": "C#4",
-      "vel": 0.71,
-      "fx": {
-       "slide": 0.6,
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "E2",
-      "vel": 0.72,
-      "fx": {
-       "slide": 0.6
-      }
-     },
-     {
       "note": "OFF"
      },
      {
       "note": "E3",
-      "vel": 0.74
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     {
-      "note": "E2",
-      "vel": 0.77,
-      "fx": {
-       "slide": 0.6
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.75,
-      "fx": {
-       "slide": 0.6
-      }
-     }
-    ]
-   },
-   "acid_13": {
-    "steps": [
-     {
-      "note": "C#4",
-      "vel": 0.91
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.87,
-      "fx": {
-       "slide": 0.6
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     {
-      "note": "C#4",
-      "vel": 0.73,
-      "fx": {
-       "slide": 0.6
-      }
-     },
-     {
-      "note": "C#5",
-      "vel": 0.72
-     },
-     {
-      "note": "E2",
-      "vel": 0.79
-     },
-     {
-      "note": "A3",
-      "vel": 0.79,
-      "fx": {
-       "slide": 0.6,
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     null,
-     {
-      "note": "A4",
-      "vel": 0.74
-     },
-     {
-      "note": "C#3",
-      "vel": 0.7,
-      "fx": {
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "A3",
-      "vel": 0.84
-     }
-    ]
-   },
-   "acid_14": {
-    "steps": [
-     {
-      "note": "E2",
-      "vel": 0.9
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     {
-      "note": "E2",
-      "vel": 0.79
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#5",
-      "vel": 0.87
-     },
-     {
-      "note": "E3",
-      "vel": 0.79,
-      "fx": {
-       "accent": 1
-      }
-     },
-     {
-      "note": "A2",
-      "vel": 0.92
-     },
-     {
-      "note": "C#3",
-      "vel": 0.75
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "A2",
-      "vel": 0.9
-     },
-     {
-      "note": "E2",
-      "vel": 0.91
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "E3",
-      "vel": 0.96,
-      "fx": {
-       "slide": 0.6
-      }
-     },
-     {
-      "note": "A2",
-      "vel": 0.92,
-      "fx": {
-       "slide": 0.6
-      }
-     },
-     {
-      "note": "A2",
-      "vel": 0.77,
-      "fx": {
-       "slide": 0.6
-      }
-     }
-    ]
-   },
-   "acid_15": {
-    "steps": [
-     {
-      "fx": {
-       "cutoff": 0.48
-      }
-     },
-     {
-      "note": "C#4",
-      "vel": 0.76
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.73
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     {
-      "note": "E2",
-      "vel": 0.92,
-      "fx": {
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.87,
-      "fx": {
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.78,
-      "fx": {
-       "slide": 0.6,
-       "accent": 1
-      }
-     },
-     {
-      "note": "E2",
-      "vel": 0.82
-     },
-     {
-      "note": "E2",
-      "vel": 0.94
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.88
-     },
-     {
-      "note": "OFF"
-     }
-    ]
-   },
-   "acid_16": {
-    "steps": [
-     {
-      "fx": {
-       "cutoff": 0.425
-      }
-     },
-     {
-      "note": "C#4",
-      "vel": 0.76
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.73
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     {
-      "note": "E2",
-      "vel": 0.92,
-      "fx": {
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.87,
-      "fx": {
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.78,
-      "fx": {
-       "slide": 0.6,
-       "accent": 1
-      }
-     },
-     {
-      "note": "E2",
-      "vel": 0.82
-     },
-     {
-      "note": "E2",
-      "vel": 0.94
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.88
-     },
-     {
-      "note": "OFF"
-     }
-    ]
-   },
-   "acid_17": {
-    "steps": [
-     {
-      "fx": {
-       "cutoff": 0.37
-      }
-     },
-     {
-      "note": "C#4",
-      "vel": 0.76
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.73
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     {
-      "note": "E2",
-      "vel": 0.92,
-      "fx": {
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.87,
-      "fx": {
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.78,
-      "fx": {
-       "slide": 0.6,
-       "accent": 1
-      }
-     },
-     {
-      "note": "E2",
-      "vel": 0.82
-     },
-     {
-      "note": "E2",
-      "vel": 0.94
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.88
-     },
-     {
-      "note": "OFF"
-     }
-    ]
-   },
-   "hats_13": {
-    "steps": [
-     null,
-     null,
-     null,
-     {
-      "note": "C3",
-      "vel": 0.76
-     },
-     null,
-     null,
-     null,
-     {
-      "note": "C3",
-      "vel": 0.44
-     },
-     null,
-     {
-      "note": "C3",
-      "vel": 0.51
-     },
-     null,
-     {
-      "note": "C3",
-      "vel": 0.44
-     },
-     {
-      "note": "C3",
-      "vel": 0.7,
-      "fx": {
-       "retrig": 3
-      }
-     },
-     {
-      "note": "C3",
-      "vel": 0.7,
-      "fx": {
-       "retrig": 3
-      }
-     },
-     {
-      "note": "C3",
-      "vel": 0.68,
-      "fx": {
-       "retrig": 3
-      }
-     },
-     {
-      "note": "C3",
-      "vel": 0.41,
-      "fx": {
-       "retrig": 3
-      }
-     }
-    ]
-   },
-   "acid_18": {
-    "steps": [
-     {
-      "fx": {
-       "cutoff": 0.523
-      }
-     },
-     {
-      "note": "C#4",
-      "vel": 0.76
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.73
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     {
-      "note": "E2",
-      "vel": 0.92,
-      "fx": {
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.87,
-      "fx": {
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.78,
-      "fx": {
-       "slide": 0.6,
-       "accent": 1
-      }
-     },
-     {
-      "note": "E2",
-      "vel": 0.82
-     },
-     {
-      "note": "E2",
-      "vel": 0.94
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.88
-     },
-     {
-      "note": "OFF"
-     }
-    ]
-   },
-   "acid_19": {
-    "steps": [
-     null,
-     {
-      "note": "C#4",
-      "vel": 0.76
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.73
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     {
-      "note": "E2",
-      "vel": 0.92,
-      "fx": {
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.87,
-      "fx": {
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.78,
-      "fx": {
-       "slide": 0.6,
-       "accent": 1
-      }
-     },
-     {
-      "note": "E2",
-      "vel": 0.82
-     },
-     {
-      "note": "E2",
-      "vel": 0.94
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.88
-     },
-     {
-      "note": "OFF"
-     }
-    ]
-   },
-   "acid_20": {
-    "steps": [
-     {
-      "fx": {
-       "cutoff": 0.474
-      }
-     },
-     {
-      "note": "C#4",
-      "vel": 0.76
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.73
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     {
-      "note": "E2",
-      "vel": 0.92,
-      "fx": {
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.87,
-      "fx": {
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.78,
-      "fx": {
-       "slide": 0.6,
-       "accent": 1
-      }
-     },
-     {
-      "note": "E2",
-      "vel": 0.82
-     },
-     {
-      "note": "E2",
-      "vel": 0.94
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.88
-     },
-     {
-      "note": "OFF"
-     }
-    ]
-   },
-   "acid_21": {
-    "steps": [
-     {
-      "note": "A2",
-      "vel": 0.78,
-      "fx": {
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     {
-      "note": "E2",
-      "vel": 1
-     },
-     {
-      "note": "E3",
-      "vel": 0.87,
-      "fx": {
-       "slide": 0.6
-      }
-     },
-     {
-      "note": "E3",
-      "vel": 0.92
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "A2",
-      "vel": 0.81
-     },
-     {
-      "note": "C#3",
-      "vel": 0.86
-     },
-     {
-      "note": "A2",
-      "vel": 0.77,
-      "fx": {
-       "slide": 0.6
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     null
-    ]
-   },
-   "acid_22": {
-    "steps": [
-     {
-      "fx": {
-       "cutoff": 0.426
-      }
-     },
-     {
-      "note": "C#4",
-      "vel": 0.76
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.73
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     {
-      "note": "E2",
-      "vel": 0.92,
-      "fx": {
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.87,
-      "fx": {
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.78,
-      "fx": {
-       "slide": 0.6,
-       "accent": 1
-      }
-     },
-     {
-      "note": "E2",
-      "vel": 0.82
-     },
-     {
-      "note": "E2",
-      "vel": 0.94
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.88
-     },
-     {
-      "note": "OFF"
-     }
-    ]
-   },
-   "acid_23": {
-    "steps": [
-     {
-      "fx": {
-       "cutoff": 0.378
-      }
-     },
-     {
-      "note": "C#4",
-      "vel": 0.76
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.73
-     },
-     {
-      "note": "OFF"
-     },
-     null,
-     {
-      "note": "E2",
-      "vel": 0.92,
-      "fx": {
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.87,
-      "fx": {
-       "accent": 1
-      }
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.78,
-      "fx": {
-       "slide": 0.6,
-       "accent": 1
-      }
-     },
-     {
-      "note": "E2",
-      "vel": 0.82
-     },
-     {
-      "note": "E2",
-      "vel": 0.94
-     },
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "C#4",
-      "vel": 0.88
-     },
-     {
-      "note": "OFF"
-     }
-    ]
-   },
-   "pad_41": {
-    "steps": [
-     {
-      "note": "A3",
-      "vel": 0.77
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_42": {
-    "steps": [
-     {
-      "note": "C#4",
-      "vel": 0.67
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_43": {
-    "steps": [
-     {
-      "note": "E4",
-      "vel": 0.75
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_44": {
-    "steps": [
-     {
-      "note": "A3",
-      "vel": 0.79
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_45": {
-    "steps": [
-     {
-      "note": "E4",
-      "vel": 0.77
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_46": {
-    "steps": [
-     {
-      "note": "A3",
-      "vel": 0.64
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_47": {
-    "steps": [
-     {
-      "note": "C#4",
-      "vel": 0.74
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_48": {
-    "steps": [
-     {
-      "note": "A3",
-      "vel": 0.69
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_49": {
-    "steps": [
-     {
-      "note": "E4",
-      "vel": 0.74
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_50": {
-    "steps": [
-     {
-      "note": "A3",
-      "vel": 0.73
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_51": {
-    "steps": [
-     {
-      "note": "C#4",
-      "vel": 0.71
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_52": {
-    "steps": [
-     {
-      "note": "A3",
-      "vel": 0.76
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_53": {
-    "steps": [
-     {
-      "note": "C#4",
-      "vel": 0.63
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_54": {
-    "steps": [
-     {
-      "note": "E4",
-      "vel": 0.7
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_55": {
-    "steps": [
-     {
-      "note": "A3",
-      "vel": 0.66
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_56": {
-    "steps": [
-     {
-      "note": "E4",
-      "vel": 0.62
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_57": {
-    "steps": [
-     {
-      "note": "A3",
-      "vel": 0.8
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_58": {
-    "steps": [
-     {
-      "note": "C#4",
-      "vel": 0.77
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_59": {
-    "steps": [
-     {
-      "note": "E4",
-      "vel": 0.73
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_60": {
-    "steps": [
-     {
-      "note": "D4",
-      "vel": 0.68
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_61": {
-    "steps": [
-     {
-      "note": "F#4",
-      "vel": 0.7
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_62": {
-    "steps": [
-     {
-      "note": "A4",
-      "vel": 0.64
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_63": {
-    "steps": [
-     {
-      "note": "D4",
-      "vel": 0.73
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_64": {
-    "steps": [
-     {
-      "note": "F#4",
-      "vel": 0.63
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_65": {
-    "steps": [
-     {
-      "note": "A4",
-      "vel": 0.66
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_66": {
-    "steps": [
-     {
-      "note": "D4",
-      "vel": 0.79
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_67": {
-    "steps": [
-     {
-      "note": "F#4",
-      "vel": 0.65
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_68": {
-    "steps": [
-     {
-      "note": "A4",
-      "vel": 0.77
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_69": {
-    "steps": [
-     {
-      "note": "D4",
-      "vel": 0.72
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_70": {
-    "steps": [
-     {
-      "note": "F#4",
-      "vel": 0.66
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_71": {
-    "steps": [
-     {
-      "note": "A4",
-      "vel": 0.72
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_72": {
-    "steps": [
-     {
-      "note": "F#4",
-      "vel": 0.75
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_73": {
-    "steps": [
-     {
-      "note": "D4",
       "vel": 0.61
      },
      null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_74": {
-    "steps": [
      {
-      "note": "F#4",
-      "vel": 0.69
+      "note": "E2",
+      "vel": 0.85
      },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_75": {
-    "steps": [
      {
-      "note": "A4",
-      "vel": 0.73
+      "note": "OFF"
      },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_76": {
-    "steps": [
      {
-      "note": "D4",
-      "vel": 0.75
+      "note": "E3",
+      "vel": 0.9,
+      "fx": {
+       "accent": 1
+      }
      },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_77": {
-    "steps": [
      {
-      "note": "A4",
-      "vel": 0.7
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_78": {
-    "steps": [
-     {
-      "note": "D4",
-      "vel": 0.78
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_79": {
-    "steps": [
-     {
-      "note": "F#4",
-      "vel": 0.78
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_80": {
-    "steps": [
-     {
-      "note": "A4",
-      "vel": 0.71
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "hats_14": {
-    "steps": [
-     null,
-     null,
-     null,
-     {
-      "note": "C3",
+      "note": "E3",
       "vel": 0.76
      },
+     {
+      "note": "E2",
+      "vel": 0.92,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.8,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.83,
+      "fx": {
+       "slide": 0.6
+      }
+     }
+    ]
+   },
+   "acid_26": {
+    "steps": [
+     null,
+     {
+      "note": "E2",
+      "vel": 0.98
+     },
+     {
+      "note": "E2",
+      "vel": 0.91
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "E3",
+      "vel": 0.64,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.84
+     },
+     {
+      "note": "E3",
+      "vel": 0.97
+     },
+     {
+      "note": "E3",
+      "vel": 0.82
+     },
+     {
+      "note": "E3",
+      "vel": 0.74,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.8,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.72
+     },
+     {
+      "note": "E3",
+      "vel": 0.98
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A3",
+      "vel": 0.91,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     null
+    ]
+   },
+   "acid_27": {
+    "steps": [
+     {
+      "note": "E2",
+      "vel": 0.93,
+      "fx": {
+       "cutoff": 0.462
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A2",
+      "vel": 0.74
+     },
+     {
+      "note": "C#4",
+      "vel": 0.89,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "A3",
+      "vel": 0.77
+     },
+     {
+      "note": "A2",
+      "vel": 0.96,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "E3",
+      "vel": 0.61
+     },
+     null,
+     {
+      "note": "E2",
+      "vel": 0.85
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "E3",
+      "vel": 0.9,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.76
+     },
+     {
+      "note": "E2",
+      "vel": 0.92,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.8,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.83,
+      "fx": {
+       "slide": 0.6
+      }
+     }
+    ]
+   },
+   "acid_28": {
+    "steps": [
+     {
+      "note": "E2",
+      "vel": 0.93,
+      "fx": {
+       "cutoff": 0.418
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A2",
+      "vel": 0.74
+     },
+     {
+      "note": "C#4",
+      "vel": 0.89,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "A3",
+      "vel": 0.77
+     },
+     {
+      "note": "A2",
+      "vel": 0.96,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "E3",
+      "vel": 0.61
+     },
+     null,
+     {
+      "note": "E2",
+      "vel": 0.85
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "E3",
+      "vel": 0.9,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.76
+     },
+     {
+      "note": "E2",
+      "vel": 0.92,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.8,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.83,
+      "fx": {
+       "slide": 0.6
+      }
+     }
+    ]
+   },
+   "acid_29": {
+    "steps": [
+     {
+      "note": "E2",
+      "vel": 0.93,
+      "fx": {
+       "cutoff": 0.375
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A2",
+      "vel": 0.74
+     },
+     {
+      "note": "C#4",
+      "vel": 0.89,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "A3",
+      "vel": 0.77
+     },
+     {
+      "note": "A2",
+      "vel": 0.96,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "E3",
+      "vel": 0.61
+     },
+     null,
+     {
+      "note": "E2",
+      "vel": 0.85
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "E3",
+      "vel": 0.9,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.76
+     },
+     {
+      "note": "E2",
+      "vel": 0.92,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.8,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.83,
+      "fx": {
+       "slide": 0.6
+      }
+     }
+    ]
+   },
+   "acid_30": {
+    "steps": [
+     {
+      "fx": {
+       "cutoff": 0.342
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.78,
+      "fx": {
+       "slide": 0.6,
+       "accent": 1
+      }
+     },
+     {
+      "note": "A2",
+      "vel": 0.86,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "A2",
+      "vel": 0.77,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A2",
+      "vel": 0.93,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.72
+     },
+     {
+      "note": "E3",
+      "vel": 0.79
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     {
+      "note": "E2",
+      "vel": 0.97,
+      "fx": {
+       "slide": 0.6,
+       "accent": 1
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A2",
+      "vel": 0.82
+     },
+     {
+      "note": "A3",
+      "vel": 0.94,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.79
+     },
+     {
+      "note": "OFF"
+     }
+    ]
+   },
+   "hats_17": {
+    "steps": [
      null,
      null,
      null,
@@ -5882,37 +5496,731 @@
       "vel": 0.44
      },
      null,
-     {
-      "note": "C3",
-      "vel": 0.51
-     },
+     null,
+     null,
+     null,
+     null,
      null,
      {
       "note": "C3",
-      "vel": 0.44
+      "vel": 0.47
      },
      null,
      {
       "note": "C3",
       "vel": 0.7,
       "fx": {
-       "retrig": 2
+       "retrig": 4
       }
      },
+     null,
+     null,
      {
       "note": "C3",
-      "vel": 0.68,
+      "vel": 0.35,
       "fx": {
-       "retrig": 2
-      }
-     },
-     {
-      "note": "C3",
-      "vel": 0.41,
-      "fx": {
-       "retrig": 2
+       "retrig": 4
       }
      }
+    ]
+   },
+   "perc_6": {
+    "steps": [
+     null,
+     {
+      "note": "C#5",
+      "fx": {
+       "accent": 1
+      }
+     },
+     null,
+     null,
+     null,
+     {
+      "note": "C#5",
+      "vel": 0.66
+     },
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "C#5",
+      "vel": 0.79
+     },
+     null,
+     null,
+     null,
+     {
+      "note": "C#5",
+      "vel": 0.85
+     },
+     null
+    ]
+   },
+   "perc_7": {
+    "steps": [
+     null,
+     null,
+     {
+      "note": "C#5",
+      "fx": {
+       "accent": 1
+      }
+     },
+     null,
+     null,
+     null,
+     {
+      "note": "C#5",
+      "vel": 0.8
+     },
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "C#5",
+      "vel": 0.7
+     },
+     null,
+     null,
+     null,
+     {
+      "note": "C#5",
+      "vel": 0.88
+     }
+    ]
+   },
+   "acid_31": {
+    "steps": [
+     {
+      "note": "E2",
+      "vel": 0.93,
+      "fx": {
+       "cutoff": 0.549
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A2",
+      "vel": 0.74
+     },
+     {
+      "note": "C#4",
+      "vel": 0.89,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "A3",
+      "vel": 0.77
+     },
+     {
+      "note": "A2",
+      "vel": 0.96,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "E3",
+      "vel": 0.61
+     },
+     null,
+     {
+      "note": "E2",
+      "vel": 0.85
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "E3",
+      "vel": 0.9,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.76
+     },
+     {
+      "note": "E2",
+      "vel": 0.92,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.8,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.83,
+      "fx": {
+       "slide": 0.6
+      }
+     }
+    ]
+   },
+   "acid_32": {
+    "steps": [
+     {
+      "note": "E2",
+      "vel": 0.95
+     },
+     {
+      "note": "E2",
+      "vel": 0.9,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "C#5",
+      "vel": 0.82
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     {
+      "note": "C#4",
+      "vel": 0.88,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "C#3",
+      "vel": 0.82
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A3",
+      "vel": 0.74,
+      "fx": {
+       "accent": 1
+      }
+     },
+     null,
+     {
+      "note": "C#3",
+      "vel": 0.94,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "A3",
+      "vel": 0.92,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "A4",
+      "vel": 0.96,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "C#4",
+      "vel": 0.96
+     },
+     {
+      "note": "C#4",
+      "vel": 0.81
+     }
+    ]
+   },
+   "acid_33": {
+    "steps": [
+     {
+      "note": "E2",
+      "vel": 0.93
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A2",
+      "vel": 0.74
+     },
+     {
+      "note": "C#4",
+      "vel": 0.89,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "A3",
+      "vel": 0.77
+     },
+     {
+      "note": "A2",
+      "vel": 0.96,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "E3",
+      "vel": 0.61
+     },
+     null,
+     {
+      "note": "E2",
+      "vel": 0.85
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "E3",
+      "vel": 0.9,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.76
+     },
+     {
+      "note": "E2",
+      "vel": 0.92,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.8,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.83,
+      "fx": {
+       "slide": 0.6
+      }
+     }
+    ]
+   },
+   "acid_34": {
+    "steps": [
+     {
+      "note": "E2",
+      "vel": 0.93,
+      "fx": {
+       "cutoff": 0.478
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A2",
+      "vel": 0.74
+     },
+     {
+      "note": "C#4",
+      "vel": 0.89,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "A3",
+      "vel": 0.77
+     },
+     {
+      "note": "A2",
+      "vel": 0.96,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "E3",
+      "vel": 0.61
+     },
+     null,
+     {
+      "note": "E2",
+      "vel": 0.85
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "E3",
+      "vel": 0.9,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.76
+     },
+     {
+      "note": "E2",
+      "vel": 0.92,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.8,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.83,
+      "fx": {
+       "slide": 0.6
+      }
+     }
+    ]
+   },
+   "acid_35": {
+    "steps": [
+     {
+      "note": "E2",
+      "vel": 0.93,
+      "fx": {
+       "cutoff": 0.406
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A2",
+      "vel": 0.74
+     },
+     {
+      "note": "C#4",
+      "vel": 0.89,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "A3",
+      "vel": 0.77
+     },
+     {
+      "note": "A2",
+      "vel": 0.96,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "E3",
+      "vel": 0.61
+     },
+     null,
+     {
+      "note": "E2",
+      "vel": 0.85
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "E3",
+      "vel": 0.9,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.76
+     },
+     {
+      "note": "E2",
+      "vel": 0.92,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.8,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.83,
+      "fx": {
+       "slide": 0.6
+      }
+     }
+    ]
+   },
+   "acid_36": {
+    "steps": [
+     {
+      "note": "E2",
+      "vel": 0.93,
+      "fx": {
+       "cutoff": 0.335
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A2",
+      "vel": 0.74
+     },
+     {
+      "note": "C#4",
+      "vel": 0.89,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "A3",
+      "vel": 0.77
+     },
+     {
+      "note": "A2",
+      "vel": 0.96,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "E3",
+      "vel": 0.61
+     },
+     null,
+     {
+      "note": "E2",
+      "vel": 0.85
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "E3",
+      "vel": 0.9,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.76
+     },
+     {
+      "note": "E2",
+      "vel": 0.92,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.8,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.83,
+      "fx": {
+       "slide": 0.6
+      }
+     }
+    ]
+   },
+   "acid_37": {
+    "steps": [
+     {
+      "fx": {
+       "cutoff": 0.273
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.78,
+      "fx": {
+       "slide": 0.6,
+       "accent": 1
+      }
+     },
+     {
+      "note": "A2",
+      "vel": 0.86,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "A2",
+      "vel": 0.77,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A2",
+      "vel": 0.93,
+      "fx": {
+       "accent": 1
+      }
+     },
+     {
+      "note": "E2",
+      "vel": 0.72
+     },
+     {
+      "note": "E3",
+      "vel": 0.79
+     },
+     {
+      "note": "OFF"
+     },
+     null,
+     {
+      "note": "E2",
+      "vel": 0.97,
+      "fx": {
+       "slide": 0.6,
+       "accent": 1
+      }
+     },
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "A2",
+      "vel": 0.82
+     },
+     {
+      "note": "A3",
+      "vel": 0.94,
+      "fx": {
+       "slide": 0.6
+      }
+     },
+     {
+      "note": "E3",
+      "vel": 0.79
+     },
+     {
+      "note": "OFF"
+     }
+    ]
+   },
+   "perc_8": {
+    "steps": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "C#5",
+      "fx": {
+       "accent": 1
+      }
+     },
+     null,
+     null,
+     {
+      "note": "C#5",
+      "vel": 0.75
+     },
+     null,
+     null,
+     {
+      "note": "C#5",
+      "vel": 0.52
+     },
+     null,
+     null,
+     null,
+     {
+      "note": "C#5",
+      "vel": 0.57
+     }
+    ]
+   },
+   "perc_9": {
+    "steps": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "C#5",
+      "vel": 0.73
+     },
+     null,
+     null,
+     null,
+     {
+      "note": "C#5",
+      "vel": 0.78
+     },
+     null,
+     null,
+     null
     ]
    }
   },
@@ -5954,41 +6262,44 @@
       "phrase": "pad_1"
      },
      {
+      "phrase": "pad_2"
+     },
+     {
+      "phrase": "pad_3"
+     },
+     {
       "phrase": "pad_4"
      },
      {
       "phrase": "pad_1"
      },
      {
-      "phrase": "pad_9"
-     },
-     {
-      "phrase": "pad_1"
+      "phrase": "pad_5"
      },
      {
       "phrase": "pad_4"
      },
      {
-      "phrase": "pad_15"
+      "phrase": "pad_6"
      },
      {
-      "phrase": "pad_15"
-     },
-     {
-      "phrase": "pad_20"
+      "phrase": "pad_7"
      }
     ]
    },
    "pad_c2": {
     "rows": [
      {
-      "phrase": "pad_2"
+      "phrase": "pad_8"
      },
      {
-      "phrase": "pad_5"
+      "phrase": "pad_9"
      },
      {
-      "phrase": "pad_7"
+      "phrase": "pad_8"
+     },
+     {
+      "phrase": "pad_9"
      },
      {
       "phrase": "pad_10"
@@ -5997,44 +6308,41 @@
       "phrase": "pad_11"
      },
      {
+      "phrase": "pad_12"
+     },
+     {
       "phrase": "pad_13"
      },
      {
-      "phrase": "pad_16"
-     },
-     {
-      "phrase": "pad_18"
-     },
-     {
-      "phrase": "pad_21"
+      "phrase": "pad_14"
      }
     ]
    },
    "pad_c3": {
     "rows": [
      {
-      "phrase": "pad_3"
+      "phrase": "pad_15"
      },
      {
-      "phrase": "pad_6"
-     },
-     {
-      "phrase": "pad_8"
-     },
-     {
-      "phrase": "pad_6"
-     },
-     {
-      "phrase": "pad_12"
-     },
-     {
-      "phrase": "pad_14"
+      "phrase": "pad_16"
      },
      {
       "phrase": "pad_17"
      },
      {
+      "phrase": "pad_18"
+     },
+     {
       "phrase": "pad_19"
+     },
+     {
+      "phrase": "pad_17"
+     },
+     {
+      "phrase": "pad_20"
+     },
+     {
+      "phrase": "pad_21"
      },
      {
       "phrase": "pad_22"
@@ -6117,31 +6425,31 @@
       "phrase": "hats_3"
      },
      {
-      "phrase": "hats_4"
-     },
-     {
-      "phrase": "hats_1"
-     },
-     {
-      "phrase": "hats_2"
-     },
-     {
-      "phrase": "hats_3"
-     },
-     {
-      "phrase": "hats_4"
-     },
-     {
-      "phrase": "hats_1"
-     },
-     {
-      "phrase": "hats_2"
-     },
-     {
-      "phrase": "hats_3"
-     },
-     {
       "phrase": "hats_5"
+     },
+     {
+      "phrase": "hats_1"
+     },
+     {
+      "phrase": "hats_2"
+     },
+     {
+      "phrase": "hats_3"
+     },
+     {
+      "phrase": "hats_6"
+     },
+     {
+      "phrase": "hats_1"
+     },
+     {
+      "phrase": "hats_2"
+     },
+     {
+      "phrase": "hats_3"
+     },
+     {
+      "phrase": "hats_7"
      }
     ]
    },
@@ -6181,7 +6489,7 @@
       "phrase": "bass_3"
      },
      {
-      "phrase": "bass_5"
+      "phrase": "bass_4"
      },
      {
       "phrase": "bass_1"
@@ -6193,7 +6501,7 @@
       "phrase": "bass_3"
      },
      {
-      "phrase": "bass_4"
+      "phrase": "bass_5"
      }
     ]
    },
@@ -6203,62 +6511,65 @@
       "phrase": "pad_1"
      },
      {
+      "phrase": "pad_2"
+     },
+     {
+      "phrase": "pad_3"
+     },
+     {
       "phrase": "pad_4"
      },
      {
       "phrase": "pad_1"
      },
      {
-      "phrase": "pad_9"
-     },
-     {
-      "phrase": "pad_1"
+      "phrase": "pad_5"
      },
      {
       "phrase": "pad_4"
      },
      {
-      "phrase": "pad_15"
+      "phrase": "pad_6"
      },
      {
-      "phrase": "pad_15"
-     },
-     {
-      "phrase": "pad_20"
+      "phrase": "pad_7"
      },
      {
       "phrase": "pad_23"
      },
      {
+      "phrase": "pad_24"
+     },
+     {
+      "phrase": "pad_25"
+     },
+     {
       "phrase": "pad_26"
      },
      {
-      "phrase": "pad_29"
+      "phrase": "pad_23"
      },
      {
-      "phrase": "pad_31"
+      "phrase": "pad_27"
      },
      {
-      "phrase": "pad_34"
-     },
-     {
-      "phrase": "pad_20"
-     },
-     {
-      "phrase": "pad_38"
+      "phrase": "pad_27"
      }
     ]
    },
    "pad_c5": {
     "rows": [
      {
-      "phrase": "pad_2"
+      "phrase": "pad_8"
      },
      {
-      "phrase": "pad_5"
+      "phrase": "pad_9"
      },
      {
-      "phrase": "pad_7"
+      "phrase": "pad_8"
+     },
+     {
+      "phrase": "pad_9"
      },
      {
       "phrase": "pad_10"
@@ -6267,89 +6578,138 @@
       "phrase": "pad_11"
      },
      {
+      "phrase": "pad_12"
+     },
+     {
       "phrase": "pad_13"
      },
      {
-      "phrase": "pad_16"
+      "phrase": "pad_14"
      },
      {
-      "phrase": "pad_18"
+      "phrase": "pad_28"
      },
      {
-      "phrase": "pad_21"
+      "phrase": "pad_14"
      },
      {
-      "phrase": "pad_24"
+      "phrase": "pad_14"
      },
      {
-      "phrase": "pad_27"
+      "phrase": "pad_29"
      },
      {
-      "phrase": "pad_24"
+      "phrase": "pad_30"
+     },
+     {
+      "phrase": "pad_31"
      },
      {
       "phrase": "pad_32"
-     },
-     {
-      "phrase": "pad_35"
-     },
-     {
-      "phrase": "pad_37"
-     },
-     {
-      "phrase": "pad_39"
      }
     ]
    },
    "pad_c6": {
     "rows": [
      {
-      "phrase": "pad_3"
+      "phrase": "pad_15"
      },
      {
-      "phrase": "pad_6"
-     },
-     {
-      "phrase": "pad_8"
-     },
-     {
-      "phrase": "pad_6"
-     },
-     {
-      "phrase": "pad_12"
-     },
-     {
-      "phrase": "pad_14"
+      "phrase": "pad_16"
      },
      {
       "phrase": "pad_17"
      },
      {
+      "phrase": "pad_18"
+     },
+     {
       "phrase": "pad_19"
+     },
+     {
+      "phrase": "pad_17"
+     },
+     {
+      "phrase": "pad_20"
+     },
+     {
+      "phrase": "pad_21"
      },
      {
       "phrase": "pad_22"
      },
      {
-      "phrase": "pad_25"
-     },
-     {
-      "phrase": "pad_28"
-     },
-     {
-      "phrase": "pad_30"
+      "phrase": "pad_22"
      },
      {
       "phrase": "pad_33"
      },
      {
+      "phrase": "pad_34"
+     },
+     {
+      "phrase": "pad_35"
+     },
+     {
       "phrase": "pad_36"
      },
      {
-      "phrase": "pad_30"
+      "phrase": "pad_37"
      },
      {
-      "phrase": "pad_40"
+      "phrase": "pad_38"
+     }
+    ]
+   },
+   "kick_c3": {
+    "rows": [
+     {
+      "phrase": "kick_1"
+     },
+     {
+      "phrase": "kick_1"
+     },
+     {
+      "phrase": "kick_1"
+     },
+     {
+      "phrase": "kick_1"
+     },
+     {
+      "phrase": "kick_1"
+     },
+     {
+      "phrase": "kick_1"
+     },
+     {
+      "phrase": "kick_1"
+     },
+     {
+      "phrase": "kick_1"
+     },
+     {
+      "phrase": "kick_1"
+     },
+     {
+      "phrase": "kick_1"
+     },
+     {
+      "phrase": "kick_1"
+     },
+     {
+      "phrase": "kick_1"
+     },
+     {
+      "phrase": "kick_1"
+     },
+     {
+      "phrase": "kick_1"
+     },
+     {
+      "phrase": "kick_1"
+     },
+     {
+      "phrase": "kick_2"
      }
     ]
    },
@@ -6365,18 +6725,6 @@
       "phrase": "hats_3"
      },
      {
-      "phrase": "hats_6"
-     },
-     {
-      "phrase": "hats_1"
-     },
-     {
-      "phrase": "hats_2"
-     },
-     {
-      "phrase": "hats_3"
-     },
-     {
       "phrase": "hats_4"
      },
      {
@@ -6402,6 +6750,18 @@
      },
      {
       "phrase": "hats_4"
+     },
+     {
+      "phrase": "hats_1"
+     },
+     {
+      "phrase": "hats_2"
+     },
+     {
+      "phrase": "hats_3"
+     },
+     {
+      "phrase": "hats_8"
      }
     ]
    },
@@ -6457,107 +6817,55 @@
      }
     ]
    },
-   "perc_c1": {
-    "rows": [
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_2"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     }
-    ]
-   },
    "bass_c2": {
     "rows": [
      {
-      "phrase": "bass_6"
+      "phrase": "bass_1"
      },
      {
-      "phrase": "bass_7"
+      "phrase": "bass_2"
      },
      {
-      "phrase": "bass_8"
+      "phrase": "bass_3"
      },
      {
-      "phrase": "bass_9"
+      "phrase": "bass_5"
      },
      {
-      "phrase": "bass_6"
+      "phrase": "bass_1"
      },
      {
-      "phrase": "bass_7"
+      "phrase": "bass_2"
      },
      {
-      "phrase": "bass_8"
+      "phrase": "bass_3"
      },
      {
-      "phrase": "bass_10"
+      "phrase": "bass_5"
      },
      {
-      "phrase": "bass_6"
+      "phrase": "bass_1"
      },
      {
-      "phrase": "bass_7"
+      "phrase": "bass_2"
      },
      {
-      "phrase": "bass_8"
+      "phrase": "bass_3"
      },
      {
-      "phrase": "bass_10"
+      "phrase": "bass_5"
      },
      {
-      "phrase": "bass_6"
+      "phrase": "bass_1"
      },
      {
-      "phrase": "bass_7"
+      "phrase": "bass_2"
      },
      {
-      "phrase": "bass_8"
+      "phrase": "bass_3"
      },
      {
-      "phrase": "bass_10"
+      "phrase": "bass_5"
      }
     ]
    },
@@ -6597,7 +6905,7 @@
       "phrase": "stab_1"
      },
      {
-      "phrase": "stab_1"
+      "phrase": "stab_2"
      },
      {
       "phrase": "stab_1"
@@ -6619,53 +6927,53 @@
       "phrase": "riser_1"
      },
      {
-      "phrase": "riser_2"
+      "phrase": "kick_2"
+     },
+     {
+      "phrase": "kick_2"
+     },
+     {
+      "phrase": "kick_2"
      },
      {
       "phrase": "riser_2"
      },
      {
-      "phrase": "riser_2"
+      "phrase": "kick_2"
+     },
+     {
+      "phrase": "kick_2"
+     },
+     {
+      "phrase": "kick_2"
      },
      {
       "phrase": "riser_3"
      },
      {
-      "phrase": "riser_2"
+      "phrase": "kick_2"
      },
      {
-      "phrase": "riser_2"
+      "phrase": "kick_2"
      },
      {
-      "phrase": "riser_2"
+      "phrase": "kick_2"
      },
      {
       "phrase": "riser_4"
      },
      {
-      "phrase": "riser_2"
+      "phrase": "kick_2"
      },
      {
-      "phrase": "riser_2"
-     },
-     {
-      "phrase": "riser_2"
+      "phrase": "kick_2"
      },
      {
       "phrase": "riser_5"
-     },
-     {
-      "phrase": "riser_2"
-     },
-     {
-      "phrase": "riser_2"
-     },
-     {
-      "phrase": "riser_2"
      }
     ]
    },
-   "kick_c3": {
+   "kick_c4": {
     "rows": [
      {
       "phrase": "kick_1"
@@ -6689,7 +6997,7 @@
       "phrase": "kick_1"
      },
      {
-      "phrase": "riser_2"
+      "phrase": "kick_1"
      }
     ]
    },
@@ -6717,7 +7025,7 @@
       "phrase": "hats_3"
      },
      {
-      "phrase": "hats_7"
+      "phrase": "hats_4"
      }
     ]
    },
@@ -6777,87 +7085,59 @@
      }
     ]
    },
-   "perc_c2": {
-    "rows": [
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_2"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_2"
-     }
-    ]
-   },
    "bass_c3": {
     "rows": [
      {
-      "phrase": "bass_6"
+      "phrase": "bass_1"
      },
      {
-      "phrase": "bass_7"
+      "phrase": "bass_2"
      },
      {
-      "phrase": "bass_8"
+      "phrase": "bass_3"
      },
      {
-      "phrase": "bass_9"
+      "phrase": "bass_4"
      },
      {
-      "phrase": "bass_6"
+      "phrase": "bass_1"
      },
      {
-      "phrase": "bass_7"
+      "phrase": "bass_2"
      },
      {
-      "phrase": "bass_8"
+      "phrase": "bass_3"
      },
      {
-      "phrase": "bass_9"
+      "phrase": "bass_5"
      }
     ]
    },
    "stab_c2": {
     "rows": [
      {
-      "phrase": "stab_2"
+      "phrase": "stab_1"
+     },
+     {
+      "phrase": "stab_1"
+     },
+     {
+      "phrase": "stab_1"
      },
      {
       "phrase": "stab_2"
      },
      {
-      "phrase": "stab_2"
+      "phrase": "stab_1"
      },
      {
-      "phrase": "stab_3"
+      "phrase": "stab_1"
      },
      {
-      "phrase": "stab_2"
+      "phrase": "stab_1"
      },
      {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_3"
+      "phrase": "stab_1"
      }
     ]
    },
@@ -6867,38 +7147,41 @@
       "phrase": "pad_1"
      },
      {
+      "phrase": "pad_2"
+     },
+     {
+      "phrase": "pad_3"
+     },
+     {
       "phrase": "pad_4"
      },
      {
       "phrase": "pad_1"
      },
      {
-      "phrase": "pad_9"
-     },
-     {
-      "phrase": "pad_1"
+      "phrase": "pad_5"
      },
      {
       "phrase": "pad_4"
      },
      {
-      "phrase": "pad_15"
-     },
-     {
-      "phrase": "pad_15"
+      "phrase": "pad_6"
      }
     ]
    },
    "pad_c8": {
     "rows": [
      {
-      "phrase": "pad_2"
+      "phrase": "pad_8"
      },
      {
-      "phrase": "pad_5"
+      "phrase": "pad_9"
      },
      {
-      "phrase": "pad_7"
+      "phrase": "pad_8"
+     },
+     {
+      "phrase": "pad_9"
      },
      {
       "phrase": "pad_10"
@@ -6907,41 +7190,38 @@
       "phrase": "pad_11"
      },
      {
+      "phrase": "pad_12"
+     },
+     {
       "phrase": "pad_13"
-     },
-     {
-      "phrase": "pad_16"
-     },
-     {
-      "phrase": "pad_18"
      }
     ]
    },
    "pad_c9": {
     "rows": [
      {
-      "phrase": "pad_3"
+      "phrase": "pad_15"
      },
      {
-      "phrase": "pad_6"
-     },
-     {
-      "phrase": "pad_8"
-     },
-     {
-      "phrase": "pad_6"
-     },
-     {
-      "phrase": "pad_12"
-     },
-     {
-      "phrase": "pad_14"
+      "phrase": "pad_16"
      },
      {
       "phrase": "pad_17"
      },
      {
+      "phrase": "pad_18"
+     },
+     {
       "phrase": "pad_19"
+     },
+     {
+      "phrase": "pad_17"
+     },
+     {
+      "phrase": "pad_20"
+     },
+     {
+      "phrase": "pad_21"
      }
     ]
    },
@@ -6969,7 +7249,7 @@
       "phrase": "hats_3"
      },
      {
-      "phrase": "hats_7"
+      "phrase": "hats_4"
      },
      {
       "phrase": "hats_1"
@@ -6981,7 +7261,7 @@
       "phrase": "hats_3"
      },
      {
-      "phrase": "hats_6"
+      "phrase": "hats_4"
      },
      {
       "phrase": "hats_1"
@@ -6993,7 +7273,7 @@
       "phrase": "hats_3"
      },
      {
-      "phrase": "hats_8"
+      "phrase": "hats_9"
      }
     ]
    },
@@ -7045,191 +7325,59 @@
       "phrase": "clap_1"
      },
      {
-      "phrase": "clap_1"
-     }
-    ]
-   },
-   "perc_c3": {
-    "rows": [
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_2"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
+      "phrase": "clap_2"
      }
     ]
    },
    "bass_c4": {
     "rows": [
      {
-      "phrase": "bass_6"
+      "phrase": "bass_1"
      },
      {
-      "phrase": "bass_7"
+      "phrase": "bass_2"
      },
      {
-      "phrase": "bass_8"
+      "phrase": "bass_3"
      },
      {
-      "phrase": "bass_10"
+      "phrase": "bass_5"
      },
      {
-      "phrase": "bass_6"
+      "phrase": "bass_1"
      },
      {
-      "phrase": "bass_7"
+      "phrase": "bass_2"
      },
      {
-      "phrase": "bass_8"
+      "phrase": "bass_3"
      },
      {
-      "phrase": "bass_10"
+      "phrase": "bass_5"
      },
      {
-      "phrase": "bass_6"
+      "phrase": "bass_1"
      },
      {
-      "phrase": "bass_7"
+      "phrase": "bass_2"
      },
      {
-      "phrase": "bass_8"
+      "phrase": "bass_3"
      },
      {
-      "phrase": "bass_9"
+      "phrase": "bass_4"
      },
      {
-      "phrase": "bass_6"
+      "phrase": "bass_1"
      },
      {
-      "phrase": "bass_7"
+      "phrase": "bass_2"
      },
      {
-      "phrase": "bass_8"
+      "phrase": "bass_3"
      },
      {
-      "phrase": "bass_9"
-     }
-    ]
-   },
-   "stab_c3": {
-    "rows": [
-     {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_3"
-     },
-     {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_3"
-     }
-    ]
-   },
-   "kick_c4": {
-    "rows": [
-     {
-      "phrase": "kick_1"
-     },
-     {
-      "phrase": "kick_1"
-     },
-     {
-      "phrase": "kick_1"
-     },
-     {
-      "phrase": "kick_1"
-     },
-     {
-      "phrase": "kick_1"
-     },
-     {
-      "phrase": "kick_1"
-     },
-     {
-      "phrase": "kick_1"
-     },
-     {
-      "phrase": "kick_1"
+      "phrase": "bass_4"
      }
     ]
    },
@@ -7257,175 +7405,7 @@
       "phrase": "hats_3"
      },
      {
-      "phrase": "hats_9"
-     }
-    ]
-   },
-   "perc_c4": {
-    "rows": [
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_2"
-     }
-    ]
-   },
-   "bass_c5": {
-    "rows": [
-     {
-      "phrase": "bass_6"
-     },
-     {
-      "phrase": "bass_7"
-     },
-     {
-      "phrase": "bass_8"
-     },
-     {
-      "phrase": "bass_10"
-     },
-     {
-      "phrase": "bass_6"
-     },
-     {
-      "phrase": "bass_7"
-     },
-     {
-      "phrase": "bass_8"
-     },
-     {
-      "phrase": "bass_10"
-     }
-    ]
-   },
-   "hats_c6": {
-    "rows": [
-     {
-      "phrase": "hats_1"
-     },
-     {
-      "phrase": "hats_2"
-     },
-     {
-      "phrase": "hats_3"
-     },
-     {
-      "phrase": "hats_4"
-     },
-     {
-      "phrase": "hats_1"
-     },
-     {
-      "phrase": "hats_2"
-     },
-     {
-      "phrase": "hats_3"
-     },
-     {
-      "phrase": "hats_10"
-     }
-    ]
-   },
-   "perc_c5": {
-    "rows": [
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     }
-    ]
-   },
-   "hats_c7": {
-    "rows": [
-     {
-      "phrase": "hats_1"
-     },
-     {
-      "phrase": "hats_2"
-     },
-     {
-      "phrase": "hats_3"
-     },
-     {
-      "phrase": "hats_6"
-     },
-     {
-      "phrase": "hats_1"
-     },
-     {
-      "phrase": "hats_2"
-     },
-     {
-      "phrase": "hats_3"
-     },
-     {
-      "phrase": "hats_7"
-     }
-    ]
-   },
-   "clap_c3": {
-    "rows": [
-     {
-      "phrase": "clap_1"
-     },
-     {
-      "phrase": "clap_1"
-     },
-     {
-      "phrase": "clap_1"
-     },
-     {
-      "phrase": "clap_1"
-     },
-     {
-      "phrase": "clap_1"
-     },
-     {
-      "phrase": "clap_1"
-     },
-     {
-      "phrase": "clap_1"
-     },
-     {
-      "phrase": "clap_2"
+      "phrase": "hats_5"
      }
     ]
    },
@@ -7457,7 +7437,7 @@
      }
     ]
    },
-   "perc_c6": {
+   "perc_c1": {
     "rows": [
      {
       "phrase": "perc_1"
@@ -7485,87 +7465,339 @@
      }
     ]
    },
+   "bass_c5": {
+    "rows": [
+     {
+      "phrase": "bass_1"
+     },
+     {
+      "phrase": "bass_2"
+     },
+     {
+      "phrase": "bass_3"
+     },
+     {
+      "phrase": "bass_4"
+     },
+     {
+      "phrase": "bass_1"
+     },
+     {
+      "phrase": "bass_2"
+     },
+     {
+      "phrase": "bass_3"
+     },
+     {
+      "phrase": "bass_4"
+     }
+    ]
+   },
+   "hats_c6": {
+    "rows": [
+     {
+      "phrase": "hats_1"
+     },
+     {
+      "phrase": "hats_2"
+     },
+     {
+      "phrase": "hats_3"
+     },
+     {
+      "phrase": "hats_4"
+     },
+     {
+      "phrase": "hats_1"
+     },
+     {
+      "phrase": "hats_2"
+     },
+     {
+      "phrase": "hats_3"
+     },
+     {
+      "phrase": "hats_5"
+     }
+    ]
+   },
+   "perc_c2": {
+    "rows": [
+     {
+      "phrase": "perc_1"
+     },
+     {
+      "phrase": "perc_1"
+     },
+     {
+      "phrase": "perc_1"
+     },
+     {
+      "phrase": "perc_1"
+     },
+     {
+      "phrase": "perc_1"
+     },
+     {
+      "phrase": "perc_1"
+     },
+     {
+      "phrase": "perc_1"
+     },
+     {
+      "phrase": "perc_1"
+     }
+    ]
+   },
    "bass_c6": {
     "rows": [
      {
-      "phrase": "bass_6"
+      "phrase": "bass_1"
      },
      {
-      "phrase": "bass_7"
+      "phrase": "bass_2"
      },
      {
-      "phrase": "bass_8"
+      "phrase": "bass_3"
      },
      {
-      "phrase": "bass_9"
+      "phrase": "bass_5"
      },
      {
-      "phrase": "bass_6"
+      "phrase": "bass_1"
      },
      {
-      "phrase": "bass_7"
+      "phrase": "bass_2"
      },
      {
-      "phrase": "bass_8"
+      "phrase": "bass_3"
      },
      {
-      "phrase": "bass_10"
+      "phrase": "bass_4"
+     }
+    ]
+   },
+   "acid_c1": {
+    "rows": [
+     {
+      "phrase": "acid_1"
+     },
+     {
+      "phrase": "acid_2"
+     },
+     {
+      "phrase": "acid_3"
+     },
+     {
+      "phrase": "acid_4"
+     },
+     {
+      "phrase": "acid_5"
+     },
+     {
+      "phrase": "acid_2"
+     },
+     {
+      "phrase": "acid_6"
+     },
+     {
+      "phrase": "acid_7"
+     }
+    ]
+   },
+   "stab_c3": {
+    "rows": [
+     {
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_3"
+     }
+    ]
+   },
+   "kick_c5": {
+    "rows": [
+     {
+      "phrase": "kick_1"
+     },
+     {
+      "phrase": "kick_1"
+     },
+     {
+      "phrase": "kick_1"
+     },
+     {
+      "phrase": "kick_1"
+     },
+     {
+      "phrase": "kick_1"
+     },
+     {
+      "phrase": "kick_1"
+     },
+     {
+      "phrase": "kick_1"
+     },
+     {
+      "phrase": "kick_2"
+     }
+    ]
+   },
+   "hats_c7": {
+    "rows": [
+     {
+      "phrase": "hats_10"
+     },
+     {
+      "phrase": "hats_11"
+     },
+     {
+      "phrase": "hats_12"
+     },
+     {
+      "phrase": "hats_13"
+     },
+     {
+      "phrase": "hats_10"
+     },
+     {
+      "phrase": "hats_11"
+     },
+     {
+      "phrase": "hats_12"
+     },
+     {
+      "phrase": "hats_13"
+     }
+    ]
+   },
+   "perc_c3": {
+    "rows": [
+     {
+      "phrase": "perc_1"
+     },
+     {
+      "phrase": "perc_1"
+     },
+     {
+      "phrase": "perc_1"
+     },
+     {
+      "phrase": "perc_1"
+     },
+     {
+      "phrase": "perc_1"
+     },
+     {
+      "phrase": "perc_1"
+     },
+     {
+      "phrase": "perc_1"
+     },
+     {
+      "phrase": "perc_3"
+     }
+    ]
+   },
+   "acid_c2": {
+    "rows": [
+     {
+      "phrase": "acid_8"
+     },
+     {
+      "phrase": "acid_2"
+     },
+     {
+      "phrase": "acid_9"
+     },
+     {
+      "phrase": "acid_10"
+     },
+     {
+      "phrase": "acid_11"
+     },
+     {
+      "phrase": "acid_2"
+     },
+     {
+      "phrase": "acid_12"
+     },
+     {
+      "phrase": "acid_13"
      }
     ]
    },
    "hats_c8": {
     "rows": [
      {
-      "phrase": "hats_1"
+      "phrase": "hats_10"
      },
      {
-      "phrase": "hats_2"
+      "phrase": "hats_11"
      },
      {
-      "phrase": "hats_3"
+      "phrase": "hats_12"
      },
      {
-      "phrase": "hats_4"
+      "phrase": "hats_13"
      },
      {
-      "phrase": "hats_1"
+      "phrase": "hats_10"
      },
      {
-      "phrase": "hats_2"
+      "phrase": "hats_11"
      },
      {
-      "phrase": "hats_3"
+      "phrase": "hats_12"
      },
      {
-      "phrase": "hats_4"
+      "phrase": "hats_14"
      },
      {
-      "phrase": "hats_1"
+      "phrase": "hats_10"
      },
      {
-      "phrase": "hats_2"
+      "phrase": "hats_11"
      },
      {
-      "phrase": "hats_3"
+      "phrase": "hats_12"
      },
      {
-      "phrase": "hats_6"
+      "phrase": "hats_13"
      },
      {
-      "phrase": "hats_1"
+      "phrase": "hats_10"
      },
      {
-      "phrase": "hats_2"
+      "phrase": "hats_11"
      },
      {
-      "phrase": "hats_3"
+      "phrase": "hats_12"
      },
      {
-      "phrase": "hats_7"
+      "phrase": "hats_15"
      }
     ]
    },
-   "clap_c4": {
+   "clap_c3": {
     "rows": [
      {
       "phrase": "clap_1"
@@ -7669,7 +7901,7 @@
      }
     ]
    },
-   "perc_c7": {
+   "perc_c4": {
     "rows": [
      {
       "phrase": "perc_1"
@@ -7693,7 +7925,7 @@
       "phrase": "perc_1"
      },
      {
-      "phrase": "perc_2"
+      "phrase": "perc_3"
      },
      {
       "phrase": "perc_1"
@@ -7717,143 +7949,195 @@
       "phrase": "perc_1"
      },
      {
-      "phrase": "perc_2"
+      "phrase": "perc_4"
      }
     ]
    },
    "bass_c7": {
     "rows": [
      {
-      "phrase": "bass_11"
+      "phrase": "bass_6"
      },
      {
-      "phrase": "bass_12"
+      "phrase": "bass_7"
      },
      {
-      "phrase": "bass_13"
+      "phrase": "bass_8"
      },
      {
-      "phrase": "bass_14"
+      "phrase": "bass_9"
      },
      {
-      "phrase": "bass_11"
+      "phrase": "bass_6"
      },
      {
-      "phrase": "bass_12"
+      "phrase": "bass_7"
      },
      {
-      "phrase": "bass_13"
+      "phrase": "bass_8"
      },
      {
-      "phrase": "bass_15"
+      "phrase": "bass_10"
      },
      {
-      "phrase": "bass_11"
+      "phrase": "bass_6"
      },
      {
-      "phrase": "bass_12"
+      "phrase": "bass_7"
      },
      {
-      "phrase": "bass_13"
+      "phrase": "bass_8"
      },
      {
-      "phrase": "bass_14"
+      "phrase": "bass_9"
      },
      {
-      "phrase": "bass_11"
+      "phrase": "bass_6"
      },
      {
-      "phrase": "bass_12"
+      "phrase": "bass_7"
      },
      {
-      "phrase": "bass_13"
+      "phrase": "bass_8"
      },
      {
-      "phrase": "bass_15"
+      "phrase": "bass_10"
      }
     ]
    },
-   "acid_c1": {
+   "acid_c3": {
     "rows": [
      {
-      "phrase": "acid_1"
+      "phrase": "acid_14"
      },
      {
       "phrase": "acid_2"
      },
      {
-      "phrase": "acid_3"
+      "phrase": "acid_15"
+     },
+     {
+      "phrase": "acid_10"
+     },
+     {
+      "phrase": "acid_16"
+     },
+     {
+      "phrase": "acid_2"
+     },
+     {
+      "phrase": "acid_15"
      },
      {
       "phrase": "acid_4"
      },
      {
-      "phrase": "acid_5"
+      "phrase": "acid_17"
      },
      {
       "phrase": "acid_2"
      },
      {
-      "phrase": "acid_3"
+      "phrase": "acid_15"
      },
      {
-      "phrase": "acid_6"
+      "phrase": "acid_4"
      },
      {
-      "phrase": "acid_7"
-     },
-     {
-      "phrase": "acid_2"
-     },
-     {
-      "phrase": "acid_3"
-     },
-     {
-      "phrase": "acid_6"
-     },
-     {
-      "phrase": "acid_8"
+      "phrase": "acid_18"
      },
      {
       "phrase": "acid_2"
      },
      {
-      "phrase": "acid_3"
+      "phrase": "acid_15"
      },
      {
-      "phrase": "acid_6"
+      "phrase": "acid_19"
+     }
+    ]
+   },
+   "stab_c4": {
+    "rows": [
+     {
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_4"
+     },
+     {
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_4"
+     },
+     {
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_4"
      }
     ]
    },
    "hats_c9": {
     "rows": [
      {
-      "phrase": "hats_1"
-     },
-     {
-      "phrase": "hats_2"
-     },
-     {
-      "phrase": "hats_3"
-     },
-     {
-      "phrase": "hats_6"
-     },
-     {
-      "phrase": "hats_1"
-     },
-     {
-      "phrase": "hats_2"
-     },
-     {
-      "phrase": "hats_3"
+      "phrase": "hats_10"
      },
      {
       "phrase": "hats_11"
+     },
+     {
+      "phrase": "hats_12"
+     },
+     {
+      "phrase": "hats_16"
+     },
+     {
+      "phrase": "hats_10"
+     },
+     {
+      "phrase": "hats_11"
+     },
+     {
+      "phrase": "hats_12"
+     },
+     {
+      "phrase": "hats_13"
      }
     ]
    },
-   "clap_c5": {
+   "clap_c4": {
     "rows": [
      {
       "phrase": "clap_1"
@@ -7884,6 +8168,206 @@
    "bass_c8": {
     "rows": [
      {
+      "phrase": "bass_6"
+     },
+     {
+      "phrase": "bass_7"
+     },
+     {
+      "phrase": "bass_8"
+     },
+     {
+      "phrase": "bass_9"
+     },
+     {
+      "phrase": "bass_6"
+     },
+     {
+      "phrase": "bass_7"
+     },
+     {
+      "phrase": "bass_8"
+     },
+     {
+      "phrase": "bass_10"
+     }
+    ]
+   },
+   "acid_c4": {
+    "rows": [
+     {
+      "phrase": "acid_20"
+     },
+     {
+      "phrase": "acid_21"
+     },
+     {
+      "phrase": "acid_22"
+     },
+     {
+      "phrase": "acid_23"
+     },
+     {
+      "phrase": "acid_20"
+     },
+     {
+      "phrase": "acid_21"
+     },
+     {
+      "phrase": "acid_22"
+     },
+     {
+      "phrase": "acid_24"
+     }
+    ]
+   },
+   "stab_c5": {
+    "rows": [
+     {
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_4"
+     }
+    ]
+   },
+   "clap_c5": {
+    "rows": [
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     }
+    ]
+   },
+   "perc_c5": {
+    "rows": [
+     {
+      "phrase": "perc_1"
+     },
+     {
+      "phrase": "perc_1"
+     },
+     {
+      "phrase": "perc_1"
+     },
+     {
+      "phrase": "perc_1"
+     },
+     {
+      "phrase": "perc_1"
+     },
+     {
+      "phrase": "perc_1"
+     },
+     {
+      "phrase": "perc_1"
+     },
+     {
+      "phrase": "perc_1"
+     },
+     {
+      "phrase": "perc_1"
+     },
+     {
+      "phrase": "perc_1"
+     },
+     {
+      "phrase": "perc_1"
+     },
+     {
+      "phrase": "perc_5"
+     },
+     {
+      "phrase": "perc_1"
+     },
+     {
+      "phrase": "perc_1"
+     },
+     {
+      "phrase": "perc_1"
+     },
+     {
+      "phrase": "perc_1"
+     }
+    ]
+   },
+   "bass_c9": {
+    "rows": [
+     {
+      "phrase": "bass_11"
+     },
+     {
+      "phrase": "bass_12"
+     },
+     {
+      "phrase": "bass_13"
+     },
+     {
+      "phrase": "bass_14"
+     },
+     {
       "phrase": "bass_11"
      },
      {
@@ -7906,291 +8390,119 @@
      },
      {
       "phrase": "bass_15"
+     },
+     {
+      "phrase": "bass_11"
+     },
+     {
+      "phrase": "bass_12"
+     },
+     {
+      "phrase": "bass_13"
+     },
+     {
+      "phrase": "bass_14"
      }
     ]
    },
-   "acid_c2": {
+   "acid_c5": {
     "rows": [
      {
-      "phrase": "acid_9"
+      "phrase": "acid_25"
      },
      {
-      "phrase": "acid_2"
+      "phrase": "acid_21"
      },
      {
-      "phrase": "acid_10"
+      "phrase": "acid_26"
      },
      {
-      "phrase": "acid_4"
+      "phrase": "acid_23"
      },
      {
-      "phrase": "acid_9"
+      "phrase": "acid_27"
      },
      {
-      "phrase": "acid_2"
+      "phrase": "acid_21"
      },
      {
-      "phrase": "acid_10"
+      "phrase": "acid_26"
      },
      {
-      "phrase": "acid_6"
+      "phrase": "acid_23"
+     },
+     {
+      "phrase": "acid_28"
+     },
+     {
+      "phrase": "acid_21"
+     },
+     {
+      "phrase": "acid_26"
+     },
+     {
+      "phrase": "acid_23"
+     },
+     {
+      "phrase": "acid_29"
+     },
+     {
+      "phrase": "acid_21"
+     },
+     {
+      "phrase": "acid_26"
+     },
+     {
+      "phrase": "acid_30"
      }
     ]
    },
-   "kick_c5": {
+   "stab_c6": {
     "rows": [
      {
-      "phrase": "kick_1"
+      "phrase": "stab_3"
      },
      {
-      "phrase": "kick_1"
+      "phrase": "stab_3"
      },
      {
-      "phrase": "kick_1"
+      "phrase": "stab_3"
      },
      {
-      "phrase": "kick_1"
+      "phrase": "stab_3"
      },
      {
-      "phrase": "kick_1"
+      "phrase": "stab_3"
      },
      {
-      "phrase": "kick_1"
+      "phrase": "stab_3"
      },
      {
-      "phrase": "kick_1"
+      "phrase": "stab_3"
      },
      {
-      "phrase": "kick_1"
+      "phrase": "stab_3"
      },
      {
-      "phrase": "kick_1"
+      "phrase": "stab_3"
      },
      {
-      "phrase": "kick_1"
+      "phrase": "stab_3"
      },
      {
-      "phrase": "kick_1"
+      "phrase": "stab_3"
      },
      {
-      "phrase": "kick_1"
+      "phrase": "stab_3"
      },
      {
-      "phrase": "kick_1"
+      "phrase": "stab_3"
      },
      {
-      "phrase": "kick_1"
+      "phrase": "stab_3"
      },
      {
-      "phrase": "kick_1"
-     },
-     {
-      "phrase": "riser_2"
-     }
-    ]
-   },
-   "hats_c10": {
-    "rows": [
-     {
-      "phrase": "hats_1"
-     },
-     {
-      "phrase": "hats_2"
-     },
-     {
-      "phrase": "hats_3"
-     },
-     {
-      "phrase": "hats_6"
-     },
-     {
-      "phrase": "hats_1"
-     },
-     {
-      "phrase": "hats_2"
-     },
-     {
-      "phrase": "hats_3"
-     },
-     {
-      "phrase": "hats_4"
-     },
-     {
-      "phrase": "hats_1"
-     },
-     {
-      "phrase": "hats_2"
-     },
-     {
-      "phrase": "hats_3"
-     },
-     {
-      "phrase": "hats_4"
-     },
-     {
-      "phrase": "hats_1"
-     },
-     {
-      "phrase": "hats_2"
-     },
-     {
-      "phrase": "hats_3"
-     },
-     {
-      "phrase": "hats_12"
-     }
-    ]
-   },
-   "bass_c9": {
-    "rows": [
-     {
-      "phrase": "bass_16"
-     },
-     {
-      "phrase": "bass_17"
-     },
-     {
-      "phrase": "bass_18"
-     },
-     {
-      "phrase": "bass_19"
-     },
-     {
-      "phrase": "bass_16"
-     },
-     {
-      "phrase": "bass_17"
-     },
-     {
-      "phrase": "bass_18"
-     },
-     {
-      "phrase": "bass_19"
-     },
-     {
-      "phrase": "bass_16"
-     },
-     {
-      "phrase": "bass_17"
-     },
-     {
-      "phrase": "bass_18"
-     },
-     {
-      "phrase": "bass_20"
-     },
-     {
-      "phrase": "bass_16"
-     },
-     {
-      "phrase": "bass_17"
-     },
-     {
-      "phrase": "bass_18"
-     },
-     {
-      "phrase": "bass_19"
-     }
-    ]
-   },
-   "acid_c3": {
-    "rows": [
-     {
-      "phrase": "acid_11"
-     },
-     {
-      "phrase": "acid_12"
-     },
-     {
-      "phrase": "acid_13"
-     },
-     {
-      "phrase": "acid_14"
-     },
-     {
-      "phrase": "acid_15"
-     },
-     {
-      "phrase": "acid_12"
-     },
-     {
-      "phrase": "acid_13"
-     },
-     {
-      "phrase": "acid_14"
-     },
-     {
-      "phrase": "acid_16"
-     },
-     {
-      "phrase": "acid_12"
-     },
-     {
-      "phrase": "acid_13"
-     },
-     {
-      "phrase": "acid_14"
-     },
-     {
-      "phrase": "acid_17"
-     },
-     {
-      "phrase": "acid_12"
-     },
-     {
-      "phrase": "acid_13"
-     },
-     {
-      "phrase": "acid_14"
-     }
-    ]
-   },
-   "stab_c4": {
-    "rows": [
-     {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
+      "phrase": "stab_3"
      },
      {
       "phrase": "stab_3"
@@ -8297,103 +8609,103 @@
      }
     ]
    },
-   "hats_c11": {
+   "hats_c10": {
     "rows": [
      {
-      "phrase": "hats_1"
+      "phrase": "hats_10"
      },
      {
-      "phrase": "hats_2"
+      "phrase": "hats_11"
      },
      {
-      "phrase": "hats_3"
+      "phrase": "hats_12"
      },
      {
-      "phrase": "hats_6"
+      "phrase": "hats_16"
      },
      {
-      "phrase": "hats_1"
+      "phrase": "hats_10"
      },
      {
-      "phrase": "hats_2"
+      "phrase": "hats_11"
      },
      {
-      "phrase": "hats_3"
-     },
-     {
-      "phrase": "hats_7"
-     },
-     {
-      "phrase": "hats_1"
-     },
-     {
-      "phrase": "hats_2"
-     },
-     {
-      "phrase": "hats_3"
-     },
-     {
-      "phrase": "hats_4"
-     },
-     {
-      "phrase": "hats_1"
-     },
-     {
-      "phrase": "hats_2"
-     },
-     {
-      "phrase": "hats_3"
-     },
-     {
-      "phrase": "hats_4"
-     },
-     {
-      "phrase": "hats_1"
-     },
-     {
-      "phrase": "hats_2"
-     },
-     {
-      "phrase": "hats_3"
-     },
-     {
-      "phrase": "hats_6"
-     },
-     {
-      "phrase": "hats_1"
-     },
-     {
-      "phrase": "hats_2"
-     },
-     {
-      "phrase": "hats_3"
-     },
-     {
-      "phrase": "hats_4"
-     },
-     {
-      "phrase": "hats_1"
-     },
-     {
-      "phrase": "hats_2"
-     },
-     {
-      "phrase": "hats_3"
-     },
-     {
-      "phrase": "hats_6"
-     },
-     {
-      "phrase": "hats_1"
-     },
-     {
-      "phrase": "hats_2"
-     },
-     {
-      "phrase": "hats_3"
+      "phrase": "hats_12"
      },
      {
       "phrase": "hats_13"
+     },
+     {
+      "phrase": "hats_10"
+     },
+     {
+      "phrase": "hats_11"
+     },
+     {
+      "phrase": "hats_12"
+     },
+     {
+      "phrase": "hats_16"
+     },
+     {
+      "phrase": "hats_10"
+     },
+     {
+      "phrase": "hats_11"
+     },
+     {
+      "phrase": "hats_12"
+     },
+     {
+      "phrase": "hats_14"
+     },
+     {
+      "phrase": "hats_10"
+     },
+     {
+      "phrase": "hats_11"
+     },
+     {
+      "phrase": "hats_12"
+     },
+     {
+      "phrase": "hats_16"
+     },
+     {
+      "phrase": "hats_10"
+     },
+     {
+      "phrase": "hats_11"
+     },
+     {
+      "phrase": "hats_12"
+     },
+     {
+      "phrase": "hats_13"
+     },
+     {
+      "phrase": "hats_10"
+     },
+     {
+      "phrase": "hats_11"
+     },
+     {
+      "phrase": "hats_12"
+     },
+     {
+      "phrase": "hats_13"
+     },
+     {
+      "phrase": "hats_10"
+     },
+     {
+      "phrase": "hats_11"
+     },
+     {
+      "phrase": "hats_12"
+     },
+     {
+      "phrase": "hats_17"
      }
     ]
    },
@@ -8497,7 +8809,107 @@
      }
     ]
    },
-   "perc_c8": {
+   "clap_c6": {
+    "rows": [
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     },
+     {
+      "phrase": "clap_1"
+     }
+    ]
+   },
+   "perc_c6": {
     "rows": [
      {
       "phrase": "perc_1"
@@ -8509,7 +8921,19 @@
       "phrase": "perc_1"
      },
      {
-      "phrase": "perc_2"
+      "phrase": "perc_1"
+     },
+     {
+      "phrase": "perc_1"
+     },
+     {
+      "phrase": "perc_1"
+     },
+     {
+      "phrase": "perc_1"
+     },
+     {
+      "phrase": "perc_3"
      },
      {
       "phrase": "perc_1"
@@ -8569,7 +8993,7 @@
       "phrase": "perc_1"
      },
      {
-      "phrase": "perc_2"
+      "phrase": "perc_6"
      },
      {
       "phrase": "perc_1"
@@ -8581,675 +9005,391 @@
       "phrase": "perc_1"
      },
      {
-      "phrase": "perc_2"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
-     },
-     {
-      "phrase": "perc_1"
+      "phrase": "perc_7"
      }
     ]
    },
    "bass_c10": {
     "rows": [
      {
-      "phrase": "bass_16"
+      "phrase": "bass_11"
      },
      {
-      "phrase": "bass_17"
+      "phrase": "bass_12"
      },
      {
-      "phrase": "bass_18"
+      "phrase": "bass_13"
      },
      {
-      "phrase": "bass_20"
+      "phrase": "bass_14"
      },
      {
-      "phrase": "bass_16"
+      "phrase": "bass_11"
      },
      {
-      "phrase": "bass_17"
+      "phrase": "bass_12"
      },
      {
-      "phrase": "bass_18"
+      "phrase": "bass_13"
      },
      {
-      "phrase": "bass_20"
+      "phrase": "bass_14"
      },
      {
-      "phrase": "bass_16"
+      "phrase": "bass_11"
      },
      {
-      "phrase": "bass_17"
+      "phrase": "bass_12"
      },
      {
-      "phrase": "bass_18"
+      "phrase": "bass_13"
      },
      {
-      "phrase": "bass_19"
+      "phrase": "bass_14"
      },
      {
-      "phrase": "bass_16"
+      "phrase": "bass_11"
      },
      {
-      "phrase": "bass_17"
+      "phrase": "bass_12"
      },
      {
-      "phrase": "bass_18"
+      "phrase": "bass_13"
      },
      {
-      "phrase": "bass_20"
+      "phrase": "bass_15"
      },
      {
-      "phrase": "bass_16"
+      "phrase": "bass_11"
      },
      {
-      "phrase": "bass_17"
+      "phrase": "bass_12"
      },
      {
-      "phrase": "bass_18"
+      "phrase": "bass_13"
      },
      {
-      "phrase": "bass_19"
+      "phrase": "bass_14"
      },
      {
-      "phrase": "bass_16"
+      "phrase": "bass_11"
      },
      {
-      "phrase": "bass_17"
+      "phrase": "bass_12"
      },
      {
-      "phrase": "bass_18"
+      "phrase": "bass_13"
      },
      {
-      "phrase": "bass_20"
+      "phrase": "bass_15"
      },
      {
-      "phrase": "bass_16"
+      "phrase": "bass_11"
      },
      {
-      "phrase": "bass_17"
+      "phrase": "bass_12"
      },
      {
-      "phrase": "bass_18"
+      "phrase": "bass_13"
      },
      {
-      "phrase": "bass_19"
+      "phrase": "bass_14"
      },
      {
-      "phrase": "bass_16"
+      "phrase": "bass_11"
      },
      {
-      "phrase": "bass_17"
+      "phrase": "bass_12"
      },
      {
-      "phrase": "bass_18"
+      "phrase": "bass_13"
      },
      {
-      "phrase": "bass_19"
+      "phrase": "bass_15"
      }
     ]
    },
-   "acid_c4": {
+   "acid_c6": {
     "rows": [
      {
-      "phrase": "acid_18"
-     },
-     {
-      "phrase": "acid_12"
-     },
-     {
-      "phrase": "acid_13"
-     },
-     {
-      "phrase": "acid_14"
-     },
-     {
-      "phrase": "acid_19"
-     },
-     {
-      "phrase": "acid_12"
-     },
-     {
-      "phrase": "acid_13"
-     },
-     {
-      "phrase": "acid_14"
-     },
-     {
-      "phrase": "acid_20"
-     },
-     {
-      "phrase": "acid_12"
-     },
-     {
-      "phrase": "acid_13"
-     },
-     {
-      "phrase": "acid_14"
-     },
-     {
-      "phrase": "acid_19"
-     },
-     {
-      "phrase": "acid_12"
-     },
-     {
-      "phrase": "acid_13"
+      "phrase": "acid_31"
      },
      {
       "phrase": "acid_21"
      },
      {
-      "phrase": "acid_22"
+      "phrase": "acid_26"
      },
      {
-      "phrase": "acid_12"
+      "phrase": "acid_32"
      },
      {
-      "phrase": "acid_13"
+      "phrase": "acid_33"
+     },
+     {
+      "phrase": "acid_21"
+     },
+     {
+      "phrase": "acid_26"
+     },
+     {
+      "phrase": "acid_32"
+     },
+     {
+      "phrase": "acid_34"
      },
      {
       "phrase": "acid_21"
      },
      {
-      "phrase": "acid_19"
+      "phrase": "acid_26"
      },
      {
-      "phrase": "acid_12"
+      "phrase": "acid_32"
      },
      {
-      "phrase": "acid_13"
+      "phrase": "acid_33"
      },
      {
       "phrase": "acid_21"
+     },
+     {
+      "phrase": "acid_26"
+     },
+     {
+      "phrase": "acid_32"
+     },
+     {
+      "phrase": "acid_35"
+     },
+     {
+      "phrase": "acid_21"
+     },
+     {
+      "phrase": "acid_26"
      },
      {
       "phrase": "acid_23"
      },
      {
-      "phrase": "acid_12"
-     },
-     {
-      "phrase": "acid_13"
+      "phrase": "acid_33"
      },
      {
       "phrase": "acid_21"
      },
      {
-      "phrase": "acid_19"
+      "phrase": "acid_26"
      },
      {
-      "phrase": "acid_12"
+      "phrase": "acid_23"
      },
      {
-      "phrase": "acid_13"
+      "phrase": "acid_36"
      },
      {
-      "phrase": "acid_14"
+      "phrase": "acid_21"
+     },
+     {
+      "phrase": "acid_26"
+     },
+     {
+      "phrase": "acid_23"
+     },
+     {
+      "phrase": "acid_33"
+     },
+     {
+      "phrase": "acid_21"
+     },
+     {
+      "phrase": "acid_26"
+     },
+     {
+      "phrase": "acid_37"
      }
     ]
    },
-   "stab_c5": {
+   "stab_c7": {
     "rows": [
      {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
+      "phrase": "stab_3"
      },
      {
       "phrase": "stab_3"
      },
      {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
+      "phrase": "stab_3"
      },
      {
       "phrase": "stab_3"
      },
      {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
+      "phrase": "stab_3"
      },
      {
       "phrase": "stab_3"
      },
      {
-      "phrase": "stab_2"
+      "phrase": "stab_3"
      },
      {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
-     },
-     {
-      "phrase": "stab_2"
+      "phrase": "stab_4"
      },
      {
       "phrase": "stab_3"
      },
      {
-      "phrase": "stab_2"
+      "phrase": "stab_3"
      },
      {
-      "phrase": "stab_2"
+      "phrase": "stab_3"
      },
      {
-      "phrase": "stab_2"
+      "phrase": "stab_4"
      },
      {
-      "phrase": "stab_2"
+      "phrase": "stab_3"
      },
      {
-      "phrase": "stab_2"
+      "phrase": "stab_3"
      },
      {
-      "phrase": "stab_2"
+      "phrase": "stab_3"
      },
      {
-      "phrase": "stab_2"
+      "phrase": "stab_4"
      },
      {
-      "phrase": "stab_2"
+      "phrase": "stab_3"
      },
      {
-      "phrase": "stab_2"
+      "phrase": "stab_3"
      },
      {
-      "phrase": "stab_2"
+      "phrase": "stab_3"
      },
      {
-      "phrase": "stab_2"
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_4"
+     },
+     {
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_3"
+     },
+     {
+      "phrase": "stab_3"
      },
      {
       "phrase": "stab_3"
      }
     ]
    },
-   "pad_c10": {
+   "hats_c11": {
     "rows": [
      {
-      "phrase": "pad_1"
+      "phrase": "hats_10"
      },
      {
-      "phrase": "pad_4"
+      "phrase": "hats_11"
      },
      {
-      "phrase": "pad_1"
+      "phrase": "hats_12"
      },
      {
-      "phrase": "pad_9"
+      "phrase": "hats_16"
      },
      {
-      "phrase": "pad_1"
+      "phrase": "hats_10"
      },
      {
-      "phrase": "pad_4"
+      "phrase": "hats_11"
      },
      {
-      "phrase": "pad_15"
-     },
-     {
-      "phrase": "pad_15"
-     },
-     {
-      "phrase": "pad_20"
-     },
-     {
-      "phrase": "pad_23"
-     },
-     {
-      "phrase": "pad_26"
-     },
-     {
-      "phrase": "pad_29"
-     },
-     {
-      "phrase": "pad_31"
-     },
-     {
-      "phrase": "pad_34"
-     },
-     {
-      "phrase": "pad_20"
-     },
-     {
-      "phrase": "pad_38"
-     },
-     {
-      "phrase": "pad_41"
-     },
-     {
-      "phrase": "pad_44"
-     },
-     {
-      "phrase": "pad_46"
-     },
-     {
-      "phrase": "pad_48"
-     },
-     {
-      "phrase": "pad_50"
-     },
-     {
-      "phrase": "pad_52"
-     },
-     {
-      "phrase": "pad_55"
-     },
-     {
-      "phrase": "pad_57"
-     },
-     {
-      "phrase": "pad_60"
-     },
-     {
-      "phrase": "pad_63"
-     },
-     {
-      "phrase": "pad_66"
-     },
-     {
-      "phrase": "pad_69"
-     },
-     {
-      "phrase": "pad_69"
-     },
-     {
-      "phrase": "pad_73"
-     },
-     {
-      "phrase": "pad_76"
-     },
-     {
-      "phrase": "pad_78"
-     }
-    ]
-   },
-   "pad_c11": {
-    "rows": [
-     {
-      "phrase": "pad_2"
-     },
-     {
-      "phrase": "pad_5"
-     },
-     {
-      "phrase": "pad_7"
-     },
-     {
-      "phrase": "pad_10"
-     },
-     {
-      "phrase": "pad_11"
-     },
-     {
-      "phrase": "pad_13"
-     },
-     {
-      "phrase": "pad_16"
-     },
-     {
-      "phrase": "pad_18"
-     },
-     {
-      "phrase": "pad_21"
-     },
-     {
-      "phrase": "pad_24"
-     },
-     {
-      "phrase": "pad_27"
-     },
-     {
-      "phrase": "pad_24"
-     },
-     {
-      "phrase": "pad_32"
-     },
-     {
-      "phrase": "pad_35"
-     },
-     {
-      "phrase": "pad_37"
-     },
-     {
-      "phrase": "pad_39"
-     },
-     {
-      "phrase": "pad_42"
-     },
-     {
-      "phrase": "pad_42"
-     },
-     {
-      "phrase": "pad_47"
-     },
-     {
-      "phrase": "pad_20"
-     },
-     {
-      "phrase": "pad_51"
-     },
-     {
-      "phrase": "pad_53"
-     },
-     {
-      "phrase": "pad_23"
-     },
-     {
-      "phrase": "pad_58"
-     },
-     {
-      "phrase": "pad_61"
-     },
-     {
-      "phrase": "pad_64"
-     },
-     {
-      "phrase": "pad_67"
-     },
-     {
-      "phrase": "pad_70"
-     },
-     {
-      "phrase": "pad_72"
-     },
-     {
-      "phrase": "pad_74"
-     },
-     {
-      "phrase": "pad_70"
-     },
-     {
-      "phrase": "pad_79"
-     }
-    ]
-   },
-   "pad_c12": {
-    "rows": [
-     {
-      "phrase": "pad_3"
-     },
-     {
-      "phrase": "pad_6"
-     },
-     {
-      "phrase": "pad_8"
-     },
-     {
-      "phrase": "pad_6"
-     },
-     {
-      "phrase": "pad_12"
-     },
-     {
-      "phrase": "pad_14"
-     },
-     {
-      "phrase": "pad_17"
-     },
-     {
-      "phrase": "pad_19"
-     },
-     {
-      "phrase": "pad_22"
-     },
-     {
-      "phrase": "pad_25"
-     },
-     {
-      "phrase": "pad_28"
-     },
-     {
-      "phrase": "pad_30"
-     },
-     {
-      "phrase": "pad_33"
-     },
-     {
-      "phrase": "pad_36"
-     },
-     {
-      "phrase": "pad_30"
-     },
-     {
-      "phrase": "pad_40"
-     },
-     {
-      "phrase": "pad_43"
-     },
-     {
-      "phrase": "pad_45"
-     },
-     {
-      "phrase": "pad_45"
-     },
-     {
-      "phrase": "pad_49"
-     },
-     {
-      "phrase": "pad_24"
-     },
-     {
-      "phrase": "pad_54"
-     },
-     {
-      "phrase": "pad_56"
-     },
-     {
-      "phrase": "pad_59"
-     },
-     {
-      "phrase": "pad_62"
-     },
-     {
-      "phrase": "pad_65"
-     },
-     {
-      "phrase": "pad_68"
-     },
-     {
-      "phrase": "pad_71"
-     },
-     {
-      "phrase": "pad_65"
-     },
-     {
-      "phrase": "pad_75"
-     },
-     {
-      "phrase": "pad_77"
-     },
-     {
-      "phrase": "pad_80"
-     }
-    ]
-   },
-   "hats_c12": {
-    "rows": [
-     {
-      "phrase": "hats_1"
-     },
-     {
-      "phrase": "hats_2"
-     },
-     {
-      "phrase": "hats_3"
-     },
-     {
-      "phrase": "hats_6"
-     },
-     {
-      "phrase": "hats_1"
-     },
-     {
-      "phrase": "hats_2"
-     },
-     {
-      "phrase": "hats_3"
+      "phrase": "hats_12"
      },
      {
       "phrase": "hats_14"
      }
     ]
    },
+   "perc_c7": {
+    "rows": [
+     {
+      "phrase": "perc_8"
+     },
+     {
+      "phrase": "perc_8"
+     },
+     {
+      "phrase": "perc_8"
+     },
+     {
+      "phrase": "perc_9"
+     },
+     {
+      "phrase": "perc_8"
+     },
+     {
+      "phrase": "perc_8"
+     },
+     {
+      "phrase": "perc_8"
+     },
+     {
+      "phrase": "perc_8"
+     }
+    ]
+   },
    "bass_c11": {
     "rows": [
      {
-      "phrase": "bass_16"
+      "phrase": "bass_11"
      },
      {
-      "phrase": "bass_17"
+      "phrase": "bass_12"
      },
      {
-      "phrase": "bass_18"
+      "phrase": "bass_13"
      },
      {
-      "phrase": "bass_20"
+      "phrase": "bass_14"
      },
      {
-      "phrase": "bass_16"
+      "phrase": "bass_11"
      },
      {
-      "phrase": "bass_17"
+      "phrase": "bass_12"
      },
      {
-      "phrase": "bass_18"
+      "phrase": "bass_13"
      },
      {
-      "phrase": "bass_20"
+      "phrase": "bass_14"
      }
     ]
    },
@@ -9269,51 +9409,51 @@
      }
     ]
    },
-   "pad_c13": {
+   "pad_c10": {
     "rows": [
      {
       "phrase": "pad_1"
      },
      {
-      "phrase": "pad_4"
+      "phrase": "pad_2"
      },
      {
-      "phrase": "pad_1"
+      "phrase": "pad_3"
+     },
+     {
+      "phrase": "pad_4"
+     }
+    ]
+   },
+   "pad_c11": {
+    "rows": [
+     {
+      "phrase": "pad_8"
+     },
+     {
+      "phrase": "pad_9"
+     },
+     {
+      "phrase": "pad_8"
      },
      {
       "phrase": "pad_9"
      }
     ]
    },
-   "pad_c14": {
+   "pad_c12": {
     "rows": [
      {
-      "phrase": "pad_2"
+      "phrase": "pad_15"
      },
      {
-      "phrase": "pad_5"
+      "phrase": "pad_16"
      },
      {
-      "phrase": "pad_7"
+      "phrase": "pad_17"
      },
      {
-      "phrase": "pad_10"
-     }
-    ]
-   },
-   "pad_c15": {
-    "rows": [
-     {
-      "phrase": "pad_3"
-     },
-     {
-      "phrase": "pad_6"
-     },
-     {
-      "phrase": "pad_8"
-     },
-     {
-      "phrase": "pad_6"
+      "phrase": "pad_18"
      }
     ]
    },
@@ -9363,62 +9503,65 @@
      }
     ]
    },
-   "pad_c16": {
+   "pad_c13": {
     "rows": [
      {
       "phrase": "pad_1"
      },
-     {
-      "phrase": "pad_4"
-     },
-     {
-      "phrase": "pad_1"
-     },
-     {
-      "phrase": "pad_9"
-     },
-     {
-      "phrase": "pad_1"
-     },
-     {
-      "phrase": "pad_4"
-     },
-     {
-      "phrase": "pad_15"
-     },
-     {
-      "phrase": "pad_15"
-     },
-     {
-      "phrase": "pad_20"
-     },
-     {
-      "phrase": "pad_23"
-     },
-     {
-      "phrase": "pad_26"
-     },
-     {
-      "phrase": "pad_29"
-     },
-     {
-      "phrase": "pad_31"
-     },
-     {
-      "phrase": "pad_34"
-     }
-    ]
-   },
-   "pad_c17": {
-    "rows": [
      {
       "phrase": "pad_2"
+     },
+     {
+      "phrase": "pad_3"
+     },
+     {
+      "phrase": "pad_4"
+     },
+     {
+      "phrase": "pad_1"
      },
      {
       "phrase": "pad_5"
      },
      {
+      "phrase": "pad_4"
+     },
+     {
+      "phrase": "pad_6"
+     },
+     {
       "phrase": "pad_7"
+     },
+     {
+      "phrase": "pad_23"
+     },
+     {
+      "phrase": "pad_24"
+     },
+     {
+      "phrase": "pad_25"
+     },
+     {
+      "phrase": "pad_26"
+     },
+     {
+      "phrase": "pad_23"
+     }
+    ]
+   },
+   "pad_c14": {
+    "rows": [
+     {
+      "phrase": "pad_8"
+     },
+     {
+      "phrase": "pad_9"
+     },
+     {
+      "phrase": "pad_8"
+     },
+     {
+      "phrase": "pad_9"
      },
      {
       "phrase": "pad_10"
@@ -9427,74 +9570,71 @@
       "phrase": "pad_11"
      },
      {
-      "phrase": "pad_13"
-     },
-     {
-      "phrase": "pad_16"
-     },
-     {
-      "phrase": "pad_18"
-     },
-     {
-      "phrase": "pad_21"
-     },
-     {
-      "phrase": "pad_24"
-     },
-     {
-      "phrase": "pad_27"
-     },
-     {
-      "phrase": "pad_24"
-     },
-     {
-      "phrase": "pad_32"
-     },
-     {
-      "phrase": "pad_35"
-     }
-    ]
-   },
-   "pad_c18": {
-    "rows": [
-     {
-      "phrase": "pad_3"
-     },
-     {
-      "phrase": "pad_6"
-     },
-     {
-      "phrase": "pad_8"
-     },
-     {
-      "phrase": "pad_6"
-     },
-     {
       "phrase": "pad_12"
+     },
+     {
+      "phrase": "pad_13"
      },
      {
       "phrase": "pad_14"
      },
      {
+      "phrase": "pad_28"
+     },
+     {
+      "phrase": "pad_14"
+     },
+     {
+      "phrase": "pad_14"
+     },
+     {
+      "phrase": "pad_29"
+     },
+     {
+      "phrase": "pad_30"
+     }
+    ]
+   },
+   "pad_c15": {
+    "rows": [
+     {
+      "phrase": "pad_15"
+     },
+     {
+      "phrase": "pad_16"
+     },
+     {
       "phrase": "pad_17"
+     },
+     {
+      "phrase": "pad_18"
      },
      {
       "phrase": "pad_19"
      },
      {
+      "phrase": "pad_17"
+     },
+     {
+      "phrase": "pad_20"
+     },
+     {
+      "phrase": "pad_21"
+     },
+     {
       "phrase": "pad_22"
      },
      {
-      "phrase": "pad_25"
-     },
-     {
-      "phrase": "pad_28"
-     },
-     {
-      "phrase": "pad_30"
+      "phrase": "pad_22"
      },
      {
       "phrase": "pad_33"
+     },
+     {
+      "phrase": "pad_34"
+     },
+     {
+      "phrase": "pad_35"
      },
      {
       "phrase": "pad_36"
@@ -9519,10 +9659,9 @@
      "pad3": "pad_c6"
     },
     {
-     "kick": "kick_c2",
+     "kick": "kick_c3",
      "hats": "hats_c2",
      "ohat": "ohat_c1",
-     "perc": "perc_c1",
      "bass": "bass_c2",
      "stab": "stab_c1",
      "pad1": "pad_c4",
@@ -9531,11 +9670,10 @@
      "riser": "riser_c1"
     },
     {
-     "kick": "kick_c3",
+     "kick": "kick_c4",
      "hats": "hats_c3",
      "ohat": "ohat_c2",
      "clap": "clap_c1",
-     "perc": "perc_c2",
      "bass": "bass_c3",
      "stab": "stab_c2",
      "pad1": "pad_c7",
@@ -9547,99 +9685,99 @@
      "hats": "hats_c4",
      "ohat": "ohat_c1",
      "clap": "clap_c2",
-     "perc": "perc_c3",
      "bass": "bass_c4",
-     "stab": "stab_c3"
+     "stab": "stab_c1"
     },
     {
      "kick": "kick_c4",
      "hats": "hats_c5",
      "ohat": "ohat_c2",
      "clap": "clap_c1",
-     "perc": "perc_c4",
+     "ride": "ride_c1",
+     "perc": "perc_c1",
      "bass": "bass_c5"
     },
     {
      "kick": "kick_c4",
      "hats": "hats_c6",
-     "ohat": "ohat_c2",
      "clap": "clap_c1",
-     "perc": "perc_c5",
-     "bass": "bass_c3"
+     "ride": "ride_c1",
+     "perc": "perc_c2",
+     "bass": "bass_c6",
+     "acid": "acid_c1",
+     "stab": "stab_c3"
     },
     {
-     "kick": "kick_c4",
+     "kick": "kick_c5",
      "hats": "hats_c7",
      "ohat": "ohat_c2",
-     "clap": "clap_c3",
+     "clap": "clap_c1",
      "ride": "ride_c1",
-     "perc": "perc_c6",
-     "bass": "bass_c6"
+     "perc": "perc_c3",
+     "bass": "bass_c6",
+     "acid": "acid_c2"
     },
     {
      "kick": "kick_c2",
      "hats": "hats_c8",
      "ohat": "ohat_c1",
-     "clap": "clap_c4",
+     "clap": "clap_c3",
      "ride": "ride_c2",
-     "perc": "perc_c7",
+     "perc": "perc_c4",
      "bass": "bass_c7",
-     "acid": "acid_c1"
+     "acid": "acid_c3",
+     "stab": "stab_c4"
     },
     {
      "kick": "kick_c4",
      "hats": "hats_c9",
      "ohat": "ohat_c2",
-     "clap": "clap_c5",
+     "clap": "clap_c4",
      "ride": "ride_c1",
-     "perc": "perc_c4",
+     "perc": "perc_c3",
      "bass": "bass_c8",
-     "acid": "acid_c2",
-     "stab": "stab_c2"
+     "acid": "acid_c4",
+     "stab": "stab_c5"
     },
     {
-     "kick": "kick_c5",
-     "hats": "hats_c10",
+     "kick": "kick_c2",
      "ohat": "ohat_c1",
+     "clap": "clap_c5",
      "ride": "ride_c2",
-     "perc": "perc_c1",
+     "perc": "perc_c5",
      "bass": "bass_c9",
-     "acid": "acid_c3",
-     "stab": "stab_c4"
+     "acid": "acid_c5",
+     "stab": "stab_c6"
     },
     {
      "kick": "kick_c6",
-     "hats": "hats_c11",
+     "hats": "hats_c10",
      "ohat": "ohat_c3",
-     "perc": "perc_c8",
+     "clap": "clap_c6",
+     "perc": "perc_c6",
      "bass": "bass_c10",
-     "acid": "acid_c4",
-     "stab": "stab_c5",
+     "acid": "acid_c6",
+     "stab": "stab_c7"
+    },
+    {
+     "kick": "kick_c5",
+     "hats": "hats_c11",
+     "ohat": "ohat_c2",
+     "clap": "clap_c1",
+     "perc": "perc_c7",
+     "bass": "bass_c11"
+    },
+    {
+     "kick": "kick_c7",
      "pad1": "pad_c10",
      "pad2": "pad_c11",
      "pad3": "pad_c12"
     },
     {
-     "kick": "kick_c4",
-     "hats": "hats_c12",
-     "ohat": "ohat_c2",
-     "perc": "perc_c5",
-     "bass": "bass_c11",
-     "pad1": "pad_c7",
-     "pad2": "pad_c8",
-     "pad3": "pad_c9"
-    },
-    {
-     "kick": "kick_c7",
+     "kick": "kick_c8",
      "pad1": "pad_c13",
      "pad2": "pad_c14",
      "pad3": "pad_c15"
-    },
-    {
-     "kick": "kick_c8",
-     "pad1": "pad_c16",
-     "pad2": "pad_c17",
-     "pad3": "pad_c18"
     }
    ],
    "sections": [

@@ -5,7 +5,7 @@
   "style": "ambient-drift",
   "seed": 1,
   "generator": "endless-techno/0.1",
-  "created": "2026-10-21T02:49:46.607Z",
+  "created": "2026-10-21T03:27:02.356Z",
   "notes": "5 min, 67.5 bpm, D majorPentatonic, 9 sections"
  },
  "transport": {
@@ -235,12 +235,12 @@
     "instrument": "bell"
    },
    {
-    "id": "shimmer",
-    "instrument": "shimmer"
-   },
-   {
     "id": "pluck",
     "instrument": "pluck"
+   },
+   {
+    "id": "shimmer",
+    "instrument": "shimmer"
    }
   ],
   "phrases": {
@@ -313,7 +313,7 @@
     "steps": [
      {
       "note": "D3",
-      "vel": 0.7
+      "vel": 0.63
      },
      null,
      null,
@@ -335,11 +335,8 @@
    "pad_2": {
     "steps": [
      {
-      "note": "F#3",
-      "vel": 0.59,
-      "fx": {
-       "nudge": 0.3
-      }
+      "note": "D3",
+      "vel": 0.69
      },
      null,
      null,
@@ -361,11 +358,8 @@
    "pad_3": {
     "steps": [
      {
-      "note": "B3",
-      "vel": 0.73,
-      "fx": {
-       "nudge": 0.6
-      }
+      "note": "D3",
+      "vel": 0.59
      },
      null,
      null,
@@ -388,7 +382,7 @@
     "steps": [
      {
       "note": "D3",
-      "vel": 0.58
+      "vel": 0.57
      },
      null,
      null,
@@ -410,7 +404,105 @@
    "pad_5": {
     "steps": [
      {
+      "note": "A3",
+      "vel": 0.61
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "pad_6": {
+    "steps": [
+     {
+      "note": "A3",
+      "vel": 0.65
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "pad_7": {
+    "steps": [
+     {
       "note": "F#3",
+      "vel": 0.72,
+      "fx": {
+       "nudge": 0.3
+      }
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "pad_8": {
+    "steps": [
+     {
+      "note": "F#3",
+      "vel": 0.63,
+      "fx": {
+       "nudge": 0.3
+      }
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "pad_9": {
+    "steps": [
+     {
+      "note": "D4",
       "vel": 0.57,
       "fx": {
        "nudge": 0.3
@@ -433,7 +525,137 @@
      null
     ]
    },
-   "pad_6": {
+   "pad_10": {
+    "steps": [
+     {
+      "note": "D4",
+      "vel": 0.72,
+      "fx": {
+       "nudge": 0.3
+      }
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "pad_11": {
+    "steps": [
+     {
+      "note": "D4",
+      "vel": 0.7,
+      "fx": {
+       "nudge": 0.3
+      }
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "pad_12": {
+    "steps": [
+     {
+      "note": "D4",
+      "vel": 0.56,
+      "fx": {
+       "nudge": 0.3
+      }
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "pad_13": {
+    "steps": [
+     {
+      "note": "B3",
+      "vel": 0.67,
+      "fx": {
+       "nudge": 0.6
+      }
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "pad_14": {
+    "steps": [
+     {
+      "note": "B3",
+      "vel": 0.6,
+      "fx": {
+       "nudge": 0.6
+      }
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "pad_15": {
     "steps": [
      {
       "note": "B3",
@@ -459,235 +681,13 @@
      null
     ]
    },
-   "pad_7": {
-    "steps": [
-     {
-      "note": "D3",
-      "vel": 0.72
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_8": {
-    "steps": [
-     {
-      "note": "F#3",
-      "vel": 0.68,
-      "fx": {
-       "nudge": 0.3
-      }
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_9": {
-    "steps": [
-     {
-      "note": "B3",
-      "vel": 0.57,
-      "fx": {
-       "nudge": 0.6
-      }
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_10": {
-    "steps": [
-     {
-      "note": "D3",
-      "vel": 0.62
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_11": {
-    "steps": [
-     {
-      "note": "F#3",
-      "vel": 0.73,
-      "fx": {
-       "nudge": 0.3
-      }
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_12": {
-    "steps": [
-     {
-      "note": "A3",
-      "vel": 0.75
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_13": {
-    "steps": [
-     {
-      "note": "D4",
-      "vel": 0.63,
-      "fx": {
-       "nudge": 0.3
-      }
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_14": {
-    "steps": [
-     {
-      "note": "F#4",
-      "vel": 0.66,
-      "fx": {
-       "nudge": 0.6
-      }
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_15": {
-    "steps": [
-     {
-      "note": "A3",
-      "vel": 0.57
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
    "pad_16": {
     "steps": [
      {
-      "note": "D4",
-      "vel": 0.65,
+      "note": "B3",
+      "vel": 0.72,
       "fx": {
-       "nudge": 0.3
+       "nudge": 0.6
       }
      },
      null,
@@ -711,7 +711,7 @@
     "steps": [
      {
       "note": "F#4",
-      "vel": 0.74,
+      "vel": 0.63,
       "fx": {
        "nudge": 0.6
       }
@@ -736,57 +736,8 @@
    "pad_18": {
     "steps": [
      {
-      "note": "A3",
-      "vel": 0.58
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_19": {
-    "steps": [
-     {
-      "note": "D4",
-      "vel": 0.61,
-      "fx": {
-       "nudge": 0.3
-      }
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_20": {
-    "steps": [
-     {
       "note": "F#4",
-      "vel": 0.72,
+      "vel": 0.57,
       "fx": {
        "nudge": 0.6
       }
@@ -808,34 +759,11 @@
      null
     ]
    },
-   "pad_21": {
-    "steps": [
-     {
-      "note": "A3",
-      "vel": 0.74
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null
-    ]
-   },
-   "pad_22": {
+   "pad_19": {
     "steps": [
      {
       "note": "F#4",
-      "vel": 0.67,
+      "vel": 0.73,
       "fx": {
        "nudge": 0.6
       }
@@ -866,56 +794,30 @@
      null,
      null,
      null,
-     {
-      "note": "F#6",
-      "vel": 0.63
-     },
+     null,
      null,
      null,
      null,
      null,
      null,
      {
-      "note": "F#6",
-      "vel": 0.6
+      "note": "F#5",
+      "vel": 0.36
      },
      null,
-     null
+     {
+      "note": "B5",
+      "vel": 0.32
+     }
     ]
    },
    "bells_2": {
     "steps": [
      null,
      null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
      {
       "note": "F#5",
-      "vel": 0.37
-     }
-    ]
-   },
-   "bells_3": {
-    "steps": [
-     null,
-     null,
-     null,
-     null,
-     null,
-     {
-      "note": "E6",
-      "vel": 0.69
+      "vel": 0.49
      },
      null,
      null,
@@ -923,9 +825,199 @@
      null,
      null,
      null,
+     null,
+     null,
+     null,
+     {
+      "note": "B5",
+      "vel": 0.43
+     },
+     null,
+     null,
+     null
+    ]
+   },
+   "bells_3": {
+    "steps": [
+     null,
+     {
+      "note": "F#6",
+      "vel": 0.68
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "D5",
+      "vel": 0.37
+     },
+     null,
+     null,
      {
       "note": "F#5",
-      "vel": 0.32
+      "vel": 0.47
+     }
+    ]
+   },
+   "bells_4": {
+    "steps": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "B5",
+      "vel": 0.67
+     },
+     null,
+     null
+    ]
+   },
+   "bells_5": {
+    "steps": [
+     null,
+     {
+      "note": "B6",
+      "vel": 0.53
+     },
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "B6",
+      "vel": 0.4
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "B6",
+      "vel": 0.63
+     },
+     null,
+     null,
+     null
+    ]
+   },
+   "pluck_1": {
+    "steps": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "D4",
+      "vel": 0.5
+     },
+     null,
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "pluck_2": {
+    "steps": [
+     null,
+     {
+      "note": "F#4",
+      "vel": 0.54
+     },
+     null,
+     {
+      "note": "E4",
+      "vel": 0.7
+     },
+     null,
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "pluck_3": {
+    "steps": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "D5",
+      "vel": 0.65
+     },
+     null
+    ]
+   },
+   "pluck_4": {
+    "steps": [
+     null,
+     null,
+     null,
+     {
+      "note": "E4",
+      "vel": 0.65
+     },
+     null,
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "D4",
+      "vel": 0.58
+     },
+     null,
+     {
+      "note": "OFF"
      },
      null,
      null,
@@ -978,58 +1070,6 @@
      null
     ]
    },
-   "bells_4": {
-    "steps": [
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     {
-      "note": "F#6",
-      "vel": 0.56
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     {
-      "note": "F#6",
-      "vel": 0.48
-     },
-     null,
-     null
-    ]
-   },
-   "bells_5": {
-    "steps": [
-     null,
-     null,
-     null,
-     null,
-     null,
-     {
-      "note": "E6",
-      "vel": 0.61
-     },
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     {
-      "note": "F#5",
-      "vel": 0.26
-     },
-     null,
-     null,
-     null
-    ]
-   },
    "bells_6": {
     "steps": [
      null,
@@ -1045,295 +1085,120 @@
      null,
      null,
      null,
+     {
+      "note": "F#5",
+      "vel": 0.32
+     },
+     null,
+     {
+      "note": "B5",
+      "vel": 0.26
+     }
+    ]
+   },
+   "bells_7": {
+    "steps": [
      null,
      null,
      {
       "note": "F#5",
-      "vel": 0.33
-     }
-    ]
-   },
-   "pluck_1": {
-    "steps": [
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     {
-      "note": "F#4",
-      "vel": 0.45
-     },
-     null,
-     {
-      "note": "OFF"
-     },
-     null,
-     {
-      "note": "F#5",
-      "vel": 0.53
-     },
-     null,
-     {
-      "note": "OFF"
-     },
-     null,
-     {
-      "note": "F#4",
-      "vel": 0.41
-     }
-    ]
-   },
-   "pluck_2": {
-    "steps": [
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     {
-      "note": "B4",
-      "vel": 0.77
-     },
-     null,
-     {
-      "note": "OFF"
+      "vel": 0.43
      },
      null,
      null,
      null,
      null,
+     null,
+     null,
+     null,
+     null,
+     null,
      {
-      "note": "F#4",
-      "vel": 0.41
+      "note": "B5",
+      "vel": 0.35
      },
+     null,
+     null,
      null
     ]
    },
-   "pluck_3": {
+   "bells_8": {
     "steps": [
      null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
      {
-      "note": "F#4",
-      "vel": 0.41
-     },
-     null,
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "F#4",
+      "note": "F#6",
       "vel": 0.6
      },
      null,
-     {
-      "note": "OFF"
-     }
-    ]
-   },
-   "pluck_4": {
-    "steps": [
      null,
      null,
-     {
-      "note": "B4",
-      "vel": 0.63
-     },
      null,
-     {
-      "note": "F#4",
-      "vel": 0.55
-     },
      null,
-     {
-      "note": "OFF"
-     },
+     null,
+     null,
      null,
      null,
      null,
      {
       "note": "D5",
+      "vel": 0.3
+     },
+     null,
+     null,
+     {
+      "note": "F#5",
+      "vel": 0.46
+     }
+    ]
+   },
+   "bells_9": {
+    "steps": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "B5",
       "vel": 0.59
      },
      null,
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "B4",
-      "vel": 0.6
-     },
-     null,
-     {
-      "note": "B4",
-      "vel": 0.73
-     }
-    ]
-   },
-   "pluck_5": {
-    "steps": [
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     {
-      "note": "F#4",
-      "vel": 0.4
-     },
-     null,
-     {
-      "note": "OFF"
-     },
-     null,
-     {
-      "note": "F#5",
-      "vel": 0.51
-     },
-     null,
-     {
-      "note": "OFF"
-     },
-     null,
-     {
-      "note": "F#4",
-      "vel": 0.39
-     }
-    ]
-   },
-   "pluck_6": {
-    "steps": [
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     {
-      "note": "B4",
-      "vel": 0.68
-     },
-     null,
-     {
-      "note": "OFF"
-     },
-     null,
-     null,
-     null,
-     null,
-     {
-      "note": "F#4",
-      "vel": 0.4
-     },
      null
     ]
    },
-   "pluck_7": {
+   "bells_10": {
     "steps": [
      null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
      {
-      "note": "F#4",
-      "vel": 0.36
-     },
-     null,
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "F#4",
-      "vel": 0.58
-     },
-     null,
-     {
-      "note": "OFF"
-     }
-    ]
-   },
-   "pluck_8": {
-    "steps": [
-     null,
-     null,
-     {
-      "note": "B4",
-      "vel": 0.56
-     },
-     null,
-     {
-      "note": "F#4",
-      "vel": 0.53
-     },
-     null,
-     {
-      "note": "OFF"
+      "note": "B6",
+      "vel": 0.47
      },
      null,
      null,
      null,
+     null,
      {
-      "note": "D5",
-      "vel": 0.55
+      "note": "B6",
+      "vel": 0.32
      },
      null,
-     {
-      "note": "OFF"
-     },
-     {
-      "note": "B4",
-      "vel": 0.51
-     },
-     null,
-     {
-      "note": "B4",
-      "vel": 0.76
-     }
-    ]
-   },
-   "pluck_9": {
-    "steps": [
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
-     null,
      null,
      null,
      null,
      null,
      {
-      "note": "E4",
-      "vel": 0.7
+      "note": "B6",
+      "vel": 0.62
      },
      null,
-     {
-      "note": "OFF"
-     },
      null,
      null
     ]
@@ -1499,137 +1364,165 @@
       "phrase": "pad_1"
      },
      {
+      "phrase": "pad_2"
+     },
+     {
+      "phrase": "pad_3"
+     },
+     {
       "phrase": "pad_4"
      },
      {
-      "phrase": "pad_7"
+      "phrase": "pad_5"
      },
      {
-      "phrase": "pad_10"
+      "phrase": "pad_5"
      },
      {
-      "phrase": "pad_12"
+      "phrase": "pad_5"
      },
      {
-      "phrase": "pad_15"
-     },
-     {
-      "phrase": "pad_18"
-     },
-     {
-      "phrase": "pad_21"
+      "phrase": "pad_6"
      }
     ]
    },
    "pad_c2": {
     "rows": [
      {
-      "phrase": "pad_2"
-     },
-     {
-      "phrase": "pad_5"
+      "phrase": "pad_7"
      },
      {
       "phrase": "pad_8"
      },
      {
+      "phrase": "pad_8"
+     },
+     {
+      "phrase": "pad_8"
+     },
+     {
+      "phrase": "pad_9"
+     },
+     {
+      "phrase": "pad_10"
+     },
+     {
       "phrase": "pad_11"
      },
      {
-      "phrase": "pad_13"
-     },
-     {
-      "phrase": "pad_16"
-     },
-     {
-      "phrase": "pad_19"
-     },
-     {
-      "phrase": "pad_13"
+      "phrase": "pad_12"
      }
     ]
    },
    "pad_c3": {
     "rows": [
      {
-      "phrase": "pad_3"
-     },
-     {
-      "phrase": "pad_6"
-     },
-     {
-      "phrase": "pad_9"
-     },
-     {
-      "phrase": "pad_3"
+      "phrase": "pad_13"
      },
      {
       "phrase": "pad_14"
      },
      {
+      "phrase": "pad_15"
+     },
+     {
+      "phrase": "pad_16"
+     },
+     {
       "phrase": "pad_17"
      },
      {
-      "phrase": "pad_20"
+      "phrase": "pad_18"
      },
      {
-      "phrase": "pad_22"
+      "phrase": "pad_19"
+     },
+     {
+      "phrase": "pad_19"
      }
     ]
    },
    "bells_c1": {
     "rows": [
      {
-      "phrase": "air_2"
-     },
-     {
       "phrase": "bells_1"
-     },
-     {
-      "phrase": "air_2"
      },
      {
       "phrase": "bells_2"
      },
      {
-      "phrase": "air_2"
+      "phrase": "bells_3"
+     },
+     {
+      "phrase": "bells_4"
      },
      {
       "phrase": "bells_1"
      },
      {
-      "phrase": "air_2"
+      "phrase": "bells_2"
      },
      {
-      "phrase": "bells_2"
+      "phrase": "bells_3"
+     },
+     {
+      "phrase": "bells_5"
      }
     ]
    },
    "bells_c2": {
     "rows": [
      {
-      "phrase": "air_2"
-     },
-     {
       "phrase": "bells_1"
      },
      {
-      "phrase": "air_2"
+      "phrase": "bells_2"
      },
      {
       "phrase": "bells_3"
      },
      {
-      "phrase": "air_2"
+      "phrase": "bells_5"
      },
      {
       "phrase": "bells_1"
      },
      {
+      "phrase": "bells_2"
+     },
+     {
+      "phrase": "bells_3"
+     },
+     {
+      "phrase": "bells_5"
+     }
+    ]
+   },
+   "pluck_c1": {
+    "rows": [
+     {
       "phrase": "air_2"
      },
      {
-      "phrase": "bells_2"
+      "phrase": "pluck_1"
+     },
+     {
+      "phrase": "pluck_2"
+     },
+     {
+      "phrase": "pluck_3"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "pluck_1"
+     },
+     {
+      "phrase": "pluck_2"
+     },
+     {
+      "phrase": "pluck_4"
      }
     ]
    },
@@ -1699,61 +1592,77 @@
       "phrase": "pad_1"
      },
      {
+      "phrase": "pad_2"
+     },
+     {
+      "phrase": "pad_3"
+     },
+     {
       "phrase": "pad_4"
-     },
-     {
-      "phrase": "pad_7"
-     },
-     {
-      "phrase": "pad_10"
      }
     ]
    },
    "pad_c5": {
     "rows": [
      {
-      "phrase": "pad_2"
-     },
-     {
-      "phrase": "pad_5"
+      "phrase": "pad_7"
      },
      {
       "phrase": "pad_8"
      },
      {
-      "phrase": "pad_11"
+      "phrase": "pad_8"
+     },
+     {
+      "phrase": "pad_8"
      }
     ]
    },
    "pad_c6": {
     "rows": [
      {
-      "phrase": "pad_3"
+      "phrase": "pad_13"
      },
      {
-      "phrase": "pad_6"
+      "phrase": "pad_14"
      },
      {
-      "phrase": "pad_9"
+      "phrase": "pad_15"
      },
      {
-      "phrase": "pad_3"
+      "phrase": "pad_16"
      }
     ]
    },
    "bells_c3": {
     "rows": [
      {
+      "phrase": "bells_6"
+     },
+     {
+      "phrase": "bells_7"
+     },
+     {
+      "phrase": "bells_8"
+     },
+     {
+      "phrase": "bells_9"
+     }
+    ]
+   },
+   "pluck_c2": {
+    "rows": [
+     {
       "phrase": "air_2"
      },
      {
-      "phrase": "bells_4"
+      "phrase": "pluck_1"
      },
      {
-      "phrase": "air_2"
+      "phrase": "pluck_2"
      },
      {
-      "phrase": "bells_5"
+      "phrase": "pluck_3"
      }
     ]
    },
@@ -1776,72 +1685,91 @@
    "bells_c4": {
     "rows": [
      {
+      "phrase": "bells_6"
+     },
+     {
+      "phrase": "bells_7"
+     },
+     {
+      "phrase": "bells_8"
+     },
+     {
+      "phrase": "bells_10"
+     },
+     {
+      "phrase": "bells_6"
+     },
+     {
+      "phrase": "bells_7"
+     },
+     {
+      "phrase": "bells_8"
+     },
+     {
+      "phrase": "bells_10"
+     }
+    ]
+   },
+   "pluck_c3": {
+    "rows": [
+     {
       "phrase": "air_2"
      },
      {
-      "phrase": "bells_4"
+      "phrase": "pluck_1"
+     },
+     {
+      "phrase": "pluck_2"
+     },
+     {
+      "phrase": "pluck_3"
      },
      {
       "phrase": "air_2"
      },
      {
-      "phrase": "bells_5"
+      "phrase": "pluck_1"
      },
      {
-      "phrase": "air_2"
+      "phrase": "pluck_2"
      },
      {
-      "phrase": "bells_4"
-     },
-     {
-      "phrase": "air_2"
-     },
-     {
-      "phrase": "bells_5"
+      "phrase": "pluck_3"
      }
     ]
    },
    "bells_c5": {
     "rows": [
      {
-      "phrase": "air_2"
+      "phrase": "bells_6"
      },
      {
-      "phrase": "bells_4"
+      "phrase": "bells_7"
      },
      {
-      "phrase": "air_2"
+      "phrase": "bells_8"
+     },
+     {
+      "phrase": "bells_9"
      },
      {
       "phrase": "bells_6"
      },
      {
-      "phrase": "air_2"
+      "phrase": "bells_7"
      },
      {
-      "phrase": "bells_4"
+      "phrase": "bells_8"
      },
      {
-      "phrase": "air_2"
-     },
-     {
-      "phrase": "bells_5"
+      "phrase": "bells_9"
      }
     ]
    },
-   "pluck_c1": {
+   "pluck_c4": {
     "rows": [
      {
-      "phrase": "pluck_1"
-     },
-     {
-      "phrase": "pluck_2"
-     },
-     {
-      "phrase": "pluck_3"
-     },
-     {
-      "phrase": "pluck_4"
+      "phrase": "air_2"
      },
      {
       "phrase": "pluck_1"
@@ -1850,38 +1778,47 @@
       "phrase": "pluck_2"
      },
      {
-      "phrase": "pluck_3"
+      "phrase": "pluck_4"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "pluck_1"
+     },
+     {
+      "phrase": "pluck_2"
      },
      {
       "phrase": "pluck_4"
      }
     ]
    },
-   "pluck_c2": {
+   "bells_c6": {
     "rows": [
      {
-      "phrase": "pluck_5"
+      "phrase": "bells_6"
      },
      {
-      "phrase": "pluck_6"
+      "phrase": "bells_7"
      },
      {
-      "phrase": "pluck_7"
+      "phrase": "bells_8"
      },
      {
-      "phrase": "pluck_8"
+      "phrase": "bells_10"
      },
      {
-      "phrase": "pluck_5"
+      "phrase": "bells_6"
      },
      {
-      "phrase": "pluck_6"
+      "phrase": "bells_7"
      },
      {
-      "phrase": "pluck_7"
+      "phrase": "bells_8"
      },
      {
-      "phrase": "pluck_9"
+      "phrase": "bells_9"
      }
     ]
    },
@@ -2041,6 +1978,7 @@
      "pad2": "pad_c2",
      "pad3": "pad_c3",
      "bells": "bells_c2",
+     "pluck": "pluck_c1",
      "shimmer": "shimmer_c1"
     },
     {
@@ -2050,6 +1988,7 @@
      "pad2": "pad_c5",
      "pad3": "pad_c6",
      "bells": "bells_c3",
+     "pluck": "pluck_c2",
      "shimmer": "shimmer_c2"
     },
     {
@@ -2059,6 +1998,7 @@
      "pad2": "pad_c2",
      "pad3": "pad_c3",
      "bells": "bells_c4",
+     "pluck": "pluck_c3",
      "shimmer": "shimmer_c1"
     },
     {
@@ -2068,7 +2008,7 @@
      "pad2": "pad_c2",
      "pad3": "pad_c3",
      "bells": "bells_c5",
-     "pluck": "pluck_c1",
+     "pluck": "pluck_c4",
      "shimmer": "shimmer_c1"
     },
     {
@@ -2077,8 +2017,8 @@
      "pad1": "pad_c1",
      "pad2": "pad_c2",
      "pad3": "pad_c3",
-     "bells": "bells_c4",
-     "pluck": "pluck_c2"
+     "bells": "bells_c6",
+     "pluck": "pluck_c3"
     },
     {
      "drone": "drone_c2",
