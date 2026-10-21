@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parameter Cube</title>
+<link rel="icon" href="data:,">
+<style>
+  :root { color-scheme: dark; --bg: #0e0f12; --panel: #16181dee; --line: #262a33; --fg: #d8dbe2; --dim: #7a8090; --acc: #6ee7b7; --acc2: #f59e0b; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: var(--bg); color: var(--fg); font: 13px/1.4 ui-monospace, Menlo, Consolas, monospace; }
+  #view { position: fixed; inset: 0; }
+  #view canvas { display: block; }
+  header { position: fixed; top: 0; left: 0; right: 0; display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; padding: 10px 16px; background: var(--panel); border-bottom: 1px solid var(--line); z-index: 2; }
+  header h1 { font-size: 14px; margin: 0 6px 0 0; color: var(--acc); letter-spacing: .08em; }
+  button, select, input { font: inherit; background: #1f232b; color: var(--fg); border: 1px solid var(--line); border-radius: 4px; padding: 5px 10px; max-width: 100%; }
+  button { cursor: pointer; } button:hover { border-color: var(--acc); }
+  button.on { border-color: var(--acc); color: var(--acc); }
+  button.primary { background: var(--acc); color: #0b0c0f; border-color: var(--acc); font-weight: bold; }
+  label.check { display: inline-flex; gap: 6px; align-items: center; }
+  a { color: var(--acc); }
+  #status { color: var(--acc2); }
+  .views { display: inline-flex; gap: 4px; }
+  #legend { position: fixed; left: 16px; bottom: 16px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; z-index: 2; max-width: 300px; }
+  #legend h2 { font-size: 11px; color: var(--dim); text-transform: uppercase; letter-spacing: .1em; margin: 0 0 6px; }
+  #legend label { display: flex; gap: 8px; align-items: center; cursor: pointer; padding: 1px 0; }
+  #legend i { width: 12px; height: 12px; border-radius: 2px; display: inline-block; flex: none; }
+  #legend small { color: var(--dim); margin-left: auto; padding-left: 8px; }
+  #legend p { color: var(--dim); margin: 8px 0 0; font-size: 11px; }
+  #tip { position: fixed; pointer-events: none; background: #0b0c0fee; border: 1px solid var(--line); border-radius: 4px; padding: 6px 8px; z-index: 3; display: none; max-width: 340px; white-space: pre-wrap; }
+  #tip b { color: var(--acc); font-weight: normal; }
+  #labels { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
+  #labels div { position: absolute; transform: translate(-50%, -50%); white-space: nowrap; font-size: 11px; color: var(--dim); text-shadow: 0 0 3px #000, 0 0 3px #000; }
+  #labels div.lane { transform: translate(0, -100%) rotate(-50deg); transform-origin: 0 100%; }
+  #labels div.track { color: var(--fg); font-size: 12px; }
+  #labels div.group { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; }
+  #labels div.row { color: var(--acc2); transform: translate(-100%, -50%); }
+  @media (max-width: 700px) { #legend { left: 8px; right: 8px; bottom: 8px; max-width: none; font-size: 12px; } #legend p { display: none; } }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<div id="view"></div>
+<div id="labels"></div>
+<header>
+  <h1>PARAMETER CUBE</h1>
+  <select id="source" title="Song, or a style to generate a song from"></select>
+  <select id="rows" title="Which song rows to show"></select>
+  <select id="lane" title="Show every parameter, or one slice"></select>
+  <span class="views" title="Camera">
+    <button data-view="iso" class="on">3-D</button>
+    <button data-view="front" title="Looking down the parameter axis: the tracker table">table</button>
+    <button data-view="side" title="Steps against parameters, all tracks overlaid">side</button>
+    <button data-view="top" title="Tracks against parameters, all steps overlaid">top</button>
+  </span>
+  <label class="check" title="Show only values that changed since the track's previous step, plus the notes"><input type="checkbox" id="changes"> changes only</label>
+  <button id="play" class="primary" title="Play these rows (Space)">Play</button>
+  <span id="status">loading…</span>
+  <a href="./">player</a>
+</header>
+<div id="legend">
+  <h2>Parameter groups</h2>
+  <div id="groups"></div>
+  <p>x: tracks · down: steps (time) · into the screen: every parameter shaping each step. A box's size and brightness is the value, 0 to 1 over the parameter's range. Pale boxes are set by a track command; grey ones are unset, shown at the schema's default (unset values with no documented default are left out); white-tinted ones changed since the track's previous step. Drag to orbit, scroll to zoom, hover for values.</p>
+</div>
+<div id="tip"></div>
+<script type="module" src="./cube.js"></script>
+</body>
+</html>

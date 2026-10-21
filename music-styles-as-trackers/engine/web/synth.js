@@ -6,6 +6,7 @@
  */
 import { toName } from '../../format/lib/core.js';
 import { EXAMPLES, STYLES } from './catalog.js';
+import { deref as derefIn, scaleFor } from './params.js';
 
 const $ = (id) => document.getElementById(id);
 const KEYBOARD_VOICES = 8;
@@ -64,32 +65,8 @@ function setAt(path, value) {
 
 /* ----------------------------------------------------------- controls */
 
-function deref(raw) {
-  if (!raw.$ref) return { node: raw, ref: null };
-  const ref = raw.$ref.split('/').pop();
-  const { $ref, ...rest } = raw;
-  return { node: { ...defs[ref], ...rest }, ref };
-}
+const deref = (raw) => derefIn(defs, raw);
 
-/** Slider mapping: linear, cubic for times and rates (fine control near zero), log for wide positive ranges. */
-function scaleFor(node, ref, key) {
-  const integer = node.type === 'integer';
-  let min = node.minimum ?? 0, max = node.maximum;
-  let kind = 'lin';
-  if (ref === 'seconds') { max = 10; kind = 'pow'; }
-  else if (key === 'rate') kind = 'pow';
-  else if (key === 'sync') { min = 0.25; max = 64; kind = 'log'; }
-  else if (!integer && min > 0 && max / min >= 20) kind = 'log';
-  const to = kind === 'log' ? (v) => Math.log(v / min) / Math.log(max / min)
-    : kind === 'pow' ? (v) => Math.cbrt((v - min) / (max - min))
-    : (v) => (v - min) / (max - min);
-  const from = kind === 'log' ? (x) => min * Math.pow(max / min, x)
-    : kind === 'pow' ? (x) => min + (max - min) * x * x * x
-    : (x) => min + (max - min) * x;
-  const round = integer ? Math.round : (v) => Number(v.toPrecision(3));
-  const rest = node.default ?? (min < 0 && max > 0 ? 0 : min);
-  return { integer, min, max, to, from, round, rest, hardMin: node.minimum ?? node.exclusiveMinimum ?? -Infinity, hardMax: node.maximum ?? Infinity };
-}
 
 function row(container, key, title) {
   const r = document.createElement('div');

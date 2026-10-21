@@ -589,6 +589,7 @@ $('download').onclick = () => {
   progress(0);
   worker.postMessage({ type: 'render', song });
 };
+$('cube').onclick = () => { if (song) try { sessionStorage.setItem('tracker-song', JSON.stringify(song)); } catch {} };
 $('save').onclick = () => download(new Blob([JSON.stringify(song, null, 2) + '\n'], { type: 'application/json' }), `${title}.json`);
 $('examples').value = EXAMPLES[1][1];
 loadUrl(EXAMPLES[1][1]);

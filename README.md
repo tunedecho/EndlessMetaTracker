@@ -9,4 +9,5 @@ cd music-styles-as-trackers
 npm install && npm test
 npm run web     # player, step editor, and generator at http://localhost:8080/engine/web/
                 # synth playground at http://localhost:8080/engine/web/synth.html
+                # parameter cube at http://localhost:8080/engine/web/cube.html
 ```

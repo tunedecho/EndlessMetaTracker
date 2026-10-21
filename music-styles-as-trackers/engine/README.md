@@ -14,7 +14,7 @@ node bin/render.js ../format/examples/minimal-techno-loop.json out.wav --mp3 --r
 node bin/analyze.js ../endless-techno/previews/hypnotic-techno-3.json --seconds 200
 
 # browser player and step editor: the whole-row grid, live playback, editing, in-page generation
-npm run web      # then open http://localhost:8080/engine/web/ (synth playground: /engine/web/synth.html)
+npm run web      # then open http://localhost:8080/engine/web/ (synth playground: synth.html, parameter cube: cube.html)
 ```
 
 From code:
@@ -39,6 +39,7 @@ console.log(analyze.report(r.left, r.right, r.sampleRate));
 | `lib/analyze.js` | Measurements for sessions without ears: peak, RMS, clipping, band balance, onset detection |
 | `web/` | The browser player and step editor. The grid shows every step of a song row, banded by phrase with each track's phrase id and transpose. Songs play live in an AudioWorklet (`synth-worklet.js`) from any row, or loop one row; edits reach the player as a new composition and are heard the next time their row is appended. The cursor steps through rows and plays each step; edit mode writes notes, OFFs, velocities, instruments, and commands into the phrase behind the step, with undo, and **Make unique here** copies a shared phrase first (`format/lib/edit.js`). A Web Worker renders WAVs, generates songs, and runs **Endless** mode, which streams generated sections gaplessly with live energy up/down |
 | `web/synth.html` | The synth playground: pick any instrument from a song or style, change every parameter with controls built from the format's schema, play it from the computer keyboard (tracker layout) or the on-screen keys, repeat a note at the song's tempo, and copy the instrument JSON back out. Audio runs in an AudioWorklet (`synth-worklet.js`) on the same `Player`, using its live-play methods `noteOn`, `noteOff`, and `updateInstrument` |
+| `web/cube.html` | The parameter cube: the tracker grid with a third axis. Tracks run across, steps run down, and every parameter shaping each step runs into the screen: the note and velocity, note commands, the track's persisting commands, and every instrument parameter, with track commands overriding the instrument as the player applies them (`cube-data.js`). Box size and brightness is the value; colour is the parameter group; values changed since the track's previous step glow. Orbit, preset views (the front view is the tracker table), slices by group or single parameter, a changes-only filter, hover for values, and live playback with a sweeping playhead. Opens on the player's song through its link. The one page with a library: three.js 0.160.0 from jsDelivr |
 
 Timing: step boundaries are computed in samples before rendering, events fire at their exact sample, and blocks are split at event boundaries. Swing delays every second step. One voice per track with up to four releasing voices behind it, so a new note cuts the old one's gate but lets its release ring.
 
