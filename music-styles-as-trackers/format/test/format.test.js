@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, readdirSync } from 'node:fs';
-import { toMidi, toName, toFreq, degreeToMidi, MODES, Random, resolve, songSteps, validate, timelineSeconds, checkSongReferences } from '../lib/index.js';
+import { toMidi, toName, toFreq, degreeToMidi, MODES, Random, resolve, songSteps, validate, timelineSeconds, checkSongReferences, stepSource, phrasePlays, getStep, setStep, makeUnique } from '../lib/index.js';
 
 const here = new URL('.', import.meta.url).pathname;
 const load = (f) => JSON.parse(readFileSync(new URL(`../examples/${f}`, import.meta.url), 'utf8'));
@@ -94,4 +94,48 @@ test('resolve honours maxSteps and loops', () => {
   song.transport.loop = 0;
   const looped = resolve(song, { loops: 2 });
   assert.equal(looped.totalSteps, 32 * 3);
+});
+
+test('stepSource finds the phrase step behind every resolved note', () => {
+  const songs = ['hello-tracker.json', 'minimal-techno-loop.json', 'ambient-drift.json'].map(load);
+  songs.push(JSON.parse(readFileSync(new URL('../../endless-techno/previews/hypnotic-techno-3.json', import.meta.url), 'utf8')));
+  for (const song of songs) {
+    const r = resolve(song);
+    let checked = 0;
+    for (const e of r.events) {
+      if (e.phrase === null) continue;
+      const src = stepSource(song, e.row, e.trackId, e.step - r.rows[e.row].step);
+      assert.equal(src.phrase, e.phrase);
+      assert.equal(src.phraseStep, e.phraseStep);
+      const cell = getStep(song, src.phrase, src.phraseStep);
+      if (typeof e.note === 'number') assert.equal(toMidi(cell.note) + src.transpose, e.note);
+      checked++;
+    }
+    assert.ok(checked > 0);
+  }
+});
+
+test('editing a shared phrase changes every place it plays; makeUnique keeps the edit in one row', () => {
+  const song = load('minimal-techno-loop.json');
+  const { rows } = song.composition.song;
+  const ri = rows.findIndex((row) => row.kick);
+  const first = stepSource(song, ri, 'kick', 0);
+  const plays = phrasePlays(song, first.phrase);
+  assert.ok(plays > 1, 'the kick phrase is shared');
+  const before = resolve(song).events.filter((e) => e.trackId === 'kick' && typeof e.note === 'number').length;
+
+  const prev = setStep(song, first.phrase, first.phraseStep, null);
+  const after = resolve(song).events.filter((e) => e.trackId === 'kick' && typeof e.note === 'number').length;
+  assert.equal(before - after, plays, 'one note fewer per play of the phrase');
+  setStep(song, first.phrase, first.phraseStep, prev);
+  assert.ok(song.composition.phrases[first.phrase].steps.length >= 1);
+
+  const ids = makeUnique(song, ri, 'kick', first.chainRow);
+  assert.equal(stepSource(song, ri, 'kick', 0).phrase, ids.phrase);
+  assert.equal(phrasePlays(song, ids.phrase), phrasePlays(song, ids.phrase, ri), 'the copy plays only in this row');
+  assert.equal(phrasePlays(song, first.phrase), plays - phrasePlays(song, ids.phrase));
+  setStep(song, ids.phrase, first.phraseStep, null);
+  const local = resolve(song).events.filter((e) => e.trackId === 'kick' && typeof e.note === 'number').length;
+  assert.equal(before - local, phrasePlays(song, ids.phrase), 'only the copy lost its note');
+  assert.deepEqual(validate(song).errors, []);
 });

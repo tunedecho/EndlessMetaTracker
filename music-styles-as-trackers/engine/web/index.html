@@ -15,7 +15,8 @@
   button { cursor: pointer; } button:hover { border-color: var(--acc); } button:disabled { opacity: .4; cursor: default; }
   button.primary { background: var(--acc); color: #0b0c0f; border-color: var(--acc); font-weight: bold; }
   input[type=number] { width: 72px; }
-  main { display: grid; grid-template-columns: 300px 1fr; gap: 0; min-height: calc(100vh - 56px); }
+  body { display: flex; flex-direction: column; height: 100vh; }
+  main { display: grid; grid-template-columns: 300px 1fr; gap: 0; flex: 1; min-height: 0; }
   aside { border-right: 1px solid var(--line); padding: 12px; overflow: auto; }
   section { padding: 12px 16px; overflow: auto; }
   h2 { font-size: 11px; color: var(--dim); text-transform: uppercase; letter-spacing: .1em; margin: 14px 0 6px; }
@@ -32,13 +33,31 @@
   #grid th { color: var(--dim); font-weight: normal; }
   #grid tr.beat td { border-top: 1px solid var(--line); }
   #grid tr.playing { background: #243243; }
+  #grid tr.cursor { background: #1b1f27; }
+  #grid tr.cursor.playing { background: #2a3a4d; }
+  #grid td.sel { outline: 1px solid var(--acc2); outline-offset: -1px; background: #2a2416; }
+  body.editing #grid td.sel { outline-color: #ef4444; background: #3a1c1c; }
+  body.editing label.check:has(#edit) { color: #ef4444; }
+  #grid tr.phrase td { color: var(--dim); font-size: 11px; border-top: 1px solid #3b4252; padding-top: 6px; overflow: hidden; text-overflow: ellipsis; max-width: 80px; }
+  #grid td.silent { color: #3a3f4a; }
+  #grid td { cursor: pointer; }
+  #cell { color: var(--dim); white-space: pre-wrap; margin-bottom: 6px; }
+  #cell b { color: var(--fg); font-weight: normal; }
+  #cell .shared { color: var(--acc2); }
+  #cellForm { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  #cellForm label { display: flex; gap: 6px; align-items: center; color: var(--dim); }
+  #cellForm input, #cellForm select { width: 100%; padding: 3px 5px; }
+  #cellForm .wide, #cellForm button { grid-column: 1 / 3; }
+  #cellForm .bad { border-color: #ef4444; }
+  #help { color: var(--dim); font-size: 12px; }
+  label.check { display: inline-flex; gap: 6px; align-items: center; }
   #grid td.note { color: var(--note); }
   #grid td.off { color: var(--dim); }
   #grid td.fx { color: var(--acc2); }
   #grid td.stepno { color: var(--dim); width: 28px; }
   canvas { width: 100%; height: 90px; background: var(--panel); border: 1px solid var(--line); border-radius: 4px; display: block; }
   a { color: var(--acc); }
-  @media (max-width: 800px) { main { grid-template-columns: 1fr; } aside { border-right: 0; border-bottom: 1px solid var(--line); } }
+  @media (max-width: 800px) { body { height: auto; display: block; } main { grid-template-columns: 1fr; } aside { border-right: 0; border-bottom: 1px solid var(--line); } }
 </style>
 </head>
 <body>
@@ -53,9 +72,13 @@
   <button id="endless">Endless</button>
   <button id="less" disabled title="less energy">−</button>
   <button id="more" disabled title="more energy">+</button>
-  <button id="play" class="primary" disabled>Render &amp; Play</button>
+  <button id="play" class="primary" disabled title="Play the song from the cursor's row (Space)">Play</button>
+  <button id="loop" disabled title="Loop the cursor's row (L)">Loop row</button>
   <button id="stop" disabled>Stop</button>
-  <button id="download" disabled>WAV</button>
+  <label class="check" title="Edit mode (Esc): note keys write into the grid"><input type="checkbox" id="edit"> edit</label>
+  <span title="Octave for the note keys">oct <button id="octDown">−</button> <b id="oct">3</b> <button id="octUp">+</button></span>
+  <button id="download" disabled title="Render the whole song offline and download it">WAV</button>
+  <button id="save" disabled title="Download the song as edited">JSON</button>
   <span id="status">loading…</span>
   <div id="progress"><i></i></div>
   <a href="./synth.html">synth playground</a>
@@ -66,12 +89,23 @@
     <div id="meta">–</div>
     <h2>Rows</h2>
     <table id="rows"></table>
+    <h2>Step</h2>
+    <div id="cell">–</div>
+    <div id="cellForm">
+      <label>note <input id="cNote" size="5" placeholder="C4, OFF"></label>
+      <label>vel <input id="cVel" type="number" min="0" max="1" step="0.05" placeholder="1"></label>
+      <label>inst <select id="cInst"></select></label>
+      <label class="wide">fx <input id="cFx" placeholder='{"cutoff": 0.4}'></label>
+      <button id="unique" title="Copy this phrase (and this row's chain) so edits change only this place">Make unique here</button>
+    </div>
+    <h2>Keys</h2>
+    <div id="help">↑ ↓ step (plays it; Shift: a beat) · ← → track · PgUp PgDn phrase<br>Space play/stop · L loop row · Enter play step<br>Esc edit mode · Z–M, Q–I notes<br>edit mode: 1 OFF · Delete clear · ⌘Z undo</div>
   </aside>
   <section>
     <canvas id="wave" width="1200" height="90"></canvas>
+    <p style="color:var(--dim)">Same engine as the offline renderer, played live. The grid is the whole song row, every step of it; each band starts a phrase and names the phrase each track plays there (with its chain transpose). <b>Play</b> streams the song from the cursor's row and <b>Loop row</b> repeats one row; edits are heard the next time their row comes round. A step belongs to a phrase, so an edit changes that phrase everywhere it plays; <b>Make unique here</b> copies it first. <b>Generate</b> writes a fixed song from the chosen style and seed. <b>Endless</b> starts a run that never ends; <b>−</b> and <b>+</b> nudge the energy of the next section.</p>
     <h2 id="gridTitle">Row</h2>
     <table id="grid"></table>
-    <p style="color:var(--dim)">Same engine as the offline renderer. <b>Render &amp; Play</b> renders the loaded song in a worker, then plays it; click a row to jump. <b>Generate</b> writes a fixed song from the chosen style and seed. <b>Endless</b> starts a run that never ends: the generator plans sections as it goes and the engine streams them gaplessly; <b>−</b> and <b>+</b> nudge the energy of the next section. Files: <code>engine/web/</code>. Serve with <code>npm run web</code>.</p>
   </section>
 </main>
 <script type="module" src="./app.js"></script>

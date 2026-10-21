@@ -17,7 +17,7 @@ This repo started from five ideas captured in the Idea Console (`docs/ideas/`). 
 | `format/` | Tracker Song Format: the shared JSON schema, validator, library, examples, spec | Working. v0.1 |
 | `styles/` | The style library: complete generative styles as data | Three styles |
 | `endless-techno/` | The generator that turns a style and a seed into a song, with previews | Working |
-| `engine/` | The tracker engine: six synth engines, effects, sequencer, offline renderer, browser player | Working, unheard |
+| `engine/` | The tracker engine: six synth engines, effects, sequencer, offline renderer, browser player and step editor, synth playground | Working, unheard |
 | `m8-writer/` | MIDI export and a Dirtywave M8 song file writer | MIDI verified; `.m8s` untested on hardware |
 
 Plain JavaScript, Node 22, no build step, no dependencies beyond the validator's Ajv.
@@ -26,10 +26,10 @@ Plain JavaScript, Node 22, no build step, no dependencies beyond the validator's
 
 ```sh
 npm install
-npm test                      # 61 tests across the four packages
+npm test                      # 63 tests across the four packages
 npm run validate              # check every example and style
 npm run demo                  # generate, render, and export everything into demo-out/
-npm run web                   # browser player at http://localhost:8080/engine/web/, synth playground at .../engine/web/synth.html
+npm run web                   # player and step editor at http://localhost:8080/engine/web/, synth playground at .../engine/web/synth.html
 
 # generate a six-minute techno track from seed 42 and render it
 node endless-techno/bin/generate.js styles/hypnotic-techno.json --seed 42 --minutes 6 --out song.json --render song.wav --mp3

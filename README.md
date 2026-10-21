@@ -7,6 +7,6 @@ The project lives in [`music-styles-as-trackers/`](music-styles-as-trackers/READ
 ```sh
 cd music-styles-as-trackers
 npm install && npm test
-npm run web     # browser player and generator at http://localhost:8080/engine/web/
+npm run web     # player, step editor, and generator at http://localhost:8080/engine/web/
                 # synth playground at http://localhost:8080/engine/web/synth.html
 ```

@@ -146,6 +146,13 @@ export class Player {
   /** Live play: release whatever the track is playing. */
   noteOff(track) { this.applyEvent({ kind: 'off', track }); }
 
+  /** Drop every event not yet played and release every track, so only tails remain. */
+  stop() {
+    this.events.length = this.ei;
+    for (let ti = 0; ti < this.tracks.length; ti++) this.noteOff(ti);
+    this.rowStart = this.pos;
+  }
+
   /**
    * Replace an instrument's definition in place, so a sounding voice picks up
    * every parameter it reads per block (filter, mix, levels, FM index, ...).
