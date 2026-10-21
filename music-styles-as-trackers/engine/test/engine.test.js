@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { renderSong, stepGrid, schedule, encodeWav, decodeWav, analyze, Osc, SVF, ADSR } from '../lib/index.js';
+import { renderSong, stepGrid, schedule, encodeWav, decodeWav, analyze, Osc, SVF, ADSR, Player } from '../lib/index.js';
 import { resolve } from '@tracker/format';
 
 const SR = 44100;
@@ -158,4 +158,20 @@ test('loop repeats the region', () => {
   const once = renderSong(song, { tailSeconds: 0 });
   const twice = renderSong(song, { loops: 1, tailSeconds: 0 });
   assert.equal(twice.left.length, once.left.length + 2 * SR);
+});
+
+test('live play: a held note sounds until noteOff, and instrument edits reach it', () => {
+  const SAW = { engine: 'analog', params: { wave: 'saw' }, filter: { cutoff: 0.9 }, amp: { attack: 0.001, sustain: 1, release: 0.01 }, mix: { volume: 1 } };
+  const p = new Player({ transport: { bpm: 120 }, sound: { instruments: { x: SAW }, master: { volume: 1, limiter: false } }, composition: { tracks: [{ id: 'v0' }] } }, { sampleRate: SR });
+  const rms = (b) => Math.sqrt(b.reduce((s, v) => s + v * v, 0) / b.length);
+  p.noteOn(0, 'x', 48);
+  const open = rms(p.render(SR / 4).left);
+  p.updateInstrument('x', { ...SAW, filter: { cutoff: 0.05 } });
+  p.render(SR / 50);
+  const closed = rms(p.render(SR / 4).left);
+  assert.ok(open > 0.05, `open ${open}`);
+  assert.ok(closed < open / 4, `the filter closed on the held note: ${closed} vs ${open}`);
+  p.noteOff(0);
+  p.render(SR / 10);
+  assert.ok(rms(p.render(SR / 10).left) < 1e-4, 'silent after release');
 });

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Synth Playground</title>
+<link rel="icon" href="data:,">
+<style>
+  :root { color-scheme: dark; --bg: #0e0f12; --panel: #16181d; --line: #262a33; --fg: #d8dbe2; --dim: #7a8090; --acc: #6ee7b7; --acc2: #f59e0b; --note: #93c5fd; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 13px/1.4 ui-monospace, Menlo, Consolas, monospace; }
+  header { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--line); background: var(--panel); }
+  header h1 { font-size: 14px; margin: 0 8px 0 0; color: var(--acc); letter-spacing: .08em; }
+  button, select, input, textarea { font: inherit; background: #1f232b; color: var(--fg); border: 1px solid var(--line); border-radius: 4px; padding: 5px 10px; }
+  button { cursor: pointer; } button:hover { border-color: var(--acc); }
+  button.primary { background: var(--acc); color: #0b0c0f; border-color: var(--acc); font-weight: bold; }
+  header select, header input { max-width: 100%; }
+  label.check { display: inline-flex; gap: 6px; align-items: center; }
+  a { color: var(--acc); }
+  #status { color: var(--acc2); }
+  .top { display: grid; grid-template-columns: minmax(200px, 1fr) auto; gap: 12px 16px; padding: 12px 16px; border-bottom: 1px solid var(--line); align-items: end; }
+  canvas { width: 100%; height: 110px; background: var(--panel); border: 1px solid var(--line); border-radius: 4px; display: block; }
+  .playbar { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; margin-bottom: 8px; color: var(--dim); }
+  .playbar input[type=range] { width: 90px; }
+  #keys { position: relative; height: 110px; user-select: none; touch-action: none; }
+  #keys div { position: absolute; top: 0; border: 1px solid #0b0c0f; border-radius: 0 0 4px 4px; cursor: pointer; }
+  #keys .w { width: 26px; height: 110px; background: #d8dbe2; color: #555; font-size: 10px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 4px; }
+  #keys .b { width: 18px; height: 68px; background: #1f232b; z-index: 1; color: var(--dim); font-size: 9px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 3px; }
+  #keys .w.down { background: var(--acc); } #keys .b.down { background: #3b9b7a; }
+  main { display: grid; grid-template-columns: 1fr 380px; min-height: calc(100vh - 200px); }
+  #params { padding: 12px 16px; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; align-content: start; }
+  fieldset { border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px 10px; margin: 0; background: var(--panel); min-width: 0; }
+  fieldset fieldset { margin-top: 6px; background: transparent; }
+  legend { color: var(--dim); text-transform: uppercase; letter-spacing: .1em; font-size: 11px; padding: 0 4px; }
+  .row { display: grid; grid-template-columns: 96px 1fr 64px 18px; gap: 6px; align-items: center; min-height: 26px; }
+  .row label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .row input[type=range] { width: 100%; accent-color: var(--acc); }
+  .row input[type=number] { width: 64px; padding: 2px 4px; }
+  .row select { padding: 2px 4px; grid-column: 2 / 4; }
+  .row.unset label, .row.unset input { opacity: .45; }
+  .row .clear { border: 0; background: none; color: var(--dim); padding: 0; visibility: hidden; }
+  .row:not(.unset) .clear { visibility: visible; }
+  .row .clear:hover { color: var(--acc2); }
+  aside { border-left: 1px solid var(--line); padding: 12px 16px; display: flex; flex-direction: column; gap: 8px; }
+  aside h2 { font-size: 11px; color: var(--dim); text-transform: uppercase; letter-spacing: .1em; margin: 0; }
+  #json { flex: 1; min-height: 320px; width: 100%; resize: vertical; white-space: pre-wrap; font-size: 12px; }
+  #json.bad { border-color: #ef4444; }
+  .buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+  p.hint { color: var(--dim); margin: 0; }
+  @media (max-width: 900px) { main, .top { grid-template-columns: 1fr; } aside { border-left: 0; border-top: 1px solid var(--line); } #keys { overflow-x: auto; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>SYNTH PLAYGROUND</h1>
+  <select id="source" title="Song or style to take instruments from"></select>
+  <input type="file" id="file" accept=".json" title="Open a song or style JSON">
+  <select id="inst" title="Instrument"></select>
+  <label class="check" title="Play through the source's master delay and reverb"><input type="checkbox" id="fx" checked> master FX</label>
+  <span id="status">loading…</span>
+  <a href="./">player</a>
+</header>
+<div class="top">
+  <div>
+    <div class="playbar">
+      <span>octave <button id="octDown">−</button> <b id="oct">3</b> <button id="octUp">+</button></span>
+      <span>vel <input type="range" id="vel" min="0.05" max="1" step="0.05" value="0.9"></span>
+      <label class="check" title="One voice; overlapping notes glide if the instrument has glide"><input type="checkbox" id="mono"> mono</label>
+      <span title="Retrigger the last note at the song's tempo">repeat <select id="repeat">
+        <option value="0">off</option><option value="1">1/16</option><option value="2">1/8</option><option value="4">1/4</option><option value="16">bar</option>
+      </select></span>
+      <button id="panic" title="Release everything and rebuild the voices">panic</button>
+    </div>
+    <canvas id="scope" width="1200" height="110"></canvas>
+  </div>
+  <div id="keys"></div>
+</div>
+<main>
+  <div id="params"></div>
+  <aside>
+    <h2>Instrument JSON</h2>
+    <textarea id="json" spellcheck="false"></textarea>
+    <div class="buttons">
+      <button id="copy" class="primary">Copy JSON</button>
+      <button id="reset">Reset</button>
+      <button id="save" title="Download the source file with your edited instruments">Save file</button>
+    </div>
+    <p class="hint">Play with the keys below Z–M and Q–U (tracker layout), or click the keyboard. Dimmed parameters are unset and use the engine's default; × clears one. Filter, mix, levels, and FM depth change a held note; the rest apply from the next note. Edit the JSON directly and the controls follow. Edits to every instrument are kept until you change the source.</p>
+  </aside>
+</main>
+<script type="module" src="./synth.js"></script>
+</body>
+</html>

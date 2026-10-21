@@ -26,10 +26,10 @@ Plain JavaScript, Node 22, no build step, no dependencies beyond the validator's
 
 ```sh
 npm install
-npm test                      # 60 tests across the four packages
+npm test                      # 61 tests across the four packages
 npm run validate              # check every example and style
 npm run demo                  # generate, render, and export everything into demo-out/
-npm run web                   # browser player at http://localhost:8080/engine/web/
+npm run web                   # browser player at http://localhost:8080/engine/web/, synth playground at .../engine/web/synth.html
 
 # generate a six-minute techno track from seed 42 and render it
 node endless-techno/bin/generate.js styles/hypnotic-techno.json --seed 42 --minutes 6 --out song.json --render song.wav --mp3

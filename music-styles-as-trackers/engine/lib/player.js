@@ -18,6 +18,17 @@ const BLOCK = 128;
 const MAX_RELEASING = 4;
 const HEADROOM = 0.5; // -6 dB per track, so a full mix of eight tracks sums without clipping
 
+const isObj = (v) => v !== null && typeof v === 'object' && !Array.isArray(v);
+
+/** Make `target` equal to `src`, keeping the identity of nested objects both share. JSON copies, since audio worklets lack structuredClone. */
+function assignInPlace(target, src) {
+  for (const k of Object.keys(target)) if (!(k in src)) delete target[k];
+  for (const [k, v] of Object.entries(src)) {
+    if (isObj(v) && isObj(target[k])) assignInPlace(target[k], v);
+    else target[k] = isObj(v) || Array.isArray(v) ? JSON.parse(JSON.stringify(v)) : v;
+  }
+}
+
 class Track {
   constructor(def) {
     this.def = def;
@@ -125,6 +136,25 @@ export class Player {
     this.prevRow = row;
     this.rowCount++;
     return info;
+  }
+
+  /** Live play, for a keyboard: start a note on a track now (at the next rendered sample). */
+  noteOn(track, inst, note, vel = 1) {
+    this.applyEvent({ kind: 'on', track, inst, note, vel, accent: 0, slide: null, table: null, stepSamples: this.currentStepLen });
+  }
+
+  /** Live play: release whatever the track is playing. */
+  noteOff(track) { this.applyEvent({ kind: 'off', track }); }
+
+  /**
+   * Replace an instrument's definition in place, so a sounding voice picks up
+   * every parameter it reads per block (filter, mix, levels, FM index, ...).
+   * Parameters a voice reads only at note start apply from the next note.
+   */
+  updateInstrument(id, def) {
+    const cur = this.sound.instruments[id];
+    if (!cur) { this.sound.instruments[id] = JSON.parse(JSON.stringify(def)); return; }
+    assignInPlace(cur, def);
   }
 
   applyEvent(ev) {
