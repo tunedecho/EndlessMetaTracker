@@ -14,6 +14,7 @@ import { drive as driveShape, panGains, clamp } from './dsp.js';
 
 const BLOCK = 128;
 const MAX_RELEASING = 4;
+const HEADROOM = 0.5; // -6 dB per track, so a full mix of eight tracks sums without clipping
 
 /**
  * Compute the start sample of every step and the step length at each step.
@@ -166,7 +167,7 @@ export function renderSong(song, opts = {}) {
     const ds = c.delaySend ?? m.delaySend ?? 0;
     const rs = c.reverbSend ?? m.reverbSend ?? 0;
     const [gl, gr] = panGains(pan);
-    const gL = vol * gl * 1.414, gR = vol * gr * 1.414;
+    const gL = vol * gl * 1.414 * HEADROOM, gR = vol * gr * 1.414 * HEADROOM;
     for (let i = 0; i < count; i++) {
       let l = tr.bufL[i], r = tr.bufR[i];
       if (drv > 0) { l = driveShape(l, drv); r = driveShape(r, drv); }

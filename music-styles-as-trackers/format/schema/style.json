@@ -92,6 +92,9 @@
         },
         "presence": { "$ref": "song.json#/$defs/unit", "default": 1, "description": "Chance the layer plays in a section where it is a candidate." },
         "always": { "type": "boolean", "description": "Never dropped once energy allows it, including in fills." },
+        "sections": { "type": "array", "items": { "enum": ["intro", "groove", "build", "breakdown", "drop", "outro"] }, "description": "Only play in sections of these kinds. Omit for any kind." },
+        "mutable": { "type": "boolean", "default": true, "description": "Whether the style's mutation rules may change this layer's phrases." },
+        "voices": { "type": "integer", "minimum": 1, "maximum": 6, "description": "For chords: how many tracks the layer spreads its notes over (track ids get a suffix)." },
         "variants": { "$ref": "#/$defs/intRange", "default": 2, "description": "Distinct phrases to generate for this layer." },
         "chainBars": { "$ref": "#/$defs/intRange", "description": "Bars per chain before it repeats. Defaults to the section length." },
         "generator": { "$ref": "#/$defs/generator" },
@@ -254,10 +257,10 @@
           "additionalProperties": false,
           "properties": {
             "start": { "$ref": "#/$defs/range" },
-            "step": { "$ref": "#/$defs/range", "description": "Change per section, drawn from this range." },
+            "step": { "$ref": "#/$defs/range", "description": "Range of random jitter added to each section's planned energy; the arc planner uses a quarter of its width." },
             "min": { "$ref": "song.json#/$defs/unit" },
             "max": { "$ref": "song.json#/$defs/unit" },
-            "momentum": { "$ref": "song.json#/$defs/unit", "description": "Tendency to keep rising or falling." }
+            "momentum": { "$ref": "song.json#/$defs/unit", "description": "Reserved for walk-style planners; unused by the arc planner." }
           }
         },
         "intro": { "type": "object", "additionalProperties": false, "properties": { "bars": { "$ref": "#/$defs/intRange" }, "energy": { "$ref": "#/$defs/range" } } },

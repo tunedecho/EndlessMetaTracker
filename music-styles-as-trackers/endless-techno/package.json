@@ -1,0 +1,11 @@
+{
+  "name": "@tracker/endless-techno",
+  "version": "0.1.0",
+  "description": "Generative techno as data: a style file in the Tracker Style Format and a generator that turns a style and a seed into a fixed song.",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": { ".": "./lib/index.js" },
+  "bin": { "tracker-generate": "bin/generate.js" },
+  "scripts": { "test": "node --test \"test/**/*.test.js\"" },
+  "dependencies": { "@tracker/format": "0.1.0" }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "@tracker/m8-writer",
+  "version": "0.1.0",
+  "description": "Exports Tracker Song Format documents to Standard MIDI Files and to Dirtywave M8 song files (.m8s). The M8 file writer is untested on a device.",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js"
+  },
+  "bin": {
+    "tracker-to-midi": "bin/to-midi.js",
+    "tracker-to-m8s": "bin/to-m8s.js"
+  },
+  "scripts": {
+    "test": "node --test \"test/**/*.test.js\""
+  },
+  "dependencies": {
+    "@tracker/format": "0.1.0"
+  }
+}

@@ -86,6 +86,16 @@ export function resolve(song, opts = {}) {
     const section = sections.get(r);
     rows.push({ row: r, step, steps: len, name: section?.name, energy: section?.energy });
 
+    // Tracks absent from a row are silent: release whatever they were playing.
+    if (r > 0) {
+      for (const [trackId, chainId] of Object.entries(songRows[r - 1])) {
+        if (!chainId || row[trackId]) continue;
+        const ti = trackIndex.get(trackId);
+        if (ti === undefined || tracks[ti].mute) continue;
+        events.push({ step, track: ti, trackId, note: 'OFF', inst: tracks[ti].instrument ?? null, vel: 1, fx: {}, row: r, chain: chainId, phrase: null, phraseStep: 0 });
+      }
+    }
+
     for (const [trackId, chainId] of Object.entries(row)) {
       if (!chainId) continue;
       const ti = trackIndex.get(trackId);
