@@ -36,7 +36,7 @@ Built early, against the plan's own advice, because every other phase needed som
 - [x] Build a small core with tight timing and good sound before adding features: sample-accurate sequencer, six synth engines, tables, delay, reverb, limiter; measured, not yet heard
 - [ ] Port Endless Spa's voices as the first engine set (needs Endless Spa's parameters)
 - [x] Load the shared format natively, including generative styles (the browser player generates and plays styles in the page)
-- [ ] Real-time streaming playback and live generation section by section
+- [x] Real-time streaming playback and live generation section by section (`engine/lib/player.js`, the browser's Endless mode, `endless-techno/bin/endless.js`)
 - [ ] A tracker editing UI
 
 ## Ongoing: the meta-pattern
@@ -44,4 +44,4 @@ Built early, against the plan's own advice, because every other phase needed som
 - [x] Add more styles to the library as the format matures (`styles/`: hypnotic techno, its M8-fitted variant, and an ambient style)
 - [x] Try the smallest-definition test: `tracker-validate --stats` reports gzipped sizes; a complete style is 1.5 to 3 KB
 - [ ] Explore building styles from stored example patterns instead of hand-written rules
-- [ ] Live control: energy up or down while playing, which the energy model is built for
+- [x] Live control: energy up or down while playing (the Endless mode's − and + buttons nudge the next section)

@@ -133,8 +133,9 @@ function play(fromStep = 0) {
 }
 
 function stop() {
+  if (endless.on) stopEndless();
   if (source) { try { source.stop(); } catch {} source.onended = null; source = null; }
-  cancelAnimationFrame(raf);
+  cancelAnimationFrame(raf); raf = 0;
   $('stop').disabled = true;
   if (buffer) status('stopped');
   for (const tr of $('grid').rows) tr.classList.remove('playing');
@@ -156,8 +157,120 @@ function tick() {
   raf = requestAnimationFrame(tick);
 }
 
+/* ---------------------------------------------------------------- endless */
+const endless = { on: false, nextTime: 0, queued: 0, bias: 0, sections: [], current: null, sampleRate: 44100, sources: [] };
+const LOOKAHEAD = 2; // sections rendered ahead of playback
+
+function startEndless() {
+  stop();
+  endless.on = true; endless.queued = 0; endless.bias = 0; endless.sections = []; endless.current = null; endless.sources = [];
+  audio ||= new AudioContext();
+  audio.resume();
+  song = null; resolved = null; buffer = null; rendered = null;
+  $('rows').innerHTML = ''; $('grid').innerHTML = ''; $('gridTitle').textContent = 'Row';
+  $('less').disabled = false; $('more').disabled = false; $('stop').disabled = false; $('play').disabled = true; $('download').disabled = true;
+  status('endless: starting…');
+  worker.postMessage({ type: 'endless-start', style: endless.style, seed: parseInt($('seed').value, 10) || 0 });
+}
+
+function requestSection() {
+  if (!endless.on) return;
+  endless.queued++;
+  worker.postMessage({ type: 'endless-next', energy: endless.bias });
+  endless.bias = 0;
+}
+
+function onSection(m) {
+  endless.queued--;
+  const buf = audio.createBuffer(2, m.left.length, m.sampleRate);
+  buf.copyToChannel(m.left, 0); buf.copyToChannel(m.right, 1);
+  const src = audio.createBufferSource();
+  src.buffer = buf; src.connect(audio.destination);
+  if (endless.sections.length === 0) endless.nextTime = audio.currentTime + 0.15;
+  const at = endless.nextTime;
+  src.start(at);
+  endless.nextTime += m.left.length / m.sampleRate;
+  endless.sources.push(src);
+  src.onended = () => { endless.sources = endless.sources.filter((x) => x !== src); };
+  endless.sections.push({ ...m, at, left: null, right: null });
+  const tr = document.createElement('tr');
+  tr.innerHTML = `<td>${m.index}</td><td>${m.section.kind}</td><td><i class="energy" style="width:${Math.round(m.section.energy * 40)}px"></i></td><td>${m.steps / 16}b</td><td>${Object.keys(m.row).join(' ').slice(0, 24)}</td>`;
+  $('rows').appendChild(tr);
+  if (endless.queued + (endless.sections.length - sectionIndexAt(audio.currentTime)) < LOOKAHEAD + 1) requestSection();
+  if (!raf) tickEndless();
+}
+
+function sectionIndexAt(t) {
+  let i = 0;
+  for (let k = 0; k < endless.sections.length; k++) if (endless.sections[k].at <= t) i = k;
+  return i;
+}
+
+function showEndlessRow(sec) {
+  if (endless.current === sec) return;
+  endless.current = sec;
+  for (const tr of $('rows').rows) tr.classList.toggle('current', tr.firstChild.textContent === String(sec.index));
+  $('gridTitle').textContent = `Row ${sec.index} · ${sec.section.kind} · energy ${sec.section.energy} · ${sec.steps / 16} bars`;
+  const g = $('grid');
+  g.innerHTML = '';
+  const head = document.createElement('tr');
+  head.innerHTML = '<th></th>' + sec.tracks.map((t) => `<th>${t.id}</th>`).join('');
+  g.appendChild(head);
+  for (let s = 0; s < 16; s++) {
+    const tr = document.createElement('tr');
+    tr.dataset.step = s;
+    if (s % 4 === 0) tr.className = 'beat';
+    let html = `<td class="stepno">${s.toString(16).toUpperCase().padStart(2, '0')}</td>`;
+    for (let ti = 0; ti < sec.tracks.length; ti++) {
+      const ev = sec.events.find((e) => e.track === ti && e.step === s);
+      if (!ev) html += '<td>·</td>';
+      else if (ev.note === 'OFF') html += '<td class="off">OFF</td>';
+      else if (ev.note === null) html += `<td class="fx">${Object.keys(ev.fx).join(',').slice(0, 7)}</td>`;
+      else html += `<td class="note">${toName(ev.note)}${ev.vel < 1 ? ' ' + Math.round(ev.vel * 99).toString().padStart(2, '0') : ''}${Object.keys(ev.fx).length ? '*' : ''}</td>`;
+    }
+    tr.innerHTML = html;
+    g.appendChild(tr);
+  }
+}
+
+function tickEndless() {
+  if (!endless.on) { raf = 0; return; }
+  const t = audio.currentTime;
+  const i = sectionIndexAt(t);
+  const sec = endless.sections[i];
+  if (sec && sec.at <= t) {
+    showEndlessRow(sec);
+    const sample = (t - sec.at) * sec.sampleRate;
+    let lo = 0, hi = sec.stepStarts.length - 1;
+    while (lo < hi) { const mid = (lo + hi + 1) >> 1; if (sec.stepStarts[mid] <= sample) lo = mid; else hi = mid - 1; }
+    const stepInPhrase = lo % 16;
+    for (const tr of $('grid').rows) tr.classList.toggle('playing', parseInt(tr.dataset.step, 10) === stepInPhrase);
+    status(`endless · ${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')} · row ${sec.index} ${sec.section.kind}${endless.bias ? ` · next ${endless.bias > 0 ? '+' : ''}${endless.bias.toFixed(1)}` : ''}`);
+    // Keep the lookahead full as playback advances.
+    if (endless.queued + (endless.sections.length - 1 - i) < LOOKAHEAD) requestSection();
+  }
+  raf = requestAnimationFrame(tickEndless);
+}
+
+function stopEndless() {
+  endless.on = false;
+  for (const s of endless.sources) { try { s.stop(); } catch {} }
+  endless.sources = [];
+  $('less').disabled = true; $('more').disabled = true;
+  status('stopped');
+}
+
+$('endless').onclick = async () => {
+  endless.style = await (await fetch($('styles').value)).json();
+  startEndless();
+};
+$('more').onclick = () => { endless.bias = Math.min(0.6, endless.bias + 0.2); status(`next section: ${endless.bias >= 0 ? '+' : ''}${endless.bias.toFixed(1)} energy`); };
+$('less').onclick = () => { endless.bias = Math.max(-0.6, endless.bias - 0.2); status(`next section: ${endless.bias >= 0 ? '+' : ''}${endless.bias.toFixed(1)} energy`); };
+
 worker.onmessage = (e) => {
   const m = e.data;
+  if (m.type === 'endless-ready') { status(`endless: ${m.title} at ${m.bpm} bpm`); $('meta').textContent = `${m.title}\nendless run, ${m.bpm} bpm\nseed ${$('seed').value}`; requestSection(); return; }
+  if (m.type === 'section') { onSection(m); return; }
   if (m.type === 'progress') progress(m.value);
   else if (m.type === 'rendered') {
     rendered = m; starts = m.starts;

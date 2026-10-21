@@ -19,6 +19,17 @@ node ../format/bin/validate.js ../styles/hypnotic-techno.json song.json
 
 Every song records its `meta.seed`, `meta.style`, and `meta.generator`, so a song can be regenerated or a seed shared.
 
+### Endless mode
+
+The generator is a `Session`: it keeps the seeded random stream, the scale, the varied sounds, the phrase pools, and every layer's accumulated drift, and writes one section at a time. `session.next({ energy })` plans a new four-minute arc whenever the queue runs out, so a run never ends, and the optional energy nudge is the live control the idea asked for.
+
+```sh
+# a twelve-minute endless run to WAV, with energy nudges on sections 4 and 9
+node bin/endless.js ../styles/hypnotic-techno.json --seed 5 --minutes 12 --out run.wav --energy "+0.3@4,-0.4@9"
+```
+
+In the browser (`npm run web`), **Endless** streams sections gaplessly as they are generated, and **−** / **+** nudge the next section's energy.
+
 ## The first style: hypnotic techno
 
 Chosen because it is loop-based with slow evolution, which is what a tracker does well, and because its voice set is small. Around 126 to 132 bpm, minor, phrygian, or dorian on a root drawn per seed.
@@ -56,7 +67,7 @@ This session could not listen. It checked that generated songs validate, fall wi
 
 - *Which kind of techno first?* Hypnotic / minimal, as above.
 - *How much of Endless Spa can be reused?* Unknown until its exports are seen. The style file carries its own sound half, so any engine that can read the sound half can play it.
-- *Should listeners steer it live?* The energy model makes this easy: a live "energy up / down" control is one extra input to `chooseLayers`. Not built yet.
+- *Should listeners steer it live?* Yes: the Endless mode's energy nudge is exactly that, one extra input to the layer choice. "More acid" would be a per-layer bias, not built yet.
 
 ## Next
 

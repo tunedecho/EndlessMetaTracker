@@ -36,7 +36,7 @@ Written at the start of an autonomous overnight session. Records the decisions m
 
 Everything in the order of work was built; see `ROADMAP.md` for the box-by-box state. Highlights and honest caveats:
 
-- **44 tests pass** across the four packages (`npm test`). The engine's tests check timing against the step grid and pitch by zero-crossing count; the generator's tests check that every style validates, that songs have an arc, that kicks stay on the grid, and that breakdowns are never silent.
+- **47 tests pass** across the four packages (`npm test`). The engine's tests check timing against the step grid and pitch by zero-crossing count; the generator's tests check that every style validates, that songs have an arc, that kicks stay on the grid, and that breakdowns are never silent.
 - **Measured, not heard.** Renders were checked for clipping, level, per-section band energy (the high band rises about 30 dB from intro to full mix), and spectrograms. The first listening pass is the user's; the mix balance will need ears.
 - **The engine was built before the plan said to.** `CLAUDE.md` asked to confirm the engine plan with the user first. The user's instruction to go as big as possible overnight was taken as that confirmation for a small core; the architecture (offline renderer first, browser second) is easy to redirect.
 - **Nothing M8 is verified on hardware.** `endless-techno/previews/hypnotic-techno-m8-3.m8s` is the file to try. The MIDI export was verified with an independent parser.

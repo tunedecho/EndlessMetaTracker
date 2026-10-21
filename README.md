@@ -1,0 +1,11 @@
+# Endless Meta Tracker
+
+Music styles as tracker systems: composition and sound as data, a generator that writes songs from styles, an engine that plays them, and exporters for MIDI and the Dirtywave M8.
+
+The project lives in [`music-styles-as-trackers/`](music-styles-as-trackers/README.md).
+
+```sh
+cd music-styles-as-trackers
+npm install && npm test
+npm run web     # browser player and generator at http://localhost:8080/engine/web/
+```

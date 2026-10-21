@@ -50,6 +50,9 @@
   <span>min <input type="number" id="minutes" value="4" min="0.5" step="0.5"></span>
   <select id="styles"></select>
   <button id="generate">Generate</button>
+  <button id="endless">Endless</button>
+  <button id="less" disabled title="less energy">−</button>
+  <button id="more" disabled title="more energy">+</button>
   <button id="play" class="primary" disabled>Render &amp; Play</button>
   <button id="stop" disabled>Stop</button>
   <button id="download" disabled>WAV</button>
@@ -67,7 +70,7 @@
     <canvas id="wave" width="1200" height="90"></canvas>
     <h2 id="gridTitle">Row</h2>
     <table id="grid"></table>
-    <p style="color:var(--dim)">Same engine as the offline renderer: the page renders the whole song in a worker, then plays it. Click a row to jump. Files: <code>engine/web/</code>. Serve with <code>npm run web</code>.</p>
+    <p style="color:var(--dim)">Same engine as the offline renderer. <b>Render &amp; Play</b> renders the loaded song in a worker, then plays it; click a row to jump. <b>Generate</b> writes a fixed song from the chosen style and seed. <b>Endless</b> starts a run that never ends: the generator plans sections as it goes and the engine streams them gaplessly; <b>−</b> and <b>+</b> nudge the energy of the next section. Files: <code>engine/web/</code>. Serve with <code>npm run web</code>.</p>
   </section>
 </main>
 <script type="module" src="./app.js"></script>

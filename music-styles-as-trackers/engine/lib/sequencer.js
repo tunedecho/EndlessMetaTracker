@@ -8,13 +8,8 @@
  * is deterministic apart from the noise sources.
  */
 import { resolve, stepSeconds, Random } from '../../format/lib/core.js';
-import { createVoice } from './voices.js';
-import { Master } from './effects.js';
-import { drive as driveShape, panGains, clamp } from './dsp.js';
+import { Player } from './player.js';
 
-const BLOCK = 128;
-const MAX_RELEASING = 4;
-const HEADROOM = 0.5; // -6 dB per track, so a full mix of eight tracks sums without clipping
 
 /**
  * Compute the start sample of every step and the step length at each step.
@@ -80,20 +75,9 @@ export function schedule(song, resolved, sampleRate, seed = 1) {
   return { events: out, grid };
 }
 
-class Track {
-  constructor(def, index) {
-    this.def = def;
-    this.index = index;
-    this.ctl = {};
-    this.current = null;
-    this.releasing = [];
-    this.bufL = new Float32Array(BLOCK);
-    this.bufR = new Float32Array(BLOCK);
-  }
-}
-
 /**
- * Render a song to stereo float buffers.
+ * Render a song to stereo float buffers. Builds a Player, appends every row
+ * (repeating the loop region if asked), and renders the whole stream.
  * @param {object} song valid tracker-song/0.1
  * @param {object} [opts]
  * @param {number} [opts.sampleRate=44100]
@@ -101,111 +85,37 @@ class Track {
  * @param {number} [opts.loops=0] times to repeat the loop region
  * @param {number} [opts.tailSeconds=2] silence appended for releases and reverb
  * @param {(fraction:number)=>void} [opts.onProgress]
- * @returns {{left: Float32Array, right: Float32Array, sampleRate: number, grid: object, seconds: number}}
+ * @returns {{left: Float32Array, right: Float32Array, sampleRate: number, grid: {starts: Float64Array, lengths: Float64Array}, seconds: number, resolved: {rows: object[], transport: object}}}
  */
 export function renderSong(song, opts = {}) {
   const sampleRate = opts.sampleRate || 44100;
-  const resolved = resolve(song, { loops: opts.loops || 0 });
-  const { events, grid } = schedule(song, resolved, sampleRate, song.meta?.seed ?? 1);
+  const player = new Player(song, { sampleRate, seed: song.meta?.seed ?? 1 });
+  const comp = song.composition;
+  const sections = new Map((comp.song.sections || []).map((s) => [s.row, s]));
+  const rows = comp.song.rows;
+  const order = [];
+  for (let r = 0; r < rows.length; r++) order.push(r);
+  if (song.transport.loop !== undefined) for (let k = 0; k < (opts.loops || 0); k++) for (let r = song.transport.loop; r < rows.length; r++) order.push(r);
+  for (const r of order) {
+    const sec = sections.get(r);
+    player.appendRow(rows[r], comp, { name: sec?.name, energy: sec?.energy });
+  }
   const tail = opts.tailSeconds ?? 2;
-  let total = Math.ceil(grid.seconds * sampleRate) + Math.round(tail * sampleRate);
+  let total = Math.ceil(player.rowStart) + Math.round(tail * sampleRate);
   if (opts.maxSeconds) total = Math.min(total, Math.round(opts.maxSeconds * sampleRate));
   const left = new Float32Array(total);
   const right = new Float32Array(total);
-
-  const tracks = song.composition.tracks.map((t, i) => new Track(t, i));
-  const instruments = song.sound.instruments;
-  const tables = song.sound.tables || {};
-  const master = new Master(sampleRate, song.sound.master, grid.lengths[0]);
-  const dry = { L: new Float32Array(BLOCK), R: new Float32Array(BLOCK) };
-  const dly = { L: new Float32Array(BLOCK), R: new Float32Array(BLOCK) };
-  const rev = { L: new Float32Array(BLOCK), R: new Float32Array(BLOCK) };
-
-  let ei = 0;
-  let pos = 0;
-  let currentStepLen = grid.lengths[0];
-  let stepCursor = 0;
-
-  const applyEvent = (ev) => {
-    const tr = tracks[ev.track];
-    if (ev.kind === 'ctl') { Object.assign(tr.ctl, ev.ctl); return; }
-    if (ev.kind === 'off') { if (tr.current) tr.current.noteOff(); return; }
-    const inst = instruments[ev.inst];
-    if (!inst) return;
-    const tableDef = ev.table ? tables[ev.table] : inst.table ? tables[inst.table] : null;
-    const legato = !!ev.slide && tr.current && !tr.current.done && tr.current.inst === inst;
-    if (legato) {
-      tr.current.noteOn(ev.note, ev.vel, { accent: ev.accent, slideFrom: ev.slide.from, slideSeconds: ev.slide.seconds, legato: true, table: tableDef, stepSamples: ev.stepSamples });
-      return;
-    }
-    if (tr.current && !tr.current.done) {
-      tr.current.noteOff();
-      tr.releasing.push(tr.current);
-      while (tr.releasing.length > MAX_RELEASING) tr.releasing.shift().choke();
-    }
-    const v = createVoice(inst, sampleRate, tr.ctl);
-    v.inst = inst;
-    v.mix = inst.mix || {};
-    v.noteOn(ev.note, ev.vel, {
-      accent: ev.accent,
-      slideFrom: ev.slide ? ev.slide.from : undefined,
-      slideSeconds: ev.slide ? ev.slide.seconds : undefined,
-      table: tableDef,
-      stepSamples: ev.stepSamples,
-    });
-    tr.current = v;
-  };
-
-  const renderVoice = (tr, v, count) => {
-    tr.bufL.fill(0, 0, count); tr.bufR.fill(0, 0, count);
-    v.render(tr.bufL, tr.bufR, 0, count, currentStepLen);
-    const m = v.mix;
-    const c = tr.ctl;
-    const vol = (c.volume ?? m.volume ?? 0.8) * (tr.def.volume ?? 1);
-    const pan = clamp((c.pan ?? m.pan ?? 0) + (tr.def.pan ?? 0), -1, 1);
-    const drv = c.drive ?? m.drive ?? 0;
-    const ds = c.delaySend ?? m.delaySend ?? 0;
-    const rs = c.reverbSend ?? m.reverbSend ?? 0;
-    const [gl, gr] = panGains(pan);
-    const gL = vol * gl * 1.414 * HEADROOM, gR = vol * gr * 1.414 * HEADROOM;
-    for (let i = 0; i < count; i++) {
-      let l = tr.bufL[i], r = tr.bufR[i];
-      if (drv > 0) { l = driveShape(l, drv); r = driveShape(r, drv); }
-      l *= gL; r *= gR;
-      dry.L[i] += l; dry.R[i] += r;
-      if (ds > 0) { dly.L[i] += l * ds; dly.R[i] += r * ds; }
-      if (rs > 0) { rev.L[i] += l * rs; rev.R[i] += r * rs; }
-    }
-  };
-
-  while (pos < total) {
-    // Advance to any events at or before pos.
-    while (ei < events.length && events[ei].t <= pos) applyEvent(events[ei++]);
-    // Track the current step length for tables and synced LFOs.
-    while (stepCursor < resolved.totalSteps && grid.starts[stepCursor + 1] <= pos) stepCursor++;
-    currentStepLen = grid.lengths[Math.min(stepCursor, grid.lengths.length - 1)];
-    if (currentStepLen !== master.lastStep) { master.setStep(currentStepLen); master.lastStep = currentStepLen; }
-
-    let count = Math.min(BLOCK, total - pos);
-    if (ei < events.length) count = Math.min(count, Math.max(1, Math.ceil(events[ei].t) - pos));
-
-    dry.L.fill(0, 0, count); dry.R.fill(0, 0, count);
-    dly.L.fill(0, 0, count); dly.R.fill(0, 0, count);
-    rev.L.fill(0, 0, count); rev.R.fill(0, 0, count);
-
-    for (const tr of tracks) {
-      if (tr.current) {
-        if (tr.current.done) tr.current = null;
-        else renderVoice(tr, tr.current, count);
-      }
-      if (tr.releasing.length) {
-        for (const v of tr.releasing) if (!v.done) renderVoice(tr, v, count);
-        tr.releasing = tr.releasing.filter((v) => !v.done);
-      }
-    }
-    master.process(dry, dly, rev, left, right, pos, count);
-    pos += count;
-    if (opts.onProgress && (pos & 0xffff) < count) opts.onProgress(pos / total);
+  const chunk = 65536;
+  for (let p = 0; p < total; p += chunk) {
+    const n = Math.min(chunk, total - p);
+    player.render(n, left, right, p);
+    if (opts.onProgress) opts.onProgress((p + n) / total);
   }
-  return { left, right, sampleRate, grid, seconds: total / sampleRate, resolved };
+  const starts = Float64Array.from(player.stepStarts.concat([player.rowStart]));
+  const lengths = Float64Array.from(player.stepLengths.concat([player.currentStepLen]));
+  return {
+    left, right, sampleRate, seconds: total / sampleRate,
+    grid: { starts, lengths },
+    resolved: { rows: player.rows, transport: player.transport, totalSteps: player.stepBase },
+  };
 }

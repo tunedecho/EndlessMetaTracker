@@ -107,51 +107,63 @@ const matches = (list, layer) => list && list.some((x) => x === layer.id || x ==
  */
 const ROLE_ORDER = ['kick', 'bass', 'hats', 'snare', 'perc', 'chords', 'lead', 'pad', 'fx'];
 
-export function chooseLayers(style, sections, rnd) {
+/**
+ * Choose the layers for one section, given what played in the previous one.
+ * @returns {Set<string>} layer ids
+ */
+export function chooseLayersFor(style, sec, prev, prevSec, rnd, isFirst = false) {
   const a = style.arrangement;
   const maxChange = a.maxLayerChange ?? 3;
   const byId = new Map(style.layers.map((l) => [l.id, l]));
+  const next = new Set();
+  const candidates = [];
+  for (const layer of style.layers) {
+    const [lo, hi] = layer.energy ?? [0, 1];
+    if (layer.sections && !layer.sections.includes(sec.kind)) continue;
+    const inRange = sec.energy >= lo - 0.02 && sec.energy <= hi + 0.02;
+    if (sec.kind === 'breakdown' && a.breakdown) {
+      if (matches(a.breakdown.drop, layer)) continue;
+      if (a.breakdown.keep) { if (!matches(a.breakdown.keep, layer)) continue; }
+      else if (!inRange) continue;
+    } else if (!inRange) continue;
+    candidates.push(layer);
+  }
+  const candidateIds = new Set(candidates.map((l) => l.id));
+  // Keep what was playing if still a candidate.
+  for (const id of prev) if (candidateIds.has(id)) next.add(id);
+  const removed = [...prev].filter((id) => !candidateIds.has(id)).length;
+  // Budget for newcomers: drops and intros open everything; builds ramp; grooves change little.
+  const budget = sec.kind === 'drop' || sec.kind === 'intro' || sec.kind === 'breakdown' || isFirst ? 99 : sec.kind === 'build' ? Math.max(3, maxChange) : maxChange;
+  let changes = sec.kind === 'breakdown' ? 0 : removed;
+  let newcomers = rnd.shuffle(candidates.filter((l) => !prev.has(l.id)));
+  if (sec.kind === 'build' || sec.kind === 'intro') newcomers.sort((x, y) => ROLE_ORDER.indexOf(x.role) - ROLE_ORDER.indexOf(y.role));
+  newcomers.sort((x, y) => (y.always ? 1 : 0) - (x.always ? 1 : 0));
+  for (const layer of newcomers) {
+    if (layer.always) { next.add(layer.id); continue; }
+    if (changes >= budget) continue;
+    if (rnd.chance(layer.presence ?? 1)) { next.add(layer.id); changes++; }
+  }
+  // A section where the energy fell should lose something, to be audible.
+  if (prevSec && sec.energy < prevSec.energy - 0.1 && removed === 0 && sec.kind !== 'breakdown') {
+    const droppable = [...next].filter((id) => !byId.get(id).always);
+    if (droppable.length) next.delete(rnd.pick(droppable));
+  }
+  // Never leave a section nearly empty when there are candidates to play.
+  const unused = candidates.filter((l) => !next.has(l.id) && !l.sections);
+  while (next.size < 2 && unused.length) next.add(unused.splice(rnd.int(0, unused.length - 1), 1)[0].id);
+  return next;
+}
+
+/**
+ * Choose the layers present in each section of a plan.
+ * @returns {Set<string>[]} layer ids per section
+ */
+export function chooseLayers(style, sections, rnd) {
   const result = [];
   let prev = new Set();
   sections.forEach((sec, si) => {
-    const next = new Set();
-    const candidates = [];
-    for (const layer of style.layers) {
-      const [lo, hi] = layer.energy ?? [0, 1];
-      if (layer.sections && !layer.sections.includes(sec.kind)) continue;
-      const inRange = sec.energy >= lo - 0.02 && sec.energy <= hi + 0.02;
-      if (sec.kind === 'breakdown' && a.breakdown) {
-        if (matches(a.breakdown.drop, layer)) continue;
-        if (a.breakdown.keep) { if (!matches(a.breakdown.keep, layer)) continue; }
-        else if (!inRange) continue;
-      } else if (!inRange) continue;
-      candidates.push(layer);
-    }
-    const candidateIds = new Set(candidates.map((l) => l.id));
-    // Keep what was playing if still a candidate.
-    for (const id of prev) if (candidateIds.has(id)) next.add(id);
-    const removed = [...prev].filter((id) => !candidateIds.has(id)).length;
-    // Budget for newcomers: drops and intros open everything; builds ramp; grooves change little.
-    const budget = sec.kind === 'drop' || sec.kind === 'intro' || sec.kind === 'breakdown' || si === 0 ? 99 : sec.kind === 'build' ? Math.max(3, maxChange) : maxChange;
-    let changes = sec.kind === 'breakdown' ? 0 : removed;
-    let newcomers = rnd.shuffle(candidates.filter((l) => !prev.has(l.id)));
-    if (sec.kind === 'build' || sec.kind === 'intro') newcomers.sort((x, y) => ROLE_ORDER.indexOf(x.role) - ROLE_ORDER.indexOf(y.role));
-    newcomers.sort((x, y) => (y.always ? 1 : 0) - (x.always ? 1 : 0));
-    for (const layer of newcomers) {
-      if (layer.always) { next.add(layer.id); continue; }
-      if (changes >= budget) continue;
-      if (rnd.chance(layer.presence ?? 1)) { next.add(layer.id); changes++; }
-    }
-    // A section where the energy fell should lose something, to be audible.
-    if (si > 0 && sec.energy < sections[si - 1].energy - 0.1 && removed === 0 && sec.kind !== 'breakdown') {
-      const droppable = [...next].filter((id) => !byId.get(id).always);
-      if (droppable.length) next.delete(rnd.pick(droppable));
-    }
-    // Never leave a section nearly empty when there are candidates to play.
-    const unused = candidates.filter((l) => !next.has(l.id) && !l.sections);
-    while (next.size < 2 && unused.length) next.add(unused.splice(rnd.int(0, unused.length - 1), 1)[0].id);
-    result.push(next);
-    prev = next;
+    prev = chooseLayersFor(style, sec, prev, si > 0 ? sections[si - 1] : null, rnd, si === 0);
+    result.push(prev);
   });
   return result;
 }

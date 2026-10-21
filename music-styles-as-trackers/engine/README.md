@@ -30,10 +30,11 @@ console.log(analyze.report(r.left, r.right, r.sampleRate));
 | `lib/dsp.js` | PolyBLEP oscillators (sine, triangle, saw, square, pulse), a TPT state-variable filter, ADSR, LFO, white/pink/brown noise, soft clip, drive, equal-power pan |
 | `lib/voices.js` | The six engines: `analog` (two oscillators, sub, noise, unison up to 7 with stereo spread, glide), `fm` (two operators, feedback, modulator envelope), `kick`, `clap`, `hihat` (six-oscillator metallic cluster plus noise), `noise`. All share filter, amp envelope, LFO, tables, and live track controls |
 | `lib/effects.js` | Tempo-synced stereo delay with ping-pong and damping, Freeverb-style reverb with predelay, master highpass, peak limiter with soft clip |
-| `lib/sequencer.js` | Step grid from tempo and swing (sample-accurate; tempo commands change the grid), event scheduling (retrig, nudge, cut, slide, chance, tables), voice management per track with release tails, routing to the master bus and sends |
+| `lib/sequencer.js` | Step grid from tempo and swing (sample-accurate; tempo commands change the grid), event scheduling (retrig, nudge, cut, slide, chance, tables), and `renderSong`, which drives a Player over a whole song |
+| `lib/player.js` | The streaming `Player`: rows are appended over time (`appendRow`) and audio is pulled in blocks (`render(n)`); voices, delay, and reverb carry across rows. This is what endless mode runs on |
 | `lib/wav.js` | 16-bit WAV encode and decode, browser-safe |
 | `lib/analyze.js` | Measurements for sessions without ears: peak, RMS, clipping, band balance, onset detection |
-| `web/` | The browser player: renders in a Web Worker, plays through Web Audio, shows rows and the phrase grid with a playhead, can generate songs in the page and download WAVs |
+| `web/` | The browser player: renders in a Web Worker, plays through Web Audio, shows rows and the phrase grid with a playhead, generates songs in the page, downloads WAVs, and has an **Endless** mode that streams generated sections gaplessly with live energy up/down |
 
 Timing: step boundaries are computed in samples before rendering, events fire at their exact sample, and blocks are split at event boundaries. Swing delays every second step. One voice per track with up to four releasing voices behind it, so a new note cuts the old one's gate but lets its release ring.
 
@@ -45,6 +46,6 @@ Levels: every track has 6 dB of headroom before the mix bus, the master limiter 
 
 ## Decisions and next steps
 
-- **Offline first.** A renderer that writes files is the smallest core that can be verified without listening. Real-time playback in the browser reuses it by rendering ahead. A streaming real-time mode (AudioWorklet, live generation section by section) is the next step for the endless use.
+- **Offline first, streaming second.** A renderer that writes files is the smallest core that can be verified without listening. The streaming Player grew out of it: the browser's endless mode renders each generated section in a worker a little ahead of playback and schedules the buffers back to back, so there is no gap and the effect tails continue. An AudioWorklet version would cut latency for live control from "next section" to "next step"; it is not needed yet.
 - **Engines are parameter sets.** Every engine's parameters are in the format's schema, so a sound is data. A sampler engine is the obvious missing one for drums.
 - **Not built:** a tracker editing UI, MIDI input, plugin or hardware targets. The idea doc asks where it should run first; this says browser for playing and editing, with the offline renderer for batch work.
