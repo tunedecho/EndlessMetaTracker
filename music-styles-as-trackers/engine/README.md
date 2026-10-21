@@ -10,6 +10,9 @@ Plain JavaScript modules with no build step and no dependencies, so the same cod
 # render a song to WAV (and MP3 with ffmpeg), print a measurement report
 node bin/render.js ../format/examples/minimal-techno-loop.json out.wav --mp3 --report
 
+# measure a song: per-section band levels and each track's octave-band spectrum
+node bin/analyze.js ../endless-techno/previews/hypnotic-techno-3.json --seconds 200
+
 # browser player with the pattern grid, a playhead, and in-page generation
 npm run web      # then open http://localhost:8080/engine/web/
 ```

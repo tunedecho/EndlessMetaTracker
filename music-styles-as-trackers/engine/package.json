@@ -8,7 +8,8 @@
     ".": "./lib/index.js"
   },
   "bin": {
-    "tracker-render": "bin/render.js"
+    "tracker-render": "bin/render.js",
+    "tracker-analyze": "bin/analyze.js"
   },
   "scripts": {
     "test": "node --test \"test/**/*.test.js\""
