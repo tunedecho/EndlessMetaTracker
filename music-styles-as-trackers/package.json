@@ -12,7 +12,8 @@
   ],
   "scripts": {
     "test": "node --test \"*/test/**/*.test.js\"",
-    "validate": "node format/bin/validate.js format/examples/*.json endless-techno/styles/*.json",
+    "validate": "node format/bin/validate.js format/examples/*.json styles/*.json",
+    "web": "node scripts/serve.js",
     "demo": "node scripts/demo.js"
   },
   "engines": {

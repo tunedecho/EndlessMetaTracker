@@ -1,14 +1,35 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { generateSong, euclid, planSections, chooseLayers, mutate, OPS } from '../lib/index.js';
 import { validate, Random, resolve, songStats } from '@tracker/format';
 
-const style = JSON.parse(readFileSync(new URL('../styles/hypnotic-techno.json', import.meta.url), 'utf8'));
+const stylesDir = new URL('../../styles/', import.meta.url);
+const loadStyle = (f) => JSON.parse(readFileSync(new URL(f, stylesDir), 'utf8'));
+const style = loadStyle('hypnotic-techno.json');
+const allStyles = readdirSync(stylesDir).filter((f) => f.endsWith('.json')).map((f) => [f, loadStyle(f)]);
 
-test('the style validates', () => {
-  const r = validate(style);
-  assert.ok(r.ok, r.errors.join('; '));
+test('every style in the library validates and generates a valid song', () => {
+  for (const [name, st] of allStyles) {
+    const r = validate(st);
+    assert.ok(r.ok, `${name}: ${r.errors.join('; ')}`);
+    const song = generateSong(st, { seed: 4, minutes: 3 });
+    const v = validate(song);
+    assert.ok(v.ok, `${name} song: ${v.errors.join('; ')}`);
+  }
+});
+
+test('the M8 variant stays within eight tracks and merges shared tracks', () => {
+  const m8 = loadStyle('hypnotic-techno-m8.json');
+  for (const seed of [1, 2, 3]) {
+    const song = generateSong(m8, { seed, minutes: 6 });
+    assert.ok(song.composition.tracks.length <= 8, `seed ${seed}: ${song.composition.tracks.length} tracks`);
+    assert.ok(Object.keys(song.composition.phrases).length <= 255);
+    // Open hats share the hats track with closed hats and appear as instrument overrides.
+    const hats = Object.entries(song.composition.phrases).filter(([id]) => id.startsWith('hats_ohat'));
+    assert.ok(hats.length > 0, 'no merged hat phrases');
+    assert.ok(hats.some(([, p]) => p.steps.some((x) => x && x.inst === 'ohat')), 'no open hat overrides');
+  }
 });
 
 test('euclidean rhythms are evenly spread', () => {

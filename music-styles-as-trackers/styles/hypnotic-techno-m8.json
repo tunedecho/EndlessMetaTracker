@@ -1,0 +1,901 @@
+{
+  "format": "tracker-style/0.1",
+  "id": "hypnotic-techno-m8",
+  "meta": {
+    "title": "Hypnotic Techno (M8)",
+    "author": "Endless Techno",
+    "notes": "The hypnotic techno style fitted to the Dirtywave M8: eight tracks. Layers that are rarely or never present together share a track (open and closed hats, so the closed hat chokes the open one; clap and perc; ride and riser), and the pad is one voice with a chord table instead of three voices. Everything else is the same as hypnotic-techno.json."
+  },
+  "transport": {
+    "bpm": [
+      126,
+      132
+    ],
+    "stepsPerBeat": 4,
+    "phraseLength": 16,
+    "swing": [
+      0,
+      0.07
+    ]
+  },
+  "scale": {
+    "root": [
+      "A",
+      "G",
+      "F",
+      "C",
+      "D",
+      "E"
+    ],
+    "mode": [
+      "minor",
+      "phrygian",
+      "dorian",
+      "minor"
+    ]
+  },
+  "sound": {
+    "instruments": {
+      "kick": {
+        "name": "909-ish kick",
+        "engine": "kick",
+        "params": {
+          "pitchStart": 190,
+          "pitchEnd": 48,
+          "pitchDecay": 0.035,
+          "click": 0.35,
+          "tone": 0.3,
+          "body": 0.42
+        },
+        "amp": {
+          "attack": 0.0005,
+          "decay": 0.45,
+          "sustain": 0,
+          "release": 0.02
+        },
+        "mix": {
+          "volume": 1,
+          "drive": 0.25
+        }
+      },
+      "clap": {
+        "engine": "clap",
+        "params": {
+          "bursts": 3,
+          "spacing": 0.011,
+          "tone": 0.5,
+          "tail": 0.2,
+          "width": 0.5
+        },
+        "mix": {
+          "volume": 0.65,
+          "reverbSend": 0.3
+        }
+      },
+      "chat": {
+        "name": "closed hat",
+        "engine": "hihat",
+        "params": {
+          "tone": 0.75,
+          "metallic": 0.45,
+          "decay": 0.045
+        },
+        "mix": {
+          "volume": 0.55,
+          "pan": 0.2
+        }
+      },
+      "ohat": {
+        "name": "open hat",
+        "engine": "hihat",
+        "params": {
+          "tone": 0.6,
+          "metallic": 0.6,
+          "decay": 0.28,
+          "open": true
+        },
+        "mix": {
+          "volume": 0.45,
+          "pan": -0.15,
+          "delaySend": 0.15
+        }
+      },
+      "ride": {
+        "engine": "hihat",
+        "params": {
+          "tone": 0.35,
+          "metallic": 0.9,
+          "decay": 0.5
+        },
+        "mix": {
+          "volume": 0.3,
+          "pan": 0.3,
+          "reverbSend": 0.2
+        }
+      },
+      "perc": {
+        "name": "FM blip",
+        "engine": "fm",
+        "params": {
+          "ratio": 3.7,
+          "index": 4,
+          "modEnv": {
+            "decay": 0.05,
+            "sustain": 0
+          },
+          "modEnvAmount": 3
+        },
+        "amp": {
+          "attack": 0.001,
+          "decay": 0.12,
+          "sustain": 0,
+          "release": 0.05
+        },
+        "mix": {
+          "volume": 0.45,
+          "pan": -0.3,
+          "delaySend": 0.45
+        }
+      },
+      "bass": {
+        "engine": "analog",
+        "params": {
+          "wave": "saw",
+          "wave2": "square",
+          "mix2": 0.3,
+          "detune2": -12,
+          "sub": 0.3
+        },
+        "filter": {
+          "type": "lowpass",
+          "cutoff": 0.28,
+          "resonance": 0.2,
+          "envAmount": 0.2,
+          "env": {
+            "attack": 0.001,
+            "decay": 0.15,
+            "sustain": 0
+          }
+        },
+        "amp": {
+          "attack": 0.002,
+          "decay": 0.25,
+          "sustain": 0.4,
+          "release": 0.05
+        },
+        "mix": {
+          "volume": 0.8,
+          "drive": 0.2
+        }
+      },
+      "acid": {
+        "engine": "analog",
+        "params": {
+          "wave": "saw",
+          "glide": 0.06
+        },
+        "filter": {
+          "type": "lowpass",
+          "cutoff": 0.3,
+          "resonance": 0.75,
+          "envAmount": 0.45,
+          "env": {
+            "attack": 0.001,
+            "decay": 0.18,
+            "sustain": 0
+          }
+        },
+        "amp": {
+          "attack": 0.001,
+          "decay": 0.3,
+          "sustain": 0.3,
+          "release": 0.05
+        },
+        "mix": {
+          "volume": 0.55,
+          "drive": 0.3,
+          "delaySend": 0.3
+        }
+      },
+      "stab": {
+        "engine": "analog",
+        "params": {
+          "wave": "saw",
+          "unison": 3,
+          "unisonDetune": 10,
+          "unisonSpread": 0.7
+        },
+        "filter": {
+          "type": "lowpass",
+          "cutoff": 0.45,
+          "resonance": 0.35,
+          "envAmount": 0.3,
+          "env": {
+            "decay": 0.12,
+            "sustain": 0
+          }
+        },
+        "amp": {
+          "attack": 0.002,
+          "decay": 0.2,
+          "sustain": 0,
+          "release": 0.15
+        },
+        "mix": {
+          "volume": 0.45,
+          "delaySend": 0.45,
+          "reverbSend": 0.25
+        },
+        "table": "minorStab"
+      },
+      "pad": {
+        "engine": "analog",
+        "params": {
+          "wave": "saw",
+          "wave2": "triangle",
+          "mix2": 0.5,
+          "detune2": 0.07,
+          "unison": 5,
+          "unisonDetune": 8,
+          "unisonSpread": 0.9
+        },
+        "filter": {
+          "type": "lowpass",
+          "cutoff": 0.3,
+          "resonance": 0.1
+        },
+        "lfo": {
+          "shape": "sine",
+          "rate": 0.08,
+          "depth": 0.15,
+          "target": "cutoff"
+        },
+        "amp": {
+          "attack": 1.5,
+          "decay": 1,
+          "sustain": 0.8,
+          "release": 2.5
+        },
+        "mix": {
+          "volume": 0.35,
+          "reverbSend": 0.6
+        },
+        "table": "padChord"
+      },
+      "riser": {
+        "engine": "noise",
+        "params": {
+          "color": "white",
+          "stereo": true
+        },
+        "filter": {
+          "type": "bandpass",
+          "cutoff": 0.5,
+          "resonance": 0.4
+        },
+        "amp": {
+          "attack": 0.5,
+          "decay": 0.1,
+          "sustain": 1,
+          "release": 0.3
+        },
+        "mix": {
+          "volume": 0.3,
+          "reverbSend": 0.5
+        }
+      }
+    },
+    "tables": {
+      "minorStab": {
+        "rate": 8,
+        "loop": true,
+        "rows": [
+          {
+            "transpose": 0
+          },
+          {
+            "transpose": 3
+          },
+          {
+            "transpose": 7
+          },
+          {
+            "transpose": 12,
+            "volume": 0.8
+          }
+        ]
+      },
+      "padChord": {
+        "rate": 2,
+        "loop": true,
+        "rows": [
+          {
+            "transpose": 0
+          },
+          {
+            "transpose": 3
+          },
+          {
+            "transpose": 7
+          },
+          {
+            "transpose": 12,
+            "volume": 0.7
+          }
+        ]
+      }
+    },
+    "master": {
+      "volume": 0.85,
+      "delay": {
+        "time": 6,
+        "feedback": 0.4,
+        "damping": 0.5,
+        "pingPong": true,
+        "level": 0.45
+      },
+      "reverb": {
+        "size": 0.7,
+        "damping": 0.5,
+        "level": 0.35
+      },
+      "highpass": 28
+    }
+  },
+  "variations": {
+    "kick": {
+      "params.pitchEnd": [
+        42,
+        56
+      ],
+      "params.body": [
+        0.35,
+        0.5
+      ]
+    },
+    "acid": {
+      "filter.cutoff": [
+        0.22,
+        0.4
+      ],
+      "filter.resonance": [
+        0.6,
+        0.85
+      ]
+    },
+    "bass": {
+      "filter.cutoff": [
+        0.22,
+        0.35
+      ]
+    },
+    "pad": {
+      "filter.cutoff": [
+        0.25,
+        0.4
+      ]
+    },
+    "chat": {
+      "params.tone": [
+        0.65,
+        0.85
+      ]
+    }
+  },
+  "layers": [
+    {
+      "id": "kick",
+      "track": "kick",
+      "instrument": "kick",
+      "role": "kick",
+      "energy": [
+        0.12,
+        1
+      ],
+      "always": true,
+      "mutable": false,
+      "variants": 1,
+      "generator": {
+        "type": "pattern",
+        "patterns": [
+          "x...x...x...x..."
+        ],
+        "note": "C3"
+      },
+      "fill": {
+        "chance": 0.3,
+        "drop": true
+      }
+    },
+    {
+      "id": "hats",
+      "track": "hats",
+      "instrument": "chat",
+      "role": "hats",
+      "energy": [
+        0.3,
+        1
+      ],
+      "variants": 3,
+      "generator": {
+        "type": "prob",
+        "steps": [
+          0.15,
+          0.5,
+          0.25,
+          0.9,
+          0.15,
+          0.5,
+          0.25,
+          0.9,
+          0.15,
+          0.5,
+          0.35,
+          0.9,
+          0.15,
+          0.5,
+          0.25,
+          0.95
+        ],
+        "velocity": [
+          0.4,
+          0.8
+        ],
+        "density": [
+          0.8,
+          1.1
+        ],
+        "note": "C3"
+      },
+      "fill": {
+        "chance": 0.5,
+        "retrig": [
+          2,
+          4
+        ]
+      }
+    },
+    {
+      "id": "ohat",
+      "track": "hats",
+      "instrument": "ohat",
+      "role": "hats",
+      "energy": [
+        0.45,
+        1
+      ],
+      "presence": 0.8,
+      "variants": 1,
+      "mutable": false,
+      "generator": {
+        "type": "pattern",
+        "patterns": [
+          "..x...x...x...x.",
+          "..x.......x....."
+        ],
+        "velocity": [
+          0.6,
+          0.9
+        ],
+        "note": "C3"
+      }
+    },
+    {
+      "id": "clap",
+      "track": "clap",
+      "instrument": "clap",
+      "role": "snare",
+      "energy": [
+        0.35,
+        1
+      ],
+      "presence": 0.9,
+      "variants": 1,
+      "mutable": false,
+      "generator": {
+        "type": "pattern",
+        "patterns": [
+          "....x.......x...",
+          "....x.......x..o"
+        ],
+        "note": "C3"
+      },
+      "fill": {
+        "chance": 0.4,
+        "density": [
+          1.5,
+          2.5
+        ]
+      }
+    },
+    {
+      "id": "ride",
+      "track": "ride",
+      "instrument": "ride",
+      "role": "hats",
+      "energy": [
+        0.65,
+        1
+      ],
+      "presence": 0.6,
+      "variants": 1,
+      "mutable": false,
+      "generator": {
+        "type": "pattern",
+        "patterns": [
+          "x.x.x.x.x.x.x.x.",
+          "o.x.o.x.o.x.o.x."
+        ],
+        "velocity": [
+          0.5,
+          0.8
+        ],
+        "ghost": [
+          0.3,
+          0.5
+        ],
+        "note": "C3"
+      }
+    },
+    {
+      "id": "perc",
+      "track": "clap",
+      "instrument": "perc",
+      "role": "perc",
+      "energy": [
+        0.4,
+        0.95
+      ],
+      "presence": 0.7,
+      "variants": 2,
+      "generator": {
+        "type": "euclid",
+        "hits": [
+          3,
+          5
+        ],
+        "length": [
+          12,
+          16
+        ],
+        "rotate": [
+          0,
+          8
+        ],
+        "note": [
+          7,
+          12,
+          14
+        ],
+        "velocity": [
+          0.5,
+          0.9
+        ],
+        "accentEvery": [
+          3,
+          4
+        ]
+      }
+    },
+    {
+      "id": "bass",
+      "track": "bass",
+      "instrument": "bass",
+      "role": "bass",
+      "energy": [
+        0.25,
+        1
+      ],
+      "presence": 0.95,
+      "variants": 2,
+      "generator": {
+        "type": "melodic",
+        "rhythm": [
+          "..x...x.x...x...",
+          "..x...x...x.x...",
+          "..x.x...x...x.x."
+        ],
+        "degrees": [
+          [
+            0,
+            6
+          ],
+          [
+            7,
+            2
+          ],
+          [
+            10,
+            1
+          ],
+          [
+            -2,
+            1
+          ],
+          [
+            5,
+            1
+          ]
+        ],
+        "octave": 1,
+        "walk": 0.2,
+        "repeat": 0.4,
+        "slide": 0.15,
+        "gate": 1,
+        "velocity": [
+          0.8,
+          1
+        ]
+      }
+    },
+    {
+      "id": "acid",
+      "track": "acid",
+      "instrument": "acid",
+      "role": "lead",
+      "energy": [
+        0.55,
+        1
+      ],
+      "presence": 0.6,
+      "variants": 2,
+      "generator": {
+        "type": "melodic",
+        "rhythm": {
+          "density": [
+            0.45,
+            0.7
+          ],
+          "onBeats": 0.7
+        },
+        "degrees": [
+          [
+            0,
+            5
+          ],
+          [
+            3,
+            1
+          ],
+          [
+            5,
+            1
+          ],
+          [
+            7,
+            2
+          ],
+          [
+            10,
+            1
+          ],
+          [
+            12,
+            2
+          ]
+        ],
+        "octave": 2,
+        "octaveJump": 0.25,
+        "walk": 0.3,
+        "repeat": 0.3,
+        "slide": 0.35,
+        "accent": 0.3,
+        "gate": 1,
+        "velocity": [
+          0.7,
+          1
+        ]
+      },
+      "automation": [
+        {
+          "param": "cutoff",
+          "from": [
+            0.2,
+            0.3
+          ],
+          "to": [
+            0.55,
+            0.7
+          ],
+          "when": "rising"
+        },
+        {
+          "param": "cutoff",
+          "from": [
+            0.5,
+            0.6
+          ],
+          "to": [
+            0.25,
+            0.35
+          ],
+          "when": "falling"
+        }
+      ]
+    },
+    {
+      "id": "stab",
+      "track": "stab",
+      "instrument": "stab",
+      "role": "chords",
+      "energy": [
+        0.5,
+        0.9
+      ],
+      "presence": 0.65,
+      "variants": 2,
+      "generator": {
+        "type": "pattern",
+        "patterns": [
+          "...x......x.....",
+          "..x.....x..x....",
+          ".....x.......x.."
+        ],
+        "note": [
+          0,
+          7
+        ],
+        "velocity": [
+          0.7,
+          1
+        ]
+      }
+    },
+    {
+      "id": "pad",
+      "track": "pad",
+      "instrument": "pad",
+      "role": "pad",
+      "voices": 1,
+      "energy": [
+        0,
+        0.6
+      ],
+      "presence": 0.85,
+      "variants": 1,
+      "mutable": false,
+      "generator": {
+        "type": "chords",
+        "progression": [
+          [
+            0
+          ],
+          [
+            5
+          ],
+          [
+            3
+          ],
+          [
+            6
+          ]
+        ],
+        "barsPerChord": 8,
+        "octave": 3,
+        "velocity": [
+          0.6,
+          0.8
+        ]
+      }
+    },
+    {
+      "id": "riser",
+      "track": "ride",
+      "instrument": "riser",
+      "role": "fx",
+      "energy": [
+        0,
+        1
+      ],
+      "sections": [
+        "build"
+      ],
+      "always": true,
+      "variants": 1,
+      "mutable": false,
+      "generator": {
+        "type": "pattern",
+        "patterns": [
+          "x..............................................................................................................................."
+        ],
+        "note": "C4"
+      },
+      "automation": [
+        {
+          "param": "cutoff",
+          "from": 0.25,
+          "to": 0.85,
+          "when": "build",
+          "curve": "exp"
+        },
+        {
+          "param": "volume",
+          "from": 0.1,
+          "to": 0.5,
+          "when": "build"
+        }
+      ]
+    }
+  ],
+  "arrangement": {
+    "minutes": [
+      5,
+      7
+    ],
+    "sectionBars": [
+      8,
+      16,
+      16,
+      32
+    ],
+    "energy": {
+      "start": [
+        0.15,
+        0.3
+      ],
+      "step": [
+        -0.15,
+        0.3
+      ],
+      "min": 0.1,
+      "max": 1,
+      "momentum": 0.4
+    },
+    "intro": {
+      "bars": [
+        8,
+        16
+      ],
+      "energy": [
+        0.15,
+        0.25
+      ]
+    },
+    "outro": {
+      "bars": [
+        8,
+        16
+      ],
+      "energy": [
+        0.15,
+        0.3
+      ]
+    },
+    "breakdown": {
+      "chance": 0.35,
+      "energy": [
+        0.15,
+        0.3
+      ],
+      "bars": [
+        8,
+        16
+      ],
+      "keep": [
+        "pad",
+        "bass",
+        "hats",
+        "perc",
+        "stab"
+      ],
+      "drop": [
+        "kick",
+        "clap",
+        "ride"
+      ],
+      "minGap": 3
+    },
+    "maxLayerChange": 2
+  },
+  "mutation": {
+    "chance": 0.4,
+    "ops": [
+      "rotate",
+      "drop",
+      "add",
+      "velocity",
+      "swap"
+    ],
+    "strength": 0.4
+  }
+}

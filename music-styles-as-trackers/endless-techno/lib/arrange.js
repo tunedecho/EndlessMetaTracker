@@ -40,8 +40,10 @@ export function planSections(style, rnd, minutes) {
   const sections = [];
   const push = (kind, bars, energy) => sections.push({ kind, bars, energy: Math.round(clampE(energy) * 100) / 100 });
 
-  const introBars = a.intro ? rnd.range(a.intro.bars ?? 16, true) : 0;
-  const outroBars = a.outro ? rnd.range(a.outro.bars ?? 16, true) : 0;
+  // Intro and outro never take more than a quarter of a short song each.
+  const cap = Math.max(4, Math.floor(targetBars / 4));
+  const introBars = a.intro ? Math.min(cap, rnd.range(a.intro.bars ?? 16, true)) : 0;
+  const outroBars = a.outro ? Math.min(cap, rnd.range(a.outro.bars ?? 16, true)) : 0;
   const body = Math.max(16, targetBars - introBars - outroBars);
   const arcBars = Math.round((4 * rnd.bpm) / beatsPerBar); // about four minutes
   const arcs = Math.max(1, Math.round(body / arcBars));

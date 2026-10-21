@@ -1,0 +1,2144 @@
+{
+ "format": "tracker-song/0.1",
+ "meta": {
+  "title": "Ambient Drift 1",
+  "style": "ambient-drift",
+  "seed": 1,
+  "generator": "endless-techno/0.1",
+  "created": "2026-10-21T02:49:46.607Z",
+  "notes": "5 min, 67.5 bpm, D majorPentatonic, 9 sections"
+ },
+ "transport": {
+  "bpm": 67.5,
+  "stepsPerBeat": 4,
+  "phraseLength": 16,
+  "swing": 0
+ },
+ "sound": {
+  "instruments": {
+   "drone": {
+    "engine": "analog",
+    "params": {
+     "wave": "sine",
+     "wave2": "triangle",
+     "mix2": 0.3,
+     "detune2": 12.02,
+     "sub": 0.5
+    },
+    "filter": {
+     "type": "lowpass",
+     "cutoff": 0.25
+    },
+    "amp": {
+     "attack": 4,
+     "decay": 1,
+     "sustain": 1,
+     "release": 6
+    },
+    "mix": {
+     "volume": 0.5,
+     "reverbSend": 0.2
+    }
+   },
+   "pad": {
+    "engine": "analog",
+    "params": {
+     "wave": "saw",
+     "wave2": "triangle",
+     "mix2": 0.6,
+     "detune2": 0.06,
+     "unison": 5,
+     "unisonDetune": 7,
+     "unisonSpread": 0.9
+    },
+    "filter": {
+     "type": "lowpass",
+     "cutoff": 0.418,
+     "resonance": 0.08,
+     "envAmount": 0.12,
+     "env": {
+      "attack": 3,
+      "decay": 3,
+      "sustain": 0.5,
+      "release": 4
+     }
+    },
+    "lfo": {
+     "shape": "sine",
+     "rate": 0.078,
+     "depth": 0.1,
+     "target": "cutoff"
+    },
+    "amp": {
+     "attack": 2.5,
+     "decay": 2,
+     "sustain": 0.75,
+     "release": 5
+    },
+    "mix": {
+     "volume": 0.3,
+     "reverbSend": 0.65,
+     "delaySend": 0.1
+    }
+   },
+   "bell": {
+    "engine": "fm",
+    "params": {
+     "ratio": 3.062,
+     "index": 1.935,
+     "modEnv": {
+      "decay": 1.2,
+      "sustain": 0
+     },
+     "modEnvAmount": 1.2
+    },
+    "amp": {
+     "attack": 0.005,
+     "decay": 2.5,
+     "sustain": 0,
+     "release": 1
+    },
+    "mix": {
+     "volume": 0.28,
+     "reverbSend": 0.7,
+     "delaySend": 0.5,
+     "pan": 0.25
+    }
+   },
+   "pluck": {
+    "engine": "analog",
+    "params": {
+     "wave": "triangle",
+     "wave2": "pulse",
+     "mix2": 0.25,
+     "pulseWidth": 0.3
+    },
+    "filter": {
+     "type": "lowpass",
+     "cutoff": 0.55,
+     "resonance": 0.15,
+     "envAmount": 0.25,
+     "env": {
+      "decay": 0.25,
+      "sustain": 0
+     }
+    },
+    "amp": {
+     "attack": 0.003,
+     "decay": 0.9,
+     "sustain": 0,
+     "release": 0.4
+    },
+    "mix": {
+     "volume": 0.3,
+     "reverbSend": 0.55,
+     "delaySend": 0.45,
+     "pan": -0.25
+    }
+   },
+   "shimmer": {
+    "engine": "fm",
+    "params": {
+     "ratio": 2,
+     "index": 0.6,
+     "feedback": 0.1,
+     "carrierWave": "sine"
+    },
+    "amp": {
+     "attack": 1.5,
+     "decay": 2,
+     "sustain": 0.4,
+     "release": 4
+    },
+    "lfo": {
+     "shape": "triangle",
+     "rate": 0.3,
+     "depth": 0.4,
+     "target": "volume"
+    },
+    "mix": {
+     "volume": 0.12,
+     "reverbSend": 0.8,
+     "pan": 0.4
+    }
+   },
+   "air": {
+    "engine": "noise",
+    "params": {
+     "color": "pink",
+     "stereo": true
+    },
+    "filter": {
+     "type": "bandpass",
+     "cutoff": 0.658,
+     "resonance": 0.35
+    },
+    "amp": {
+     "attack": 5,
+     "sustain": 1,
+     "release": 5
+    },
+    "lfo": {
+     "shape": "triangle",
+     "rate": 0.04,
+     "depth": 0.3,
+     "target": "cutoff"
+    },
+    "mix": {
+     "volume": 0.18,
+     "reverbSend": 0.8
+    }
+   }
+  },
+  "master": {
+   "volume": 0.9,
+   "delay": {
+    "time": 6,
+    "feedback": 0.5,
+    "damping": 0.6,
+    "pingPong": true,
+    "level": 0.45
+   },
+   "reverb": {
+    "size": 0.93,
+    "damping": 0.3,
+    "predelay": 0.03,
+    "level": 0.6
+   },
+   "highpass": 24
+  }
+ },
+ "composition": {
+  "tracks": [
+   {
+    "id": "drone",
+    "instrument": "drone"
+   },
+   {
+    "id": "air",
+    "instrument": "air"
+   },
+   {
+    "id": "pad1",
+    "instrument": "pad"
+   },
+   {
+    "id": "pad2",
+    "instrument": "pad"
+   },
+   {
+    "id": "pad3",
+    "instrument": "pad"
+   },
+   {
+    "id": "bells",
+    "instrument": "bell"
+   },
+   {
+    "id": "shimmer",
+    "instrument": "shimmer"
+   },
+   {
+    "id": "pluck",
+    "instrument": "pluck"
+   }
+  ],
+  "phrases": {
+   "drone_1": {
+    "steps": [
+     {
+      "note": "D1",
+      "vel": 0.9
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "air_1": {
+    "steps": [
+     {
+      "note": "C4"
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "air_2": {
+    "steps": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "pad_1": {
+    "steps": [
+     {
+      "note": "D3",
+      "vel": 0.7
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "pad_2": {
+    "steps": [
+     {
+      "note": "F#3",
+      "vel": 0.59,
+      "fx": {
+       "nudge": 0.3
+      }
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "pad_3": {
+    "steps": [
+     {
+      "note": "B3",
+      "vel": 0.73,
+      "fx": {
+       "nudge": 0.6
+      }
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "pad_4": {
+    "steps": [
+     {
+      "note": "D3",
+      "vel": 0.58
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "pad_5": {
+    "steps": [
+     {
+      "note": "F#3",
+      "vel": 0.57,
+      "fx": {
+       "nudge": 0.3
+      }
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "pad_6": {
+    "steps": [
+     {
+      "note": "B3",
+      "vel": 0.7,
+      "fx": {
+       "nudge": 0.6
+      }
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "pad_7": {
+    "steps": [
+     {
+      "note": "D3",
+      "vel": 0.72
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "pad_8": {
+    "steps": [
+     {
+      "note": "F#3",
+      "vel": 0.68,
+      "fx": {
+       "nudge": 0.3
+      }
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "pad_9": {
+    "steps": [
+     {
+      "note": "B3",
+      "vel": 0.57,
+      "fx": {
+       "nudge": 0.6
+      }
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "pad_10": {
+    "steps": [
+     {
+      "note": "D3",
+      "vel": 0.62
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "pad_11": {
+    "steps": [
+     {
+      "note": "F#3",
+      "vel": 0.73,
+      "fx": {
+       "nudge": 0.3
+      }
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "pad_12": {
+    "steps": [
+     {
+      "note": "A3",
+      "vel": 0.75
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "pad_13": {
+    "steps": [
+     {
+      "note": "D4",
+      "vel": 0.63,
+      "fx": {
+       "nudge": 0.3
+      }
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "pad_14": {
+    "steps": [
+     {
+      "note": "F#4",
+      "vel": 0.66,
+      "fx": {
+       "nudge": 0.6
+      }
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "pad_15": {
+    "steps": [
+     {
+      "note": "A3",
+      "vel": 0.57
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "pad_16": {
+    "steps": [
+     {
+      "note": "D4",
+      "vel": 0.65,
+      "fx": {
+       "nudge": 0.3
+      }
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "pad_17": {
+    "steps": [
+     {
+      "note": "F#4",
+      "vel": 0.74,
+      "fx": {
+       "nudge": 0.6
+      }
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "pad_18": {
+    "steps": [
+     {
+      "note": "A3",
+      "vel": 0.58
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "pad_19": {
+    "steps": [
+     {
+      "note": "D4",
+      "vel": 0.61,
+      "fx": {
+       "nudge": 0.3
+      }
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "pad_20": {
+    "steps": [
+     {
+      "note": "F#4",
+      "vel": 0.72,
+      "fx": {
+       "nudge": 0.6
+      }
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "pad_21": {
+    "steps": [
+     {
+      "note": "A3",
+      "vel": 0.74
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "pad_22": {
+    "steps": [
+     {
+      "note": "F#4",
+      "vel": 0.67,
+      "fx": {
+       "nudge": 0.6
+      }
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "bells_1": {
+    "steps": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "F#6",
+      "vel": 0.63
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "F#6",
+      "vel": 0.6
+     },
+     null,
+     null
+    ]
+   },
+   "bells_2": {
+    "steps": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "F#5",
+      "vel": 0.37
+     }
+    ]
+   },
+   "bells_3": {
+    "steps": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "E6",
+      "vel": 0.69
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "F#5",
+      "vel": 0.32
+     },
+     null,
+     null,
+     null
+    ]
+   },
+   "shimmer_1": {
+    "steps": [
+     {
+      "note": "B6",
+      "vel": 0.6
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "shimmer_2": {
+    "steps": [
+     {
+      "note": "F#7",
+      "vel": 0.6
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   },
+   "bells_4": {
+    "steps": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "F#6",
+      "vel": 0.56
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "F#6",
+      "vel": 0.48
+     },
+     null,
+     null
+    ]
+   },
+   "bells_5": {
+    "steps": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "E6",
+      "vel": 0.61
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "F#5",
+      "vel": 0.26
+     },
+     null,
+     null,
+     null
+    ]
+   },
+   "bells_6": {
+    "steps": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "F#5",
+      "vel": 0.33
+     }
+    ]
+   },
+   "pluck_1": {
+    "steps": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "F#4",
+      "vel": 0.45
+     },
+     null,
+     {
+      "note": "OFF"
+     },
+     null,
+     {
+      "note": "F#5",
+      "vel": 0.53
+     },
+     null,
+     {
+      "note": "OFF"
+     },
+     null,
+     {
+      "note": "F#4",
+      "vel": 0.41
+     }
+    ]
+   },
+   "pluck_2": {
+    "steps": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "B4",
+      "vel": 0.77
+     },
+     null,
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "F#4",
+      "vel": 0.41
+     },
+     null
+    ]
+   },
+   "pluck_3": {
+    "steps": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "F#4",
+      "vel": 0.41
+     },
+     null,
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "F#4",
+      "vel": 0.6
+     },
+     null,
+     {
+      "note": "OFF"
+     }
+    ]
+   },
+   "pluck_4": {
+    "steps": [
+     null,
+     null,
+     {
+      "note": "B4",
+      "vel": 0.63
+     },
+     null,
+     {
+      "note": "F#4",
+      "vel": 0.55
+     },
+     null,
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     null,
+     {
+      "note": "D5",
+      "vel": 0.59
+     },
+     null,
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "B4",
+      "vel": 0.6
+     },
+     null,
+     {
+      "note": "B4",
+      "vel": 0.73
+     }
+    ]
+   },
+   "pluck_5": {
+    "steps": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "F#4",
+      "vel": 0.4
+     },
+     null,
+     {
+      "note": "OFF"
+     },
+     null,
+     {
+      "note": "F#5",
+      "vel": 0.51
+     },
+     null,
+     {
+      "note": "OFF"
+     },
+     null,
+     {
+      "note": "F#4",
+      "vel": 0.39
+     }
+    ]
+   },
+   "pluck_6": {
+    "steps": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "B4",
+      "vel": 0.68
+     },
+     null,
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "F#4",
+      "vel": 0.4
+     },
+     null
+    ]
+   },
+   "pluck_7": {
+    "steps": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "F#4",
+      "vel": 0.36
+     },
+     null,
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "F#4",
+      "vel": 0.58
+     },
+     null,
+     {
+      "note": "OFF"
+     }
+    ]
+   },
+   "pluck_8": {
+    "steps": [
+     null,
+     null,
+     {
+      "note": "B4",
+      "vel": 0.56
+     },
+     null,
+     {
+      "note": "F#4",
+      "vel": 0.53
+     },
+     null,
+     {
+      "note": "OFF"
+     },
+     null,
+     null,
+     null,
+     {
+      "note": "D5",
+      "vel": 0.55
+     },
+     null,
+     {
+      "note": "OFF"
+     },
+     {
+      "note": "B4",
+      "vel": 0.51
+     },
+     null,
+     {
+      "note": "B4",
+      "vel": 0.76
+     }
+    ]
+   },
+   "pluck_9": {
+    "steps": [
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     {
+      "note": "E4",
+      "vel": 0.7
+     },
+     null,
+     {
+      "note": "OFF"
+     },
+     null,
+     null
+    ]
+   },
+   "drone_2": {
+    "steps": [
+     {
+      "note": "A1",
+      "vel": 0.9
+     },
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null,
+     null
+    ]
+   }
+  },
+  "chains": {
+   "drone_c1": {
+    "rows": [
+     {
+      "phrase": "drone_1"
+     },
+     {
+      "phrase": "drone_1"
+     },
+     {
+      "phrase": "drone_1"
+     },
+     {
+      "phrase": "drone_1"
+     },
+     {
+      "phrase": "drone_1"
+     },
+     {
+      "phrase": "drone_1"
+     },
+     {
+      "phrase": "drone_1"
+     },
+     {
+      "phrase": "drone_1"
+     },
+     {
+      "phrase": "drone_1"
+     },
+     {
+      "phrase": "drone_1"
+     },
+     {
+      "phrase": "drone_1"
+     }
+    ]
+   },
+   "air_c1": {
+    "rows": [
+     {
+      "phrase": "air_1"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "air_1"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "air_1"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "air_2"
+     }
+    ]
+   },
+   "drone_c2": {
+    "rows": [
+     {
+      "phrase": "drone_1"
+     },
+     {
+      "phrase": "drone_1"
+     },
+     {
+      "phrase": "drone_1"
+     },
+     {
+      "phrase": "drone_1"
+     },
+     {
+      "phrase": "drone_1"
+     },
+     {
+      "phrase": "drone_1"
+     },
+     {
+      "phrase": "drone_1"
+     },
+     {
+      "phrase": "drone_1"
+     }
+    ]
+   },
+   "air_c2": {
+    "rows": [
+     {
+      "phrase": "air_1"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "air_1"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "air_2"
+     }
+    ]
+   },
+   "pad_c1": {
+    "rows": [
+     {
+      "phrase": "pad_1"
+     },
+     {
+      "phrase": "pad_4"
+     },
+     {
+      "phrase": "pad_7"
+     },
+     {
+      "phrase": "pad_10"
+     },
+     {
+      "phrase": "pad_12"
+     },
+     {
+      "phrase": "pad_15"
+     },
+     {
+      "phrase": "pad_18"
+     },
+     {
+      "phrase": "pad_21"
+     }
+    ]
+   },
+   "pad_c2": {
+    "rows": [
+     {
+      "phrase": "pad_2"
+     },
+     {
+      "phrase": "pad_5"
+     },
+     {
+      "phrase": "pad_8"
+     },
+     {
+      "phrase": "pad_11"
+     },
+     {
+      "phrase": "pad_13"
+     },
+     {
+      "phrase": "pad_16"
+     },
+     {
+      "phrase": "pad_19"
+     },
+     {
+      "phrase": "pad_13"
+     }
+    ]
+   },
+   "pad_c3": {
+    "rows": [
+     {
+      "phrase": "pad_3"
+     },
+     {
+      "phrase": "pad_6"
+     },
+     {
+      "phrase": "pad_9"
+     },
+     {
+      "phrase": "pad_3"
+     },
+     {
+      "phrase": "pad_14"
+     },
+     {
+      "phrase": "pad_17"
+     },
+     {
+      "phrase": "pad_20"
+     },
+     {
+      "phrase": "pad_22"
+     }
+    ]
+   },
+   "bells_c1": {
+    "rows": [
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "bells_1"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "bells_2"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "bells_1"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "bells_2"
+     }
+    ]
+   },
+   "bells_c2": {
+    "rows": [
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "bells_1"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "bells_3"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "bells_1"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "bells_2"
+     }
+    ]
+   },
+   "shimmer_c1": {
+    "rows": [
+     {
+      "phrase": "shimmer_1"
+     },
+     {
+      "phrase": "shimmer_1"
+     },
+     {
+      "phrase": "shimmer_1"
+     },
+     {
+      "phrase": "shimmer_1"
+     },
+     {
+      "phrase": "shimmer_2"
+     },
+     {
+      "phrase": "shimmer_2"
+     },
+     {
+      "phrase": "shimmer_2"
+     },
+     {
+      "phrase": "shimmer_2"
+     }
+    ]
+   },
+   "drone_c3": {
+    "rows": [
+     {
+      "phrase": "drone_1"
+     },
+     {
+      "phrase": "drone_1"
+     },
+     {
+      "phrase": "drone_1"
+     },
+     {
+      "phrase": "drone_1"
+     }
+    ]
+   },
+   "air_c3": {
+    "rows": [
+     {
+      "phrase": "air_1"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "air_2"
+     }
+    ]
+   },
+   "pad_c4": {
+    "rows": [
+     {
+      "phrase": "pad_1"
+     },
+     {
+      "phrase": "pad_4"
+     },
+     {
+      "phrase": "pad_7"
+     },
+     {
+      "phrase": "pad_10"
+     }
+    ]
+   },
+   "pad_c5": {
+    "rows": [
+     {
+      "phrase": "pad_2"
+     },
+     {
+      "phrase": "pad_5"
+     },
+     {
+      "phrase": "pad_8"
+     },
+     {
+      "phrase": "pad_11"
+     }
+    ]
+   },
+   "pad_c6": {
+    "rows": [
+     {
+      "phrase": "pad_3"
+     },
+     {
+      "phrase": "pad_6"
+     },
+     {
+      "phrase": "pad_9"
+     },
+     {
+      "phrase": "pad_3"
+     }
+    ]
+   },
+   "bells_c3": {
+    "rows": [
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "bells_4"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "bells_5"
+     }
+    ]
+   },
+   "shimmer_c2": {
+    "rows": [
+     {
+      "phrase": "shimmer_1"
+     },
+     {
+      "phrase": "shimmer_1"
+     },
+     {
+      "phrase": "shimmer_1"
+     },
+     {
+      "phrase": "shimmer_1"
+     }
+    ]
+   },
+   "bells_c4": {
+    "rows": [
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "bells_4"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "bells_5"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "bells_4"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "bells_5"
+     }
+    ]
+   },
+   "bells_c5": {
+    "rows": [
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "bells_4"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "bells_6"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "bells_4"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "bells_5"
+     }
+    ]
+   },
+   "pluck_c1": {
+    "rows": [
+     {
+      "phrase": "pluck_1"
+     },
+     {
+      "phrase": "pluck_2"
+     },
+     {
+      "phrase": "pluck_3"
+     },
+     {
+      "phrase": "pluck_4"
+     },
+     {
+      "phrase": "pluck_1"
+     },
+     {
+      "phrase": "pluck_2"
+     },
+     {
+      "phrase": "pluck_3"
+     },
+     {
+      "phrase": "pluck_4"
+     }
+    ]
+   },
+   "pluck_c2": {
+    "rows": [
+     {
+      "phrase": "pluck_5"
+     },
+     {
+      "phrase": "pluck_6"
+     },
+     {
+      "phrase": "pluck_7"
+     },
+     {
+      "phrase": "pluck_8"
+     },
+     {
+      "phrase": "pluck_5"
+     },
+     {
+      "phrase": "pluck_6"
+     },
+     {
+      "phrase": "pluck_7"
+     },
+     {
+      "phrase": "pluck_9"
+     }
+    ]
+   },
+   "drone_c4": {
+    "rows": [
+     {
+      "phrase": "drone_1"
+     },
+     {
+      "phrase": "drone_1"
+     },
+     {
+      "phrase": "drone_1"
+     },
+     {
+      "phrase": "drone_1"
+     },
+     {
+      "phrase": "drone_1"
+     },
+     {
+      "phrase": "drone_1"
+     },
+     {
+      "phrase": "drone_1"
+     },
+     {
+      "phrase": "drone_1"
+     },
+     {
+      "phrase": "drone_1"
+     },
+     {
+      "phrase": "drone_1"
+     },
+     {
+      "phrase": "drone_1"
+     },
+     {
+      "phrase": "drone_1"
+     },
+     {
+      "phrase": "drone_1"
+     },
+     {
+      "phrase": "drone_1"
+     },
+     {
+      "phrase": "drone_1"
+     },
+     {
+      "phrase": "drone_1"
+     },
+     {
+      "phrase": "drone_2"
+     },
+     {
+      "phrase": "drone_2"
+     },
+     {
+      "phrase": "drone_2"
+     },
+     {
+      "phrase": "drone_2"
+     },
+     {
+      "phrase": "drone_2"
+     }
+    ]
+   },
+   "air_c4": {
+    "rows": [
+     {
+      "phrase": "air_1"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "air_1"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "air_1"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "air_1"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "air_1"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "air_2"
+     },
+     {
+      "phrase": "air_1"
+     }
+    ]
+   }
+  },
+  "song": {
+   "rows": [
+    {
+     "drone": "drone_c1",
+     "air": "air_c1"
+    },
+    {
+     "drone": "drone_c2",
+     "air": "air_c2",
+     "pad1": "pad_c1",
+     "pad2": "pad_c2",
+     "pad3": "pad_c3",
+     "bells": "bells_c1"
+    },
+    {
+     "drone": "drone_c2",
+     "air": "air_c2",
+     "pad1": "pad_c1",
+     "pad2": "pad_c2",
+     "pad3": "pad_c3",
+     "bells": "bells_c2",
+     "shimmer": "shimmer_c1"
+    },
+    {
+     "drone": "drone_c3",
+     "air": "air_c3",
+     "pad1": "pad_c4",
+     "pad2": "pad_c5",
+     "pad3": "pad_c6",
+     "bells": "bells_c3",
+     "shimmer": "shimmer_c2"
+    },
+    {
+     "drone": "drone_c2",
+     "air": "air_c2",
+     "pad1": "pad_c1",
+     "pad2": "pad_c2",
+     "pad3": "pad_c3",
+     "bells": "bells_c4",
+     "shimmer": "shimmer_c1"
+    },
+    {
+     "drone": "drone_c2",
+     "air": "air_c2",
+     "pad1": "pad_c1",
+     "pad2": "pad_c2",
+     "pad3": "pad_c3",
+     "bells": "bells_c5",
+     "pluck": "pluck_c1",
+     "shimmer": "shimmer_c1"
+    },
+    {
+     "drone": "drone_c2",
+     "air": "air_c2",
+     "pad1": "pad_c1",
+     "pad2": "pad_c2",
+     "pad3": "pad_c3",
+     "bells": "bells_c4",
+     "pluck": "pluck_c2"
+    },
+    {
+     "drone": "drone_c2",
+     "air": "air_c2",
+     "pad1": "pad_c1",
+     "pad2": "pad_c2",
+     "pad3": "pad_c3"
+    },
+    {
+     "drone": "drone_c4",
+     "air": "air_c4"
+    }
+   ],
+   "sections": [
+    {
+     "row": 0,
+     "name": "intro",
+     "energy": 0.1
+    },
+    {
+     "row": 1,
+     "name": "build",
+     "energy": 0.35
+    },
+    {
+     "row": 2,
+     "name": "build",
+     "energy": 0.56
+    },
+    {
+     "row": 3,
+     "name": "build",
+     "energy": 0.7
+    },
+    {
+     "row": 4,
+     "name": "drop",
+     "energy": 0.7
+    },
+    {
+     "row": 5,
+     "name": "groove",
+     "energy": 0.7
+    },
+    {
+     "row": 6,
+     "name": "groove",
+     "energy": 0.47
+    },
+    {
+     "row": 7,
+     "name": "groove",
+     "energy": 0.24
+    },
+    {
+     "row": 8,
+     "name": "outro",
+     "energy": 0.07
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,110 @@
+{
+  "format": "tracker-style/0.1",
+  "id": "ambient-drift",
+  "meta": {
+    "title": "Ambient Drift",
+    "author": "Endless",
+    "notes": "Slow, consonant, in the spirit of spa music: a drone, pad chords on a lydian or pentatonic scale, sparse bells and plucks, and air. Written to test that the same format and generator hold a style that is nothing like techno. Not derived from Endless Spa's own data, which this repo has not seen."
+  },
+  "transport": { "bpm": [60, 72], "stepsPerBeat": 4, "phraseLength": 16, "swing": 0 },
+  "scale": { "root": ["D", "F", "G", "A", "C"], "mode": ["lydian", "major", "majorPentatonic", "dorian"] },
+  "sound": {
+    "instruments": {
+      "drone": {
+        "engine": "analog",
+        "params": { "wave": "sine", "wave2": "triangle", "mix2": 0.3, "detune2": 12.02, "sub": 0.5 },
+        "filter": { "type": "lowpass", "cutoff": 0.25 },
+        "amp": { "attack": 4, "decay": 1, "sustain": 1, "release": 6 },
+        "mix": { "volume": 0.5, "reverbSend": 0.2 }
+      },
+      "pad": {
+        "engine": "analog",
+        "params": { "wave": "saw", "wave2": "triangle", "mix2": 0.6, "detune2": 0.06, "unison": 5, "unisonDetune": 7, "unisonSpread": 0.9 },
+        "filter": { "type": "lowpass", "cutoff": 0.36, "resonance": 0.08, "envAmount": 0.12, "env": { "attack": 3, "decay": 3, "sustain": 0.5, "release": 4 } },
+        "lfo": { "shape": "sine", "rate": 0.05, "depth": 0.1, "target": "cutoff" },
+        "amp": { "attack": 2.5, "decay": 2, "sustain": 0.75, "release": 5 },
+        "mix": { "volume": 0.3, "reverbSend": 0.65, "delaySend": 0.1 }
+      },
+      "bell": {
+        "engine": "fm",
+        "params": { "ratio": 3.5, "index": 1.8, "modEnv": { "decay": 1.2, "sustain": 0 }, "modEnvAmount": 1.2 },
+        "amp": { "attack": 0.005, "decay": 2.5, "sustain": 0, "release": 1 },
+        "mix": { "volume": 0.28, "reverbSend": 0.7, "delaySend": 0.5, "pan": 0.25 }
+      },
+      "pluck": {
+        "engine": "analog",
+        "params": { "wave": "triangle", "wave2": "pulse", "mix2": 0.25, "pulseWidth": 0.3 },
+        "filter": { "type": "lowpass", "cutoff": 0.55, "resonance": 0.15, "envAmount": 0.25, "env": { "decay": 0.25, "sustain": 0 } },
+        "amp": { "attack": 0.003, "decay": 0.9, "sustain": 0, "release": 0.4 },
+        "mix": { "volume": 0.3, "reverbSend": 0.55, "delaySend": 0.45, "pan": -0.25 }
+      },
+      "shimmer": {
+        "engine": "fm",
+        "params": { "ratio": 2, "index": 0.6, "feedback": 0.1, "carrierWave": "sine" },
+        "amp": { "attack": 1.5, "decay": 2, "sustain": 0.4, "release": 4 },
+        "lfo": { "shape": "triangle", "rate": 0.3, "depth": 0.4, "target": "volume" },
+        "mix": { "volume": 0.12, "reverbSend": 0.8, "pan": 0.4 }
+      },
+      "air": {
+        "engine": "noise",
+        "params": { "color": "pink", "stereo": true },
+        "filter": { "type": "bandpass", "cutoff": 0.62, "resonance": 0.35 },
+        "amp": { "attack": 5, "sustain": 1, "release": 5 },
+        "lfo": { "shape": "triangle", "rate": 0.04, "depth": 0.3, "target": "cutoff" },
+        "mix": { "volume": 0.18, "reverbSend": 0.8 }
+      }
+    },
+    "master": {
+      "volume": 0.9,
+      "delay": { "time": 6, "feedback": 0.5, "damping": 0.6, "pingPong": true, "level": 0.45 },
+      "reverb": { "size": 0.93, "damping": 0.3, "predelay": 0.03, "level": 0.6 },
+      "highpass": 24
+    }
+  },
+  "variations": {
+    "pad": { "filter.cutoff": [0.3, 0.42], "lfo.rate": [0.03, 0.08] },
+    "bell": { "params.ratio": [2.5, 4.5], "params.index": [1.2, 2.4] },
+    "air": { "filter.cutoff": [0.55, 0.7] }
+  },
+  "layers": [
+    {
+      "id": "drone", "track": "drone", "instrument": "drone", "role": "bass",
+      "energy": [0, 1], "always": true, "mutable": false, "variants": 1,
+      "generator": { "type": "chords", "progression": [[0], [0], [3], [0]], "barsPerChord": 8, "octave": 1, "velocity": 0.9 }
+    },
+    {
+      "id": "air", "track": "air", "instrument": "air", "role": "fx",
+      "energy": [0, 1], "always": true, "mutable": false, "variants": 1,
+      "generator": { "type": "pattern", "patterns": ["x..............................................................."], "note": "C4", "velocity": 1 }
+    },
+    {
+      "id": "pad", "track": "pad", "instrument": "pad", "role": "pad", "voices": 3,
+      "energy": [0.15, 1], "presence": 0.9, "mutable": false, "variants": 1,
+      "generator": { "type": "chords", "progression": [[0, 2, 4], [3, 5, 7], [5, 7, 9], [1, 3, 5]], "barsPerChord": 4, "octave": 3, "velocity": [0.55, 0.75], "strum": 0.3 }
+    },
+    {
+      "id": "bells", "track": "bells", "instrument": "bell", "role": "lead",
+      "energy": [0.3, 1], "presence": 0.8, "variants": 2,
+      "generator": { "type": "melodic", "rhythm": { "density": [0.06, 0.12], "onBeats": 1.5 }, "degrees": [[0, 3], [2, 2], [4, 3], [6, 1], [7, 2], [9, 1]], "octave": 5, "walk": 0.5, "repeat": 0.1, "velocity": [0.3, 0.7] }
+    },
+    {
+      "id": "pluck", "track": "pluck", "instrument": "pluck", "role": "perc",
+      "energy": [0.4, 1], "presence": 0.7, "variants": 2,
+      "generator": { "type": "melodic", "rhythm": { "density": [0.12, 0.22], "onBeats": 0.6 }, "degrees": [[0, 2], [1, 1], [2, 2], [4, 2], [5, 1], [7, 1]], "octave": 4, "walk": 0.6, "repeat": 0.25, "octaveJump": 0.1, "gate": 2, "velocity": [0.4, 0.8] }
+    },
+    {
+      "id": "shimmer", "track": "shimmer", "instrument": "shimmer", "role": "pad",
+      "energy": [0.5, 1], "presence": 0.6, "mutable": false, "variants": 1,
+      "generator": { "type": "chords", "progression": [[4], [7], [9], [4]], "barsPerChord": 4, "octave": 6, "velocity": 0.6 }
+    }
+  ],
+  "arrangement": {
+    "minutes": [6, 10],
+    "sectionBars": [8, 16],
+    "energy": { "start": [0.1, 0.2], "step": [-0.05, 0.05], "min": 0.05, "max": 0.7 },
+    "intro": { "bars": [8, 16], "energy": [0.05, 0.15] },
+    "outro": { "bars": [16, 24], "energy": [0.05, 0.12] },
+    "maxLayerChange": 1
+  },
+  "mutation": { "chance": 0.3, "ops": ["add", "drop", "velocity"], "strength": 0.3 }
+}

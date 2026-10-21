@@ -147,6 +147,7 @@ export function generateSong(style, opts = {}) {
   let prevSec = null;
   sections.forEach((sec, si) => {
     const row = {};
+    const pending = {};
     for (const layer of style.layers) {
       if (!present[si].has(layer.id)) continue;
       const st = stateOf(layer);
@@ -167,11 +168,11 @@ export function generateSong(style, opts = {}) {
         autos = autos.filter((a, i) => autos.findIndex((b) => b.param === a.param) === i);
       }
       const pointEvery = Math.max(1, Math.floor(bars / 4));
-      const voiceRows = [];
+      const voiceBars = [];
       for (let b = 0; b < bars; b++) {
         const vi = st.gens.length > 1 && b % 4 === 3 && rnd.chance(0.5) ? 1 + ((b >> 2) % (st.gens.length - 1)) : 0;
         let steps = barSteps(layer, st, vi, b);
-        const perVoice = Array.isArray(steps[0]) ? steps : [steps];
+        const perVoice = (Array.isArray(steps[0]) ? steps : [steps]).slice(0, layer.voices ?? Infinity);
         perVoice.forEach((voiceSteps, v) => {
           let s = voiceSteps.slice();
           if (doFill && b === bars - 1) s = fillSteps(s, rnd, layer.fill, ctx);
@@ -184,17 +185,32 @@ export function generateSong(style, opts = {}) {
             }
             s[0] = s[0] ? { ...s[0], fx: { ...(s[0].fx || {}), ...fx } } : { fx };
           }
-          const trackId = perVoice.length > 1 ? `${layer.track}${v + 1}` : layer.track;
-          const track = ensureTrack(trackId, layer.instrument);
-          if (track.instrument !== layer.instrument) s = s.map((x) => (x && x.note !== undefined && x.note !== 'OFF' ? { ...x, inst: layer.instrument } : x));
-          (voiceRows[v] ||= []).push({ phrase: internPhrase(layer.id, s) });
+          (voiceBars[v] ||= []).push(s);
         });
       }
-      voiceRows.forEach((vr, v) => {
-        const trackId = voiceRows.length > 1 ? `${layer.track}${v + 1}` : layer.track;
-        if (layer.voices && v >= layer.voices) return;
-        row[trackId] = internChain(layer.id, vr);
+      voiceBars.forEach((vb, v) => {
+        const trackId = voiceBars.length > 1 ? `${layer.track}${v + 1}` : layer.track;
+        ensureTrack(trackId, layer.instrument);
+        (pending[trackId] ||= []).push({ layer, bars: vb });
       });
+    }
+    // Write one chain per track. Layers that share a track are merged bar by bar:
+    // the earlier layer's steps win, the later layer fills the empty steps.
+    for (const [trackId, entries] of Object.entries(pending)) {
+      const track = tracks[trackIndex.get(trackId)];
+      const len = Math.max(...entries.map((e) => e.bars.length));
+      const chainRows = [];
+      for (let b = 0; b < len; b++) {
+        let merged = null;
+        for (const { layer, bars: lb } of entries) {
+          let src = lb[b % lb.length];
+          if (track.instrument !== layer.instrument) src = src.map((x) => (x && x.note !== undefined && x.note !== 'OFF' ? { ...x, inst: layer.instrument } : x));
+          if (!merged) { merged = src.slice(); continue; }
+          for (let i = 0; i < merged.length; i++) if (!merged[i] && src[i]) merged[i] = src[i];
+        }
+        chainRows.push({ phrase: internPhrase(entries.map((e) => e.layer.id).join('_'), merged) });
+      }
+      row[trackId] = internChain(entries.map((e) => e.layer.id).join('_'), chainRows);
     }
     if (Object.keys(row).length === 0) {
       // A silent section still needs a length: hold it with an empty chain on the first track.

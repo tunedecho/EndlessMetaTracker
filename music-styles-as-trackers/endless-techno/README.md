@@ -8,13 +8,13 @@ Phase 2 of `../ROADMAP.md`. The idea is in `../docs/ideas/endless-techno.md`.
 
 ```sh
 # a six-minute song from seed 42, saved as JSON and rendered to WAV and MP3
-node bin/generate.js styles/hypnotic-techno.json --seed 42 --minutes 6 --out song.json --render song.wav --mp3
+node bin/generate.js ../styles/hypnotic-techno.json --seed 42 --minutes 6 --out song.json --render song.wav --mp3
 
 # print stats: tracks, phrases, chains, bars, bytes
-node bin/generate.js styles/hypnotic-techno.json --seed 42 --stats --out song.json
+node bin/generate.js ../styles/hypnotic-techno.json --seed 42 --stats --out song.json
 
 # validate a style or a song
-node ../format/bin/validate.js styles/hypnotic-techno.json song.json
+node ../format/bin/validate.js ../styles/hypnotic-techno.json song.json
 ```
 
 Every song records its `meta.seed`, `meta.style`, and `meta.generator`, so a song can be regenerated or a seed shared.
