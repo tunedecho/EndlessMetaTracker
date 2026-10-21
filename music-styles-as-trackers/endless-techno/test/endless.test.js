@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { Session } from '../lib/index.js';
+import { Session, generateLayer } from '../lib/index.js';
 import { Player, analyze } from '../../engine/lib/index.js';
 import { validate } from '@tracker/format';
 
@@ -54,4 +54,16 @@ test('the streaming player renders appended sections across their boundary', () 
   // The player keeps rendering (tails, then silence) past the appended rows.
   const { left: tail } = player.render(4096);
   assert.equal(tail.length, 4096);
+});
+
+test('generateLayer: one layer on its own, in the given key, repeatable by seed', () => {
+  const style = JSON.parse(readFileSync(new URL('../../styles/hypnotic-techno.json', import.meta.url), 'utf8'));
+  const a = generateLayer(style, 'bass', { seed: 3, bars: 4, root: 'D', mode: 'dorian' });
+  assert.equal(a.voices.length, 1);
+  assert.equal(a.voices[0].length, 4);
+  assert.ok(a.voices[0].every((bar) => bar.length === 16));
+  assert.deepEqual(generateLayer(style, 'bass', { seed: 3, bars: 4, root: 'D', mode: 'dorian' }), a);
+  assert.notDeepEqual(generateLayer(style, 'bass', { seed: 4, bars: 4, root: 'D', mode: 'dorian' }).voices, a.voices);
+  assert.equal(generateLayer(style, 'pad', { seed: 1, bars: 2 }).voices.length, 3);
+  assert.throws(() => generateLayer(style, 'nope'), /no layer nope/);
 });

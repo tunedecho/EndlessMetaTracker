@@ -4,12 +4,13 @@
  * so edits are heard from the next bar; the worker renders
  * WAVs and runs the generator, including endless mode's sections.
  */
-import { resolve, toName, toMidi, stepSource, phrasePlays, getStep, setStep, makeUnique } from '../../format/lib/core.js';
+import { resolve, toName, toMidi, stepSource, phrasePlays, getStep, setStep, makeUnique, MODES } from '../../format/lib/core.js';
 import { encodeWav } from '../lib/wav.js';
 import { EXAMPLES, STYLES } from './catalog.js';
 import { deref, leafParams } from './params.js';
 import { weird, MACROS } from './weird.js';
 import { knob } from './knob.js';
+import { addLayer, reseed, saveSet, newSet, deleteSet, removeFromSet, setName, nameOf, jamOf, groupOf, guessKey } from './jam.js';
 
 const $ = (id) => document.getElementById(id);
 // Tracker keyboard layout: two rows, an octave and a bit each.
@@ -208,6 +209,7 @@ function renderGrid() {
   }
   showCursor(false);
   showPlaying();
+  renderJam();
 }
 
 function showCursor(scroll = true) {
@@ -219,6 +221,7 @@ function showCursor(scroll = true) {
   tr.cells[cur.track + 1]?.classList.add('sel');
   if (scroll) tr.scrollIntoView({ block: 'nearest' });
   showCell();
+  for (const chip of $('jTracks').querySelectorAll('.jtrack')) chip.classList.toggle('cur', chip.dataset.track === tracks()[cur.track]?.id);
 }
 
 function showPlaying() {
@@ -586,6 +589,128 @@ $('grid').onclick = (e) => {
 $('edit').onchange = () => setEdit(editing());
 $('octDown').onclick = () => setOctave(octave - 1);
 $('octUp').onclick = () => setOctave(octave + 1);
+
+/* ------------------------------------------------------------- jam */
+
+// Building a song a track and a set at a time (jam.js does the work). Parts
+// come from the layers of every style in the library.
+const styles = new Map();
+const ROOTS = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+const newSeed = () => 1 + Math.floor(Math.random() * 99999);
+for (const r of ROOTS) $('jRoot').add(new Option(r, r));
+for (const m of Object.keys(MODES)) $('jMode').add(new Option(m, m));
+Promise.all(STYLES.map(([, url]) => fetch(url).then((r) => r.json()))).then((list) => {
+  for (const st of list) {
+    if (styles.has(st.id)) continue;
+    styles.set(st.id, st);
+    const g = document.createElement('optgroup');
+    g.label = st.meta?.title ?? st.id;
+    for (const l of st.layers) g.appendChild(new Option(`${l.id} · ${st.sound.instruments[l.instrument].engine}`, `${st.id}|${l.id}`));
+    $('jLayer').appendChild(g);
+  }
+  $('jLayer').value = 'hypnotic-techno|kick';
+  renderJam();
+});
+
+/** The part a track reseeds as: its recipe, else a layer named like it (preferring the song's own style), else a bass line. */
+function partFor(trackId) {
+  const r = song.meta?.jam?.recipes?.[trackId];
+  if (r && styles.get(r.style)?.layers.some((l) => l.id === r.layer)) return `${r.style}|${r.layer}`;
+  const name = trackId.replace(/\d+$/, '');
+  const order = [...styles.values()].sort((a, b) => (b.id === song.meta?.style) - (a.id === song.meta?.style));
+  for (const st of order) {
+    const l = st.layers.find((x) => x.id === name || x.track === name);
+    if (l) return `${st.id}|${l.id}`;
+  }
+  return 'hypnotic-techno|bass';
+}
+
+function renderJam() {
+  const box = $('jTracks');
+  box.innerHTML = '';
+  const enabled = !!song && styles.size > 0;
+  for (const el of $('jam').querySelectorAll('input, select, button')) el.disabled = !enabled;
+  if (!enabled) return;
+  $('jRow').textContent = view;
+  if (document.activeElement !== $('jName')) $('jName').value = nameOf(song, view) ?? '';
+  const key = song.meta?.jam ?? guessKey(song); // a guess until the first jam change saves it
+  $('jRoot').value = key.root; $('jMode').value = key.mode;
+  $('jDelete').disabled = song.composition.song.rows.length <= 1;
+  const row = song.composition.song.rows[view] || {};
+  const ids = Object.keys(row).filter((id) => row[id]);
+  if (!ids.length) { box.innerHTML = '<span class="empty">An empty set: pick a part and add a track.</span>'; return; }
+  for (const id of ids) {
+    const chip = document.createElement('span');
+    chip.className = 'jtrack';
+    chip.dataset.track = id;
+    const track = tracks().find((t) => t.id === id);
+    chip.innerHTML = `<b title="Select this track">${id}</b><small>${track?.instrument ?? ''}</small>`;
+    const as = $('jLayer').cloneNode(true);
+    as.removeAttribute('id');
+    as.title = 'The part a reseed writes';
+    as.value = partFor(id);
+    const again = Object.assign(document.createElement('button'), { textContent: '↻', title: 'A new take: new notes, same sound' });
+    const drop = Object.assign(document.createElement('button'), { textContent: '×', title: 'Take this track out of this set' });
+    chip.querySelector('b').onclick = () => { cur.track = tracks().findIndex((t) => t.id === id); showCursor(); };
+    again.onclick = () => { const [st, ly] = as.value.split('|'); jamDo(() => reseed(song, view, id, styles.get(st), ly, newSeed()), `new take on ${groupOf(song, view, id).join(', ')}`); };
+    drop.onclick = () => jamDo(() => removeFromSet(song, view, id), `${id} is out of set ${view}`);
+    chip.append(as, again, drop);
+    chip.classList.toggle('cur', tracks()[cur.track]?.id === id);
+    box.appendChild(chip);
+  }
+}
+/** Run a jam change as one undoable edit, then send the live player the new sound and composition. */
+function jamDo(fn, message) {
+  if (!song || weirdBlocks()) return;
+  snapshot();
+  let out;
+  try { out = fn(); } catch (e) { undo.pop(); status(e.message); return; }
+  post({ type: 'sound', sound: song.sound });
+  if (node) loadKeys();
+  edited();
+  if (message) status(typeof message === 'function' ? message(out) : message);
+  return out;
+}
+
+/** Show a set; a looping row follows when it is another one (changes to this one are heard from the next bar). */
+function goToSet(r) {
+  const moved = r !== view;
+  setView(r, moved ? 0 : cur.step);
+  renderGrid();
+  if (moved && playing === 'row') play(true);
+}
+
+$('jAdd').onclick = () => {
+  const [st, ly] = $('jLayer').value.split('|');
+  const ids = jamDo(() => addLayer(song, view, styles.get(st), ly, { seed: newSeed(), bars: parseInt($('jBars').value, 10) }), (ids) => `added ${ids.join(', ')}`);
+  if (ids) { cur.track = tracks().findIndex((t) => t.id === ids[0]); goToSet(view); }
+};
+$('jReseedAll').onclick = () => jamDo(() => {
+  const row = song.composition.song.rows[view];
+  const done = new Set();
+  for (const id of Object.keys(row)) {
+    if (!row[id] || done.has(id)) continue;
+    const [st, ly] = partFor(id).split('|');
+    for (const g of groupOf(song, view, id)) done.add(g);
+    reseed(song, view, id, styles.get(st), ly, newSeed());
+  }
+}, `new takes on set ${view}`);
+$('jSave').onclick = () => {
+  const n = jamDo(() => saveSet(song, view, $('jName').value.trim() || undefined), (n) => `saved set ${n - 1}; jamming on its copy, set ${n}`);
+  if (n !== undefined) goToSet(n);
+};
+$('jNew').onclick = () => { const n = jamDo(() => newSet(song, view), (n) => `new set ${n}`); if (n !== undefined) goToSet(n); };
+$('jDelete').onclick = () => {
+  const r = view;
+  if (jamDo(() => { deleteSet(song, r); return true; }, `deleted set ${r} (⌘Z undoes)`)) goToSet(Math.min(r, song.composition.song.rows.length - 1));
+};
+$('jName').onchange = () => jamDo(() => setName(song, view, $('jName').value.trim() || `set ${view}`));
+$('jRoot').onchange = $('jMode').onchange = () => {
+  if (!song) return;
+  const jam = jamOf(song);
+  jam.root = $('jRoot').value; jam.mode = $('jMode').value;
+  status(`key: ${jam.root} ${jam.mode}; new and reseeded tracks use it`);
+};
 
 /* ------------------------------------------------------------- weirdness */
 

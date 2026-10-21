@@ -16,6 +16,7 @@
  *   {type:'repeat', id, note, every, gate}    retrigger a note every `every` steps (every 0 stops)
  *   {type:'play', song, row, loop, endless}   stream a song from a row; loop repeats that row; endless waits for more rows instead of ending
  *   {type:'composition', composition}         use this composition for rows appended from now on
+ *   {type:'sound', sound}                     use these instruments and tables from the next note (a jam adds instruments)
  *   {type:'stop'}                             stop the song, letting tails ring
  * Messages out:
  *   {type:'pos', row, step}                   the song row and step now playing, about 30 times a second
@@ -56,6 +57,10 @@ class SynthProcessor extends AudioWorkletProcessor {
       return;
     }
     if (m.type === 'composition') { if (this.song) this.song.comp = m.composition; return; }
+    if (m.type === 'sound') {
+      for (const p of [this.song?.player, this.player]) if (p) { p.sound.instruments = m.sound.instruments; p.sound.tables = m.sound.tables || {}; }
+      return;
+    }
     if (m.type === 'stop') {
       const s = this.song;
       if (s && s.stopAt < 0) { s.player.stop(); s.stopAt = s.player.pos; }

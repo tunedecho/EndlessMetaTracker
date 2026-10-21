@@ -23,6 +23,8 @@ Every song records its `meta.seed`, `meta.style`, and `meta.generator`, so a son
 
 The generator is a `Session`: it keeps the seeded random stream, the scale, the varied sounds, the phrase pools, and every layer's accumulated drift, and writes one section at a time. `session.next({ energy })` plans a new four-minute arc whenever the queue runs out, so a run never ends, and the optional energy nudge is the live control the idea asked for.
 
+`generateLayer(style, layerId, { seed, bars, root, mode })` writes one layer on its own, in a key the caller picks: the bars of steps for each of its voices. The player's jam builds songs a track at a time with it; a new seed is a new take on the same part.
+
 ```sh
 # a twelve-minute endless run to WAV, with energy nudges on sections 4 and 9
 node bin/endless.js ../styles/hypnotic-techno.json --seed 5 --minutes 12 --out run.wav --energy "+0.3@4,-0.4@9"

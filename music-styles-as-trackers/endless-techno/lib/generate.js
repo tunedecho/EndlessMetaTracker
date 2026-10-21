@@ -314,4 +314,41 @@ export function generateSong(style, opts = {}) {
   return session.toSong({ title: opts.title, minutes });
 }
 
+/**
+ * One layer of a style on its own: `bars` bars of steps for each of its voices,
+ * in a key the caller chooses. For building a song a track at a time; a new
+ * seed is a new take on the same part. Variants alternate the way a session
+ * does (every fourth bar may switch); mutation, fills, and automation are left
+ * to the caller.
+ * @param {object} style tracker-style/0.1
+ * @param {string} layerId
+ * @param {{seed?: number, bars?: number, root?: string, mode?: string|number[]}} [opts]
+ * @returns {{layer: object, instrument: string, voices: Array<Array<Array<object|null>>>}} voices[v][bar] is a phrase's steps
+ */
+export function generateLayer(style, layerId, opts = {}) {
+  const layer = style.layers.find((l) => l.id === layerId);
+  if (!layer) throw new Error(`style ${style.id} has no layer ${layerId}`);
+  const { seed = 1, bars = 4, root = 'A', mode = 'minor' } = opts;
+  const ctx = {
+    root,
+    intervals: modeIntervals(mode),
+    phraseLength: style.transport.phraseLength ?? 16,
+    stepsPerBeat: style.transport.stepsPerBeat ?? 4,
+    modeName: typeof mode === 'string' ? mode : 'custom',
+  };
+  const rnd = new Random(seed);
+  const lrnd = rnd.fork(layer.id);
+  const variants = Math.max(1, lrnd.range(layer.variants ?? 2, true));
+  const gens = Array.from({ length: variants }, (_, i) => makeGenerator(layer.generator, lrnd.fork(`v${i}`), ctx));
+  const voices = [];
+  for (let b = 0; b < bars; b++) {
+    const vi = gens.length > 1 && b % 4 === 3 && rnd.chance(0.5) ? 1 + ((b >> 2) % (gens.length - 1)) : 0;
+    const g = gens[vi];
+    const steps = g(b % g.period);
+    const perVoice = (Array.isArray(steps[0]) ? steps : [steps]).slice(0, layer.voices ?? Infinity);
+    perVoice.forEach((s, v) => (voices[v] ||= []).push(s.slice()));
+  }
+  return { layer, instrument: layer.instrument, voices };
+}
+
 export { VERSION };
