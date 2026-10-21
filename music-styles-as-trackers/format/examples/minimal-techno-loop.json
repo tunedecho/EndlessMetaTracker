@@ -1,0 +1,133 @@
+{
+  "format": "tracker-song/0.1",
+  "meta": {
+    "title": "Minimal Techno Loop",
+    "style": "hypnotic-techno",
+    "notes": "A hand-written loop showing the tracker vocabulary: four drum voices, a bass, a stab with a table, chains with transposes, and a song grid where layers enter row by row."
+  },
+  "transport": { "bpm": 128, "swing": 0.05, "loop": 1 },
+  "sound": {
+    "instruments": {
+      "kick": {
+        "engine": "kick",
+        "params": { "pitchStart": 180, "pitchEnd": 48, "pitchDecay": 0.04, "click": 0.3, "tone": 0.25, "body": 0.35 },
+        "amp": { "attack": 0.001, "decay": 0.4, "sustain": 0, "release": 0.02 },
+        "mix": { "volume": 0.95, "drive": 0.2 }
+      },
+      "clap": {
+        "engine": "clap",
+        "params": { "bursts": 3, "spacing": 0.012, "tone": 0.55, "tail": 0.18, "width": 0.4 },
+        "mix": { "volume": 0.7, "reverbSend": 0.25 }
+      },
+      "hat": {
+        "engine": "hihat",
+        "params": { "tone": 0.75, "metallic": 0.5, "decay": 0.05 },
+        "mix": { "volume": 0.45, "pan": 0.15 }
+      },
+      "ohat": {
+        "engine": "hihat",
+        "params": { "tone": 0.6, "metallic": 0.6, "decay": 0.3, "open": true },
+        "mix": { "volume": 0.35, "pan": -0.1, "delaySend": 0.1 }
+      },
+      "bass": {
+        "engine": "analog",
+        "params": { "wave": "saw", "wave2": "square", "mix2": 0.4, "detune2": -12, "sub": 0.2 },
+        "filter": { "type": "lowpass", "cutoff": 0.3, "resonance": 0.25, "envAmount": 0.25, "env": { "attack": 0.001, "decay": 0.12, "sustain": 0 } },
+        "amp": { "attack": 0.002, "decay": 0.2, "sustain": 0.3, "release": 0.04 },
+        "mix": { "volume": 0.8, "drive": 0.15 }
+      },
+      "stab": {
+        "engine": "analog",
+        "params": { "wave": "saw", "unison": 3, "unisonDetune": 12, "unisonSpread": 0.6 },
+        "filter": { "type": "lowpass", "cutoff": 0.5, "resonance": 0.4, "envAmount": 0.35, "env": { "decay": 0.15, "sustain": 0 } },
+        "amp": { "attack": 0.002, "decay": 0.18, "sustain": 0, "release": 0.1 },
+        "mix": { "volume": 0.5, "delaySend": 0.4, "reverbSend": 0.2 },
+        "table": "stabChord"
+      }
+    },
+    "tables": {
+      "stabChord": {
+        "rate": 8,
+        "loop": true,
+        "rows": [ { "transpose": 0 }, { "transpose": 3 }, { "transpose": 7 }, { "transpose": 10 } ]
+      }
+    },
+    "master": {
+      "volume": 0.85,
+      "delay": { "time": 6, "feedback": 0.45, "damping": 0.5, "pingPong": true, "level": 0.5 },
+      "reverb": { "size": 0.6, "damping": 0.5, "level": 0.4 },
+      "highpass": 30
+    }
+  },
+  "composition": {
+    "tracks": [
+      { "id": "kick", "instrument": "kick" },
+      { "id": "clap", "instrument": "clap" },
+      { "id": "hats", "instrument": "hat" },
+      { "id": "bass", "instrument": "bass" },
+      { "id": "stab", "instrument": "stab", "volume": 0.9 }
+    ],
+    "phrases": {
+      "kick4": { "steps": [
+        { "note": "C3" }, null, null, null, { "note": "C3" }, null, null, null,
+        { "note": "C3" }, null, null, null, { "note": "C3" }, null, null, null
+      ] },
+      "clap24": { "steps": [
+        null, null, null, null, { "note": "C3" }, null, null, null,
+        null, null, null, null, { "note": "C3" }, null, null, { "note": "C3", "vel": 0.3, "fx": { "nudge": 0.5 } }
+      ] },
+      "hatsOff": { "steps": [
+        null, null, { "note": "C3", "inst": "ohat" }, null, null, null, { "note": "C3", "vel": 0.6 }, null,
+        null, null, { "note": "C3", "inst": "ohat" }, null, null, null, { "note": "C3", "vel": 0.6 }, { "note": "C3", "vel": 0.4 }
+      ] },
+      "hats16": { "steps": [
+        { "note": "C3", "vel": 0.5 }, { "note": "C3", "vel": 0.3 }, { "note": "C3", "inst": "ohat" }, { "note": "C3", "vel": 0.3 },
+        { "note": "C3", "vel": 0.5 }, { "note": "C3", "vel": 0.3 }, { "note": "C3", "vel": 0.7 }, { "note": "C3", "vel": 0.3 },
+        { "note": "C3", "vel": 0.5 }, { "note": "C3", "vel": 0.3 }, { "note": "C3", "inst": "ohat" }, { "note": "C3", "vel": 0.3 },
+        { "note": "C3", "vel": 0.5 }, { "note": "C3", "vel": 0.3 }, { "note": "C3", "vel": 0.7 }, { "note": "C3", "vel": 0.5, "fx": { "retrig": 2 } }
+      ] },
+      "bassA": { "steps": [
+        null, null, { "note": "A1", "fx": { "cut": 0.5 } }, null, null, null, { "note": "A1", "fx": { "cut": 0.5 } }, { "note": "A2", "vel": 0.7, "fx": { "cut": 0.5 } },
+        null, null, { "note": "A1", "fx": { "cut": 0.5 } }, null, null, { "note": "G1", "fx": { "cut": 0.5 } }, null, { "note": "C2", "vel": 0.8, "fx": { "slide": 0.5 } }
+      ] },
+      "bassB": { "steps": [
+        null, null, { "note": "A1", "fx": { "cut": 0.5 } }, null, null, null, { "note": "A1", "fx": { "cut": 0.5 } }, null,
+        null, null, { "note": "A1", "fx": { "cut": 0.5 } }, null, { "note": "E2", "vel": 0.7, "fx": { "cut": 0.5 } }, null, { "note": "D2", "vel": 0.7, "fx": { "cut": 0.5 } }, null
+      ] },
+      "stabA": { "steps": [
+        null, null, null, { "note": "A3", "fx": { "cut": 0.5 } }, null, null, null, null,
+        null, null, { "note": "A3", "vel": 0.8, "fx": { "cut": 0.5 } }, null, null, null, null, null
+      ] },
+      "stabSweep": { "steps": [
+        { "note": "A3", "fx": { "cutoff": 0.25 } }, null, null, null, { "fx": { "cutoff": 0.4 } }, null, null, null,
+        { "fx": { "cutoff": 0.55 } }, null, null, null, { "fx": { "cutoff": 0.7 } }, null, null, { "note": "OFF" }
+      ] }
+    },
+    "chains": {
+      "kick": { "rows": [ { "phrase": "kick4" } ] },
+      "clap": { "rows": [ { "phrase": "clap24" } ] },
+      "hatsLight": { "rows": [ { "phrase": "hatsOff" } ] },
+      "hatsFull": { "rows": [ { "phrase": "hatsOff" }, { "phrase": "hatsOff" }, { "phrase": "hatsOff" }, { "phrase": "hats16" } ] },
+      "bass": { "rows": [ { "phrase": "bassA" }, { "phrase": "bassA" }, { "phrase": "bassA" }, { "phrase": "bassB" } ] },
+      "stab": { "rows": [ { "phrase": "stabA" }, { "phrase": "stabA", "transpose": 0 }, { "phrase": "stabA", "transpose": -2 }, { "phrase": "stabA", "transpose": 3 } ] },
+      "stabSweep": { "rows": [ { "phrase": "stabSweep" } ] }
+    },
+    "song": {
+      "rows": [
+        { "kick": "kick", "hats": "hatsLight" },
+        { "kick": "kick", "clap": "clap", "hats": "hatsLight", "bass": "bass" },
+        { "kick": "kick", "clap": "clap", "hats": "hatsFull", "bass": "bass", "stab": "stab" },
+        { "kick": "kick", "clap": "clap", "hats": "hatsFull", "bass": "bass", "stab": "stab" },
+        { "clap": "clap", "hats": "hatsLight", "stab": "stabSweep" },
+        { "kick": "kick", "clap": "clap", "hats": "hatsFull", "bass": "bass", "stab": "stab" }
+      ],
+      "sections": [
+        { "row": 0, "name": "intro", "energy": 0.2 },
+        { "row": 1, "name": "bass in", "energy": 0.4 },
+        { "row": 2, "name": "full", "energy": 0.8 },
+        { "row": 4, "name": "breakdown", "energy": 0.3 },
+        { "row": 5, "name": "drop", "energy": 0.9 }
+      ]
+    }
+  }
+}

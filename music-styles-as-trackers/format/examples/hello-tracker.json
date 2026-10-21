@@ -1,0 +1,31 @@
+{
+  "format": "tracker-song/0.1",
+  "meta": {
+    "title": "Hello Tracker",
+    "notes": "The smallest useful song: one instrument, one phrase, one chain, one row. Four notes of a saw bass."
+  },
+  "transport": { "bpm": 120 },
+  "sound": {
+    "instruments": {
+      "bass": {
+        "engine": "analog",
+        "params": { "wave": "saw", "sub": 0.3 },
+        "filter": { "type": "lowpass", "cutoff": 0.35, "resonance": 0.2, "envAmount": 0.3, "env": { "decay": 0.2 } },
+        "amp": { "attack": 0.005, "decay": 0.25, "sustain": 0.0, "release": 0.05 }
+      }
+    }
+  },
+  "composition": {
+    "tracks": [ { "id": "bass", "instrument": "bass" } ],
+    "phrases": {
+      "p0": { "steps": [
+        { "note": "C2" }, null, null, null,
+        { "note": "C2" }, null, { "note": "Eb2" }, null,
+        { "note": "G2" }, null, null, null,
+        { "note": "Bb1", "vel": 0.8 }, null, { "note": "C2" }, null
+      ] }
+    },
+    "chains": { "c0": { "rows": [ { "phrase": "p0" } ] } },
+    "song": { "rows": [ { "bass": "c0" }, { "bass": "c0" } ] }
+  }
+}

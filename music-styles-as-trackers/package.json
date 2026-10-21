@@ -1,0 +1,21 @@
+{
+  "name": "music-styles-as-trackers",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Expressing whole musical styles as tracker systems: composition and sound as data.",
+  "type": "module",
+  "workspaces": [
+    "format",
+    "engine",
+    "endless-techno",
+    "m8-writer"
+  ],
+  "scripts": {
+    "test": "node --test \"*/test/**/*.test.js\"",
+    "validate": "node format/bin/validate.js format/examples/*.json endless-techno/styles/*.json",
+    "demo": "node scripts/demo.js"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

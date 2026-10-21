@@ -1,0 +1,427 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tracker-song.dev/schema/0.1/song.json",
+  "title": "Tracker Song Format v0.1",
+  "description": "A complete piece of music as data. The sound half (instruments, tables, master bus) says what plays; the composition half (tracks, phrases, chains, song) says what is played. Either half can be swapped without touching the other.",
+  "type": "object",
+  "required": ["format", "transport", "sound", "composition"],
+  "additionalProperties": false,
+  "properties": {
+    "format": { "const": "tracker-song/0.1" },
+    "meta": { "$ref": "#/$defs/meta" },
+    "transport": { "$ref": "#/$defs/transport" },
+    "sound": { "$ref": "#/$defs/sound" },
+    "composition": { "$ref": "#/$defs/composition" },
+    "style": {
+      "description": "Optional: the generative style this song was produced from, or a reference to one. If present and the song is also fixed, the song is a rendering of the style for meta.seed.",
+      "oneOf": [
+        { "type": "string", "description": "Path or id of a style file." },
+        { "$ref": "style.json" }
+      ]
+    }
+  },
+  "$defs": {
+    "meta": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "title": { "type": "string" },
+        "author": { "type": "string" },
+        "style": { "type": "string", "description": "Style id this song belongs to, such as hypnotic-techno." },
+        "seed": { "type": "integer", "description": "Random seed used when a generator wrote this song." },
+        "generator": { "type": "string", "description": "Name and version of the generator that wrote this song." },
+        "created": { "type": "string", "format": "date-time" },
+        "notes": { "type": "string" }
+      }
+    },
+    "transport": {
+      "type": "object",
+      "required": ["bpm"],
+      "additionalProperties": false,
+      "properties": {
+        "bpm": { "type": "number", "minimum": 20, "maximum": 400 },
+        "stepsPerBeat": { "type": "integer", "minimum": 1, "maximum": 16, "default": 4 },
+        "phraseLength": { "type": "integer", "minimum": 1, "maximum": 64, "default": 16, "description": "Steps per phrase. Every phrase in the song has this many steps." },
+        "swing": { "type": "number", "minimum": 0, "maximum": 0.5, "default": 0, "description": "Delay applied to every second step, as a fraction of a step. 0 is straight, 0.33 is a hard shuffle." },
+        "loop": { "type": "integer", "minimum": 0, "description": "Song row to jump to after the last row. Omit for a song that ends." }
+      }
+    },
+    "sound": {
+      "type": "object",
+      "required": ["instruments"],
+      "additionalProperties": false,
+      "properties": {
+        "instruments": {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": { "$ref": "#/$defs/id" },
+          "additionalProperties": { "$ref": "#/$defs/instrument" }
+        },
+        "tables": {
+          "type": "object",
+          "propertyNames": { "$ref": "#/$defs/id" },
+          "additionalProperties": { "$ref": "#/$defs/table" }
+        },
+        "master": { "$ref": "#/$defs/master" }
+      }
+    },
+    "id": { "type": "string", "pattern": "^[A-Za-z_][A-Za-z0-9_.-]*$" },
+    "unit": { "type": "number", "minimum": 0, "maximum": 1 },
+    "signed": { "type": "number", "minimum": -1, "maximum": 1 },
+    "seconds": { "type": "number", "minimum": 0, "maximum": 60 },
+    "envelope": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "attack": { "$ref": "#/$defs/seconds" },
+        "decay": { "$ref": "#/$defs/seconds" },
+        "sustain": { "$ref": "#/$defs/unit" },
+        "release": { "$ref": "#/$defs/seconds" }
+      }
+    },
+    "waveform": { "enum": ["sine", "triangle", "saw", "square", "pulse", "noise"] },
+    "instrument": {
+      "type": "object",
+      "required": ["engine"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "engine": { "enum": ["analog", "fm", "kick", "clap", "hihat", "noise"] },
+        "params": { "type": "object", "description": "Engine-specific oscillator parameters. Validated per engine below." },
+        "filter": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "type": { "enum": ["lowpass", "highpass", "bandpass", "off"], "default": "lowpass" },
+            "cutoff": { "$ref": "#/$defs/unit", "description": "0 is 20 Hz, 1 is 20 kHz, exponential in between." },
+            "resonance": { "$ref": "#/$defs/unit" },
+            "envAmount": { "$ref": "#/$defs/signed", "description": "How far the filter envelope moves the cutoff, in cutoff units." },
+            "env": { "$ref": "#/$defs/envelope" },
+            "keyTrack": { "$ref": "#/$defs/unit" }
+          }
+        },
+        "amp": { "$ref": "#/$defs/envelope" },
+        "lfo": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "shape": { "enum": ["sine", "triangle", "saw", "square", "random"] },
+            "rate": { "type": "number", "minimum": 0, "maximum": 50, "description": "Hz, unless sync is set." },
+            "sync": { "type": "number", "exclusiveMinimum": 0, "description": "Period in steps. Overrides rate." },
+            "depth": { "$ref": "#/$defs/unit" },
+            "target": { "enum": ["cutoff", "pitch", "volume", "pan", "pulseWidth"] },
+            "retrigger": { "type": "boolean" }
+          }
+        },
+        "mix": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "volume": { "$ref": "#/$defs/unit" },
+            "pan": { "$ref": "#/$defs/signed" },
+            "drive": { "$ref": "#/$defs/unit" },
+            "delaySend": { "$ref": "#/$defs/unit" },
+            "reverbSend": { "$ref": "#/$defs/unit" }
+          }
+        },
+        "table": { "$ref": "#/$defs/id", "description": "Table that runs on every note of this instrument." },
+        "transpose": { "type": "integer", "minimum": -48, "maximum": 48 }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "engine": { "const": "analog" } } },
+          "then": { "properties": { "params": { "$ref": "#/$defs/params.analog" } } }
+        },
+        {
+          "if": { "properties": { "engine": { "const": "fm" } } },
+          "then": { "properties": { "params": { "$ref": "#/$defs/params.fm" } } }
+        },
+        {
+          "if": { "properties": { "engine": { "const": "kick" } } },
+          "then": { "properties": { "params": { "$ref": "#/$defs/params.kick" } } }
+        },
+        {
+          "if": { "properties": { "engine": { "const": "clap" } } },
+          "then": { "properties": { "params": { "$ref": "#/$defs/params.clap" } } }
+        },
+        {
+          "if": { "properties": { "engine": { "const": "hihat" } } },
+          "then": { "properties": { "params": { "$ref": "#/$defs/params.hihat" } } }
+        },
+        {
+          "if": { "properties": { "engine": { "const": "noise" } } },
+          "then": { "properties": { "params": { "$ref": "#/$defs/params.noise" } } }
+        }
+      ]
+    },
+    "params.analog": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Subtractive synth: two oscillators, sub, noise, unison.",
+      "properties": {
+        "wave": { "$ref": "#/$defs/waveform" },
+        "wave2": { "$ref": "#/$defs/waveform" },
+        "mix2": { "$ref": "#/$defs/unit", "description": "Level of oscillator 2." },
+        "detune2": { "type": "number", "minimum": -24, "maximum": 24, "description": "Oscillator 2 offset in semitones, fractional allowed." },
+        "pulseWidth": { "$ref": "#/$defs/unit" },
+        "sub": { "$ref": "#/$defs/unit", "description": "Level of a square wave one octave down." },
+        "noise": { "$ref": "#/$defs/unit" },
+        "unison": { "type": "integer", "minimum": 1, "maximum": 7 },
+        "unisonDetune": { "type": "number", "minimum": 0, "maximum": 100, "description": "Cents between unison voices." },
+        "unisonSpread": { "$ref": "#/$defs/unit", "description": "Stereo width of unison voices." },
+        "glide": { "$ref": "#/$defs/seconds", "description": "Portamento time when a note follows another without a gap." }
+      }
+    },
+    "params.fm": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Two-operator FM: a modulator feeding a carrier, with feedback.",
+      "properties": {
+        "ratio": { "type": "number", "minimum": 0.01, "maximum": 32, "description": "Modulator frequency as a multiple of the carrier." },
+        "index": { "type": "number", "minimum": 0, "maximum": 20, "description": "Modulation depth." },
+        "feedback": { "$ref": "#/$defs/unit" },
+        "modEnv": { "$ref": "#/$defs/envelope", "description": "Envelope on the modulation index." },
+        "modEnvAmount": { "type": "number", "minimum": -20, "maximum": 20 },
+        "carrierWave": { "enum": ["sine", "triangle"] }
+      }
+    },
+    "params.kick": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Analog-style kick: a sine with a pitch sweep, a click, and drive.",
+      "properties": {
+        "pitchStart": { "type": "number", "minimum": 20, "maximum": 2000 },
+        "pitchEnd": { "type": "number", "minimum": 20, "maximum": 500 },
+        "pitchDecay": { "$ref": "#/$defs/seconds" },
+        "click": { "$ref": "#/$defs/unit" },
+        "tone": { "$ref": "#/$defs/unit", "description": "Harmonic content from waveshaping; 0 is a pure sine." },
+        "body": { "$ref": "#/$defs/seconds", "description": "Decay time of the body. amp.decay overrides it if set." }
+      }
+    },
+    "params.clap": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Noise bursts through a bandpass filter, like a 909 clap.",
+      "properties": {
+        "bursts": { "type": "integer", "minimum": 1, "maximum": 8 },
+        "spacing": { "$ref": "#/$defs/seconds", "description": "Time between bursts." },
+        "tone": { "$ref": "#/$defs/unit", "description": "Bandpass centre, 0 is low and 1 is high." },
+        "tail": { "$ref": "#/$defs/seconds", "description": "Decay of the final burst." },
+        "width": { "$ref": "#/$defs/unit", "description": "Stereo spread of the bursts." }
+      }
+    },
+    "params.hihat": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Metallic square-wave cluster mixed with noise, highpassed.",
+      "properties": {
+        "tone": { "$ref": "#/$defs/unit", "description": "Highpass frequency, 0 is dark and 1 is bright." },
+        "metallic": { "$ref": "#/$defs/unit", "description": "0 is pure noise, 1 is pure oscillator cluster." },
+        "decay": { "$ref": "#/$defs/seconds" },
+        "open": { "type": "boolean", "description": "Open hat: longer decay and the OFF note chokes it." }
+      }
+    },
+    "params.noise": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Coloured noise, for risers, textures, and snares.",
+      "properties": {
+        "color": { "enum": ["white", "pink", "brown"] },
+        "stereo": { "type": "boolean" }
+      }
+    },
+    "table": {
+      "type": "object",
+      "required": ["rows"],
+      "additionalProperties": false,
+      "description": "A short sequence of modulations that runs each time a note plays, like an M8 table.",
+      "properties": {
+        "rate": { "type": "number", "exclusiveMinimum": 0, "maximum": 64, "default": 4, "description": "Rows per step." },
+        "loop": { "type": "boolean", "default": true },
+        "rows": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 64,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "transpose": { "type": "integer", "minimum": -48, "maximum": 48 },
+              "volume": { "$ref": "#/$defs/unit" },
+              "fx": { "$ref": "#/$defs/fx" }
+            }
+          }
+        }
+      }
+    },
+    "master": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "volume": { "$ref": "#/$defs/unit" },
+        "limiter": { "type": "boolean", "default": true },
+        "delay": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "time": { "type": "number", "exclusiveMinimum": 0, "maximum": 16, "description": "Delay time in steps." },
+            "feedback": { "$ref": "#/$defs/unit" },
+            "damping": { "$ref": "#/$defs/unit", "description": "Lowpass on the feedback path." },
+            "pingPong": { "type": "boolean" },
+            "level": { "$ref": "#/$defs/unit" }
+          }
+        },
+        "reverb": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "size": { "$ref": "#/$defs/unit" },
+            "damping": { "$ref": "#/$defs/unit" },
+            "predelay": { "$ref": "#/$defs/seconds" },
+            "level": { "$ref": "#/$defs/unit" }
+          }
+        },
+        "highpass": { "type": "number", "minimum": 0, "maximum": 500, "description": "Master highpass in Hz; 0 disables it." }
+      }
+    },
+    "note": {
+      "description": "A pitch as a note name (C4, F#3, Bb2; C4 is MIDI 60), a MIDI number, or OFF to release the current note.",
+      "oneOf": [
+        { "type": "string", "pattern": "^([A-Ga-g][#b]?-?[0-9]|OFF)$" },
+        { "type": "integer", "minimum": 0, "maximum": 127 }
+      ]
+    },
+    "fx": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Commands on a step or a table row. Track commands persist until changed; note commands affect only that step.",
+      "properties": {
+        "volume": { "$ref": "#/$defs/unit", "description": "Track: level multiplier." },
+        "cutoff": { "$ref": "#/$defs/unit", "description": "Track: set filter cutoff." },
+        "resonance": { "$ref": "#/$defs/unit", "description": "Track: set filter resonance." },
+        "pan": { "$ref": "#/$defs/signed", "description": "Track: set pan." },
+        "delaySend": { "$ref": "#/$defs/unit", "description": "Track: delay send." },
+        "reverbSend": { "$ref": "#/$defs/unit", "description": "Track: reverb send." },
+        "drive": { "$ref": "#/$defs/unit", "description": "Track: drive amount." },
+        "pitch": { "type": "number", "minimum": -48, "maximum": 48, "description": "Track: pitch offset in semitones, fractional allowed. Tables use it for arpeggios." },
+        "retrig": { "type": "integer", "minimum": 1, "maximum": 16, "description": "Note: play the note this many times within the step." },
+        "nudge": { "$ref": "#/$defs/unit", "description": "Note: delay the note by this fraction of a step." },
+        "chance": { "$ref": "#/$defs/unit", "description": "Note: probability that the note plays. A generated song should have none left; a style may." },
+        "slide": { "$ref": "#/$defs/unit", "description": "Note: glide from the previous pitch over this fraction of a step." },
+        "accent": { "$ref": "#/$defs/unit", "description": "Note: extra velocity and filter envelope, for acid lines." },
+        "table": { "$ref": "#/$defs/id", "description": "Note: run this table for the note." },
+        "tempo": { "type": "number", "minimum": 20, "maximum": 400, "description": "Global: set tempo from this step." },
+        "cut": { "$ref": "#/$defs/unit", "description": "Note: release the note after this fraction of a step." }
+      }
+    },
+    "step": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "note": { "$ref": "#/$defs/note" },
+            "inst": { "$ref": "#/$defs/id", "description": "Instrument for this note. Defaults to the track's instrument." },
+            "vel": { "$ref": "#/$defs/unit", "default": 1 },
+            "fx": { "$ref": "#/$defs/fx" }
+          }
+        }
+      ]
+    },
+    "phrase": {
+      "type": "object",
+      "required": ["steps"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "steps": { "type": "array", "items": { "$ref": "#/$defs/step" }, "minItems": 1, "maxItems": 64 }
+      }
+    },
+    "chain": {
+      "type": "object",
+      "required": ["rows"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string" },
+        "rows": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 64,
+          "items": {
+            "type": "object",
+            "required": ["phrase"],
+            "additionalProperties": false,
+            "properties": {
+              "phrase": { "$ref": "#/$defs/id" },
+              "transpose": { "type": "integer", "minimum": -48, "maximum": 48, "default": 0 }
+            }
+          }
+        }
+      }
+    },
+    "track": {
+      "type": "object",
+      "required": ["id"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "name": { "type": "string" },
+        "instrument": { "$ref": "#/$defs/id", "description": "Default instrument for steps on this track that name none." },
+        "volume": { "$ref": "#/$defs/unit" },
+        "pan": { "$ref": "#/$defs/signed" },
+        "mute": { "type": "boolean" }
+      }
+    },
+    "composition": {
+      "type": "object",
+      "required": ["tracks", "phrases", "chains", "song"],
+      "additionalProperties": false,
+      "properties": {
+        "tracks": { "type": "array", "minItems": 1, "maxItems": 16, "items": { "$ref": "#/$defs/track" } },
+        "phrases": {
+          "type": "object",
+          "propertyNames": { "$ref": "#/$defs/id" },
+          "additionalProperties": { "$ref": "#/$defs/phrase" }
+        },
+        "chains": {
+          "type": "object",
+          "propertyNames": { "$ref": "#/$defs/id" },
+          "additionalProperties": { "$ref": "#/$defs/chain" }
+        },
+        "song": {
+          "type": "object",
+          "required": ["rows"],
+          "additionalProperties": false,
+          "description": "The song grid. Each row maps track ids to chain ids. A row lasts as long as its longest chain; shorter chains repeat to fill it. Tracks missing from a row are silent for that row.",
+          "properties": {
+            "rows": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 1024,
+              "items": {
+                "type": "object",
+                "propertyNames": { "$ref": "#/$defs/id" },
+                "additionalProperties": { "oneOf": [ { "$ref": "#/$defs/id" }, { "type": "null" } ] }
+              }
+            },
+            "sections": {
+              "type": "array",
+              "description": "Optional labels for ranges of rows, for display and for generators that write arrangement.",
+              "items": {
+                "type": "object",
+                "required": ["row", "name"],
+                "additionalProperties": false,
+                "properties": {
+                  "row": { "type": "integer", "minimum": 0 },
+                  "name": { "type": "string" },
+                  "energy": { "$ref": "#/$defs/unit" }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,291 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tracker-song.dev/schema/0.1/style.json",
+  "title": "Tracker Style Format v0.1",
+  "description": "A generative style as data. It carries a full sound half (the same shape as a song's) and, instead of written phrases, a set of layers with generator rules plus an arrangement model. A generator turns a style and a seed into a fixed song.",
+  "type": "object",
+  "required": ["format", "id", "transport", "sound", "layers", "arrangement"],
+  "additionalProperties": false,
+  "properties": {
+    "format": { "const": "tracker-style/0.1" },
+    "id": { "$ref": "song.json#/$defs/id" },
+    "meta": { "$ref": "song.json#/$defs/meta" },
+    "transport": {
+      "type": "object",
+      "required": ["bpm"],
+      "additionalProperties": false,
+      "properties": {
+        "bpm": { "$ref": "#/$defs/range" },
+        "stepsPerBeat": { "type": "integer", "minimum": 1, "maximum": 16, "default": 4 },
+        "phraseLength": { "type": "integer", "minimum": 1, "maximum": 64, "default": 16 },
+        "swing": { "$ref": "#/$defs/range" }
+      }
+    },
+    "sound": { "$ref": "song.json#/$defs/sound" },
+    "variations": {
+      "type": "object",
+      "description": "Per-seed randomisation of sound parameters. Keys are instrument ids; values map dotted parameter paths (filter.cutoff, params.ratio) to a [min, max] range.",
+      "propertyNames": { "$ref": "song.json#/$defs/id" },
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": { "$ref": "#/$defs/range" }
+      }
+    },
+    "scale": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "root": {
+          "description": "A note name without octave, or a list to choose from per seed.",
+          "oneOf": [
+            { "type": "string", "pattern": "^[A-G][#b]?$" },
+            { "type": "array", "items": { "type": "string", "pattern": "^[A-G][#b]?$" }, "minItems": 1 }
+          ]
+        },
+        "mode": {
+          "description": "A named mode, or semitone intervals from the root, or a list of names to choose from per seed.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "array", "items": { "type": "integer", "minimum": 0, "maximum": 11 }, "minItems": 1 },
+            { "type": "array", "items": { "type": "string" }, "minItems": 1 }
+          ]
+        }
+      }
+    },
+    "layers": { "type": "array", "minItems": 1, "maxItems": 16, "items": { "$ref": "#/$defs/layer" } },
+    "arrangement": { "$ref": "#/$defs/arrangement" },
+    "mutation": { "$ref": "#/$defs/mutation" }
+  },
+  "$defs": {
+    "range": {
+      "description": "A fixed number, or [min, max] to draw from uniformly.",
+      "oneOf": [
+        { "type": "number" },
+        { "type": "array", "items": { "type": "number" }, "minItems": 2, "maxItems": 2 }
+      ]
+    },
+    "intRange": {
+      "oneOf": [
+        { "type": "integer" },
+        { "type": "array", "items": { "type": "integer" }, "minItems": 2, "maxItems": 2 }
+      ]
+    },
+    "choice": {
+      "description": "A value, or a list of values to choose from with equal weight.",
+      "oneOf": [
+        { "type": "string" }, { "type": "number" },
+        { "type": "array", "minItems": 1 }
+      ]
+    },
+    "layer": {
+      "type": "object",
+      "required": ["id", "track", "instrument", "generator"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "song.json#/$defs/id" },
+        "track": { "$ref": "song.json#/$defs/id", "description": "Track this layer writes to. Several layers may share a track if they are never present together." },
+        "instrument": { "$ref": "song.json#/$defs/id" },
+        "role": { "enum": ["kick", "snare", "hats", "perc", "bass", "lead", "chords", "pad", "fx"] },
+        "energy": {
+          "type": "array", "items": { "$ref": "song.json#/$defs/unit" }, "minItems": 2, "maxItems": 2,
+          "description": "The layer is a candidate when the section energy falls in this range."
+        },
+        "presence": { "$ref": "song.json#/$defs/unit", "default": 1, "description": "Chance the layer plays in a section where it is a candidate." },
+        "always": { "type": "boolean", "description": "Never dropped once energy allows it, including in fills." },
+        "variants": { "$ref": "#/$defs/intRange", "default": 2, "description": "Distinct phrases to generate for this layer." },
+        "chainBars": { "$ref": "#/$defs/intRange", "description": "Bars per chain before it repeats. Defaults to the section length." },
+        "generator": { "$ref": "#/$defs/generator" },
+        "automation": { "type": "array", "items": { "$ref": "#/$defs/automation" } },
+        "fill": { "$ref": "#/$defs/fill" }
+      }
+    },
+    "generator": {
+      "type": "object",
+      "required": ["type"],
+      "oneOf": [
+        { "$ref": "#/$defs/gen.pattern" },
+        { "$ref": "#/$defs/gen.euclid" },
+        { "$ref": "#/$defs/gen.prob" },
+        { "$ref": "#/$defs/gen.melodic" },
+        { "$ref": "#/$defs/gen.chords" }
+      ]
+    },
+    "patternString": {
+      "type": "string",
+      "pattern": "^[xX.o]+$",
+      "description": "One character per step: x hit, X accented hit, o ghost (quiet) hit, . rest."
+    },
+    "noteChoice": {
+      "description": "A note name, a scale degree as an integer (0 is the root, 7 is the root an octave up), or a list to choose from.",
+      "oneOf": [
+        { "type": "string" },
+        { "type": "integer" },
+        { "type": "array", "minItems": 1, "items": { "oneOf": [ { "type": "string" }, { "type": "integer" } ] } }
+      ]
+    },
+    "gen.pattern": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "patterns"],
+      "properties": {
+        "type": { "const": "pattern" },
+        "patterns": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/patternString" } },
+        "note": { "$ref": "#/$defs/noteChoice", "default": "C3" },
+        "velocity": { "$ref": "#/$defs/range", "default": 1 },
+        "ghost": { "$ref": "#/$defs/range", "default": 0.4 },
+        "gate": { "$ref": "#/$defs/range", "description": "Steps the note lasts before OFF; omit to let the envelope ring." },
+        "fx": { "$ref": "song.json#/$defs/fx", "description": "Commands on every hit." }
+      }
+    },
+    "gen.euclid": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "hits"],
+      "properties": {
+        "type": { "const": "euclid" },
+        "hits": { "$ref": "#/$defs/intRange" },
+        "length": { "$ref": "#/$defs/intRange", "description": "Pattern length in steps; may differ from the phrase length for polymeter." },
+        "rotate": { "$ref": "#/$defs/intRange" },
+        "note": { "$ref": "#/$defs/noteChoice" },
+        "velocity": { "$ref": "#/$defs/range" },
+        "accentEvery": { "$ref": "#/$defs/intRange", "description": "Accent every nth hit." },
+        "gate": { "$ref": "#/$defs/range" },
+        "fx": { "$ref": "song.json#/$defs/fx" }
+      }
+    },
+    "gen.prob": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "steps"],
+      "properties": {
+        "type": { "const": "prob" },
+        "steps": { "type": "array", "items": { "$ref": "song.json#/$defs/unit" }, "minItems": 1, "description": "Probability of a hit on each step. Repeats if shorter than the phrase." },
+        "note": { "$ref": "#/$defs/noteChoice" },
+        "velocity": { "$ref": "#/$defs/range" },
+        "density": { "$ref": "#/$defs/range", "description": "Multiplier on every probability." },
+        "gate": { "$ref": "#/$defs/range" },
+        "fx": { "$ref": "song.json#/$defs/fx" }
+      }
+    },
+    "gen.melodic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "rhythm"],
+      "description": "Basslines, acid lines, and leads: a rhythm, a pitch source, and articulation.",
+      "properties": {
+        "type": { "const": "melodic" },
+        "rhythm": {
+          "oneOf": [
+            { "$ref": "#/$defs/patternString" },
+            { "type": "array", "items": { "$ref": "#/$defs/patternString" } },
+            { "type": "object", "required": ["density"], "additionalProperties": false,
+              "properties": { "density": { "$ref": "#/$defs/range" }, "onBeats": { "$ref": "#/$defs/range", "description": "Extra weight for beat steps." } } }
+          ]
+        },
+        "degrees": {
+          "type": "array", "minItems": 1,
+          "description": "Scale degrees to draw from, with optional weights as [degree, weight].",
+          "items": { "oneOf": [ { "type": "integer" }, { "type": "array", "items": { "type": "number" }, "minItems": 2, "maxItems": 2 } ] }
+        },
+        "octave": { "type": "integer", "minimum": 0, "maximum": 8, "default": 2 },
+        "octaveJump": { "$ref": "song.json#/$defs/unit", "description": "Chance a note jumps an octave up." },
+        "walk": { "$ref": "song.json#/$defs/unit", "description": "0: each note drawn independently. 1: each note moves one degree from the last." },
+        "repeat": { "$ref": "song.json#/$defs/unit", "description": "Chance a note repeats the previous pitch." },
+        "slide": { "$ref": "song.json#/$defs/unit", "description": "Chance a note slides from the previous one." },
+        "accent": { "$ref": "song.json#/$defs/unit", "description": "Chance a note is accented." },
+        "gate": { "$ref": "#/$defs/range", "description": "Note length in steps." },
+        "velocity": { "$ref": "#/$defs/range" },
+        "fx": { "$ref": "song.json#/$defs/fx" }
+      }
+    },
+    "gen.chords": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "progression"],
+      "description": "Held chords or stabs. Each chord is a list of scale degrees. The chain follows the progression, one entry per barsPerChord bars.",
+      "properties": {
+        "type": { "const": "chords" },
+        "progression": {
+          "type": "array", "minItems": 1,
+          "items": { "type": "array", "items": { "type": "integer" }, "minItems": 1 }
+        },
+        "barsPerChord": { "$ref": "#/$defs/intRange", "default": 4 },
+        "octave": { "type": "integer", "minimum": 0, "maximum": 8, "default": 3 },
+        "rhythm": { "$ref": "#/$defs/patternString", "description": "Where the chord sounds within a bar. Default: a single hit on step 0 held for the bar." },
+        "gate": { "$ref": "#/$defs/range" },
+        "velocity": { "$ref": "#/$defs/range" },
+        "strum": { "$ref": "song.json#/$defs/unit", "description": "Nudge between chord notes, as a fraction of a step." },
+        "fx": { "$ref": "song.json#/$defs/fx" }
+      }
+    },
+    "automation": {
+      "type": "object",
+      "required": ["param", "from", "to"],
+      "additionalProperties": false,
+      "description": "A parameter move written into the phrases over a section: for example the filter opening across a build.",
+      "properties": {
+        "param": { "enum": ["cutoff", "resonance", "volume", "delaySend", "reverbSend", "drive", "pan"] },
+        "from": { "$ref": "#/$defs/range" },
+        "to": { "$ref": "#/$defs/range" },
+        "when": { "enum": ["always", "build", "breakdown", "peak", "rising", "falling"], "default": "rising" },
+        "curve": { "enum": ["linear", "exp"], "default": "linear" }
+      }
+    },
+    "fill": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "What happens to the layer's last bar before a section change.",
+      "properties": {
+        "chance": { "$ref": "song.json#/$defs/unit" },
+        "retrig": { "$ref": "#/$defs/intRange", "description": "Retrigger hits in the last beat." },
+        "density": { "$ref": "#/$defs/range", "description": "Multiply hit probability in the fill bar." },
+        "drop": { "type": "boolean", "description": "Silence the layer in the fill bar instead." }
+      }
+    },
+    "arrangement": {
+      "type": "object",
+      "required": ["sectionBars"],
+      "additionalProperties": false,
+      "properties": {
+        "minutes": { "$ref": "#/$defs/range", "description": "Target length of a generated song." },
+        "sectionBars": { "type": "array", "items": { "type": "integer", "minimum": 1 }, "minItems": 1, "description": "Section lengths to choose from." },
+        "energy": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "start": { "$ref": "#/$defs/range" },
+            "step": { "$ref": "#/$defs/range", "description": "Change per section, drawn from this range." },
+            "min": { "$ref": "song.json#/$defs/unit" },
+            "max": { "$ref": "song.json#/$defs/unit" },
+            "momentum": { "$ref": "song.json#/$defs/unit", "description": "Tendency to keep rising or falling." }
+          }
+        },
+        "intro": { "type": "object", "additionalProperties": false, "properties": { "bars": { "$ref": "#/$defs/intRange" }, "energy": { "$ref": "#/$defs/range" } } },
+        "outro": { "type": "object", "additionalProperties": false, "properties": { "bars": { "$ref": "#/$defs/intRange" }, "energy": { "$ref": "#/$defs/range" } } },
+        "breakdown": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "chance": { "$ref": "song.json#/$defs/unit" },
+            "energy": { "$ref": "#/$defs/range" },
+            "bars": { "$ref": "#/$defs/intRange" },
+            "keep": { "type": "array", "items": { "type": "string" }, "description": "Roles or layer ids that may stay in a breakdown." },
+            "drop": { "type": "array", "items": { "type": "string" }, "description": "Roles or layer ids always removed in a breakdown." },
+            "minGap": { "type": "integer", "minimum": 0, "description": "Sections between breakdowns." }
+          }
+        },
+        "maxLayerChange": { "type": "integer", "minimum": 1, "description": "Layers added or removed per section change, at most." }
+      }
+    },
+    "mutation": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "How phrases drift as the song goes on. Applied when a layer enters a new section.",
+      "properties": {
+        "chance": { "$ref": "song.json#/$defs/unit", "description": "Chance a layer's phrase is mutated at a section change." },
+        "ops": { "type": "array", "items": { "enum": ["rotate", "drop", "add", "transpose", "swap", "velocity", "newVariant"] } },
+        "strength": { "$ref": "song.json#/$defs/unit" }
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "@tracker/format",
+  "version": "0.1.0",
+  "description": "Tracker Song Format: JSON Schema, validator, and helper library for songs and generative styles that define composition and sound as data.",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./schema/song.json": "./schema/song.json",
+    "./schema/style.json": "./schema/style.json"
+  },
+  "bin": {
+    "tracker-validate": "bin/validate.js"
+  },
+  "scripts": {
+    "test": "node --test \"test/**/*.test.js\"",
+    "validate": "node bin/validate.js examples/*.json"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1"
+  }
+}

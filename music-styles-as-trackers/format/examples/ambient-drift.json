@@ -1,0 +1,84 @@
+{
+  "format": "tracker-song/0.1",
+  "meta": {
+    "title": "Ambient Drift",
+    "style": "ambient",
+    "notes": "A slow piece in the spirit of spa music, to show the format holding something other than techno: a unison pad, an FM bell with an arpeggio table, a sub drone, and long reverb."
+  },
+  "transport": { "bpm": 66, "phraseLength": 16 },
+  "sound": {
+    "instruments": {
+      "pad": {
+        "engine": "analog",
+        "params": { "wave": "saw", "wave2": "triangle", "mix2": 0.5, "detune2": 0.08, "unison": 5, "unisonDetune": 9, "unisonSpread": 0.9 },
+        "filter": { "type": "lowpass", "cutoff": 0.38, "resonance": 0.1, "envAmount": 0.15, "env": { "attack": 2.5, "decay": 2, "sustain": 0.6, "release": 3 } },
+        "amp": { "attack": 1.8, "decay": 1, "sustain": 0.8, "release": 3.5 },
+        "lfo": { "shape": "sine", "rate": 0.07, "depth": 0.12, "target": "cutoff" },
+        "mix": { "volume": 0.45, "reverbSend": 0.6, "delaySend": 0.15 }
+      },
+      "bell": {
+        "engine": "fm",
+        "params": { "ratio": 3.5, "index": 2.2, "modEnv": { "decay": 0.9, "sustain": 0 }, "modEnvAmount": 1.5 },
+        "amp": { "attack": 0.004, "decay": 1.8, "sustain": 0, "release": 0.6 },
+        "mix": { "volume": 0.3, "reverbSend": 0.7, "delaySend": 0.5, "pan": 0.2 },
+        "table": "arp"
+      },
+      "drone": {
+        "engine": "analog",
+        "params": { "wave": "sine", "sub": 0.5 },
+        "filter": { "type": "lowpass", "cutoff": 0.2 },
+        "amp": { "attack": 3, "sustain": 1, "release": 4 },
+        "mix": { "volume": 0.4 }
+      },
+      "air": {
+        "engine": "noise",
+        "params": { "color": "pink", "stereo": true },
+        "filter": { "type": "bandpass", "cutoff": 0.6, "resonance": 0.3 },
+        "amp": { "attack": 4, "sustain": 1, "release": 4 },
+        "lfo": { "shape": "triangle", "rate": 0.05, "depth": 0.3, "target": "cutoff" },
+        "mix": { "volume": 0.08, "reverbSend": 0.8 }
+      }
+    },
+    "tables": {
+      "arp": { "rate": 1, "loop": false, "rows": [ { "transpose": 0 }, { "transpose": 7 }, { "transpose": 12 }, { "transpose": 19, "volume": 0.7 } ] }
+    },
+    "master": {
+      "volume": 0.9,
+      "delay": { "time": 6, "feedback": 0.5, "damping": 0.6, "pingPong": true, "level": 0.5 },
+      "reverb": { "size": 0.92, "damping": 0.35, "predelay": 0.04, "level": 0.6 },
+      "highpass": 25
+    }
+  },
+  "composition": {
+    "tracks": [
+      { "id": "drone", "instrument": "drone" },
+      { "id": "pad", "instrument": "pad" },
+      { "id": "bell", "instrument": "bell" },
+      { "id": "air", "instrument": "air" }
+    ],
+    "phrases": {
+      "droneOn": { "steps": [ { "note": "D1" }, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null ] },
+      "hold": { "steps": [ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null ] },
+      "padI": { "steps": [ { "note": "D3" }, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null ] },
+      "padIV": { "steps": [ { "note": "G3", "vel": 0.9 }, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null ] },
+      "padVI": { "steps": [ { "note": "Bb3", "vel": 0.85 }, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null ] },
+      "bellA": { "steps": [ null, null, null, null, { "note": "A4", "vel": 0.6 }, null, null, null, null, null, null, null, null, { "note": "F4", "vel": 0.5 }, null, null ] },
+      "bellB": { "steps": [ null, null, null, null, null, null, { "note": "D5", "vel": 0.5 }, null, null, null, null, null, null, null, null, null ] },
+      "bellRest": { "steps": [ null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null ] },
+      "airOn": { "steps": [ { "note": "C4" }, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null ] }
+    },
+    "chains": {
+      "drone": { "rows": [ { "phrase": "droneOn" }, { "phrase": "hold" }, { "phrase": "hold" }, { "phrase": "hold" }, { "phrase": "hold" }, { "phrase": "hold" }, { "phrase": "hold" }, { "phrase": "hold" } ] },
+      "pads": { "rows": [ { "phrase": "padI" }, { "phrase": "hold" }, { "phrase": "padIV" }, { "phrase": "hold" }, { "phrase": "padVI" }, { "phrase": "hold" }, { "phrase": "padI", "transpose": -5 }, { "phrase": "hold" } ] },
+      "bells": { "rows": [ { "phrase": "bellRest" }, { "phrase": "bellA" }, { "phrase": "bellRest" }, { "phrase": "bellB" }, { "phrase": "bellA", "transpose": -2 }, { "phrase": "bellRest" }, { "phrase": "bellB", "transpose": -5 }, { "phrase": "bellRest" } ] },
+      "air": { "rows": [ { "phrase": "airOn" }, { "phrase": "hold" }, { "phrase": "hold" }, { "phrase": "hold" }, { "phrase": "hold" }, { "phrase": "hold" }, { "phrase": "hold" }, { "phrase": "hold" } ] }
+    },
+    "song": {
+      "rows": [
+        { "drone": "drone", "pad": "pads", "air": "air" },
+        { "drone": "drone", "pad": "pads", "bell": "bells", "air": "air" }
+      ],
+      "sections": [ { "row": 0, "name": "pads", "energy": 0.2 }, { "row": 1, "name": "bells", "energy": 0.35 } ]
+    }
+  }
+}
