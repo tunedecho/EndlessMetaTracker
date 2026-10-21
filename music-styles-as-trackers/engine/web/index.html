@@ -65,6 +65,24 @@
   .lockrow.locked .clear { visibility: visible; }
   .lockrow .clear:hover { color: var(--acc2); }
   label.check { display: inline-flex; gap: 6px; align-items: center; }
+  :root { --weird: #e879f9; }
+  #macros { border: 1px solid var(--line); border-radius: 6px; padding: 8px 10px 4px; margin-bottom: 10px; background: var(--panel); }
+  .mhead { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; color: var(--dim); }
+  #wInfo { color: var(--dim); font-size: 12px; }
+  #knobs { display: flex; flex-wrap: wrap; gap: 4px 6px; margin-top: 6px; }
+  .knob { display: grid; justify-items: center; width: 62px; cursor: ns-resize; user-select: none; touch-action: none; outline: none; position: relative; }
+  .knob svg path { fill: none; stroke-width: 4; stroke-linecap: round; }
+  .knob .track { stroke: #2a2f3a; }
+  .knob .fill { stroke: var(--weird); }
+  .knob .tick { stroke: var(--fg); stroke-width: 2; stroke-linecap: round; }
+  .knob b { position: absolute; top: 15px; font-weight: normal; font-size: 11px; color: var(--fg); }
+  .knob span { font-size: 11px; color: var(--dim); margin-top: -2px; }
+  .knob.zero b { color: var(--dim); }
+  .knob:focus-visible svg { filter: drop-shadow(0 0 3px var(--weird)); }
+  .knob.depth .fill { stroke: var(--acc); }
+  body.weird #weirdToggle { background: var(--weird); color: #0b0c0f; border-color: var(--weird); font-weight: bold; }
+  body.weird #grid th, body.weird #gridTitle { color: var(--weird); }
+  body.weird #grid { box-shadow: 0 0 0 1px #e879f955; }
   #grid td.note { color: var(--note); }
   #grid td.off { color: var(--dim); }
   #grid td.fx { color: var(--acc2); }
@@ -116,9 +134,22 @@
     <h2>All parameters <span id="lockCount"></span></h2>
     <div id="locks"></div>
     <h2>Keys</h2>
-    <div id="help">↑ ↓ step (plays it; Shift: a beat) · ← → track · PgUp PgDn phrase<br>Space play/stop · L loop row · Enter play step<br>Esc edit mode · Z–M, Q–I notes<br>edit mode: 1 OFF · Delete clear · ⌘Z undo<br>◆ marks a step with parameter locks</div>
+    <div id="help">↑ ↓ step (plays it; Shift: a beat) · ← → track · PgUp PgDn phrase<br>Space play/stop · L loop row · Enter play step<br>Esc edit mode · Z–M, Q–I notes<br>edit mode: 1 OFF · Delete clear · ⌘Z undo<br>◆ marks a step with parameter locks<br>` flips weird / original</div>
   </aside>
   <section>
+    <div id="macros">
+      <div class="mhead">
+        <button id="weirdToggle" title="Flip between the original and the weird version (`)">original</button>
+        <button id="reroll" title="New seed: the same knobs, different choices">reroll</button>
+        <button id="surprise" title="Random knob settings">surprise me</button>
+        <button id="zero" title="All knobs to zero">zero</button>
+        <button id="bake" title="Keep the weird version: write it into the song (undo with ⌘Z)">bake</button>
+        <label title="Where the macros act">on <select id="wScope"><option value="song">the whole song</option><option value="row">this row</option><option value="track">this track</option><option value="rowtrack">this row and track</option></select></label>
+        <label class="check" title="Give every repeat of a phrase its own weirdness (copies phrases per bar); off writes into the shared phrases"><input type="checkbox" id="wVary" checked> vary repeats</label>
+        <span id="wInfo"></span>
+      </div>
+      <div id="knobs"></div>
+    </div>
     <canvas id="wave" width="1200" height="90"></canvas>
     <p style="color:var(--dim)">Same engine as the offline renderer, played live. The grid is the whole song row, every step of it; each band starts a phrase and names the phrase each track plays there (with its chain transpose). <b>Play</b> streams the song from the cursor's row and <b>Loop row</b> repeats one row; edits are heard the next time their row comes round. A step belongs to a phrase, so an edit changes that phrase everywhere it plays; <b>Make unique here</b> copies it first. <b>Generate</b> writes a fixed song from the chosen style and seed. <b>Endless</b> starts a run that never ends; <b>−</b> and <b>+</b> nudge the energy of the next section.</p>
     <h2 id="gridTitle">Row</h2>

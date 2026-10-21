@@ -8,6 +8,8 @@ import { resolve, toName, toMidi, stepSource, phrasePlays, getStep, setStep, mak
 import { encodeWav } from '../lib/wav.js';
 import { EXAMPLES, STYLES } from './catalog.js';
 import { deref, leafParams } from './params.js';
+import { weird, MACROS } from './weird.js';
+import { knob } from './knob.js';
 
 const $ = (id) => document.getElementById(id);
 // Tracker keyboard layout: two rows, an octave and a bit each.
@@ -88,6 +90,7 @@ function drawScope() {
 
 function setSong(s, name) {
   stop();
+  weirdOff(false);
   song = s;
   title = (name || song.meta?.title || 'song').replace(/\.json$/, '');
   resolved = resolve(song);
@@ -107,6 +110,7 @@ function setSong(s, name) {
 
 /** After any edit: re-resolve, redraw, and hand the live player the new composition. */
 function edited() {
+  if (!weirdness.on) cached.base = null; // the song changed under the last weird copy
   resolved = resolve(song);
   renderRows();
   renderGrid();
@@ -315,7 +319,9 @@ function showLocks(src, cell = {}) {
   $('lockCount').textContent = n ? `· ${n} locked` : '';
   const head = document.createElement('p');
   head.className = 'dim';
-  head.textContent = `${instId} (${inst.engine}). Move a control to lock it on this note; × unlocks.`;
+  head.textContent = weirdness.on
+    ? `${instId} (${inst.engine}). Weird is on: these are the weird version's locks. Flip back (\`) or bake to edit.`
+    : `${instId} (${inst.engine}). Move a control to lock it on this note; × unlocks.`;
   box.appendChild(head);
   for (const [key, title, params] of lockGroups(inst.engine)) {
     const det = document.createElement('details');
@@ -326,6 +332,7 @@ function showLocks(src, cell = {}) {
     for (const p of params) det.appendChild(lockRow(p, inst, lock));
     box.appendChild(det);
   }
+  if (weirdness.on) for (const el of box.querySelectorAll('input, select, button')) el.disabled = true;
 }
 
 function lockRow(p, inst, lock) {
@@ -375,6 +382,7 @@ function lockRow(p, inst, lock) {
  * goes straight to the live player without redrawing; on release it is a full edit.
  */
 function setLock(path, value, final, undoable = false) {
+  if (weirdBlocks()) return;
   const src = stepSource(song, view, tracks()[cur.track].id, cur.step);
   if (!src) return;
   if (undoable) snapshot();
@@ -390,6 +398,7 @@ function setLock(path, value, final, undoable = false) {
 
 /** Write the cursor's step. `change` maps the stored cell (or {}) to the new one; null clears it. */
 function writeCell(change) {
+  if (weirdBlocks()) return null;
   const t = tracks()[cur.track];
   const src = stepSource(song, view, t.id, cur.step);
   if (!src) { status(`${t.id} is silent in this row: nothing to write into`); return null; }
@@ -424,6 +433,7 @@ function applyForm(e) {
 }
 for (const id of ['cNote', 'cVel', 'cInst', 'cFx']) $(id).onchange = applyForm;
 $('unique').onclick = () => {
+  if (weirdBlocks()) return;
   const t = tracks()[cur.track];
   const src = stepSource(song, view, t.id, cur.step);
   if (!src) return;
@@ -504,6 +514,7 @@ window.addEventListener('keydown', (e) => {
   if ((e.metaKey || e.ctrlKey) && k.toLowerCase() === 'z') {
     if (!undo.length) return;
     e.preventDefault();
+    if (weirdBlocks()) return;
     song.composition = JSON.parse(undo.pop());
     edited();
     status('undone');
@@ -515,6 +526,7 @@ window.addEventListener('keydown', (e) => {
   if (k === 'ArrowLeft' || k === 'ArrowRight') { e.preventDefault(); cur.track = (cur.track + (k === 'ArrowLeft' ? -1 : 1) + tracks().length) % tracks().length; showCursor(); return; }
   if (k === ' ') { e.preventDefault(); if (playing) stop(); else play(false); return; }
   if (k === 'Escape') { setEdit(!editing()); return; }
+  if (k === '`' || e.code === 'Backquote') { e.preventDefault(); flipWeird(); return; }
   if (k === 'Enter') { auditionStep(); return; }
   if (k.toLowerCase() === 'l' && !e.repeat) { if (playing === 'row') stop(); else play(true); return; }
   if (e.repeat) return;
@@ -546,6 +558,111 @@ $('edit').onchange = () => setEdit(editing());
 $('octDown').onclick = () => setOctave(octave - 1);
 $('octUp').onclick = () => setOctave(octave + 1);
 
+/* ------------------------------------------------------------- weirdness */
+
+// The macros never touch the song: they build a weird copy from it. While the
+// copy is on, `song` is the copy (what plays and shows) and `original` holds
+// the song; flipping back restores it, and baking makes the copy the song.
+const weirdness = { on: false, seed: 1, depth: 0.5, amounts: Object.fromEntries(Object.keys(MACROS).map((k) => [k, 0])) };
+let original = null, weirdTimer = 0, originalLocks = 0;
+let cached = { base: null, key: '', song: null }; // the last weird copy, so flipping back to it is instant
+const knobs = {};
+
+function weirdBlocks() {
+  if (!weirdness.on) return false;
+  status('weird is on: flip back (`) or bake it before editing');
+  return true;
+}
+
+function weirdOpts() {
+  const scope = $('wScope').value;
+  const opts = { seed: weirdness.seed, amounts: weirdness.amounts, depth: weirdness.depth, vary: $('wVary').checked };
+  if (scope === 'row' || scope === 'rowtrack') opts.rows = [view, view + 1];
+  if (scope === 'track' || scope === 'rowtrack') opts.tracks = [tracks()[cur.track].id];
+  return opts;
+}
+
+/** Rebuild the weird copy from the original and, if it is on, play and show it. */
+function applyWeird() {
+  clearTimeout(weirdTimer);
+  const base = original ?? song;
+  if (!base || !defs) return;
+  const opts = weirdOpts();
+  const key = JSON.stringify(opts);
+  const w = cached.base === base && cached.key === key ? cached.song : weird(base, defs, opts);
+  cached = { base, key, song: w };
+  if (w === base) { if (weirdness.on) weirdOff(true); info(); return; }
+  if (!weirdness.on) { original = song; originalLocks = resolved.events.filter((e) => e.lock).length; weirdness.on = true; document.body.classList.add('weird'); $('weirdToggle').textContent = 'weird'; }
+  song = w;
+  resolved = resolve(song);
+  setView(Math.min(view, resolved.rows.length - 1));
+  renderGrid();
+  post({ type: 'composition', composition: song.composition });
+  info();
+}
+
+function weirdOff(redraw = true) {
+  clearTimeout(weirdTimer);
+  if (weirdness.on && original) song = original;
+  original = null;
+  weirdness.on = false;
+  document.body.classList.remove('weird');
+  $('weirdToggle').textContent = 'original';
+  if (redraw && song) { resolved = resolve(song); renderGrid(); post({ type: 'composition', composition: song.composition }); }
+  info();
+}
+
+function flipWeird() {
+  if (!song) return;
+  if (weirdness.on) { weirdOff(); status('original'); }
+  else { applyWeird(); status(weirdness.on ? 'weird' : 'turn a knob up first'); }
+}
+
+function info() {
+  const active = Object.entries(weirdness.amounts).filter(([, v]) => v > 0).map(([k]) => k);
+  let text = `seed ${weirdness.seed}`;
+  if (weirdness.on && original) {
+    text += ` · ${resolved.events.filter((e) => e.lock).length - originalLocks} more locked notes · ${active.join(', ')}`;
+  } else if (active.length) text += ' · showing the original';
+  $('wInfo').textContent = text;
+}
+
+/** Knob moves: rebuild shortly after they stop, so dragging stays smooth on long songs. */
+function weirdSoon() { clearTimeout(weirdTimer); weirdTimer = setTimeout(applyWeird, 120); }
+
+for (const [key, text] of Object.entries(MACROS)) {
+  knobs[key] = knob({ label: key, title: text, onInput: (v) => { weirdness.amounts[key] = v; weirdSoon(); }, onChange: (v) => { weirdness.amounts[key] = v; applyWeird(); } });
+  $('knobs').appendChild(knobs[key].el);
+}
+knobs.depth = knob({ label: 'depth', title: 'How far locks move from the instrument: a nudge at the bottom, anywhere in range at the top', value: weirdness.depth, defaultValue: 0.5, onInput: (v) => { weirdness.depth = v; weirdSoon(); }, onChange: (v) => { weirdness.depth = v; applyWeird(); } });
+knobs.depth.el.classList.add('depth');
+$('knobs').appendChild(knobs.depth.el);
+
+$('weirdToggle').onclick = flipWeird;
+$('reroll').onclick = () => { weirdness.seed = 1 + Math.floor(Math.random() * 99999); applyWeird(); };
+$('surprise').onclick = () => {
+  weirdness.seed = 1 + Math.floor(Math.random() * 99999);
+  for (const k of Object.keys(MACROS)) { const v = Math.random() < 0.55 ? Math.round(Math.random() * 70) / 100 : 0; weirdness.amounts[k] = v; knobs[k].value = v; }
+  weirdness.depth = knobs.depth.value = 0.3 + Math.round(Math.random() * 60) / 100;
+  applyWeird();
+};
+$('zero').onclick = () => { for (const k of Object.keys(MACROS)) { weirdness.amounts[k] = 0; knobs[k].value = 0; } weirdOff(); };
+$('bake').onclick = () => {
+  if (!weirdness.on || !original) { status('nothing to bake: turn a knob up first'); return; }
+  undo.push(JSON.stringify(original.composition));
+  original = null;
+  weirdness.on = false;
+  document.body.classList.remove('weird');
+  $('weirdToggle').textContent = 'original';
+  for (const k of Object.keys(MACROS)) { weirdness.amounts[k] = 0; knobs[k].value = 0; }
+  edited();
+  info();
+  status('baked: the weird version is now the song (⌘Z undoes)');
+};
+$('wScope').onchange = () => { if (weirdness.on) applyWeird(); };
+$('wVary').onchange = () => { if (weirdness.on) applyWeird(); };
+info();
+
 /* ---------------------------------------------------------------- endless */
 const endless = { on: false, nextTime: 0, queued: 0, bias: 0, sections: [], current: null, sampleRate: 44100, sources: [] };
 const LOOKAHEAD = 2; // sections rendered ahead of playback
@@ -558,6 +675,7 @@ function startEndless() {
   endless.on = true; endless.queued = 0; endless.bias = 0; endless.sections = []; endless.current = null; endless.sources = [];
   output();
   startAudio();
+  weirdOff(false);
   song = null; resolved = null; stepRows = [];
   $('rows').innerHTML = ''; $('grid').innerHTML = ''; $('gridTitle').textContent = 'Row'; $('cell').textContent = '–';
   $('less').disabled = false; $('more').disabled = false; $('stop').disabled = false;

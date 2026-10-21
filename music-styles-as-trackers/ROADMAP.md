@@ -47,3 +47,4 @@ Built early, against the plan's own advice, because every other phase needed som
 - [x] Try the smallest-definition test: `tracker-validate --stats` reports gzipped sizes; a complete style is 1.5 to 3 KB
 - [ ] Explore building styles from stored example patterns instead of hand-written rules
 - [x] Live control: energy up or down while playing (the Endless mode's − and + buttons nudge the next section)
+- [x] Weirdness macros: knobs that inject parameter locks, commands, and ghost notes into a song, flip back to the original, and bake (`engine/web/weird.js`)
