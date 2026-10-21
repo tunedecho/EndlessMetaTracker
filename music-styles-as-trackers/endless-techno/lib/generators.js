@@ -4,7 +4,7 @@
  * so patterns longer or shorter than a phrase can run across bars (polymeter)
  * and so a generator can be asked for the same phrase again.
  */
-import { degreeToMidi, toMidi, toName } from '@tracker/format';
+import { degreeToMidi, toMidi, toName } from '../../format/lib/core.js';
 
 /**
  * Euclidean rhythm: k hits spread as evenly as possible over n steps.

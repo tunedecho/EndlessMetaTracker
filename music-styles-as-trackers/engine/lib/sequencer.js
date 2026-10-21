@@ -7,7 +7,7 @@
  * step they land on. Events are processed at their exact sample, so rendering
  * is deterministic apart from the noise sources.
  */
-import { resolve, stepSeconds, Random } from '@tracker/format';
+import { resolve, stepSeconds, Random } from '../../format/lib/core.js';
 import { createVoice } from './voices.js';
 import { Master } from './effects.js';
 import { drive as driveShape, panGains, clamp } from './dsp.js';

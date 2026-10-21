@@ -7,7 +7,7 @@
  * a layer that re-enters later has drifted. Fills touch the last bar, and
  * automation writes parameter moves into the first step of each bar.
  */
-import { Random, assertValid, modeIntervals, validate } from '@tracker/format';
+import { Random, modeIntervals, checkStyleReferences, checkSongReferences } from '../../format/lib/core.js';
 import { makeGenerator } from './generators.js';
 import { mutate, fillSteps } from './mutate.js';
 import { planSections, chooseLayers } from './arrange.js';
@@ -58,7 +58,9 @@ function autoApplies(when, sec, prev) {
  * @returns {object} tracker-song/0.1
  */
 export function generateSong(style, opts = {}) {
-  assertValid(style, 'style');
+  if (style.format !== 'tracker-style/0.1') throw new Error(`not a tracker-style/0.1 document: ${style.format}`);
+  const styleProblems = checkStyleReferences(style);
+  if (styleProblems.length) throw new Error(`style has broken references:\n  ${styleProblems.join('\n  ')}`);
   const seed = opts.seed ?? 1;
   const rnd = new Random(seed);
   const stepsPerBeat = style.transport.stepsPerBeat ?? 4;
@@ -219,8 +221,8 @@ export function generateSong(style, opts = {}) {
     sound,
     composition: { tracks, phrases, chains, song: { rows, sections: sectionMeta } },
   };
-  const v = validate(song);
-  if (!v.ok) throw new Error(`generator produced an invalid song:\n  ${v.errors.slice(0, 10).join('\n  ')}`);
+  const problems = checkSongReferences(song);
+  if (problems.length) throw new Error(`generator produced an invalid song:\n  ${problems.slice(0, 10).join('\n  ')}`);
   return song;
 }
 

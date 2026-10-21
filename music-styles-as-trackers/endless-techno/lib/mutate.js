@@ -2,7 +2,7 @@
  * Mutations: small changes to a phrase so a layer drifts over a long run
  * instead of looping identically. Each op returns a new step list.
  */
-import { toMidi, toName } from '@tracker/format';
+import { toMidi, toName } from '../../format/lib/core.js';
 
 const isHit = (s) => s && s.note !== undefined && s.note !== 'OFF';
 

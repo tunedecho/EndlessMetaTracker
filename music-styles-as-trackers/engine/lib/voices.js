@@ -4,7 +4,7 @@
  * commands take effect on the sounding note.
  */
 import { Osc, SVF, ADSR, LFO, Noise, OnePole, cutoffHz, clamp, panGains, TWO_PI } from './dsp.js';
-import { toFreq } from '@tracker/format';
+import { toFreq } from '../../format/lib/core.js';
 
 const CTL_BLOCK = 16; // samples between modulation updates
 
