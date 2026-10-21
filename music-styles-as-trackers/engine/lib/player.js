@@ -60,6 +60,15 @@ export class Player {
     this.rowCount = 0;
     this.currentStepLen = stepLen;
     this.stepCursor = 0;
+    this.lastNote = new Map(); // track index -> last midi note, so slides work across rows
+  }
+
+  /** Release every track at the end of the appended rows, so the tail decays instead of cutting. */
+  end() {
+    for (let ti = 0; ti < this.tracks.length; ti++) this.events.push({ t: this.rowStart, pri: 1, kind: 'off', track: ti });
+    const tail = this.events.splice(this.ei);
+    tail.sort((a, b) => a.t - b.t || a.pri - b.pri);
+    this.events.push(...tail);
   }
 
   /** Add tracks (append-only; existing ids are kept). */
@@ -90,7 +99,7 @@ export class Player {
     };
     delete mini.transport.loop;
     const resolved = resolve(mini);
-    const { events, grid } = schedule(mini, resolved, this.sampleRate, (this.seed + this.rowCount * 7919) >>> 0);
+    const { events, grid } = schedule(mini, resolved, this.sampleRate, (this.seed + this.rowCount * 7919) >>> 0, this.lastNote);
     const steps = resolved.totalSteps;
     const samples = grid.starts[steps];
     // Tracks that leave the grid are released at the row start.
@@ -102,6 +111,10 @@ export class Player {
       }
     }
     for (const e of events) { e.t += this.rowStart; this.events.push(e); }
+    // A nudged, cut, or swung note on the last step can land past the row end, so keep the pending tail sorted.
+    const tail = this.events.splice(this.ei);
+    tail.sort((a, b) => a.t - b.t || a.pri - b.pri);
+    this.events.push(...tail);
     for (let s = 0; s < steps; s++) { this.stepStarts.push(this.rowStart + grid.starts[s]); this.stepLengths.push(grid.lengths[s]); }
     // Carry the tempo forward if the row changed it.
     for (const e of resolved.events) if (e.fx && e.fx.tempo !== undefined) this.bpm = e.fx.tempo;
@@ -123,15 +136,20 @@ export class Player {
     if (!inst) return;
     const tables = this.sound.tables || {};
     const tableDef = ev.table ? tables[ev.table] : inst.table ? tables[inst.table] : null;
-    const legato = !!ev.slide && tr.current && !tr.current.done && tr.current.inst === inst;
-    if (legato) {
-      tr.current.noteOn(ev.note, ev.vel, { accent: ev.accent, slideFrom: ev.slide.from, slideSeconds: ev.slide.seconds, legato: true, table: tableDef, stepSamples: ev.stepSamples });
+    const sounding = tr.current && !tr.current.done && tr.current.inst === inst;
+    // Legato: a slide command, or a glide instrument whose previous note was not released (no OFF between).
+    const glide = inst.params?.glide > 0 && sounding && tr.current.amp.stage !== 'release' && tr.current.amp.stage !== 'idle';
+    if (sounding && (ev.slide || glide)) {
+      const from = ev.slide ? ev.slide.from : tr.current.midi - (inst.transpose || 0);
+      const seconds = ev.slide ? ev.slide.seconds : inst.params.glide;
+      tr.current.noteOn(ev.note, ev.vel, { accent: ev.accent, slideFrom: from, slideSeconds: seconds, legato: true, table: tableDef, stepSamples: ev.stepSamples });
       return;
     }
     if (tr.current && !tr.current.done) {
       tr.current.noteOff();
       tr.releasing.push(tr.current);
-      while (tr.releasing.length > MAX_RELEASING) tr.releasing.shift().choke();
+      // Too many tails: choke the oldest, but keep rendering them until they are done (no hard cuts).
+      for (let i = 0; i < tr.releasing.length - MAX_RELEASING; i++) tr.releasing[i].choke();
     }
     const v = createVoice(inst, this.sampleRate, tr.ctl);
     v.inst = inst;

@@ -36,11 +36,13 @@ Written at the start of an autonomous overnight session. Records the decisions m
 
 Everything in the order of work was built; see `ROADMAP.md` for the box-by-box state. Highlights and honest caveats:
 
-- **47 tests pass** across the four packages (`npm test`). The engine's tests check timing against the step grid and pitch by zero-crossing count; the generator's tests check that every style validates, that songs have an arc, that kicks stay on the grid, and that breakdowns are never silent.
+- **60 tests pass** across the four packages (`npm test`). The engine's tests check timing against the step grid and pitch by zero-crossing count; the generator's tests check that every style validates, that songs have an arc, that kicks stay on the grid, and that breakdowns are never silent.
 - **Measured, not heard.** Renders were checked for clipping, level, per-section band energy (the high band rises about 30 dB from intro to full mix), and spectrograms. The first listening pass is the user's; the mix balance will need ears.
 - **The engine was built before the plan said to.** `CLAUDE.md` asked to confirm the engine plan with the user first. The user's instruction to go as big as possible overnight was taken as that confirmation for a small core; the architecture (offline renderer first, browser second) is easy to redirect.
 - **Nothing M8 is verified on hardware.** `endless-techno/previews/hypnotic-techno-m8-3.m8s` is the file to try. The MIDI export was verified with an independent parser.
 - **Endless Spa is still unseen.** The format was designed from tracker principles. When exports arrive, write `format/adapters/endless-spa.js` and check the sound-half assumptions against the real voices.
 - **Previews add about 14 MB of MP3 to the repo.** They can be deleted from history if that matters.
+
+- **An independent review was run and acted on.** A fresh agent reviewed the engine, generator, and format for correctness with reproduction scripts and found twelve defects (late notes at row boundaries, hard-cut release tails, a hard song ending, NaN from a missing LFO depth, a dead glide parameter, drum sustain from partial envelopes, lost automation and command leaks on shared tracks, automation never reaching its end value, lost polymeter, swing on odd phrase lengths, delay clamping on tempo drops, and a missing OFF at loop re-entry). All are fixed with regression tests. Its unconfirmed concerns are listed in `docs/review-notes.md`.
 
 Suggested first things to do tomorrow: listen to the three previews, try the `.m8s` on the M8 with a backed-up card, and share a few Endless Spa exports.

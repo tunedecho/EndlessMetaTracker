@@ -15,25 +15,6 @@ import { planSections, chooseLayersFor } from './arrange.js';
 
 const VERSION = 'endless-techno/0.1';
 
-function gcd(a, b) { return b ? gcd(b, a % b) : a; }
-function lcm(a, b) { return (a * b) / gcd(a, b); }
-
-/** Bars until a generator's output repeats, used to memoise bars. */
-function periodOf(spec, pl) {
-  switch (spec.type) {
-    case 'pattern': return Math.min(8, lcm(Math.max(...spec.patterns.map((p) => p.length)), pl) / pl);
-    case 'euclid': {
-      const len = typeof spec.length === 'number' ? spec.length : Array.isArray(spec.length) ? spec.length[1] : pl;
-      return Math.min(8, lcm(len, pl) / pl);
-    }
-    case 'chords': {
-      const bpc = typeof spec.barsPerChord === 'number' ? spec.barsPerChord : Array.isArray(spec.barsPerChord) ? spec.barsPerChord[1] : 4;
-      return spec.progression.length * bpc;
-    }
-    default: return 4;
-  }
-}
-
 function setPath(obj, path, value) {
   const parts = path.split('.');
   let o = obj;
@@ -97,6 +78,7 @@ export class Session {
     this.prevSec = null;
     this.present = new Set();
     this.queue = [];        // planned sections not yet written
+    this.automated = new Map(); // trackId -> params that automation has written on it
     this.arcs = 0;
     this.newPhraseIds = [];
     this.newChainIds = [];
@@ -136,14 +118,15 @@ export class Session {
     const lrnd = this.rnd.fork(layer.id);
     const variants = Math.max(1, lrnd.range(layer.variants ?? 2, true));
     const gens = Array.from({ length: variants }, (_, i) => makeGenerator(layer.generator, lrnd.fork(`v${i}`), this.ctx));
-    const st = { lrnd, gens, period: periodOf(layer.generator, this.phraseLength), memo: new Map(), mutations: [], lastSection: -1 };
+    const st = { lrnd, gens, memo: new Map(), mutations: [], lastSection: -1 };
     this.states.set(layer.id, st);
     return st;
   }
 
   barSteps(st, vi, bar) {
-    const key = `${vi}:${bar % st.period}`;
-    if (!st.memo.has(key)) st.memo.set(key, st.gens[vi](bar % st.period));
+    const period = st.gens[vi].period;
+    const key = `${vi}:${bar % period}`;
+    if (!st.memo.has(key)) st.memo.set(key, st.gens[vi](bar % period));
     const steps = st.memo.get(key);
     const apply = (s) => {
       let out = s;
@@ -186,7 +169,7 @@ export class Session {
         perVoice.forEach((voiceSteps, v) => {
           let s = voiceSteps.slice();
           if (doFill && b === bars - 1) s = fillSteps(s, rnd, layer.fill, ctx);
-          if (autos.length && b % pointEvery === 0) {
+          if (autos.length && (b % pointEvery === 0 || b === bars - 1)) {
             const t = bars > 1 ? b / (bars - 1) : 1;
             const fx = {};
             for (const a of autos) {
@@ -201,8 +184,25 @@ export class Session {
       voiceBars.forEach((vb, v) => {
         const trackId = voiceBars.length > 1 ? `${layer.track}${v + 1}` : layer.track;
         this.ensureTrack(trackId, layer.instrument);
-        (pending[trackId] ||= []).push({ layer, bars: vb });
+        (pending[trackId] ||= []).push({ layer, bars: vb, autos: autos.map((a) => a.param) });
       });
+    }
+    // Track commands persist on the track, not the layer. When a track that was automated earlier plays
+    // again without that automation, reset the parameter to the track's own instrument value.
+    for (const [trackId, entries] of Object.entries(pending)) {
+      const was = this.automated.get(trackId) || new Set();
+      const now = new Set(entries.flatMap((e) => e.autos));
+      const track = tracks[this.trackIndex.get(trackId)];
+      const inst = sound.instruments[track.instrument];
+      const base = (p) => (p === 'cutoff' || p === 'resonance' ? inst.filter?.[p] : inst.mix?.[p]);
+      const reset = {};
+      for (const p of was) if (!now.has(p)) reset[p] = base(p) ?? (p === 'volume' ? 0.8 : p === 'cutoff' ? 1 : 0);
+      if (Object.keys(reset).length) {
+        const first = entries[0].bars[0];
+        first[0] = first[0] ? { ...first[0], fx: { ...reset, ...(first[0].fx || {}) } } : { fx: reset };
+      }
+      for (const p of now) was.add(p);
+      this.automated.set(trackId, was);
     }
     // One chain per track. Layers that share a track are merged bar by bar:
     // the earlier layer's steps win, the later layer fills the empty steps.
@@ -216,7 +216,10 @@ export class Session {
           let src = lb[b % lb.length];
           if (track.instrument !== layer.instrument) src = src.map((x) => (x && x.note !== undefined && x.note !== 'OFF' ? { ...x, inst: layer.instrument } : x));
           if (!merged) { merged = src.slice(); continue; }
-          for (let i = 0; i < merged.length; i++) if (!merged[i] && src[i]) merged[i] = src[i];
+          for (let i = 0; i < merged.length; i++) {
+            if (!merged[i]) merged[i] = src[i];
+            else if (src[i]?.fx) merged[i] = { ...merged[i], fx: { ...src[i].fx, ...(merged[i].fx || {}) } }; // commands from both layers
+          }
         }
         chainRows.push({ phrase: this.internPhrase(entries.map((e) => e.layer.id).join('_'), merged) });
       }
@@ -244,7 +247,7 @@ export class Session {
   next(opts = {}) {
     if (!this.queue.length) {
       const arcStyle = this.arcs === 0 ? this.style : { ...this.style, arrangement: { ...this.style.arrangement, intro: undefined, outro: undefined } };
-      const planned = planSections(arcStyle, this.rnd, 4);
+      const planned = planSections(arcStyle, this.rnd, 4, this.bpm);
       this.queue.push(...(this.arcs === 0 ? planned.filter((s) => s.kind !== 'outro') : planned));
       this.arcs++;
     }
@@ -302,7 +305,7 @@ export class Session {
 export function generateSong(style, opts = {}) {
   const session = new Session(style, { seed: opts.seed ?? 1 });
   const minutes = opts.minutes ?? session.rnd.range(style.arrangement.minutes ?? 5);
-  const sections = planSections(style, session.rnd, minutes);
+  const sections = planSections(style, session.rnd, minutes, session.bpm);
   let present = new Set();
   sections.forEach((sec, si) => {
     present = chooseLayersFor(style, sec, present, si > 0 ? sections[si - 1] : null, session.rnd, si === 0);

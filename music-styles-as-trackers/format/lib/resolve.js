@@ -80,6 +80,7 @@ export function resolve(song, opts = {}) {
   let loopsLeft = opts.loops ?? 0;
 
   let r = 0;
+  let prevRow = null; // the row that actually preceded, also across a loop jump
   while (r < songRows.length && step < maxSteps) {
     const row = songRows[r];
     const len = rowSteps(song, row);
@@ -87,8 +88,8 @@ export function resolve(song, opts = {}) {
     rows.push({ row: r, step, steps: len, name: section?.name, energy: section?.energy });
 
     // Tracks absent from a row are silent: release whatever they were playing.
-    if (r > 0) {
-      for (const [trackId, chainId] of Object.entries(songRows[r - 1])) {
+    if (prevRow) {
+      for (const [trackId, chainId] of Object.entries(prevRow)) {
         if (!chainId || row[trackId]) continue;
         const ti = trackIndex.get(trackId);
         if (ti === undefined || tracks[ti].mute) continue;
@@ -142,6 +143,7 @@ export function resolve(song, opts = {}) {
       }
     }
     step += len;
+    prevRow = row;
     r++;
     if (r >= songRows.length && loopTarget !== undefined && loopsLeft > 0) {
       loopsLeft--;

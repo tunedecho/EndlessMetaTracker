@@ -69,7 +69,9 @@ export const GENERATORS = {
     const pat = rnd.pick(spec.patterns);
     const note = resolveNote(spec.note ?? 'C3', rnd, ctx);
     const gate = rnd.range(spec.gate);
-    return (bar) => applyGate(fromPattern(pat, (bar * ctx.phraseLength) % pat.length, ctx.phraseLength, note, rnd, spec, spec.fx), gate);
+    const fn = (bar) => applyGate(fromPattern(pat, (bar * ctx.phraseLength) % pat.length, ctx.phraseLength, note, rnd, spec, spec.fx), gate);
+    fn.period = Math.min(16, lcm(pat.length, ctx.phraseLength) / ctx.phraseLength);
+    return fn;
   },
 
   euclid(spec, rnd, ctx) {
@@ -81,7 +83,7 @@ export const GENERATORS = {
     const note = resolveNote(spec.note ?? 'C3', rnd, ctx);
     const accentEvery = rnd.range(spec.accentEvery, true);
     const gate = rnd.range(spec.gate);
-    return (bar) => {
+    const fn = (bar) => {
       const steps = Array(ctx.phraseLength).fill(null);
       let hitIndex = 0;
       for (let i = 0; i < ctx.phraseLength; i++) {
@@ -93,6 +95,8 @@ export const GENERATORS = {
       }
       return applyGate(steps, gate);
     };
+    fn.period = Math.min(16, lcm(length, ctx.phraseLength) / ctx.phraseLength);
+    return fn;
   },
 
   prob(spec, rnd, ctx) {
@@ -160,7 +164,7 @@ export const GENERATORS = {
     const gate = rnd.range(spec.gate);
     const strum = spec.strum || 0;
     const voices = Math.max(...spec.progression.map((c) => c.length));
-    return (bar) => {
+    const fn = (bar) => {
       const chord = spec.progression[Math.floor(bar / barsPerChord) % spec.progression.length];
       const out = [];
       for (let v = 0; v < voices; v++) {
@@ -176,11 +180,23 @@ export const GENERATORS = {
       }
       return out;
     };
+    fn.period = spec.progression.length * barsPerChord;
+    return fn;
   },
 };
 
+function gcd(a, b) { return b ? gcd(b, a % b) : a; }
+const lcm = (a, b) => (a * b) / gcd(a, b);
+
+/**
+ * Build a generator: a function `bar(index) -> steps` with a `.period`
+ * property, the number of bars after which its output repeats (so callers can
+ * memoise bars and polymeter still runs across bars).
+ */
 export function makeGenerator(spec, rnd, ctx) {
   const g = GENERATORS[spec.type];
   if (!g) throw new Error(`unknown generator type: ${spec.type}`);
-  return g(spec, rnd, ctx);
+  const fn = g(spec, rnd, ctx);
+  if (fn.period === undefined) fn.period = 4;
+  return fn;
 }

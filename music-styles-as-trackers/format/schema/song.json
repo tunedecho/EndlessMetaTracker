@@ -108,8 +108,8 @@
             "shape": { "enum": ["sine", "triangle", "saw", "square", "random"] },
             "rate": { "type": "number", "minimum": 0, "maximum": 50, "description": "Hz, unless sync is set." },
             "sync": { "type": "number", "exclusiveMinimum": 0, "description": "Period in steps. Overrides rate." },
-            "depth": { "$ref": "#/$defs/unit" },
-            "target": { "enum": ["cutoff", "pitch", "volume", "pan", "pulseWidth"] },
+            "depth": { "$ref": "#/$defs/unit", "default": 0 },
+            "target": { "enum": ["cutoff", "pitch", "volume", "pulseWidth"] },
             "retrigger": { "type": "boolean" }
           }
         },

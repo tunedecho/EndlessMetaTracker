@@ -28,7 +28,7 @@ export function stepGrid(resolved, sampleRate) {
     if (tempoAt.has(s)) bpm = tempoAt.get(s);
     const L = stepSeconds(bpm, transport.stepsPerBeat) * sampleRate;
     lengths[s] = L;
-    starts[s] = t + (s % 2 === 1 ? swing * L : 0);
+    starts[s] = t + (s % 2 === 1 && s < totalSteps ? swing * L : 0);
     t += L;
   }
   return { starts, lengths, seconds: t / sampleRate };
@@ -38,11 +38,11 @@ export function stepGrid(resolved, sampleRate) {
  * Expand the resolved timeline into sample-stamped events.
  * Kinds: ctl (track command), on, off.
  */
-export function schedule(song, resolved, sampleRate, seed = 1) {
+export function schedule(song, resolved, sampleRate, seed = 1, lastNote = new Map()) {
   const grid = stepGrid(resolved, sampleRate);
   const rnd = new Random(seed);
   const out = [];
-  const lastNote = new Map(); // track -> midi, for slides
+  // lastNote: track -> midi, for slides; a caller may pass one that persists across rows
   for (const e of resolved.events) {
     const t0 = grid.starts[e.step];
     const L = grid.lengths[e.step];
@@ -100,6 +100,7 @@ export function renderSong(song, opts = {}) {
     const sec = sections.get(r);
     player.appendRow(rows[r], comp, { name: sec?.name, energy: sec?.energy });
   }
+  player.end();
   const tail = opts.tailSeconds ?? 2;
   let total = Math.ceil(player.rowStart) + Math.round(tail * sampleRate);
   if (opts.maxSeconds) total = Math.min(total, Math.round(opts.maxSeconds * sampleRate));

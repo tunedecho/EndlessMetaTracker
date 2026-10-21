@@ -10,13 +10,15 @@ const CTL_BLOCK = 16; // samples between modulation updates
 
 /** Base class: envelope, filter, LFO, table, pitch glide. */
 class Voice {
-  constructor(inst, sampleRate, ctl) {
+  /** @param {object} [ampDefaults] engine-specific amp defaults, merged under the instrument's own amp */
+  constructor(inst, sampleRate, ctl, ampDefaults = { attack: 0.002, decay: 0.1, sustain: 1, release: 0.05 }) {
     this.inst = inst;
     this.sr = sampleRate;
     this.ctl = ctl; // live track controls
     this.filter = inst.filter || {};
     this.filterType = this.filter.type || 'lowpass';
-    this.amp = new ADSR(sampleRate, { attack: 0.002, decay: 0.1, sustain: 1, release: 0.05, ...(inst.amp || {}) });
+    this.amp = new ADSR(sampleRate, { ...ampDefaults, ...(inst.amp || {}) });
+    this.lfoDepth = inst.lfo ? inst.lfo.depth ?? 0 : 0;
     this.fenv = new ADSR(sampleRate, { attack: 0.001, decay: 0.2, sustain: 0, release: 0.2, ...(this.filter.env || {}) });
     this.lfo = inst.lfo ? new LFO(sampleRate, inst.lfo.shape || 'sine', inst.lfo.rate ?? 1) : null;
     this.svfL = new SVF(sampleRate);
@@ -95,7 +97,7 @@ class Voice {
   cutoffUnits() {
     let c = this.tableFx?.cutoff ?? this.ctl.cutoff ?? this.filter.cutoff ?? 1;
     if (this.filter.envAmount) c += this.filter.envAmount * this.fenv.level * (1 + this.accent);
-    if (this.lfo && this.inst.lfo.target === 'cutoff') c += this.lfoValue * this.inst.lfo.depth * 0.5;
+    if (this.lfo && this.inst.lfo.target === 'cutoff') c += this.lfoValue * this.lfoDepth * 0.5;
     if (this.filter.keyTrack) c += (this.pitch - 60) / 60 * this.filter.keyTrack * 0.5;
     return clamp(c, 0, 1);
   }
@@ -127,14 +129,14 @@ class Voice {
   /** Pitch in MIDI including everything but the oscillator's own detune. */
   midiNow() {
     let p = this.pitch + this.tableTranspose + (this.ctl.pitch || 0) + (this.tableFx?.pitch || 0);
-    if (this.lfo && this.inst.lfo.target === 'pitch') p += this.lfoValue * this.inst.lfo.depth * 12;
+    if (this.lfo && this.inst.lfo.target === 'pitch') p += this.lfoValue * this.lfoDepth * 12;
     return p;
   }
 
   /** Gain from velocity, accent, table, LFO. */
   gainNow() {
     let g = this.vel * (1 + this.accent * 0.5) * this.tableVolume;
-    if (this.lfo && this.inst.lfo.target === 'volume') g *= 1 - (this.lfoValue * 0.5 + 0.5) * this.inst.lfo.depth;
+    if (this.lfo && this.inst.lfo.target === 'volume') g *= 1 - (this.lfoValue * 0.5 + 0.5) * this.lfoDepth;
     return g;
   }
 
@@ -195,7 +197,7 @@ export class AnalogVoice extends Voice {
     this.f2 = this.detunes.map((d) => toFreq(m + d + (this.p.detune2 || 0)));
     this.fsub = toFreq(m - 12);
     if (this.lfo && this.inst.lfo.target === 'pulseWidth') {
-      const pw = clamp((this.p.pulseWidth ?? 0.5) + this.lfoValue * this.inst.lfo.depth * 0.45, 0.05, 0.95);
+      const pw = clamp((this.p.pulseWidth ?? 0.5) + this.lfoValue * this.lfoDepth * 0.45, 0.05, 0.95);
       for (const o of this.osc1) o.pw = pw;
     }
   }
@@ -236,7 +238,8 @@ export class AnalogVoice extends Voice {
 
 export class FMVoice extends Voice {
   constructor(inst, sr, ctl) {
-    super(inst, sr, ctl);
+    // A decay with no sustain given means a percussive note, which is what most FM patches want.
+    super(inst, sr, ctl, { attack: 0.002, decay: 0.3, sustain: inst.amp && inst.amp.decay !== undefined && inst.amp.sustain === undefined ? 0 : 1, release: 0.05 });
     const p = inst.params || {};
     this.p = p;
     this.phC = 0; this.phM = 0; this.prevMod = 0;
@@ -269,13 +272,12 @@ export class FMVoice extends Voice {
 
 export class KickVoice extends Voice {
   constructor(inst, sr, ctl) {
-    super(inst, sr, ctl);
+    super(inst, sr, ctl, { attack: 0.0005, decay: inst.params?.body ?? 0.4, sustain: 0, release: 0.02 });
     const p = inst.params || {};
     this.p = p;
     this.ph = 0;
     this.t = 0;
     this.click = new OnePole(sr, 3000);
-    if (!inst.amp) this.amp.set({ attack: 0.0005, decay: p.body ?? 0.4, sustain: 0, release: 0.02 });
   }
   noteOn(midi, vel, o) {
     super.noteOn(midi, vel, o);
@@ -305,7 +307,7 @@ export class KickVoice extends Voice {
 
 export class ClapVoice extends Voice {
   constructor(inst, sr, ctl) {
-    super(inst, sr, ctl);
+    super(inst, sr, ctl, { attack: 0.0005, decay: 1.5, sustain: 0, release: 0.01 });
     const p = inst.params || {};
     this.p = p;
     this.bpL = new SVF(sr); this.bpR = new SVF(sr);
@@ -314,7 +316,6 @@ export class ClapVoice extends Voice {
     this.t = 0;
     this.stereo = true;
     this.useFilter = this.useFilter && !!inst.filter?.cutoff;
-    if (!inst.amp) this.amp.set({ attack: 0.0005, decay: 1.5, sustain: 0, release: 0.01 });
   }
   noteOn(midi, vel, o) { super.noteOn(midi, vel, o); this.t = 0; }
   sampleInto(L, R, idx, g) {
@@ -342,7 +343,7 @@ const HAT_RATIOS = [1, 1.4826, 1.8, 2.546, 2.63, 3.897]; // from the 808's six s
 
 export class HihatVoice extends Voice {
   constructor(inst, sr, ctl) {
-    super(inst, sr, ctl);
+    super(inst, sr, ctl, { attack: 0.0003, decay: 2, sustain: 0, release: 0.004 });
     const p = inst.params || {};
     this.p = p;
     this.oscs = HAT_RATIOS.map(() => new Osc(sr, 'square', Math.random()));
@@ -353,7 +354,6 @@ export class HihatVoice extends Voice {
     this.t = 0;
     this.decay = p.decay ?? (p.open ? 0.35 : 0.06);
     this.useFilter = this.useFilter && !!inst.filter?.cutoff;
-    if (!inst.amp) this.amp.set({ attack: 0.0003, decay: 2, sustain: 0, release: 0.004 });
   }
   noteOn(midi, vel, o) { super.noteOn(midi, vel, o); this.t = 0; }
   sampleInto(L, R, idx, g) {

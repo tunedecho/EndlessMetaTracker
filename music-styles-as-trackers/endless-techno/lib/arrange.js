@@ -29,10 +29,11 @@ const jitter = (rnd, e, amount) => e + rnd.float(-amount, amount);
  * keeps breathing instead of wandering.
  * @returns {{kind:string, bars:number, energy:number}[]}
  */
-export function planSections(style, rnd, minutes) {
+export function planSections(style, rnd, minutes, bpm = rnd.bpm) {
+  if (!bpm) throw new Error('planSections needs a tempo');
   const a = style.arrangement;
   const beatsPerBar = (style.transport.phraseLength ?? 16) / (style.transport.stepsPerBeat ?? 4);
-  const targetBars = Math.max(16, Math.round((minutes * rnd.bpm) / beatsPerBar));
+  const targetBars = Math.max(16, Math.round((minutes * bpm) / beatsPerBar));
   const e = a.energy || {};
   const min = e.min ?? 0.1, max = e.max ?? 1;
   const jit = Array.isArray(e.step) ? Math.min(0.1, (e.step[1] - e.step[0]) / 4) : 0.05;
@@ -45,7 +46,7 @@ export function planSections(style, rnd, minutes) {
   const introBars = a.intro ? Math.min(cap, rnd.range(a.intro.bars ?? 16, true)) : 0;
   const outroBars = a.outro ? Math.min(cap, rnd.range(a.outro.bars ?? 16, true)) : 0;
   const body = Math.max(16, targetBars - introBars - outroBars);
-  const arcBars = Math.round((4 * rnd.bpm) / beatsPerBar); // about four minutes
+  const arcBars = Math.round((4 * bpm) / beatsPerBar); // about four minutes
   const arcs = Math.max(1, Math.round(body / arcBars));
   const perArc = Math.floor(body / arcs / 4) * 4;
 
@@ -57,7 +58,7 @@ export function planSections(style, rnd, minutes) {
     const hasBreak = a.breakdown && rnd.chance(a.breakdown.chance ?? 0.5) || (a.breakdown && arc > 0);
     // Bar budgets for the phases of this arc.
     const riseBars = Math.round(perArc * (first ? 0.35 : 0.25) / 4) * 4;
-    const breakBars = hasBreak ? Math.round(rnd.range(a.breakdown.bars ?? 16, true) / 4) * 4 : 0;
+    const breakBars = hasBreak ? Math.max(4, Math.round(rnd.range(a.breakdown.bars ?? 16, true) / 4) * 4) : 0;
     const buildBars = hasBreak ? Math.max(4, Math.round(breakBars / 2 / 4) * 4) : 0;
     const peakBars = Math.max(8, Math.round((perArc * 0.3 - breakBars - buildBars) / 4) * 4);
     const fallBars = Math.max(8, perArc - riseBars - breakBars - buildBars - peakBars);

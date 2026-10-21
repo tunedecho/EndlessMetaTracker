@@ -12,7 +12,8 @@ export class Delay {
     this.feedback = def.feedback ?? 0.4;
     this.level = def.level ?? 0.5;
     this.setTime(stepSamples);
-    const max = Math.ceil(16 * stepSamples) + 2;
+    // Room for 16 steps at the slowest tempo the format allows (20 bpm, 4 steps per beat), so tempo drops never clamp.
+    const max = Math.ceil(16 * 0.75 * sampleRate) + 2;
     this.bufL = new Float32Array(Math.max(max, this.len + 2));
     this.bufR = new Float32Array(this.bufL.length);
     this.pos = 0;
