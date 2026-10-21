@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Endless Meta Tracker</title>
+<meta name="description" content="Music styles as tracker systems: a browser tracker with live synth engines, generative styles, parameter locks, weirdness macros, and jamming.">
+<link rel="icon" href="data:,">
+<script>if (location.protocol === 'http:' && !/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname)) location.replace('https:' + location.href.slice(5));</script>
+<style>
+  :root { color-scheme: dark; --bg: #0e0f12; --panel: #16181d; --line: #262a33; --fg: #d8dbe2; --dim: #7a8090; --acc: #6ee7b7; --acc2: #f59e0b; --weird: #e879f9; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.55 ui-monospace, Menlo, Consolas, monospace; }
+  main { max-width: 880px; margin: 0 auto; padding: 48px 16px 64px; }
+  h1 { color: var(--acc); font-size: 22px; letter-spacing: .1em; margin: 0 0 6px; }
+  .lede { color: var(--dim); margin: 0 0 32px; max-width: 640px; }
+  h2 { font-size: 12px; color: var(--dim); text-transform: uppercase; letter-spacing: .12em; margin: 36px 0 12px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+  a.card { display: block; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 16px; color: var(--fg); text-decoration: none; }
+  a.card:hover { border-color: var(--acc); }
+  a.card b { display: block; color: var(--acc); margin-bottom: 6px; font-weight: normal; letter-spacing: .04em; }
+  a.card.cube b { color: var(--weird); }
+  a.card.synth b { color: var(--acc2); }
+  a.card span { color: var(--dim); font-size: 13px; }
+  .listen { display: grid; gap: 10px; }
+  .listen div { display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
+  .listen small { color: var(--dim); }
+  audio { width: 100%; height: 36px; }
+  ol { color: var(--dim); padding-left: 20px; margin: 0; }
+  ol b { color: var(--fg); font-weight: normal; }
+  kbd { border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; font: inherit; font-size: 12px; color: var(--fg); }
+  footer { margin-top: 40px; color: var(--dim); font-size: 13px; }
+  a { color: var(--acc); }
+</style>
+</head>
+<body>
+<main>
+  <h1>ENDLESS META TRACKER</h1>
+  <p class="lede">Music styles as tracker systems: every note and every synth voice is data. A browser tracker with its own synth engines, generative styles, per-note parameter locks, weirdness macros, and a jam mode for building songs a track at a time. Plain JavaScript, no build step, everything runs in your browser.</p>
+
+  <h2>Open</h2>
+  <div class="cards">
+    <a class="card" href="engine/web/"><b>Tracker</b><span>Play, step through, and edit songs; jam a song together track by track; turn the weirdness knobs; run Endless mode.</span></a>
+    <a class="card synth" href="engine/web/synth.html"><b>Synth playground</b><span>Pick any instrument, move every parameter, play it from your keyboard.</span></a>
+    <a class="card cube" href="engine/web/cube.html"><b>Parameter cube</b><span>The tracker grid in 3-D: every parameter of every step, as a field of boxes.</span></a>
+  </div>
+
+  <h2>Try this</h2>
+  <ol>
+    <li>Open the <b>Tracker</b>, pick <b>Hello Tracker</b>, and press <kbd>L</kbd> to loop it.</li>
+    <li>In the <b>jam</b> panel, add a kick, then hats; press <b>↻</b> on a track for a new take.</li>
+    <li>Turn up <b>chaos</b> and <b>drift</b>; press <kbd>`</kbd> to flip back to the original.</li>
+    <li>Press <b>Endless</b> for a run that never stops; <b>−</b> and <b>+</b> steer its energy.</li>
+  </ol>
+
+  <h2>Listen</h2>
+  <div class="listen">
+    <div><span>Hypnotic Techno, seed 3</span><audio controls preload="none" src="endless-techno/previews/hypnotic-techno-3.mp3"></audio><small>generated from the hypnotic-techno style</small></div>
+    <div><span>Hypnotic Techno, seed 7</span><audio controls preload="none" src="endless-techno/previews/hypnotic-techno-7.mp3"></audio><small>the same style, another seed</small></div>
+    <div><span>Ambient Drift, seed 1</span><audio controls preload="none" src="endless-techno/previews/ambient-drift-1.mp3"></audio><small>generated from the ambient-drift style</small></div>
+  </div>
+
+  <footer>Audio starts on your first click or key press, as browsers require. Source and docs: <a href="https://github.com/tunedecho/EndlessMetaTracker">github.com/tunedecho/EndlessMetaTracker</a>.</footer>
+</main>
+</body>
+</html>
