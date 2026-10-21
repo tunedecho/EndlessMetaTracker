@@ -495,11 +495,30 @@ function stop() {
 function onLive(m) {
   if (m.type === 'pos' && playing) {
     playPos = m;
-    if (m.row !== view) { view = m.row; cur.step = Math.min(cur.step, resolved.rows[view].steps - 1); renderGrid(); }
+    // Following, the grid shows the playing row and keeps the playhead in view; otherwise it stays where you are.
+    if (following() && m.row !== view) { view = m.row; cur.step = Math.min(cur.step, resolved.rows[view].steps - 1); renderGrid(); }
     showPlaying();
-    stepRows[m.step]?.scrollIntoView({ block: 'nearest' });
+    if (following() && m.row === view) keepPlayheadInView(stepRows[m.step]);
   } else if (m.type === 'ended') { playing = null; playPos = null; $('stop').disabled = true; showPlaying(); status('end of song'); }
 }
+
+/* ------------------------------------------------------------- follow */
+
+const following = () => $('follow').checked;
+
+/** Keep the playing step a third of the way down the grid, so what comes next is visible. */
+function keepPlayheadInView(tr) {
+  if (!tr) return;
+  const wrap = $('gridWrap');
+  const head = $('grid').rows[0]?.offsetHeight || 0;
+  const top = tr.offsetTop - wrap.scrollTop;
+  if (top < head || top + tr.offsetHeight > wrap.clientHeight - tr.offsetHeight * 4) wrap.scrollTop = tr.offsetTop - head - (wrap.clientHeight - head) / 3;
+}
+try { $('follow').checked = localStorage.getItem('tracker-follow') !== 'off'; } catch {}
+$('follow').onchange = () => {
+  try { localStorage.setItem('tracker-follow', following() ? 'on' : 'off'); } catch {}
+  status(following() ? 'following the playhead' : 'not following: the grid stays put while playing');
+};
 
 /* ------------------------------------------------------------- keys */
 
@@ -527,6 +546,7 @@ window.addEventListener('keydown', (e) => {
   if (k === ' ') { e.preventDefault(); if (playing) stop(); else play(false); return; }
   if (k === 'Escape') { setEdit(!editing()); return; }
   if (k === '`' || e.code === 'Backquote') { e.preventDefault(); flipWeird(); return; }
+  if (k.toLowerCase() === 'f') { $('follow').checked = !following(); $('follow').onchange(); return; }
   if (k === 'Enter') { auditionStep(); return; }
   if (k.toLowerCase() === 'l' && !e.repeat) { if (playing === 'row') stop(); else play(true); return; }
   if (e.repeat) return;
