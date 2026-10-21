@@ -3,9 +3,9 @@
 > A central console, in the spirit of the current tracker, that composes endless techno, drives every piece of outboard gear and plugin from one place, records into Ableton Live, and is above all fun to play live.
 
 - **Slug:** live-console
-- **Status:** seed, captured from conversation on 2026-10-21
+- **Status:** seed, captured from conversation on 2026-10-21; planned in `live-console/` the same day
 - **Tags:** music, tracker, generative, live, hardware, ableton
-- **Likely home:** a new repo. This file is the hand-off. It reuses ideas and, where useful, code from `music-styles-as-trackers/`.
+- **Home:** [`live-console/`](../../../live-console/README.md) in this repository, kept separate from `music-styles-as-trackers/`. Its README holds the revised plan, the gear findings, and the build order; this file is the seed as captured.
 
 ## What
 
@@ -76,7 +76,7 @@ A software control centre that:
 - How much of the current JavaScript engine carries over? The generator and the format do; the synth voices become one destination among many.
 - What is the first live test? Suggested: RD-8 on drums, TD-3 on acid, one poly on pads, everything recorded into Live, endless mode running, energy control and "add drum fills" working by voice.
 
-## Suggested build order (to revisit in the new repo)
+## Suggested build order (superseded by `live-console/README.md`)
 
 1. Confirm the gear list and write the first three MIDI CC maps (RD-8, TD-3, the six-voice poly).
 2. Decide the Live integration route with a one-day spike of each candidate: can it follow transport and send tight MIDI to one synth?
@@ -93,4 +93,4 @@ A software control centre that:
 - [Builds on: Endless Techno](endless-techno.md)
 - [Builds on: New Tracker Engine](new-tracker-engine.md)
 - [Uses: Tracker Song Format](tracker-song-format.md)
-- Related: M8 Song Writer (hardware as a destination is the same idea, generalised)
+- [Related: M8 Song Writer](m8-song-writer.md) (hardware as a destination is the same idea, generalised)

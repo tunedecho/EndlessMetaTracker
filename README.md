@@ -4,6 +4,8 @@ Music styles as tracker systems: composition and sound as data, a generator that
 
 The project lives in [`music-styles-as-trackers/`](music-styles-as-trackers/README.md).
 
+A second, separate project is planned in [`live-console/`](live-console/README.md): the same compositional engine as a console that plays outboard gear and plugins from inside Ableton Live.
+
 ```sh
 cd music-styles-as-trackers
 npm install && npm test
