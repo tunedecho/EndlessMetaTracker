@@ -86,10 +86,14 @@ export class Player {
     this.events.push(...tail);
   }
 
-  /** Add tracks (append-only; existing ids are kept). */
+  /**
+   * Add tracks (append-only). A track already here takes the new definition, so a changed default
+   * instrument, volume, or pan is heard from the next appended row (a live player appends a bar at a time).
+   */
   addTracks(defs) {
     for (const def of defs) {
-      if (this.trackIndex.has(def.id)) continue;
+      const known = this.trackIndex.get(def.id);
+      if (known !== undefined) { this.tracks[known].def = def; continue; }
       this.trackIndex.set(def.id, this.tracks.length);
       this.tracks.push(new Track(def));
     }

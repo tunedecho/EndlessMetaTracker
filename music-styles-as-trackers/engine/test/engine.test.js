@@ -201,6 +201,24 @@ test('a host can bring its own voices through createVoice', () => {
   assert.ok(level(12) < 1e-6, `and stops at OFF: ${level(12)}`);
 });
 
+test('a track switched to another instrument plays it from the next appended row', () => {
+  const SINE = { engine: 'analog', params: { wave: 'sine' }, amp: { attack: 0.001, sustain: 1, release: 0.005 }, mix: { volume: 1 } };
+  const steps = rest(16);
+  steps[0] = { note: 'C3' };
+  const song = mini({ bpm: 120, inst: SINE, steps });
+  song.sound.instruments.quiet = { ...SINE, mix: { volume: 0.05 } };
+  const p = new Player(song, { sampleRate: SR });
+  const comp = song.composition;
+  const bar = SR * 2; // 16 steps at 120 bpm
+  const level = (b) => Math.sqrt(b.reduce((s, v) => s + v * v, 0) / b.length);
+  p.appendRow(comp.song.rows[0], comp);
+  const loud = level(p.render(bar).left.subarray(0, SR / 4));
+  const switched = { ...comp, tracks: comp.tracks.map((t) => ({ ...t, instrument: 'quiet' })) };
+  p.appendRow(comp.song.rows[0], switched);
+  const soft = level(p.render(bar).left.subarray(0, SR / 4));
+  assert.ok(soft < loud / 5, `the second bar plays the new instrument: ${soft} vs ${loud}`);
+});
+
 test('a parameter lock shapes its own note only, and wins over a track command', () => {
   const SAW = { engine: 'analog', params: { wave: 'saw' }, filter: { cutoff: 0.9 }, amp: { attack: 0.001, sustain: 1, release: 0.005 }, mix: { volume: 1 } };
   const steps = rest(16);
