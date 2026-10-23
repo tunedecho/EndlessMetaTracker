@@ -176,6 +176,31 @@ test('live play: a held note sounds until noteOff, and instrument edits reach it
   assert.ok(rms(p.render(SR / 10).left) < 1e-4, 'silent after release');
 });
 
+test('a host can bring its own voices through createVoice', () => {
+  const calls = [];
+  const factory = (inst, sr, ctl, where) => {
+    calls.push({ engine: inst.engine, track: where.track, sr });
+    // A 441 Hz square (the master high-passes DC) with the voice interface: ctl (kept for the mixer), noteOn, noteOff, choke, render, done.
+    return {
+      ctl, done: true, midi: 0, amp: { stage: 'idle' }, n: 0,
+      noteOn(midi) { this.midi = midi; this.done = false; this.amp.stage = 'sustain'; },
+      noteOff() { this.done = true; this.amp.stage = 'release'; },
+      choke() { this.done = true; },
+      render(L, R, start, count) { for (let i = 0; i < count; i++) { const v = (this.n++ % 100) < 50 ? 0.25 : -0.25; L[start + i] += v; R[start + i] += v; } },
+    };
+  };
+  const ext = { engine: 'external', mix: { volume: 1 } };
+  const steps = rest(16);
+  steps[0] = { note: 'C3' };
+  steps[8] = { note: 'OFF' };
+  const r = renderSong(mini({ bpm: 120, inst: ext, steps }), { tailSeconds: 0, createVoice: factory });
+  assert.deepEqual(calls.map((c) => [c.engine, c.track, c.sr]), [['external', 0, SR]]);
+  const step = SR / 8; // 120 bpm, four steps a beat
+  const level = (i) => { const a = Math.round(i * step), b = a + Math.round(step / 2); let m = 0; for (let k = a; k < b; k++) m = Math.max(m, Math.abs(r.left[k])); return m; };
+  assert.ok(level(2) > 0.05, `the external voice sounds: ${level(2)}`);
+  assert.ok(level(12) < 1e-6, `and stops at OFF: ${level(12)}`);
+});
+
 test('a parameter lock shapes its own note only, and wins over a track command', () => {
   const SAW = { engine: 'analog', params: { wave: 'saw' }, filter: { cutoff: 0.9 }, amp: { attack: 0.001, sustain: 1, release: 0.005 }, mix: { volume: 1 } };
   const steps = rest(16);

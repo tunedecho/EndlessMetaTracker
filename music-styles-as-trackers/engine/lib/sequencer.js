@@ -90,7 +90,7 @@ export function schedule(song, resolved, sampleRate, seed = 1, lastNote = new Ma
  */
 export function renderSong(song, opts = {}) {
   const sampleRate = opts.sampleRate || 44100;
-  const player = new Player(song, { sampleRate, seed: song.meta?.seed ?? 1 });
+  const player = new Player(song, { sampleRate, seed: song.meta?.seed ?? 1, createVoice: opts.createVoice });
   const comp = song.composition;
   const sections = new Map((comp.song.sections || []).map((s) => [s.row, s]));
   const rows = comp.song.rows;

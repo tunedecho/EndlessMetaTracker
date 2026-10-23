@@ -43,10 +43,14 @@ class Track {
 export class Player {
   /**
    * @param {{transport: object, sound: object, composition?: {tracks: object[]}}} song header; composition.tracks may be empty
-   * @param {{sampleRate?: number, seed?: number}} [opts]
+   * @param {{sampleRate?: number, seed?: number, createVoice?: Function}} [opts] createVoice(inst, sampleRate, ctl, {track, player})
+   *   replaces the built-in engines, for hosts that bring their own voices (SynthLand's web tracker plays its
+   *   synth plugins this way); it returns an object with the voice interface: noteOn, noteOff, choke, render, done, and ctl
+   *   (the `ctl` it was given, which the mixer reads for the track's live volume, pan and sends)
    */
   constructor(song, opts = {}) {
     this.sampleRate = opts.sampleRate || 44100;
+    this.createVoice = opts.createVoice || createVoice;
     this.transport = { stepsPerBeat: 4, phraseLength: 16, swing: 0, ...song.transport };
     this.bpm = this.transport.bpm;
     this.sound = song.sound;
@@ -196,7 +200,7 @@ export class Player {
       ctl = Object.create(tr.ctl);
       for (const [path, value] of Object.entries(ev.lock)) { const cmd = commandForPath(path); if (cmd) ctl[cmd] = value; }
     }
-    const v = createVoice(inst, this.sampleRate, ctl);
+    const v = this.createVoice(inst, this.sampleRate, ctl, { track: ev.track, player: this });
     v.inst = inst;
     v.instId = ev.inst;
     v.mix = inst.mix || {};
