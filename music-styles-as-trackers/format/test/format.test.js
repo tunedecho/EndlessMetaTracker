@@ -155,3 +155,21 @@ test('parameter locks: valid ones pass, and each lock is checked against the ins
   steps[i].lock = { engine: 'fm' };
   assert.ok(validate(song).errors.length, 'the engine cannot be locked');
 });
+
+test('chords: a step note may be an array; it validates, resolves with every note, transposes', () => {
+  const song = load('hello-tracker.json');
+  const [pid] = Object.keys(song.composition.phrases);
+  song.composition.phrases[pid].steps[0] = { note: ['A3', 'C4', 'E4'] };
+  const r = validate(song);
+  assert.ok(r.ok, r.errors.join('; '));
+  const e = resolve(song).events.find((x) => x.phraseStep === 0 && x.phrase === pid);
+  assert.equal(e.note, toMidi('A3'));
+  assert.deepEqual(e.chord, ['A3', 'C4', 'E4'].map(toMidi));
+  song.composition.chains[Object.keys(song.composition.chains)[0]].rows[0].transpose = 2;
+  const t = resolve(song).events.find((x) => x.phraseStep === 0 && x.phrase === pid);
+  assert.deepEqual(t.chord, ['B3', 'D4', 'F#4'].map(toMidi));
+  assert.equal(toMidi(['E4', 'A3']), toMidi('A3'), 'toMidi of a chord is its lowest note');
+  const tooBig = load('hello-tracker.json');
+  tooBig.composition.phrases[pid].steps[0] = { note: ['A3'] };
+  assert.equal(validate(tooBig).ok, false, 'a chord has at least two notes');
+});

@@ -468,6 +468,7 @@ function writePhrase(buf, idx, phrase, defaultInst, ctx) {
     if (cell.note !== undefined) {
       if (cell.note === 'OFF') buf[o] = NOTE_OFF;
       else {
+        if (Array.isArray(cell.note)) ctx.warnings.push(`${ctx.where}[${s}]: chord ${cell.note.join(' ')} reduced to its lowest note; an M8 track plays one note`);
         const midi = toMidi(cell.note) + (ctx.pitchShift.get(instId) || 0);
         const m8 = midi - MIDI_OFFSET;
         if (m8 < 0 || m8 > 127) ctx.warnings.push(`${ctx.where}[${s}]: note ${cell.note} outside the M8 range after shifting`);

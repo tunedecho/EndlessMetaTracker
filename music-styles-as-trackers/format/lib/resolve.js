@@ -6,7 +6,7 @@
  * The result is what a player, a renderer, or an exporter needs: every note
  * and command with an absolute step index, plus the row and phrase boundaries.
  */
-import { toMidi } from './notes.js';
+import { toMidi, chordNotes } from './notes.js';
 
 export const DEFAULTS = { stepsPerBeat: 4, phraseLength: 16, swing: 0 };
 
@@ -47,7 +47,8 @@ export function stepSeconds(bpm, stepsPerBeat) {
  * @property {number} step absolute step index from song start
  * @property {number} track index into composition.tracks
  * @property {string} trackId
- * @property {number|'OFF'|null} note MIDI number, 'OFF', or null for a command-only step
+ * @property {number|'OFF'|null} note MIDI number, 'OFF', or null for a command-only step (a chord's lowest note)
+ * @property {number[]|null} chord every note of a chord step, lowest first (transposed), else null
  * @property {string|null} inst instrument id (null when no note)
  * @property {number} vel 0..1
  * @property {object} fx command map, possibly empty
@@ -94,7 +95,7 @@ export function resolve(song, opts = {}) {
         if (!chainId || row[trackId]) continue;
         const ti = trackIndex.get(trackId);
         if (ti === undefined || tracks[ti].mute) continue;
-        events.push({ step, track: ti, trackId, note: 'OFF', inst: tracks[ti].instrument ?? null, vel: 1, fx: {}, lock: null, row: r, chain: chainId, phrase: null, phraseStep: 0 });
+        events.push({ step, track: ti, trackId, note: 'OFF', chord: null, inst: tracks[ti].instrument ?? null, vel: 1, fx: {}, lock: null, row: r, chain: chainId, phrase: null, phraseStep: 0 });
       }
     }
 
@@ -121,16 +122,18 @@ export function resolve(song, opts = {}) {
             if (!cell) continue;
             const abs = base + s;
             if (abs >= step + len || abs >= maxSteps) break;
-            let note = null;
+            let note = null, chord = null;
             if (cell.note !== undefined) {
               note = toMidi(cell.note);
               if (note !== 'OFF') note += transpose;
+              if (Array.isArray(cell.note) && cell.note.length > 1) chord = chordNotes(cell.note).map((n) => n + transpose);
             }
             events.push({
               step: abs,
               track: ti,
               trackId,
               note,
+              chord,
               inst: note !== null && note !== 'OFF' ? (cell.inst ?? defaultInst) : (cell.inst ?? defaultInst),
               vel: cell.vel ?? 1,
               fx: cell.fx ?? {},

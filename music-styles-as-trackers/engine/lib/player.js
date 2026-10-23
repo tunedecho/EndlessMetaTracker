@@ -34,6 +34,7 @@ class Track {
     this.def = def;
     this.ctl = {};
     this.current = null;
+    this.chord = [];      // the other voices of a sounding chord (current plays its lowest note)
     this.releasing = [];
     this.bufL = new Float32Array(BLOCK);
     this.bufR = new Float32Array(BLOCK);
@@ -44,6 +45,7 @@ export class Player {
   /**
    * @param {{transport: object, sound: object, composition?: {tracks: object[]}}} song header; composition.tracks may be empty
    * @param {{sampleRate?: number, seed?: number, createVoice?: Function, busEffects?: object}} [opts] createVoice(inst, sampleRate, ctl, {track, player, lock})
+   *   (chord: the voice's place in a chord step, 0 for the lowest or only note)
    *   replaces the built-in engines, for hosts that bring their own voices (SynthLand's web tracker plays its
    *   synth plugins this way); it returns an object with the voice interface: noteOn, noteOff, choke, render, done, and ctl
    *   (the `ctl` it was given, which the mixer reads for the track's live volume, pan and sends);
@@ -178,12 +180,15 @@ export class Player {
     const tr = this.tracks[ev.track];
     if (!tr) return;
     if (ev.kind === 'ctl') { Object.assign(tr.ctl, ev.ctl); return; }
-    if (ev.kind === 'off') { if (tr.current) tr.current.noteOff(); return; }
+    if (ev.kind === 'off') { if (tr.current) tr.current.noteOff(); for (const v of tr.chord) v.noteOff(); return; }
     const base = this.sound.instruments[ev.inst];
     if (!base) return;
     const inst = ev.lock ? applyLock(base, ev.lock) : base;
     const tables = this.sound.tables || {};
     const tableDef = ev.table ? tables[ev.table] : inst.table ? tables[inst.table] : null;
+    // A chord: the lowest note on the track's main voice, the others on voices beside it, all on one instrument.
+    const extra = ev.chord && ev.chord.length > 1 ? ev.chord.slice(1) : [];
+    const limit = MAX_RELEASING * (1 + extra.length);
     const sounding = tr.current && !tr.current.done && tr.current.instId === ev.inst;
     // Legato: a slide command, or a glide instrument whose previous note was not released (no OFF between).
     const glide = inst.params?.glide > 0 && sounding && tr.current.amp.stage !== 'release' && tr.current.amp.stage !== 'idle';
@@ -191,14 +196,26 @@ export class Player {
       const from = ev.slide ? ev.slide.from : tr.current.midi - (inst.transpose || 0);
       const seconds = ev.slide ? ev.slide.seconds : inst.params.glide;
       tr.current.noteOn(ev.note, ev.vel, { accent: ev.accent, slideFrom: from, slideSeconds: seconds, legato: true, table: tableDef, stepSamples: ev.stepSamples });
+      // Chord voices slide too, each from the note it was playing; a chord that grew gets new voices, one that
+      // shrank releases the rest.
+      const keep = [];
+      extra.forEach((n, i) => {
+        const v = tr.chord[i];
+        if (v && !v.done) { v.noteOn(n, ev.vel, { accent: ev.accent, slideFrom: v.midi - (inst.transpose || 0), slideSeconds: seconds, legato: true, table: tableDef, stepSamples: ev.stepSamples }); keep.push(v); }
+        else keep.push(this.startVoice(tr, inst, ev, tableDef, tr.ctl, n, i + 1));
+      });
+      for (const v of tr.chord.slice(extra.length)) if (!v.done) { v.noteOff(); tr.releasing.push(v); }
+      tr.chord = keep;
       return;
     }
     if (tr.current && !tr.current.done) {
       tr.current.noteOff();
       tr.releasing.push(tr.current);
-      // Too many tails: choke the oldest, but keep rendering them until they are done (no hard cuts).
-      for (let i = 0; i < tr.releasing.length - MAX_RELEASING; i++) tr.releasing[i].choke();
     }
+    for (const v of tr.chord) if (!v.done) { v.noteOff(); tr.releasing.push(v); }
+    tr.chord = [];
+    // Too many tails: choke the oldest, but keep rendering them until they are done (no hard cuts).
+    for (let i = 0; i < tr.releasing.length - limit; i++) tr.releasing[i].choke();
     // A lock on a parameter a track command also sets wins for this note: the voice sees the
     // track's controls through a layer holding the locked values.
     let ctl = tr.ctl;
@@ -206,18 +223,24 @@ export class Player {
       ctl = Object.create(tr.ctl);
       for (const [path, value] of Object.entries(ev.lock)) { const cmd = commandForPath(path); if (cmd) ctl[cmd] = value; }
     }
-    const v = this.createVoice(inst, this.sampleRate, ctl, { track: ev.track, player: this, lock: ev.lock || null });
+    tr.current = this.startVoice(tr, inst, ev, tableDef, ctl, ev.note, 0, ev.slide);
+    tr.chord = extra.map((n, i) => this.startVoice(tr, inst, ev, tableDef, ctl, n, i + 1));
+  }
+
+  /** Make and start one voice for an event: chord is its place in a chord (0: the lowest, or the only note). */
+  startVoice(tr, inst, ev, tableDef, ctl, note, chord, slide = null) {
+    const v = this.createVoice(inst, this.sampleRate, ctl, { track: ev.track, player: this, lock: ev.lock || null, chord });
     v.inst = inst;
     v.instId = ev.inst;
     v.mix = inst.mix || {};
-    v.noteOn(ev.note, ev.vel, {
+    v.noteOn(note, ev.vel, {
       accent: ev.accent,
-      slideFrom: ev.slide ? ev.slide.from : undefined,
-      slideSeconds: ev.slide ? ev.slide.seconds : undefined,
+      slideFrom: slide ? slide.from + (note - ev.note) : undefined,
+      slideSeconds: slide ? slide.seconds : undefined,
       table: tableDef,
       stepSamples: ev.stepSamples,
     });
-    tr.current = v;
+    return v;
   }
 
   renderVoice(tr, v, count) {
@@ -265,6 +288,10 @@ export class Player {
         if (tr.current) {
           if (tr.current.done) tr.current = null;
           else this.renderVoice(tr, tr.current, count);
+        }
+        if (tr.chord.length) {
+          for (const v of tr.chord) if (!v.done) this.renderVoice(tr, v, count);
+          tr.chord = tr.chord.filter((v) => !v.done);
         }
         if (tr.releasing.length) {
           for (const v of tr.releasing) if (!v.done) this.renderVoice(tr, v, count);

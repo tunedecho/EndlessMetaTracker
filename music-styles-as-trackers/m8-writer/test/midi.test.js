@@ -81,3 +81,15 @@ test('round trip through the parser keeps every note', () => {
     assert.ok(parsed.tracks.every((t) => t[t.length - 1].type === 'end'));
   }
 });
+
+test('a chord step writes every note, and all of them end at the next note', () => {
+  const steps = rest(16);
+  steps[0] = { note: ['A3', 'C4', 'E4'] };
+  steps[4] = { note: 'G3' };
+  const t = songToMidiEvents(mini({ steps })).tracks[0];
+  const on = (tick) => t.filter((e) => e.type === 'on' && e.tick === tick).map((e) => e.note).sort((a, b) => a - b);
+  assert.deepEqual(on(0), [57, 60, 64]);
+  const step = PPQ / 4;
+  const offs = t.filter((e) => e.type === 'off' && e.tick === 4 * step).map((e) => e.note).sort((a, b) => a - b);
+  assert.deepEqual(offs, [57, 60, 64]);
+});

@@ -60,7 +60,7 @@ export function schedule(song, resolved, sampleRate, seed = 1, lastNote = new Ma
     for (let k = 0; k < retrig; k++) {
       const t = t0 + nudge + k * spacing;
       out.push({
-        t, pri: 2, kind: 'on', track: e.track, note: e.note, inst: e.inst, vel: e.vel * (k > 0 ? 0.85 : 1),
+        t, pri: 2, kind: 'on', track: e.track, note: e.note, chord: e.chord || null, inst: e.inst, vel: e.vel * (k > 0 ? 0.85 : 1),
         accent: fx.accent || 0,
         slide: fx.slide !== undefined && slideFrom !== undefined ? { from: slideFrom, seconds: fx.slide * L / sampleRate } : null,
         table: fx.table || null,

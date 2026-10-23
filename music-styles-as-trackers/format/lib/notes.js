@@ -36,8 +36,12 @@ export function pitchClass(name) {
   return (pc + 12) % 12;
 }
 
-/** Note name or number to MIDI number. Returns 'OFF' for "OFF". */
+/**
+ * Note name or number to MIDI number. Returns 'OFF' for "OFF". A chord (an array of notes) gives its lowest
+ * note, so code that plays one note per step still plays something sensible; chordNotes gives them all.
+ */
 export function toMidi(note) {
+  if (Array.isArray(note)) return Math.min(...note.map(toMidi));
   if (typeof note === 'number') return note;
   if (note === 'OFF') return 'OFF';
   const m = /^([A-Ga-g])([#b]?)(-?[0-9])$/.exec(note);
@@ -45,6 +49,12 @@ export function toMidi(note) {
   const pc = pitchClass(m[1] + m[2]);
   const octave = parseInt(m[3], 10);
   return (octave + 1) * 12 + pc;
+}
+
+/** Every MIDI note of a step's note, lowest first: a chord's notes, or one note in an array. 'OFF' stays 'OFF'. */
+export function chordNotes(note) {
+  if (note === 'OFF') return 'OFF';
+  return (Array.isArray(note) ? note.map(toMidi) : [toMidi(note)]).sort((a, b) => a - b);
 }
 
 /** MIDI number to a name like "C4". */

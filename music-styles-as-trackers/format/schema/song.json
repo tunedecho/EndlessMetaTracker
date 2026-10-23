@@ -291,6 +291,18 @@
         { "type": "integer", "minimum": 0, "maximum": 127 }
       ]
     },
+    "chord": {
+      "description": "Several notes struck together on one track, 2 to 8 note names or MIDI numbers. Players sound them all on the step's instrument; one-note-per-track targets such as the M8 keep the lowest.",
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 8,
+      "items": {
+        "oneOf": [
+          { "type": "string", "pattern": "^[A-Ga-g][#b]?-?[0-9]$" },
+          { "type": "integer", "minimum": 0, "maximum": 127 }
+        ]
+      }
+    },
     "fx": {
       "type": "object",
       "additionalProperties": false,
@@ -328,7 +340,7 @@
           "type": "object",
           "additionalProperties": false,
           "properties": {
-            "note": { "$ref": "#/$defs/note" },
+            "note": { "oneOf": [{ "$ref": "#/$defs/note" }, { "$ref": "#/$defs/chord" }] },
             "inst": { "$ref": "#/$defs/id", "description": "Instrument for this note. Defaults to the track's instrument." },
             "vel": { "$ref": "#/$defs/unit", "default": 1 },
             "fx": { "$ref": "#/$defs/fx" },

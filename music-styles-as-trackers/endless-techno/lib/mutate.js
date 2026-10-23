@@ -31,7 +31,8 @@ export const OPS = {
   transpose(steps, rnd, ctx) {
     const by = rnd.pick(ctx.intervals.filter((i) => i > 0 && i <= 7));
     const dir = rnd.chance(0.5) ? 1 : -1;
-    return steps.map((s) => (isHit(s) ? { ...s, note: toName(toMidi(s.note) + by * dir) } : s));
+    const shift = (n) => toName(toMidi(n) + by * dir);
+    return steps.map((s) => (isHit(s) ? { ...s, note: Array.isArray(s.note) ? s.note.map(shift) : shift(s.note) } : s));
   },
   swap(steps, rnd) {
     const idx = steps.map((s, i) => (isHit(s) ? i : -1)).filter((i) => i >= 0);

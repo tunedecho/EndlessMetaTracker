@@ -103,7 +103,7 @@ export function songToMidiEvents(song, opts = {}) {
     const inst = instruments[e.inst];
     if (!inst) continue;
     const isDrum = ch === 9;
-    const note = b7(isDrum ? drumNote(inst) : e.note);
+    const notes = isDrum ? [b7(drumNote(inst))] : (e.chord || [e.note]).map(b7); // a chord sounds all its notes
     const vel = b7(1 + (e.vel ?? 1) * (1 + (fx.accent || 0) * 0.3) * 126);
     const retrig = Math.max(1, fx.retrig || 1);
     const spacing = ticksPerStep / retrig;
@@ -111,8 +111,10 @@ export function songToMidiEvents(song, opts = {}) {
     for (let k = 0; k < retrig; k++) {
       const on = Math.round(t0 + nudge + k * spacing);
       closeAll(ti, on);
-      perTrack[ti].push({ tick: on, type: 'on', channel: ch, note, velocity: k ? b7(vel * 0.85) : vel, order: 3 });
-      open[ti].push({ note, channel: ch });
+      for (const note of notes) {
+        perTrack[ti].push({ tick: on, type: 'on', channel: ch, note, velocity: k ? b7(vel * 0.85) : vel, order: 3 });
+        open[ti].push({ note, channel: ch });
+      }
       const cutTicks = fx.cut !== undefined ? fx.cut * spacing : retrig > 1 ? spacing : isDrum ? ticksPerStep : null;
       if (cutTicks !== null) closeAll(ti, Math.round(on + cutTicks));
     }

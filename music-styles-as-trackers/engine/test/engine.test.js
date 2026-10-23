@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { renderSong, stepGrid, schedule, encodeWav, decodeWav, analyze, Osc, SVF, ADSR, Player } from '../lib/index.js';
+import { renderSong, stepGrid, schedule, encodeWav, decodeWav, analyze, Osc, SVF, ADSR, Player, createVoice } from '../lib/index.js';
 import { resolve } from '@tracker/format';
 
 const SR = 44100;
@@ -243,6 +243,41 @@ test('a host can replace the reverb return and add a master chain', () => {
   const peak = (r) => r.left.reduce((m, v) => Math.max(m, Math.abs(v)), 0);
   assert.ok(Math.abs(peak(chained) / peak(replaced) - 0.5) < 0.05, `the chain runs before the master volume: ${peak(chained)} vs ${peak(replaced)}`);
   assert.ok(calls.reverb > 0 && calls.chain > 0);
+});
+
+test('a chord step sounds every note on one track, released together at OFF', () => {
+  const SINE = { engine: 'analog', params: { wave: 'sine' }, amp: { attack: 0.001, sustain: 1, release: 0.005 }, mix: { volume: 1 } };
+  const steps = rest(16);
+  steps[0] = { note: ['A3', 'C#4', 'E4'] };
+  steps[8] = { note: 'OFF' };
+  const song = mini({ bpm: 120, inst: SINE, steps });
+  const calls = [];
+  const r = renderSong(song, { tailSeconds: 0, createVoice: (inst, sr, ctl, where) => { calls.push(where.chord); return createVoice(inst, sr, ctl); } });
+  assert.deepEqual(calls, [0, 1, 2], 'one voice per chord note, numbered from the lowest');
+  // The three pitches are all there: count zero crossings of the chord against each single note.
+  const seg = r.left.subarray(Math.round(0.1 * SR), Math.round(0.5 * SR));
+  const energyAt = (hz) => { let re = 0, im = 0; for (let i = 0; i < seg.length; i++) { const a = (2 * Math.PI * hz * i) / SR; re += seg[i] * Math.cos(a); im += seg[i] * Math.sin(a); } return Math.hypot(re, im) / seg.length; };
+  for (const hz of [220, 277.18, 329.63]) assert.ok(energyAt(hz) > 0.02, `${hz} Hz present: ${energyAt(hz)}`);
+  assert.ok(energyAt(246.94) < energyAt(220) / 10, 'a note not in the chord is absent');
+  const after = r.left.subarray(Math.round(1.1 * SR), Math.round(1.5 * SR));
+  assert.ok(after.every((v) => Math.abs(v) < 1e-3), 'every chord note stops at OFF');
+});
+
+test('a chord followed by a single note releases the chord, and a slid chord moves every note', () => {
+  const SINE = { engine: 'analog', params: { wave: 'sine' }, amp: { attack: 0.001, sustain: 1, release: 0.005 }, mix: { volume: 1 } };
+  const steps = rest(16);
+  steps[0] = { note: ['A3', 'E4'] };
+  steps[4] = { note: 'C3' };
+  steps[8] = { note: ['A3', 'E4'] };
+  steps[12] = { note: ['B3', 'F#4'], fx: { slide: 0.5 } };
+  const r = renderSong(mini({ bpm: 120, inst: SINE, steps }), { tailSeconds: 0 });
+  const seg = (a, b) => r.left.subarray(Math.round(a * SR), Math.round(b * SR));
+  const energy = (x, hz) => { let re = 0, im = 0; for (let i = 0; i < x.length; i++) { const a = (2 * Math.PI * hz * i) / SR; re += x[i] * Math.cos(a); im += x[i] * Math.sin(a); } return Math.hypot(re, im) / x.length; };
+  const single = seg(0.6, 0.98);
+  assert.ok(energy(single, 329.63) < energy(single, 130.81) / 10, 'the chord is gone under the single note');
+  const slid = seg(1.75, 1.98);
+  assert.ok(energy(slid, 369.99) > 5 * energy(slid, 329.63), 'the upper chord note slid to its new pitch');
+  assert.ok(energy(slid, 246.94) > 5 * energy(slid, 220), 'and so did the lower one');
 });
 
 test('a parameter lock shapes its own note only, and wins over a track command', () => {
