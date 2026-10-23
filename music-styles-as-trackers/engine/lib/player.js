@@ -43,10 +43,12 @@ class Track {
 export class Player {
   /**
    * @param {{transport: object, sound: object, composition?: {tracks: object[]}}} song header; composition.tracks may be empty
-   * @param {{sampleRate?: number, seed?: number, createVoice?: Function}} [opts] createVoice(inst, sampleRate, ctl, {track, player})
+   * @param {{sampleRate?: number, seed?: number, createVoice?: Function, busEffects?: object}} [opts] createVoice(inst, sampleRate, ctl, {track, player})
    *   replaces the built-in engines, for hosts that bring their own voices (SynthLand's web tracker plays its
    *   synth plugins this way); it returns an object with the voice interface: noteOn, noteOff, choke, render, done, and ctl
-   *   (the `ctl` it was given, which the mixer reads for the track's live volume, pan and sends)
+   *   (the `ctl` it was given, which the mixer reads for the track's live volume, pan and sends);
+   *   busEffects {delay?, reverb?, chain?} replaces the master's delay and reverb returns or adds a chain
+   *   before its limiter (see Master in effects.js)
    */
   constructor(song, opts = {}) {
     this.sampleRate = opts.sampleRate || 44100;
@@ -59,7 +61,7 @@ export class Player {
     this.trackIndex = new Map();
     this.addTracks(song.composition?.tracks || []);
     const stepLen = (60 / this.bpm / this.transport.stepsPerBeat) * this.sampleRate;
-    this.master = new Master(this.sampleRate, this.sound.master, stepLen);
+    this.master = new Master(this.sampleRate, this.sound.master, stepLen, opts.busEffects);
     this.dry = { L: new Float32Array(BLOCK), R: new Float32Array(BLOCK) };
     this.dly = { L: new Float32Array(BLOCK), R: new Float32Array(BLOCK) };
     this.rev = { L: new Float32Array(BLOCK), R: new Float32Array(BLOCK) };

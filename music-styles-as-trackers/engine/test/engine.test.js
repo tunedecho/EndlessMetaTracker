@@ -219,6 +219,32 @@ test('a track switched to another instrument plays it from the next appended row
   assert.ok(soft < loud / 5, `the second bar plays the new instrument: ${soft} vs ${loud}`);
 });
 
+test('a host can replace the reverb return and add a master chain', () => {
+  const SAW = { engine: 'analog', params: { wave: 'saw' }, amp: { attack: 0.001, sustain: 1, release: 0.01 }, mix: { volume: 1, reverbSend: 1 } };
+  const steps = rest(16);
+  steps[0] = { note: 'C3' };
+  steps[2] = { note: 'OFF' };
+  const song = mini({ bpm: 120, inst: SAW, steps });
+  song.sound.master.reverb = { size: 0.9, level: 0.5 };
+  const tail = (r) => { let s = 0; for (let i = SR; i < 2 * SR; i++) s += r.left[i] * r.left[i]; return Math.sqrt(s / SR); };
+  const built = renderSong(song, { tailSeconds: 0 });
+  const calls = { reverb: 0, chain: 0 };
+  const silentReverb = (L, R, n) => { calls.reverb++; L.fill(0, 0, n); R.fill(0, 0, n); return true; };
+  const halve = (L, R, n) => { calls.chain++; for (let i = 0; i < n; i++) { L[i] *= 0.5; R[i] *= 0.5; } return true; };
+  const replaced = renderSong(song, { tailSeconds: 0, busEffects: { reverb: silentReverb } });
+  assert.ok(tail(built) > 1e-3, `the built-in reverb rings after the note: ${tail(built)}`);
+  assert.ok(tail(replaced) < 1e-6, `a host reverb that returns silence replaces it: ${tail(replaced)}`);
+  // Voices start at random phases (Math.random), so compare two renders with it seeded alike.
+  const seeded = (fn) => { const real = Math.random; let x = 1; Math.random = () => ((x = (x * 16807) % 2147483647) / 2147483647); try { return fn(); } finally { Math.random = real; } };
+  const plain = seeded(() => renderSong(song, { tailSeconds: 0 }));
+  const declined = seeded(() => renderSong(song, { tailSeconds: 0, busEffects: { reverb: () => false } }));
+  assert.ok(declined.left.every((v, i) => v === plain.left[i]), 'returning false keeps the built-in reverb, sample for sample');
+  const chained = renderSong(song, { tailSeconds: 0, busEffects: { reverb: silentReverb, chain: halve } });
+  const peak = (r) => r.left.reduce((m, v) => Math.max(m, Math.abs(v)), 0);
+  assert.ok(Math.abs(peak(chained) / peak(replaced) - 0.5) < 0.05, `the chain runs before the master volume: ${peak(chained)} vs ${peak(replaced)}`);
+  assert.ok(calls.reverb > 0 && calls.chain > 0);
+});
+
 test('a parameter lock shapes its own note only, and wins over a track command', () => {
   const SAW = { engine: 'analog', params: { wave: 'saw' }, filter: { cutoff: 0.9 }, amp: { attack: 0.001, sustain: 1, release: 0.005 }, mix: { volume: 1 } };
   const steps = rest(16);

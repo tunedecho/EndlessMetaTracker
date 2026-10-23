@@ -117,7 +117,13 @@ export class Limiter {
 }
 
 export class Master {
-  constructor(sampleRate, def = {}, stepSamples) {
+  /**
+   * @param {object} [ext] host-provided bus effects, each (L, R, count) => boolean, processing a block in place and
+   *   returning true when it handled the bus (false: the built-in one runs): `delay` and `reverb` receive their
+   *   send bus and return the wet signal; `chain` receives the summed mix (Float64Arrays) before the highpass, volume and limiter.
+   */
+  constructor(sampleRate, def = {}, stepSamples, ext = {}) {
+    this.ext = ext;
     this.volume = def.volume ?? 0.85;
     this.delay = def.delay ? new Delay(sampleRate, def.delay, stepSamples) : null;
     this.reverb = def.reverb ? new Reverb(sampleRate, def.reverb) : null;
@@ -134,10 +140,23 @@ export class Master {
    * dry, dly, rev: {L, R} Float32Arrays (block-sized). Writes into outL/outR at offset.
    */
   process(dry, dly, rev, outL, outR, offset, count) {
+    const ext = this.ext;
+    const extDelay = !!ext.delay && ext.delay(dly.L, dly.R, count);
+    const extReverb = !!ext.reverb && ext.reverb(rev.L, rev.R, count);
+    // The mix stays in doubles between the passes, as it did when this was one loop.
+    if (!this.mixL || this.mixL.length < count) { this.mixL = new Float64Array(count); this.mixR = new Float64Array(count); }
+    const mL = this.mixL, mR = this.mixR;
     for (let i = 0; i < count; i++) {
       let l = dry.L[i], r = dry.R[i];
-      if (this.delay) { const [a, b] = this.delay.process(dly.L[i], dly.R[i]); l += a; r += b; }
-      if (this.reverb) { const [a, b] = this.reverb.process(rev.L[i], rev.R[i]); l += a; r += b; }
+      if (extDelay) { l += dly.L[i]; r += dly.R[i]; }
+      else if (this.delay) { const [a, b] = this.delay.process(dly.L[i], dly.R[i]); l += a; r += b; }
+      if (extReverb) { l += rev.L[i]; r += rev.R[i]; }
+      else if (this.reverb) { const [a, b] = this.reverb.process(rev.L[i], rev.R[i]); l += a; r += b; }
+      mL[i] = l; mR[i] = r;
+    }
+    if (ext.chain) ext.chain(mL, mR, count);
+    for (let i = 0; i < count; i++) {
+      let l = mL[i], r = mR[i];
       l = this.dc[0].hp(l); r = this.dc[1].hp(r);
       if (this.hp) { l = this.hp.hp(l); r = this.hpR.hp(r); }
       l *= this.volume; r *= this.volume;
