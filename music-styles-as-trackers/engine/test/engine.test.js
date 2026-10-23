@@ -179,7 +179,7 @@ test('live play: a held note sounds until noteOff, and instrument edits reach it
 test('a host can bring its own voices through createVoice', () => {
   const calls = [];
   const factory = (inst, sr, ctl, where) => {
-    calls.push({ engine: inst.engine, track: where.track, sr });
+    calls.push({ engine: inst.engine, track: where.track, sr, lock: where.lock });
     // A 441 Hz square (the master high-passes DC) with the voice interface: ctl (kept for the mixer), noteOn, noteOff, choke, render, done.
     return {
       ctl, done: true, midi: 0, amp: { stage: 'idle' }, n: 0,
@@ -194,7 +194,7 @@ test('a host can bring its own voices through createVoice', () => {
   steps[0] = { note: 'C3' };
   steps[8] = { note: 'OFF' };
   const r = renderSong(mini({ bpm: 120, inst: ext, steps }), { tailSeconds: 0, createVoice: factory });
-  assert.deepEqual(calls.map((c) => [c.engine, c.track, c.sr]), [['external', 0, SR]]);
+  assert.deepEqual(calls.map((c) => [c.engine, c.track, c.sr, c.lock]), [['external', 0, SR, null]]);
   const step = SR / 8; // 120 bpm, four steps a beat
   const level = (i) => { const a = Math.round(i * step), b = a + Math.round(step / 2); let m = 0; for (let k = a; k < b; k++) m = Math.max(m, Math.abs(r.left[k])); return m; };
   assert.ok(level(2) > 0.05, `the external voice sounds: ${level(2)}`);
