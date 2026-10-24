@@ -44,13 +44,14 @@ class Track {
 export class Player {
   /**
    * @param {{transport: object, sound: object, composition?: {tracks: object[]}}} song header; composition.tracks may be empty
-   * @param {{sampleRate?: number, seed?: number, createVoice?: Function, busEffects?: object}} [opts] createVoice(inst, sampleRate, ctl, {track, player, lock})
+   * @param {{sampleRate?: number, seed?: number, createVoice?: Function, busEffects?: object, muted?: string[]}} [opts] createVoice(inst, sampleRate, ctl, {track, player, lock})
    *   (chord: the voice's place in a chord step, 0 for the lowest or only note)
    *   replaces the built-in engines, for hosts that bring their own voices (SynthLand's web tracker plays its
    *   synth plugins this way); it returns an object with the voice interface: noteOn, noteOff, choke, render, done, and ctl
    *   (the `ctl` it was given, which the mixer reads for the track's live volume, pan and sends);
    *   busEffects {delay?, reverb?, chain?, group?} replaces the master's delay and reverb returns, adds a chain
-   *   before its limiter (see Master in effects.js), and group(name, L, R, count) processes each group bus
+   *   before its limiter (see Master in effects.js), and group(name, L, R, count) processes each group bus;
+   *   muted lists track ids that render silently (setMuted changes them live)
    */
   constructor(song, opts = {}) {
     this.sampleRate = opts.sampleRate || 44100;
@@ -67,6 +68,8 @@ export class Player {
     // Group buses: a track whose instrument names a bus (mix.bus) is summed apart and handed to the host's
     // busEffects.group(name, L, R, count) before it joins the mix (a compressor per group, say).
     this.groupFx = opts.busEffects?.group || null;
+    // Muted tracks (by id) still render, so their voices keep time, but add nothing to the mix or the sends.
+    this.muted = new Set(opts.muted || []);
     this.groups = new Map(); // bus name -> { L, R, used }
     this.dry = { L: new Float32Array(BLOCK), R: new Float32Array(BLOCK) };
     this.dly = { L: new Float32Array(BLOCK), R: new Float32Array(BLOCK) };
@@ -247,6 +250,9 @@ export class Player {
     return v;
   }
 
+  /** Mute exactly these tracks (ids), from the next rendered sample: a live mute and solo for a player. */
+  setMuted(ids) { this.muted = new Set(ids || []); }
+
   /** The block buffers of a group bus, cleared for this block on first use. */
   groupBus(name, count) {
     let g = this.groups.get(name);
@@ -261,7 +267,7 @@ export class Player {
     v.render(tr.bufL, tr.bufR, 0, count, this.currentStepLen);
     const m = v.mix;
     const c = v.ctl;
-    const vol = (c.volume ?? m.volume ?? 0.8) * (tr.def.volume ?? 1);
+    const vol = this.muted.has(tr.def.id) ? 0 : (c.volume ?? m.volume ?? 0.8) * (tr.def.volume ?? 1);
     const pan = clamp((c.pan ?? m.pan ?? 0) + (tr.def.pan ?? 0), -1, 1);
     const drv = c.drive ?? m.drive ?? 0;
     const ds = c.delaySend ?? m.delaySend ?? 0;

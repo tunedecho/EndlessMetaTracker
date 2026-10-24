@@ -301,6 +301,30 @@ test('a host can process group buses: tracks naming a bus are summed apart and h
   assert.ok(without.left.every((v, i) => v === plain.left[i]), 'without a group effect, mix.bus changes nothing');
 });
 
+test('muted tracks render silently, live, and a muted part comes back in time', () => {
+  const SINE = { engine: 'analog', params: { wave: 'sine' }, amp: { attack: 0.001, sustain: 1, release: 0.005 }, mix: { volume: 1, reverbSend: 0.5 } };
+  const song = mini({ bpm: 120, inst: SINE, steps: [{ note: 'A3' }, ...rest(15)] });
+  song.sound.instruments.other = { ...SINE };
+  song.composition.tracks.push({ id: 'u', instrument: 'other' });
+  song.composition.phrases.q = { steps: [{ note: 'E5' }, ...rest(15)] };
+  song.composition.chains.d = { rows: [{ phrase: 'q' }] };
+  song.composition.song.rows[0].u = 'd';
+  const energy = (x, hz) => { let re = 0, im = 0; for (let i = 0; i < x.length; i++) { const a = (2 * Math.PI * hz * i) / SR; re += x[i] * Math.cos(a); im += x[i] * Math.sin(a); } return Math.hypot(re, im) / x.length; };
+  const seg = (r) => r.left.subarray(Math.round(0.1 * SR), Math.round(0.6 * SR));
+  const plain = renderSong(song, { tailSeconds: 0 });
+  const muted = renderSong(song, { tailSeconds: 0, muted: ['t'] });
+  // (Measured against the unmuted render: the other track's tone leaks a little into any one frequency.)
+  assert.ok(energy(seg(muted), 220) < energy(seg(plain), 220) / 100, 'the muted track is silent, sends included');
+  assert.ok(energy(seg(muted), 659.26) > 0.02, 'the other track plays');
+  // Live: unmute mid-note on a Player; the note is heard from there, already sounding (it kept time).
+  const p = new Player(song, { sampleRate: SR, muted: ['t'] });
+  p.appendRow(song.composition.song.rows[0], song.composition);
+  const before = p.render(SR / 4).left.slice();
+  p.setMuted([]);
+  const after = p.render(SR / 4).left.slice();
+  assert.ok(energy(before, 220) < energy(after, 220) / 100 && energy(after, 220) > 0.02, 'setMuted unmutes from the next sample');
+});
+
 test('a parameter lock shapes its own note only, and wins over a track command', () => {
   const SAW = { engine: 'analog', params: { wave: 'saw' }, filter: { cutoff: 0.9 }, amp: { attack: 0.001, sustain: 1, release: 0.005 }, mix: { volume: 1 } };
   const steps = rest(16);
