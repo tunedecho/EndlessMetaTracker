@@ -280,6 +280,27 @@ test('a chord followed by a single note releases the chord, and a slid chord mov
   assert.ok(energy(slid, 246.94) > 5 * energy(slid, 220), 'and so did the lower one');
 });
 
+test('a host can process group buses: tracks naming a bus are summed apart and handed to busEffects.group', () => {
+  const SINE = (bus) => ({ engine: 'analog', params: { wave: 'sine' }, amp: { attack: 0.001, sustain: 1, release: 0.005 }, mix: { volume: 1, ...(bus ? { bus } : {}) } });
+  const song = mini({ bpm: 120, inst: SINE('rhythm'), steps: [{ note: 'A3' }, ...rest(15)] });
+  song.sound.instruments.other = SINE(null);
+  song.composition.tracks.push({ id: 'u', instrument: 'other' });
+  song.composition.phrases.q = { steps: [{ note: 'E5' }, ...rest(15)] };
+  song.composition.chains.d = { rows: [{ phrase: 'q' }] };
+  song.composition.song.rows[0].u = 'd';
+  const seg = (r) => r.left.subarray(Math.round(0.1 * SR), Math.round(0.6 * SR));
+  const energy = (x, hz) => { let re = 0, im = 0; for (let i = 0; i < x.length; i++) { const a = (2 * Math.PI * hz * i) / SR; re += x[i] * Math.cos(a); im += x[i] * Math.sin(a); } return Math.hypot(re, im) / x.length; };
+  const seeded = (fn) => { const real = Math.random; let x = 5; Math.random = () => ((x = (x * 16807) % 2147483647) / 2147483647); try { return fn(); } finally { Math.random = real; } };
+  const names = new Set();
+  const plain = seeded(() => renderSong(song, { tailSeconds: 0 }));
+  const grouped = seeded(() => renderSong(song, { tailSeconds: 0, busEffects: { group: (name, L, R, n) => { names.add(name); for (let i = 0; i < n; i++) { L[i] *= 0.25; R[i] *= 0.25; } return true; } } }));
+  assert.deepEqual([...names], ['rhythm'], 'one group bus, named by the instrument');
+  assert.ok(Math.abs(energy(seg(grouped), 220) / energy(seg(plain), 220) - 0.25) < 0.02, 'the bus track went through the group effect');
+  assert.ok(Math.abs(energy(seg(grouped), 659.26) / energy(seg(plain), 659.26) - 1) < 0.02, 'the other track did not');
+  const without = seeded(() => renderSong(song, { tailSeconds: 0, busEffects: {} }));
+  assert.ok(without.left.every((v, i) => v === plain.left[i]), 'without a group effect, mix.bus changes nothing');
+});
+
 test('a parameter lock shapes its own note only, and wins over a track command', () => {
   const SAW = { engine: 'analog', params: { wave: 'saw' }, filter: { cutoff: 0.9 }, amp: { attack: 0.001, sustain: 1, release: 0.005 }, mix: { volume: 1 } };
   const steps = rest(16);

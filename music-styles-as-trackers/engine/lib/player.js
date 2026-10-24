@@ -49,8 +49,8 @@ export class Player {
    *   replaces the built-in engines, for hosts that bring their own voices (SynthLand's web tracker plays its
    *   synth plugins this way); it returns an object with the voice interface: noteOn, noteOff, choke, render, done, and ctl
    *   (the `ctl` it was given, which the mixer reads for the track's live volume, pan and sends);
-   *   busEffects {delay?, reverb?, chain?} replaces the master's delay and reverb returns or adds a chain
-   *   before its limiter (see Master in effects.js)
+   *   busEffects {delay?, reverb?, chain?, group?} replaces the master's delay and reverb returns, adds a chain
+   *   before its limiter (see Master in effects.js), and group(name, L, R, count) processes each group bus
    */
   constructor(song, opts = {}) {
     this.sampleRate = opts.sampleRate || 44100;
@@ -64,6 +64,10 @@ export class Player {
     this.addTracks(song.composition?.tracks || []);
     const stepLen = (60 / this.bpm / this.transport.stepsPerBeat) * this.sampleRate;
     this.master = new Master(this.sampleRate, this.sound.master, stepLen, opts.busEffects);
+    // Group buses: a track whose instrument names a bus (mix.bus) is summed apart and handed to the host's
+    // busEffects.group(name, L, R, count) before it joins the mix (a compressor per group, say).
+    this.groupFx = opts.busEffects?.group || null;
+    this.groups = new Map(); // bus name -> { L, R, used }
     this.dry = { L: new Float32Array(BLOCK), R: new Float32Array(BLOCK) };
     this.dly = { L: new Float32Array(BLOCK), R: new Float32Array(BLOCK) };
     this.rev = { L: new Float32Array(BLOCK), R: new Float32Array(BLOCK) };
@@ -243,8 +247,16 @@ export class Player {
     return v;
   }
 
+  /** The block buffers of a group bus, cleared for this block on first use. */
+  groupBus(name, count) {
+    let g = this.groups.get(name);
+    if (!g) { g = { L: new Float32Array(BLOCK), R: new Float32Array(BLOCK), used: false }; this.groups.set(name, g); }
+    if (!g.used) { g.L.fill(0, 0, count); g.R.fill(0, 0, count); g.used = true; }
+    return g;
+  }
+
   renderVoice(tr, v, count) {
-    const { dry, dly, rev } = this;
+    const { dly, rev } = this;
     tr.bufL.fill(0, 0, count); tr.bufR.fill(0, 0, count);
     v.render(tr.bufL, tr.bufR, 0, count, this.currentStepLen);
     const m = v.mix;
@@ -256,6 +268,8 @@ export class Player {
     const rs = c.reverbSend ?? m.reverbSend ?? 0;
     const [gl, gr] = panGains(pan);
     const gL = vol * gl * 1.414 * HEADROOM, gR = vol * gr * 1.414 * HEADROOM;
+    // Its dry signal goes to its group bus when it has one (sends stay pre-bus, from the track).
+    const dry = this.groupFx && m.bus ? this.groupBus(m.bus, count) : this.dry;
     for (let i = 0; i < count; i++) {
       let l = tr.bufL[i], r = tr.bufR[i];
       if (drv > 0) { l = driveShape(l, drv); r = driveShape(r, drv); }
@@ -284,6 +298,7 @@ export class Player {
       dry.L.fill(0, 0, count); dry.R.fill(0, 0, count);
       dly.L.fill(0, 0, count); dly.R.fill(0, 0, count);
       rev.L.fill(0, 0, count); rev.R.fill(0, 0, count);
+      for (const g of this.groups.values()) g.used = false;
       for (const tr of this.tracks) {
         if (tr.current) {
           if (tr.current.done) tr.current = null;
@@ -297,6 +312,12 @@ export class Player {
           for (const v of tr.releasing) if (!v.done) this.renderVoice(tr, v, count);
           tr.releasing = tr.releasing.filter((v) => !v.done);
         }
+      }
+      // Every known group bus is processed each block (silent ones too, so its effect keeps time) and joins the mix.
+      for (const [name, g] of this.groups) {
+        if (!g.used) { g.L.fill(0, 0, count); g.R.fill(0, 0, count); }
+        this.groupFx(name, g.L, g.R, count);
+        for (let i = 0; i < count; i++) { dry.L[i] += g.L[i]; dry.R[i] += g.R[i]; }
       }
       this.master.process(dry, dly, rev, left, right, out, count);
       this.pos += count;
